@@ -1,0 +1,10 @@
+Package: wmisc
+Type: Package
+Title: Wilbert miscellaneous functions
+Version: 0.1.5
+Date: 2019-07-21
+Author: Juergen Wilbert
+Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
+Description: A selection of functions for internal use
+License: GPL 2
+RoxygenNote: 6.1.1
