@@ -22,7 +22,7 @@ split_at_median <- function(x, lab = c("low", "high"), type = "higher", explicit
   md <- median(x, na.rm = TRUE)
   if (type == "higher") x <- if_else(x <= md, 1, 2)
   if (type == "lower") x <- if_else(x < md, 1, 2)
-  x <- factor(x, levels = c(1, 2), labels = lab)
+  x <- factor(x, levels = c(1, 2), labels = lab) 
   if (!is.na(explicit_na)) x <- fct_explicit_na(x, na_level = explicit_na)
   x
 }
