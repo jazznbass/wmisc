@@ -26,7 +26,7 @@ Dichotomize vector valeues at their median
 }
 \examples{
 sample(c(1:10, NA), 100, replace = TRUE) \%>\%
-  split_at_median(, explicit_na = TRUE) \%>\%
+  split_at_median(explicit_na = TRUE) \%>\%
   table()
 
 }
