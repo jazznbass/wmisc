@@ -5,7 +5,6 @@
 #' @param FUN Function for calculating the average (e.g., FUN = mean)
 #' @param ... 
 #'
-#' @return
 #' @export
 
 moving_average <- function(x, xLag, FUN = mean, ...) {

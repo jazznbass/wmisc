@@ -6,11 +6,7 @@
 #' @param alpha Alpha Level
 #' @param svg.out If set a svg file with the given name is created
 #' @param fill If TRUE intersections are filled out in grey
-#'
-#' @return
 #' @export
-#'
-#' @examples
 plotalphabeta <- function(m = 0, sd = 1, d = 3, alpha = 0.01, svg.out = "", fill = TRUE) {
   crit <- qnorm(1 - alpha, 0, 1)
   x <- seq(-4 * sd + m, (4 + d) * sd + m, length = 1000)

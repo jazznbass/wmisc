@@ -1,12 +1,13 @@
 #' Table with alpha values
-#'
+#' 
 #' Returns a list of alpha cronbachs. VAR is a list of character strings
+#' 
 #' @param data A data Frame
 #' @param VAR A list containing vectors with variable names. Each list element defines one scale.
 #' @param labels Label names for scales
 #' @param round Rounds values to given decimal position
 #' @param CI If TRUE confidence intervals are calculated
-#' @param conf_level Confidence level (e.g. 0.95 for 95%)
+#' @param conf_level Confidence level (e.g. 0.95 for 95 percent)
 #' @param check_key Check_key for the psych::alpha function
 #' @param omega If TRUE Omega reliability estimation is calculated
 #' @param key Optional key argument for the psych::alpha function

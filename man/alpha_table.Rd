@@ -19,7 +19,7 @@ alpha_table(data, VAR, labels = NULL, round = 2, CI = TRUE,
 
 \item{CI}{If TRUE confidence intervals are calculated}
 
-\item{conf_level}{Confidence level (e.g. 0.95 for 95%)}
+\item{conf_level}{Confidence level (e.g. 0.95 for 95 percent)}
 
 \item{check_key}{Check_key for the psych::alpha function}
 

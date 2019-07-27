@@ -13,7 +13,7 @@ alpha_CI(alpha, n, items, ci)
 
 \item{items}{Number of items}
 
-\item{ci}{Confidence level (e.g. 0.95 for 95%)}
+\item{ci}{Confidence level (e.g. 0.95 for 95 percent)}
 }
 \description{
 Cronbachs Alpha Confidence Interval

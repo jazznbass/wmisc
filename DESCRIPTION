@@ -1,10 +1,22 @@
 Package: wmisc
 Type: Package
 Title: Wilbert miscellaneous functions
-Version: 0.1.5
-Date: 2019-07-21
+Version: 0.1.6
+Date: 2019-07-27
 Author: Juergen Wilbert
 Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
+Imports: 
+  stats, 
+  nlme, 
+  utils, 
+  methods, 
+  graphics,
+  eRm,
+  psych,
+  knitr,
+  kableExtra,
+  readxl,
+  tidyverse
 Description: A selection of functions for internal use
 License: GPL 2
 RoxygenNote: 6.1.1
