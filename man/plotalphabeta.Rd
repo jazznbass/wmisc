@@ -3,10 +3,10 @@
 \name{plotalphabeta}
 \alias{plotalphabeta}
 \title{Plot ALpha / Beta graph
-enerates a graphic for visualizing alpha and beta error}
+Generates a graphic for visualizing alpha and beta error}
 \usage{
-plotalphabeta(m = 0, sd = 1, d = 3, alpha = 0.01, svg.out = "",
-  fill = TRUE)
+plotalphabeta(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE,
+  col_fill = c("grey75", "grey50"))
 }
 \arguments{
 \item{m}{Mean}
@@ -17,11 +17,11 @@ plotalphabeta(m = 0, sd = 1, d = 3, alpha = 0.01, svg.out = "",
 
 \item{alpha}{Alpha Level}
 
-\item{svg.out}{If set a svg file with the given name is created}
-
 \item{fill}{If TRUE intersections are filled out in grey}
+
+\item{col_fill}{Vector of length two with colornames to fill area below curve}
 }
 \description{
 Plot ALpha / Beta graph
-enerates a graphic for visualizing alpha and beta error
+Generates a graphic for visualizing alpha and beta error
 }
