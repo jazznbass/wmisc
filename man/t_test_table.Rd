@@ -22,11 +22,13 @@ Defaults to the first two levels of the independent variable iv if applicable.}
 
 \item{level}{If TRUE, p values are printed in a nice format.}
 
+\item{digits}{Number of digits for rounding mean and sd values}
+
 \item{var_equal}{If FALSE, a t-test for unequal variances is calculated.}
 
 \item{order}{Either "12" or "21" depicting whether group two is compared to group one or vice versa.}
 
-\item{digit}{Number of digits for rounding mean and sd values}
+\item{type}{Either "df" for data frame or "html" for html table.}
 }
 \value{
 A data frame

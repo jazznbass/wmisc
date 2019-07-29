@@ -1,7 +1,7 @@
 #' Format p values
 #'
 #' @param p Vector of p values.
-#' @param equal.sign If TRUE an equal sign is set before p values.
+#' @param equal_sign If TRUE an equal sign is set before p values.
 #'
 #' @return A character vector with nicely formated p values
 #' @export

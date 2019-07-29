@@ -7,19 +7,21 @@
 #' @param explicit_na If not NA, NAs will be recoded as a fector level of the provided name.
 #' If TRUE, the name will default to '(Missing)'.
 #' @return A vector of type factor with two levels.
-#' @export
-#'
 #' @examples
-#' sample(c(1:10, NA), 100, replace = TRUE) %>%
-#'   split_at_median(explicit_na = TRUE) %>%
-#'   table()
+#' x <- sample(c(1:10, NA), 100, replace = TRUE)
+#' x <- split_at_median(x, explicit_na = TRUE)
+#' table(x)
 #' 
+#' @export
 split_at_median <- function(x, lab = c("low", "high"), type = "higher", explicit_na = NA) {
   if (!type %in% c("higher", "lower")) {
     stop("Wrong type. Must be 'higher' or 'lower'")
   }
+  
   if (isTRUE(explicit_na)) explicit_na <- "(Missing)"
+  
   md <- median(x, na.rm = TRUE)
+  
   if (type == "higher") x <- if_else(x <= md, 1, 2)
   if (type == "lower") x <- if_else(x < md, 1, 2)
   x <- factor(x, levels = c(1, 2), labels = lab) 

@@ -7,7 +7,7 @@
 #' @param lower TRUE if lower triangle should be included
 #' @param alpha Alpha level
 #' @param digits Round to given digit position
-#' @param n.sig Charcter indexing non-significant values
+#' @param n_sig Charcter indexing non-significant values
 #' @param values TRUE if values should be included
 #' @param stars TRUE if stars should be included
 #' @param autocor Character for diagonal (e.g. "-" or "1.00")
@@ -20,7 +20,7 @@
 #' @export
 
 nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
-                            alpha = .10, digits = 2, n.sig,
+                            alpha = .10, digits = 2, n_sig,
                             values = TRUE, stars = TRUE, autocor = "-",
                             square = FALSE, caption = "Correlation matrix.",
                             sig.10 = "\u271d  ", type = "df") {
@@ -31,7 +31,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   r <- round(r, digits)
   if (!values) r[TRUE] <- ""
 
-  if (!missing(n.sig)) r[p > alpha] <- n.sig
+  if (!missing(n_sig)) r[p > alpha] <- n_sig
   if (stars) {
     copt[p <= .10] <- paste0(r[p <= .10], sig.10)
     copt[p <= .05] <- paste0(r[p <= .05], "*  ")
@@ -53,11 +53,11 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   }
 
   if (type == "html") {
-    kable(r, caption = caption, row.names = TRUE) %>%
-      kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
-      column_spec(1, bold = TRUE, color = "black") %>%
-      row_spec(1, hline_after = TRUE) %>%
-      footnote(general = paste0(sig.10, "p<.10; *p<.05; **p<.01; ***p<.001")) %>%
+    knitr::kable(r, caption = caption, row.names = TRUE) %>%
+      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+      kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
+      kableExtra::row_spec(1, hline_after = TRUE) %>%
+      kableExtra::footnote(general = paste0(sig.10, "p<.10; *p<.05; **p<.01; ***p<.001")) %>%
       return()
   }
 }

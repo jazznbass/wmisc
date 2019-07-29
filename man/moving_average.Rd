@@ -4,7 +4,7 @@
 \alias{moving_average}
 \title{Moving Average}
 \usage{
-moving_average(x, xLag, FUN = mean, ...)
+moving_average(x, xLag, FUN = mean)
 }
 \arguments{
 \item{x}{Vector}
@@ -12,8 +12,6 @@ moving_average(x, xLag, FUN = mean, ...)
 \item{xLag}{Lag for calculating the average}
 
 \item{FUN}{Function for calculating the average (e.g., FUN = mean)}
-
-\item{...}{}
 }
 \description{
 Moving Average

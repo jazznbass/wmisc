@@ -7,9 +7,10 @@
 #' @param labels A character vector of length two with labels for the dependent variables.
 #' @param concise A more concise table with mean and sd in one column. 
 #' @param level If TRUE, p values are printed in a nice format.
-#' @param digit Number of digits for rounding mean and sd values
+#' @param digits Number of digits for rounding mean and sd values
 #' @param var_equal If FALSE, a t-test for unequal variances is calculated.
 #' @param order Either "12" or "21" depicting whether group two is compared to group one or vice versa.
+#' @param type Either "df" for data frame or "html" for html table.
 #'
 #' @return A data frame
 #' @export
@@ -84,11 +85,11 @@ t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = 
     
     pillai <- sprintf("Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6])
     
-    out <- kable(out, caption = "T-Test table.", align = "c", row.names = FALSE) %>%
-      kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
-      column_spec(1, bold = TRUE, color = "black") %>%
-      row_spec(1, hline_after = TRUE) %>%
-      footnote(general = pillai)
+    out <- knitr::kable(out, caption = "T-Test table.", align = "c", row.names = FALSE) %>%
+      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+      kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
+      kableExtra::row_spec(1, hline_after = TRUE) %>%
+      kableExtra::footnote(general = pillai)
     
     return(out)
   }

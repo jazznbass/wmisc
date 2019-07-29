@@ -9,7 +9,7 @@ nice_p(p, equal_sign = FALSE)
 \arguments{
 \item{p}{Vector of p values.}
 
-\item{equal.sign}{If TRUE an equal sign is set before p values.}
+\item{equal_sign}{If TRUE an equal sign is set before p values.}
 }
 \value{
 A character vector with nicely formated p values

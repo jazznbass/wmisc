@@ -2,12 +2,15 @@
 % Please edit documentation in R/x_names.R
 \name{x_names}
 \alias{x_names}
-\title{x.names}
+\alias{x_nanmes}
+\title{x_names}
 \usage{
 x_names(list, width = 70)
 }
 \arguments{
-\item{A}{data-frame or another object of class list}
+\item{list}{data-frame or another object of class list}
+
+\item{width}{Linewidth before linebreak}
 }
 \value{
 A character string with variable names formated as "c(naem, name, name, ...)"

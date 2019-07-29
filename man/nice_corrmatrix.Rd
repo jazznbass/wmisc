@@ -5,7 +5,7 @@
 \title{Nice correlationmatrix}
 \usage{
 nice_corrmatrix(cr, upper = TRUE, lower = TRUE, alpha = 0.1,
-  digits = 2, n.sig, values = TRUE, stars = TRUE, autocor = "-",
+  digits = 2, n_sig, values = TRUE, stars = TRUE, autocor = "-",
   square = FALSE, caption = "Correlation matrix.", sig.10 = "✝  ",
   type = "df")
 }
@@ -20,7 +20,7 @@ nice_corrmatrix(cr, upper = TRUE, lower = TRUE, alpha = 0.1,
 
 \item{digits}{Round to given digit position}
 
-\item{n.sig}{Charcter indexing non-significant values}
+\item{n_sig}{Charcter indexing non-significant values}
 
 \item{values}{TRUE if values should be included}
 

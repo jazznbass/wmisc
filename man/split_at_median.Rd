@@ -25,8 +25,8 @@ A vector of type factor with two levels.
 Dichotomize vector valeues at their median
 }
 \examples{
-sample(c(1:10, NA), 100, replace = TRUE) \%>\%
-  split_at_median(explicit_na = TRUE) \%>\%
-  table()
+x <- sample(c(1:10, NA), 100, replace = TRUE)
+x <- split_at_median(x, explicit_na = TRUE)
+table(x)
 
 }

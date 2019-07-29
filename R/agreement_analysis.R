@@ -56,11 +56,11 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     if (mean.gsize == 0) mean.gsize <- 1
     n[i] <- length(x)
     
-    agreement <- rwg(x, group, ranvar = ranvar(rv))
+    agreement <- multilevel::rwg(x, group, ranvar = ranvar(rv))
     r.wg[i] <- mean(agreement$rwg, na.rm = TRUE)
     n.classes[i] <- sum(!is.na(agreement$rwg))
     r.wg.crit[i] <- mean(agreement$rwg >= crit, na.rm = TRUE)
-    r.wg.95 <- rwg.sim(gsize = mean.gsize, nresp = rv, nrep = n_sim)$rwg.95
+    r.wg.95 <- multilevel::rwg.sim(gsize = mean.gsize, nresp = rv, nrep = n_sim)$rwg.95
  
     if (length(r.wg.95) == 0) {
       r.wg.95[i] <- NA
@@ -72,14 +72,14 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     if (length(r.wg.95) == 0) r.wg.p[i] <- NA
     
     fit <- aov(x ~ group)
-    icc1[i] <- ICC1(fit)
-    icc2[i] <- ICC2(fit)
+    icc1[i] <- multilevel::ICC1(fit)
+    icc2[i] <- multilevel::ICC2(fit)
     null.model <- lme(x ~ 1, random = ~ 1 | group, method = "ML")
     model.without <- gls(x ~ 1, method = "ML")
     dif <- anova(null.model, model.without)
     L.icc[i] <- dif$L.Ratio[2]
     p.icc[i] <- dif$"p-value"[2]
-    G.rel[i] <- mean(GmeanRel(null.model)$MeanRel, na.rm = TRUE)
+    G.rel[i] <- mean(multilevel::GmeanRel(null.model)$MeanRel, na.rm = TRUE)
     v <- VarCorr(null.model)
     G.var[i] <- as.numeric(v[[1]][1]) / (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
   }

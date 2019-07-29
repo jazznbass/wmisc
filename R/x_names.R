@@ -1,8 +1,10 @@
-#' x.names
+#' x_names
 #'
 #' Give a list of variable names to the CLIPBOARD and the screen
 #'
-#' @param A data-frame or another object of class list
+#' @aliases x_nanmes
+#' @param list data-frame or another object of class list
+#' @param width Linewidth before linebreak
 #'
 #' @return A character string with variable names formated as "c(naem, name, name, ...)"
 #' @export

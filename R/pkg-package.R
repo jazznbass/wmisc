@@ -7,10 +7,13 @@
 #' @docType package
 #' @author Juergen Wilbert [aut, cre]
 #' @keywords package
-#' @import stats
+#' @import dplyr
 #' @import graphics
-#' @import knitr
-#' @import kableExtra
-#' @import psych
-#' @import tidyverse
+#' @importFrom forcats fct_explicit_na
+#' @importFrom magrittr %>%
+#' @importFrom lavaan fitMeasures
+#' @importFrom psych scoreFast alpha describe
+#' @importFrom nlme lme VarCorr gls
+#' @importFrom stats aggregate anova aov dnorm lm manova 
+#' median pchisq qf qnorm qt sd t.test
 NULL

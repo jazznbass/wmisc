@@ -5,9 +5,9 @@
 #' @param grouping A variable with group values for calculating grouped centered.
 #' @param min_valid Minimal number of valid values that is requiered for calculation.
 #' A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).
-#' @param max_valid Maximum number of NAs that are allowed before returning NA.
+#' @param max_na Maximum number of NAs that are allowed before returning NA.
 #' A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).
-#' @param mean Mean after standardisation (default = 0)
+#' @param m Mean after standardisation (default = 0)
 #' @param sd Mean after standardisation (default = 1)
 #' @export
 #' @examples 

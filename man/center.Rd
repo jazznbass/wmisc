@@ -12,12 +12,10 @@ center(x, min_valid, max_na, grouping)
 \item{min_valid}{Minimal number of valid values that is requiered for calculation.
 A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).}
 
-\item{grouping}{A variable with group values for calculating grouped centered.}
-
-\item{max_valid}{Maximum number of NAs that are allowed before returning NA.
+\item{max_na}{Maximum number of NAs that are allowed before returning NA.
 A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).}
 
-\item{mean}{Mean after standardisation (default = 0)}
+\item{grouping}{A variable with group values for calculating grouped centered.}
 }
 \description{
 Mean center
