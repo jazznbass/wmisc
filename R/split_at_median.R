@@ -13,7 +13,7 @@
 #' table(x)
 #' 
 #' @export
-split_at_median <- function(x, lab = c("low", "high"), type = "higher", explicit_na = NA) {
+split_at_median <- function(x, labels = c("low", "high"), type = "higher", explicit_na = NA) {
   if (!type %in% c("higher", "lower")) {
     stop("Wrong type. Must be 'higher' or 'lower'")
   }
@@ -24,7 +24,7 @@ split_at_median <- function(x, lab = c("low", "high"), type = "higher", explicit
   
   if (type == "higher") x <- if_else(x <= md, 1, 2)
   if (type == "lower") x <- if_else(x < md, 1, 2)
-  x <- factor(x, levels = c(1, 2), labels = lab) 
+  x <- factor(x, levels = c(1, 2), labels = labels) 
   if (!is.na(explicit_na)) x <- fct_explicit_na(x, na_level = explicit_na)
   x
 }

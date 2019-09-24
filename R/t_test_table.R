@@ -2,17 +2,17 @@
 #'
 #' @param dv A data frame with the dependent variables
 #' @param iv A data frame or vector with the independent variable 
-#' @param conditions A character vecotr of length two with the names of the two conditions.
-#' Defaults to the first two levels of the independent variable iv if applicable.
+#' @param conditions A character vectot of length two with the names of the two conditions.
+#' Defaults to the first two levels of the independent variable 'iv' if applicable.
 #' @param labels A character vector of length two with labels for the dependent variables.
 #' @param concise A more concise table with mean and sd in one column. 
-#' @param level If TRUE, p values are printed in a nice format.
+#' @param nice_p If TRUE, p values are printed in a nice format.
 #' @param digits Number of digits for rounding mean and sd values
 #' @param var_equal If FALSE, a t-test for unequal variances is calculated.
 #' @param order Either "12" or "21" depicting whether group two is compared to group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
 #'
-#' @return A data frame
+#' @return A tibble
 #' @export
 #'
 #' @examples
@@ -22,7 +22,7 @@
 #'   )
 #' iv <- factor(c(rep("A", 85), rep("B", 115)))
 #' t_test_table(dv, iv, labels = c("Motivation", "Achievement"))
-t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = NULL, concise = TRUE, level = TRUE, digits = 1, var_equal = FALSE, order = "12", type = "df") {
+t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = NULL, concise = TRUE, nice_p = TRUE, digits = 1, var_equal = FALSE, order = "12", type = "df") {
 
   
   dv <- dv[iv %in% conditions, ]
@@ -72,10 +72,10 @@ t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = 
     MS_B <- paste0(out[[3]], " (", out[[5]], ")")
     out <- 
       tibble(Scale = out[[1]], MS_A, MS_B) %>%
-      bind_cols(out[c(6:ncol(out))])
+        bind_cols(out[c(6:ncol(out))])
     colnames(out)[2:3] <- paste0("M (SD) ", lev)
   }
-  if (level) out$p <- nice_p(out$p)
+  if (nice_p) out$p <- nice_p(out$p)
 
   if(type == "html") {
     res <- lm(as.matrix(dv) ~ iv) %>%
@@ -83,9 +83,12 @@ t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = 
       summary() %>%
       .$"stats"
     
-    pillai <- sprintf("Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6])
+    pillai <- sprintf(
+      "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
+      res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
+    )
     
-    out <- knitr::kable(out, caption = "T-Test table.", align = "c", row.names = FALSE) %>%
+    out <- knitr::kable(out, caption = "T-Test table.", align = c("l", rep("c",8)), row.names = FALSE) %>%
       kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
       kableExtra::row_spec(1, hline_after = TRUE) %>%

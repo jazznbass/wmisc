@@ -2,7 +2,6 @@
 % Please edit documentation in R/x_names.R
 \name{x_names}
 \alias{x_names}
-\alias{x_nanmes}
 \title{x_names}
 \usage{
 x_names(list, width = 70)
@@ -13,7 +12,7 @@ x_names(list, width = 70)
 \item{width}{Linewidth before linebreak}
 }
 \value{
-A character string with variable names formated as "c(naem, name, name, ...)"
+A character string with variable names formated as "c(name, name, name, ...)"
 }
 \description{
 Give a list of variable names to the CLIPBOARD and the screen

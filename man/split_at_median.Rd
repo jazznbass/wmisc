@@ -4,19 +4,19 @@
 \alias{split_at_median}
 \title{Dichotomize vector valeues at their median}
 \usage{
-split_at_median(x, lab = c("low", "high"), type = "higher",
+split_at_median(x, labels = c("low", "high"), type = "higher",
   explicit_na = NA)
 }
 \arguments{
 \item{x}{A vector}
-
-\item{lab}{Vector with two factor labels.}
 
 \item{type}{"higher" will split group at above median (vs. equal and below)
 and "lower" will split group below median (vs. equal and above)}
 
 \item{explicit_na}{If not NA, NAs will be recoded as a fector level of the provided name.
 If TRUE, the name will default to '(Missing)'.}
+
+\item{lab}{Vector with two factor labels.}
 }
 \value{
 A vector of type factor with two levels.

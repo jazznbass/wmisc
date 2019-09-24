@@ -2,16 +2,15 @@
 #'
 #' Give a list of variable names to the CLIPBOARD and the screen
 #'
-#' @aliases x_nanmes
 #' @param list data-frame or another object of class list
 #' @param width Linewidth before linebreak
 #'
-#' @return A character string with variable names formated as "c(naem, name, name, ...)"
+#' @return A character string with variable names formated as "c(name, name, name, ...)"
 #' @export
 
 x_names <- function(list, width = 70) {
-  list <- names(list)
-  b <- paste("\"", list, "\", ", sep = "", collapse = "")
+  
+  b <- paste("\"", names(list), "\", ", sep = "", collapse = "")
   a <- paste("c(", substr(b, start = 1, stop = nchar(b) - 2), ")", sep = "", collapse = "")
   signs <- which(strsplit(a, "")[[1]] == ",")
   width2 <- width
@@ -25,8 +24,9 @@ x_names <- function(list, width = 70) {
     }
   }
 
-  # clip <- pipe("pbcopy", "w")
-  cat(a) # , file = clip)
-  # close(clip)
+  clip <- pipe("pbcopy", "w")
+  cat(a, file = clip)
+  close(clip)
   cat(a, "\r\n")
 }
+

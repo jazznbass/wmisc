@@ -43,5 +43,6 @@ standardise <- function(x, grouping, min_valid, max_na, m = 0, sd = 1) {
 
 }
 
+#' @export
 standardize <- function(...) standardise(...)
 

@@ -6,8 +6,8 @@
 \usage{
 nice_corrmatrix(cr, upper = TRUE, lower = TRUE, alpha = 0.1,
   digits = 2, n_sig, values = TRUE, stars = TRUE, autocor = "-",
-  square = FALSE, caption = "Correlation matrix.", sig.10 = "✝  ",
-  type = "df")
+  square = FALSE, caption = "Correlation matrix.",
+  sig.10 = "<U+271D>  ", type = "df")
 }
 \arguments{
 \item{cr}{A correlation matrix returned by the psych package}

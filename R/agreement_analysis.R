@@ -11,15 +11,10 @@
 #' @return A Data-frame
 #' @export
 
-agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.7, label, n_sim = 10000) {
+agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.7, type = "df", label, n_sim = 10000) {
   
-  if (class(grouping) == "character") vars <- vars[!vars %in% grouping]
-
-  if (missing(label)) {
-    lab <- names(data[vars])
-  } else {
-    lab <- label
-  }
+  if (class(grouping) == "character") vars <- vars[, !vars %in% grouping]
+  if (missing(label)) label <- names(data[vars])
 
   r.wg <- c()
   r.wg.95 <- c()
@@ -84,14 +79,27 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     G.var[i] <- as.numeric(v[[1]][1]) / (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
   }
   
-  out <- data.frame(
-    Var = lab, n = n, "n l2" = n.classes, "mean rwg" = round(r.wg, 2),
-    "rwg >= crit" = r.wg.crit, "rwg upper 95% CI" = round(r.wg.95, 2),
-    "Proportion > 95%CI" = round(r.wg.p, 2), ICC = round(icc1, 2),
-    L.icc = round(L.icc, 1), p.icc = round(p.icc, 3),
-    "ICC(2)" = round(icc2, 2), M.G.Real = round(G.rel, 2), 
-    G.Var = round(G.var, 2), check.names = FALSE
+  out <- tibble(
+    Var = label, 
+    n = n, 
+    "n l2" = n.classes, 
+    "mean rwg" = round(r.wg, 2),
+    "rwg >= crit" = r.wg.crit, 
+    "rwg upper 95% CI" = round(r.wg.95, 2),
+    "Proportion > 95%CI" = round(r.wg.p, 2), 
+    ICC = round(icc1, 2),
+    L.icc = round(L.icc, 1), 
+    p.icc = round(p.icc, 3),
+    "ICC(2)" = round(icc2, 2), 
+    M.G.Real = round(G.rel, 2), 
+    G.Var = round(G.var, 2)
   )
-  out
+  if (type == "df") out
+  if (type == "html") {
+    knitr::kable(out, caption = "Agreement analyses", align = c("l", rep("c", ncol(out) - 1)), row.names = FALSE) %>%
+      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+      kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
+      kableExtra::row_spec(1, hline_after = TRUE) 
+  }
 }
 

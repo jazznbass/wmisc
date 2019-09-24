@@ -5,7 +5,7 @@
 \title{Creats t.test tabel for multiple dependent variables}
 \usage{
 t_test_table(dv, iv, conditions = levels(factor(iv))[1:2],
-  labels = NULL, concise = TRUE, level = TRUE, digits = 1,
+  labels = NULL, concise = TRUE, nice_p = TRUE, digits = 1,
   var_equal = FALSE, order = "12", type = "df")
 }
 \arguments{
@@ -13,14 +13,14 @@ t_test_table(dv, iv, conditions = levels(factor(iv))[1:2],
 
 \item{iv}{A data frame or vector with the independent variable}
 
-\item{conditions}{A character vecotr of length two with the names of the two conditions.
-Defaults to the first two levels of the independent variable iv if applicable.}
+\item{conditions}{A character vectot of length two with the names of the two conditions.
+Defaults to the first two levels of the independent variable 'iv' if applicable.}
 
 \item{labels}{A character vector of length two with labels for the dependent variables.}
 
 \item{concise}{A more concise table with mean and sd in one column.}
 
-\item{level}{If TRUE, p values are printed in a nice format.}
+\item{nice_p}{If TRUE, p values are printed in a nice format.}
 
 \item{digits}{Number of digits for rounding mean and sd values}
 
@@ -31,7 +31,7 @@ Defaults to the first two levels of the independent variable iv if applicable.}
 \item{type}{Either "df" for data frame or "html" for html table.}
 }
 \value{
-A data frame
+A tibble
 }
 \description{
 Creats t.test tabel for multiple dependent variables
