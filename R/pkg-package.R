@@ -9,6 +9,7 @@
 #' @keywords package
 #' @import dplyr
 #' @import graphics
+#' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na
 #' @importFrom magrittr %>%
 #' @importFrom lavaan fitMeasures
