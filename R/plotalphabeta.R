@@ -1,12 +1,15 @@
-#' Plot ALpha / Beta graph
+#' Plot Alpha / Beta graph
 #' Generates a graphic for visualizing alpha and beta error
 #' @param m Mean
 #' @param sd Standard Deviation
 #' @param d Effect size
 #' @param alpha Alpha Level
-#' @param fill If TRUE intersections are filled out in grey
+#' @param fill If TRUE, intersections are filled out in grey
 #' @param col_fill Vector of length two with colornames to fill area below curve 
 #' @export
+#' @examples
+#' plotalphabeta()
+#' 
 plotalphabeta <- function(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE, col_fill = c("grey75", "grey50")) {
   crit <- qnorm(1 - alpha, 0, 1)
   x <- seq(-4 * sd + m, (4 + d) * sd + m, length = 1000)

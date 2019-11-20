@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotalphabeta.R
 \name{plotalphabeta}
 \alias{plotalphabeta}
-\title{Plot ALpha / Beta graph
+\title{Plot Alpha / Beta graph
 Generates a graphic for visualizing alpha and beta error}
 \usage{
 plotalphabeta(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE,
@@ -17,11 +17,15 @@ plotalphabeta(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE,
 
 \item{alpha}{Alpha Level}
 
-\item{fill}{If TRUE intersections are filled out in grey}
+\item{fill}{If TRUE, intersections are filled out in grey}
 
 \item{col_fill}{Vector of length two with colornames to fill area below curve}
 }
 \description{
-Plot ALpha / Beta graph
+Plot Alpha / Beta graph
 Generates a graphic for visualizing alpha and beta error
+}
+\examples{
+plotalphabeta()
+
 }
