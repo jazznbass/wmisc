@@ -27,6 +27,7 @@ percent <- function(x, round = 2, min_valid, max_na) {
     }
   }
   
-  mean(x, na.rm = TRUE) * 100 %>% round(digits = round)
-  
+  out <- mean(x, na.rm = TRUE) * 100
+  out <- round(out, digits = round)
+  out
 }

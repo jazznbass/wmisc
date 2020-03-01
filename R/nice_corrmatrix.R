@@ -23,37 +23,55 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
                             alpha = .10, digits = 2, n_sig,
                             values = TRUE, stars = TRUE, autocor = "-",
                             square = FALSE, caption = "Correlation matrix.",
-                            sig.10 = "\u271d  ", type = "df") {
-  r <- as.data.frame(cr$r)
-  p <- as.data.frame(cr$p)
+                            sig.10 = "\u271d", type = "df",
+                            numbered_columns = FALSE) {
+  
+  if ("data.frame" %in% class(cr))
+    cr <- psych::corr.test(cr)
+  
+  r <- cr$r
+  p <- cr$p
   copt <- r
   if (square) r <- r * r
-  r <- round(r, digits)
+  r <- format(round(r, digits = digits), nsmall = digits)  #round(r, digits)
   if (!values) r[TRUE] <- ""
 
   if (!missing(n_sig)) r[p > alpha] <- n_sig
+  #copt[copt == 1] <- paste0(autocor, "    ")
+  #copt[copt == 1] <- paste0(autocor, "    ")
+  diag(copt) <- paste0(autocor, "")
+  diag(p) <- 1
   if (stars) {
     copt[p <= .10] <- paste0(r[p <= .10], sig.10)
-    copt[p <= .05] <- paste0(r[p <= .05], "*  ")
-    copt[p <= .01] <- paste0(r[p <= .01], "** ")
+    copt[p <= .05] <- paste0(r[p <= .05], "*")
+    copt[p <= .01] <- paste0(r[p <= .01], "**")
     copt[p <= .001] <- paste0(r[p <= .001], "***")
-    copt[r == 1] <- paste0(autocor, "    ")
-    copt[p > .10] <- paste0(r[p > .10], "  ")
+    copt[p > .10 & p < 1] <- paste0(r[p > .10 & p < 1], "")
     r <- copt
   }
-
-  if (!upper) r[upper.tri(r)] <- ""
-  if (!lower) r[lower.tri(r)] <- ""
+  
+  if (!upper) r[upper.tri(r)] <- " "
+  if (!lower) r[lower.tri(r)] <- " "
+  
+  r <- as.data.frame(r)
+  
+  if (numbered_columns) {
+    rownames(r) <- paste0("", 1:nrow(r), " ", rownames(r))
+    colnames(r) <- paste0("", 1:nrow(r), "") 
+  }
+  
+  
   if (type == "df") {
     cat("Correlation matrix.\nProbability signs above the diagonal are adjusted for multiple tests.\n")
     if (square) cat("Explained variance r-squared\n")
-    if (stars) cat(sig.10, "p<.10; *p<.05; **p<.01; ***p<.001.\n")
+    if (stars) cat(sig.10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
     cat("\n")
+    r <- format(r, justify = "left")
     return(r)
   }
 
   if (type == "html") {
-    knitr::kable(r, caption = caption, row.names = TRUE) %>%
+    knitr::kable(r, format = "html", caption = caption, row.names = TRUE, align = "c") %>%
       kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
       kableExtra::row_spec(1, hline_after = TRUE) %>%

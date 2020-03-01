@@ -1,3 +1,7 @@
+# wmisc 0.2.4
+
+- `t_test_table()`: new arguments: caption, bootstrap_options, and full_width
+
 # wmisc 0.2.3
 
 - New `reference_package_version()`

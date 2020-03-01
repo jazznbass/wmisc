@@ -4,14 +4,18 @@
 \alias{t_test_table}
 \title{Creats t.test tabel for multiple dependent variables}
 \usage{
-t_test_table(dv, iv, conditions = levels(factor(iv))[1:2],
+t_test_table(dv, iv, data, conditions = levels(factor(iv))[1:2],
   labels = NULL, concise = TRUE, nice_p = TRUE, digits = 1,
-  var_equal = FALSE, order = "12", type = "df")
+  var_equal = FALSE, manova = TRUE, order = "12", type = "df",
+  caption = "t-test table", bootstrap_options = c("condensed",
+  "striped", "hover"), full_width = TRUE)
 }
 \arguments{
-\item{dv}{A data frame with the dependent variables}
+\item{dv}{A data frame with the dependent variables or a character vector when data is defined.}
 
-\item{iv}{A data frame or vector with the independent variable}
+\item{iv}{A data frame or vector with the independent variable or a character if data is defined.}
+
+\item{data}{A data frame.}
 
 \item{conditions}{A character vectot of length two with the names of the two conditions.
 Defaults to the first two levels of the independent variable 'iv' if applicable.}
@@ -29,9 +33,15 @@ Defaults to the first two levels of the independent variable 'iv' if applicable.
 \item{order}{Either "12" or "21" depicting whether group two is compared to group one or vice versa.}
 
 \item{type}{Either "df" for data frame or "html" for html table.}
+
+\item{caption}{Tabel caption is type = "html"}
+
+\item{bootstrap_options}{see kable_styling()}
+
+\item{full_width}{see kable_styling()}
 }
 \value{
-A tibble
+A tibble or a kableExtra object
 }
 \description{
 Creats t.test tabel for multiple dependent variables

@@ -1,7 +1,8 @@
 #' Creats t.test tabel for multiple dependent variables
 #'
-#' @param dv A data frame with the dependent variables
-#' @param iv A data frame or vector with the independent variable 
+#' @param dv A data frame with the dependent variables or a character vector when data is defined.
+#' @param iv A data frame or vector with the independent variable or a character if data is defined.
+#' @param data A data frame.
 #' @param conditions A character vectot of length two with the names of the two conditions.
 #' Defaults to the first two levels of the independent variable 'iv' if applicable.
 #' @param labels A character vector of length two with labels for the dependent variables.
@@ -11,8 +12,11 @@
 #' @param var_equal If FALSE, a t-test for unequal variances is calculated.
 #' @param order Either "12" or "21" depicting whether group two is compared to group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
+#' @param caption Tabel caption is type = "html"
+#' @param bootstrap_options see kable_styling()
+#' @param full_width see kable_styling()
 #'
-#' @return A tibble
+#' @return A tibble or a kableExtra object
 #' @export
 #'
 #' @examples
@@ -22,13 +26,21 @@
 #'   )
 #' iv <- factor(c(rep("A", 85), rep("B", 115)))
 #' t_test_table(dv, iv, labels = c("Motivation", "Achievement"))
-t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = NULL, concise = TRUE, nice_p = TRUE, digits = 1, var_equal = FALSE, order = "12", type = "df") {
+t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
+                         labels = NULL, concise = TRUE, 
+                         nice_p = TRUE, digits = 1, var_equal = FALSE, 
+                         manova = TRUE, order = "12", type = "df", 
+                         caption = "t-test table", 
+                         bootstrap_options = c("condensed", "striped", "hover"), 
+                         full_width = TRUE) {
 
-  
+  if (!missing(data)) {
+    dv <- data[, dv]
+    iv <- data[[iv]]
+  }
   dv <- dv[iv %in% conditions, ]
   iv <- iv[iv %in% conditions]
   iv <- factor(iv)
-
   lev <- levels(iv)
 
   out <- tibble(
@@ -54,11 +66,17 @@ t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = 
     out[i, "n1"] <- sum(!is.na(dv[iv == conditions[1], i]))
     out[i, "n2"] <- sum(!is.na(dv[iv == conditions[2], i]))
   }
+  
+  round_ <- function(x, digits) {
+    format(round(x, digits=digits), nsmall = digits) 
+  }
+  
   out <- out %>%
-    mutate_at(c(2:5), round, digits = digits) %>%
-    mutate_at("p", round, 3) %>%
-    mutate_at(c("d","df"), round, 1) %>%
-    mutate_at("t", round, 2)
+    mutate_at(c(2:5), round_, digits = digits) %>%
+    mutate_at("p", round_, 3) %>%
+    mutate_at("d", round_, digits = digits) %>%
+    mutate_at("df", round_, 1) %>%
+    mutate_at("t", round_, 2)
   
   if (order == "21") {
     out$t <- out$t * -1
@@ -78,21 +96,25 @@ t_test_table <- function(dv, iv, conditions = levels(factor(iv))[1:2], labels = 
   if (nice_p) out$p <- nice_p(out$p)
 
   if(type == "html") {
-    res <- lm(as.matrix(dv) ~ iv) %>%
-      manova() %>%
-      summary() %>%
-      .$"stats"
-    
-    pillai <- sprintf(
-      "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
-      res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
-    )
-    
-    out <- knitr::kable(out, caption = "T-Test table.", align = c("l", rep("c",8)), row.names = FALSE) %>%
-      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+    out <- knitr::kable(out, caption = caption, align = c("l", rep("c", 8)), row.names = FALSE) %>%
+      kableExtra::kable_styling(bootstrap_options = bootstrap_options, full_width = full_width) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
-      kableExtra::row_spec(1, hline_after = TRUE) %>%
-      kableExtra::footnote(general = pillai)
+      kableExtra::row_spec(1, hline_after = TRUE)
+    
+    if (manova) {
+      res <- lm(as.matrix(dv) ~ iv) %>%
+        manova() %>%
+        summary() %>%
+        .$"stats"
+      
+      pillai <- sprintf(
+        "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
+        res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
+      )
+      
+      out <- kableExtra::footnote(out, general = pillai)
+    }  
+
     
     return(out)
   }

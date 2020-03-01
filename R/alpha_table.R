@@ -15,8 +15,10 @@
 #' @param values Sets maximum and minimum valid values necessary to calculate item difficulty
 #' @export
 
-alpha_table <- function(data, scales, labels = NULL, round = 2, CI = TRUE, conf_level = 0.95, 
-                        check_key = TRUE, omega = FALSE, keys = NULL, RMSEA = FALSE, difficulty = FALSE, values = NULL) {
+alpha_table <- function(data, scales, labels = NULL, round = 2, CI = TRUE, 
+                        conf_level = 0.95, check_key = TRUE, omega = FALSE, 
+                        keys = NULL, RMSEA = FALSE, difficulty = FALSE, 
+                        values = NULL) {
   
   if (difficulty && is.null(values)) {
     stop("Can not calculate item difficulty without min and max scale values.")
