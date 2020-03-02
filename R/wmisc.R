@@ -2,8 +2,8 @@
 
 .onAttach <- function(lib, pkg, ...) {
   out <- paste0(
-    "Wmisc - Wilbert miscellaneous functions\n",
-    "Caution! This is a beta version and heavily under construction!\n"
+    "Wmisc ", utils::packageVersion("Wmisc"),
+    " (", utils::packageDate('Wmisc'), ")\n"
   )
   packageStartupMessage(out)
 }
