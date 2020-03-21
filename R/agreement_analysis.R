@@ -94,12 +94,13 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     M.G.Real = round(G.rel, 2), 
     G.Var = round(G.var, 2)
   )
-  if (type == "df") out
+  if (type == "df") return(out)
   if (type == "html") {
     knitr::kable(out, caption = "Agreement analyses", align = c("l", rep("c", ncol(out) - 1)), row.names = FALSE) %>%
       kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
-      kableExtra::row_spec(1, hline_after = TRUE) 
+      kableExtra::row_spec(1, hline_after = TRUE)
   }
+  return(out)
 }
 
