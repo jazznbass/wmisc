@@ -4,9 +4,20 @@
 \alias{alpha_table}
 \title{Table with alpha values}
 \usage{
-alpha_table(data, scales, labels = NULL, round = 2, CI = TRUE,
-  conf_level = 0.95, check_key = TRUE, omega = FALSE, keys = NULL,
-  RMSEA = FALSE, difficulty = FALSE, values = NULL)
+alpha_table(
+  data,
+  scales,
+  labels = NULL,
+  round = 2,
+  CI = TRUE,
+  conf_level = 0.95,
+  check_key = TRUE,
+  omega = FALSE,
+  keys = NULL,
+  RMSEA = FALSE,
+  difficulty = FALSE,
+  values = NULL
+)
 }
 \arguments{
 \item{data}{A data Frame}

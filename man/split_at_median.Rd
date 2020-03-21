@@ -4,8 +4,12 @@
 \alias{split_at_median}
 \title{Dichotomize vector valeues at their median}
 \usage{
-split_at_median(x, labels = c("low", "high"), type = "higher",
-  explicit_na = NA)
+split_at_median(
+  x,
+  labels = c("low", "high"),
+  type = "higher",
+  explicit_na = NA
+)
 }
 \arguments{
 \item{x}{A vector}

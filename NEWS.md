@@ -1,3 +1,7 @@
+# wmisc 0.2.5
+
+- new function: `chi_test_table()`: Compares the proportions of a dichotomos variable in two groups for multiple variables and puts the results into a table. Like t_test_table() put für dichtomous variables.
+
 # wmisc 0.2.4
 
 - `t_test_table()`: new arguments: caption, bootstrap_options, and full_width

@@ -4,8 +4,16 @@
 \alias{agreement_analysis}
 \title{Agreement Analysis}
 \usage{
-agreement_analysis(data, vars = names(data), grouping, rv, crit = 0.7,
-  type = "df", label, n_sim = 10000)
+agreement_analysis(
+  data,
+  vars = names(data),
+  grouping,
+  rv,
+  crit = 0.7,
+  type = "df",
+  label,
+  n_sim = 10000
+)
 }
 \arguments{
 \item{data}{A data-frame}

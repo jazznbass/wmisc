@@ -17,10 +17,10 @@ analysis_missing <- function(dat, scale) {
     p.total[i, "missing"] <- sum(is.na(dat[, scale[[i]]]))
     p.total[i, "total"] <- length(scale[[i]]) * nrow(dat)
     p.total[i, "p"] <- sum(is.na(dat[, scale[[i]]])) / (length(scale[[i]]) * nrow(dat))
-    p.total[i, "n.cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) any(is.na(x)))))
-    p.total[i, "p.cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) any(is.na(x))))) / cases
-    p.total[i, "n.all.cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) all(is.na(x)))))
-    p.total[i, "p.all.cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) all(is.na(x))))) / cases
+    p.total[i, "n cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) any(is.na(x)))))
+    p.total[i, "p cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) any(is.na(x))))) / cases
+    p.total[i, "n all cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) all(is.na(x)))))
+    p.total[i, "p all cases"] <- sum(unlist(apply(dat[, scale[[i]]], 1, function(x) all(is.na(x))))) / cases
   }
   p.total
 }

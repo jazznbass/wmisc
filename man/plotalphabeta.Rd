@@ -5,8 +5,14 @@
 \title{Plot Alpha / Beta graph
 Generates a graphic for visualizing alpha and beta error}
 \usage{
-plotalphabeta(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE,
-  col_fill = c("grey75", "grey50"))
+plotalphabeta(
+  m = 0,
+  sd = 1,
+  d = 2,
+  alpha = 0.05,
+  fill = TRUE,
+  col_fill = c("grey75", "grey50")
+)
 }
 \arguments{
 \item{m}{Mean}

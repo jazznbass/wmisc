@@ -1,6 +1,6 @@
-#' Creats t.test tabel for multiple dependent variables
+#' Creats a t.test tabel for multiple dependent variables
 #'
-#' @param dv A data frame with the dependent variables or a character vector when data is defined.
+#' @param dv A data frame with the dependent variables or a character vector with variable names when data is defined.
 #' @param iv A data frame or vector with the independent variable or a character if data is defined.
 #' @param data A data frame.
 #' @param conditions A character vectot of length two with the names of the two conditions.
@@ -29,7 +29,8 @@
 t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
                          labels = NULL, concise = TRUE, 
                          nice_p = TRUE, digits = 1, var_equal = FALSE, 
-                         manova = TRUE, order = "12", type = "df", 
+                         label_attr = TRUE,
+                         manova = TRUE, order = "12", type = "df",
                          caption = "t-test table", 
                          bootstrap_options = c("condensed", "striped", "hover"), 
                          full_width = TRUE) {
@@ -51,9 +52,12 @@ t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
 
   if (is.null(labels)) labels <- names(dv)
   
+  
+  
   for (i in 1:ncol(dv)) {
     res <- t.test(dv[[i]] ~ iv, var.equal = var_equal)
     sds <- aggregate(dv[[i]], by = list(iv), sd, na.rm = TRUE)
+    if (label_attr && !is.null(attr(dv[[i]], "label"))) labels[i] <- attr(dv[[i]], "label")
     out[i, "SD1"] <- sds[1, 2]
     out[i, "SD2"] <- sds[2, 2]
     out[i, "p"] <- res$p.value

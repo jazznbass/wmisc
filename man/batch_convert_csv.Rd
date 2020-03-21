@@ -5,8 +5,15 @@
 \title{Batch convert csv
 Convert all csv fies in a folder to xlsx and rds files}
 \usage{
-batch_convert_csv(folder, xlsx = TRUE, rds = TRUE, move_csv = "",
-  dec = ",", sep = ";", ...)
+batch_convert_csv(
+  folder,
+  xlsx = TRUE,
+  rds = TRUE,
+  move_csv = "",
+  dec = ",",
+  sep = ";",
+  ...
+)
 }
 \arguments{
 \item{folder}{Character string with source folder}

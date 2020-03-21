@@ -4,8 +4,13 @@
 \alias{split_at_percentile}
 \title{Factorizes a vector by percentiles}
 \usage{
-split_at_percentile(x, frac = c(1/3, 2/3), lab = c("low", "middle",
-  "high"), type = "higher", explicit_na = NA)
+split_at_percentile(
+  x,
+  frac = c(1/3, 2/3),
+  lab = c("low", "middle", "high"),
+  type = "higher",
+  explicit_na = NA
+)
 }
 \arguments{
 \item{x}{A vector}

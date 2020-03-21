@@ -2,16 +2,29 @@
 % Please edit documentation in R/t_test_table.R
 \name{t_test_table}
 \alias{t_test_table}
-\title{Creats t.test tabel for multiple dependent variables}
+\title{Creats a t.test tabel for multiple dependent variables}
 \usage{
-t_test_table(dv, iv, data, conditions = levels(factor(iv))[1:2],
-  labels = NULL, concise = TRUE, nice_p = TRUE, digits = 1,
-  var_equal = FALSE, manova = TRUE, order = "12", type = "df",
-  caption = "t-test table", bootstrap_options = c("condensed",
-  "striped", "hover"), full_width = TRUE)
+t_test_table(
+  dv,
+  iv,
+  data,
+  conditions = levels(factor(iv))[1:2],
+  labels = NULL,
+  concise = TRUE,
+  nice_p = TRUE,
+  digits = 1,
+  var_equal = FALSE,
+  label_attr = TRUE,
+  manova = TRUE,
+  order = "12",
+  type = "df",
+  caption = "t-test table",
+  bootstrap_options = c("condensed", "striped", "hover"),
+  full_width = TRUE
+)
 }
 \arguments{
-\item{dv}{A data frame with the dependent variables or a character vector when data is defined.}
+\item{dv}{A data frame with the dependent variables or a character vector with variable names when data is defined.}
 
 \item{iv}{A data frame or vector with the independent variable or a character if data is defined.}
 
@@ -44,7 +57,7 @@ Defaults to the first two levels of the independent variable 'iv' if applicable.
 A tibble or a kableExtra object
 }
 \description{
-Creats t.test tabel for multiple dependent variables
+Creats a t.test tabel for multiple dependent variables
 }
 \examples{
 dv <- data.frame(

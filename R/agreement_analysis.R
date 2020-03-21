@@ -13,7 +13,7 @@
 
 agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.7, type = "df", label, n_sim = 10000) {
   
-  if (class(grouping) == "character") vars <- vars[, !vars %in% grouping]
+  if (class(grouping) == "character") vars <- vars[!vars %in% grouping]
   if (missing(label)) label <- names(data[vars])
 
   r.wg <- c()

@@ -1,6 +1,6 @@
 anova_table <- function(test, labels = NULL, type = "df") {
 
-  if (is.null(labels)) labels <- paste0("Model ",1:length(test[[1]]))
+  if (is.null(labels)) labels <- paste0("Model ", 1:length(test[[1]]))
   out <- tibble(
     Variable = labels, 
     df = test[[3]], 
