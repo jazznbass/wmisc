@@ -16,7 +16,7 @@ nice_corrmatrix(
   autocor = "-",
   square = FALSE,
   caption = "Correlation matrix.",
-  sig.10 = "✝",
+  sig.10 = "<U+271D>",
   type = "df",
   numbered_columns = FALSE
 )

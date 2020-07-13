@@ -2,8 +2,8 @@
 
 .onAttach <- function(lib, pkg, ...) {
   out <- paste0(
-    "Wmisc ", utils::packageVersion("Wmisc"),
-    " (", utils::packageDate('Wmisc'), ")\n"
+    "wmisc ", utils::packageVersion("wmisc"),
+    " (", utils::packageDate('wmisc'), ")\n"
   )
   packageStartupMessage(out)
 }
