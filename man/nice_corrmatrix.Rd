@@ -16,13 +16,14 @@ nice_corrmatrix(
   autocor = "-",
   square = FALSE,
   caption = "Correlation matrix.",
-  sig.10 = "<U+271D>",
+  sig.10 = "✝",
   type = "df",
-  numbered_columns = FALSE
+  numbered_columns = FALSE,
+  descriptives = TRUE
 )
 }
 \arguments{
-\item{cr}{A correlation matrix returned by the psych package}
+\item{cr}{A data frame or a correlation matrix returned by the psych package}
 
 \item{upper}{TRUE if upper triangle should be included}
 
@@ -44,7 +45,7 @@ nice_corrmatrix(
 
 \item{caption}{Caption for a html table.}
 
-\item{sig.10}{Character indexing .10 sognificance level}
+\item{sig.10}{Character indexing .10 significance level}
 
 \item{type}{Charcater string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)}
 }

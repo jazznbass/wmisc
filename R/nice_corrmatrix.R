@@ -2,7 +2,7 @@
 #'
 #' From a psych corr object it gives a correlationmatrix formated for overview
 #'
-#' @param cr A correlation matrix returned by the psych package
+#' @param cr A data frame or a correlation matrix returned by the psych package
 #' @param upper TRUE if upper triangle should be included
 #' @param lower TRUE if lower triangle should be included
 #' @param alpha Alpha level
@@ -13,7 +13,7 @@
 #' @param autocor Character for diagonal (e.g. "-" or "1.00")
 #' @param square Report squared r instead of r
 #' @param caption Caption for a html table.
-#' @param sig.10 Character indexing .10 sognificance level
+#' @param sig.10 Character indexing .10 significance level
 #' @param type Charcater string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)
 #'
 #' @return A data-frame or a html table object
@@ -24,16 +24,20 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
                             values = TRUE, stars = TRUE, autocor = "-",
                             square = FALSE, caption = "Correlation matrix.",
                             sig.10 = "\u271d", type = "df",
-                            numbered_columns = FALSE) {
+                            numbered_columns = FALSE,
+                            descriptives = TRUE) {
   
-  if ("data.frame" %in% class(cr))
+  if ("data.frame" %in% class(cr)) {
+    .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
+    .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
     cr <- psych::corr.test(cr)
+  }
   
   r <- cr$r
   p <- cr$p
-  copt <- r
   if (square) r <- r * r
   r <- format(round(r, digits = digits), nsmall = digits)  #round(r, digits)
+  copt <- r
   if (!values) r[TRUE] <- ""
 
   if (!missing(n_sig)) r[p > alpha] <- n_sig
@@ -42,11 +46,11 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   diag(copt) <- paste0(autocor, "")
   diag(p) <- 1
   if (stars) {
-    copt[p <= .10] <- paste0(r[p <= .10], sig.10)
-    copt[p <= .05] <- paste0(r[p <= .05], "*")
-    copt[p <= .01] <- paste0(r[p <= .01], "**")
-    copt[p <= .001] <- paste0(r[p <= .001], "***")
-    copt[p > .10 & p < 1] <- paste0(r[p > .10 & p < 1], "")
+    copt[which(p <= .10)] <- paste0(r[which(p <= .10)], sig.10)
+    copt[which(p <= .05)] <- paste0(r[which(p <= .05)], "*")
+    copt[which(p <= .01)] <- paste0(r[which(p <= .01)], "**")
+    copt[which(p <= .001)] <- paste0(r[which(p <= .001)], "***")
+    copt[which(p > .10 & p < 1)] <- paste0(r[which(p > .10 & p < 1)], "")
     r <- copt
   }
   
@@ -60,6 +64,12 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
     colnames(r) <- paste0("", 1:nrow(r), "") 
   }
   
+  if (descriptives) {
+    .varnames <- names(r)
+    r$M <- round(.means, digits)
+    r$SD <- round(.sds, digits)
+    r <- r[, c("M", "SD", .varnames)]
+  }
   
   if (type == "df") {
     cat("Correlation matrix.\nProbability signs above the diagonal are adjusted for multiple tests.\n")
@@ -75,7 +85,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
       kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
       kableExtra::row_spec(1, hline_after = TRUE) %>%
-      kableExtra::footnote(general = paste0(sig.10, "p<.10; *p<.05; **p<.01; ***p<.001")) %>%
+      kableExtra::footnote(general = paste0(sig.10, "p < .10; *p < .05; **p < .01; ***p < .001")) %>%
       return()
   }
 }
