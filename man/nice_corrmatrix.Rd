@@ -10,16 +10,17 @@ nice_corrmatrix(
   lower = TRUE,
   alpha = 0.1,
   digits = 2,
-  n_sig,
   values = TRUE,
   stars = TRUE,
-  autocor = "-",
-  square = FALSE,
-  caption = "Correlation matrix.",
-  sig.10 = "✝",
-  type = "df",
   numbered_columns = FALSE,
-  descriptives = TRUE
+  descriptives = TRUE,
+  char_nsig,
+  char_autocor = "-",
+  char_p10 = "✝",
+  char_NA = "",
+  caption = "Correlation matrix.",
+  drop_zero = TRUE,
+  type = "df"
 )
 }
 \arguments{
@@ -33,19 +34,19 @@ nice_corrmatrix(
 
 \item{digits}{Round to given digit position}
 
-\item{n_sig}{Charcter indexing non-significant values}
-
 \item{values}{TRUE if values should be included}
 
 \item{stars}{TRUE if stars should be included}
 
-\item{autocor}{Character for diagonal (e.g. "-" or "1.00")}
+\item{char_nsig}{Charcter indexing non-significant values}
 
-\item{square}{Report squared r instead of r}
+\item{char_autocor}{Character for diagonal (e.g. "-" or "1.00")}
+
+\item{char_p10}{Character indexing .10 significance level}
+
+\item{char_NA}{Character for NA values}
 
 \item{caption}{Caption for a html table.}
-
-\item{sig.10}{Character indexing .10 significance level}
 
 \item{type}{Charcater string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)}
 }
