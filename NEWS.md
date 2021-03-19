@@ -1,3 +1,8 @@
+# wmisc 0.2.8
+
+New function:
+`create_blogsite()`: Helps to create a blog-like site for Rmarkdown webpages
+
 # wmisc 0.2.5
 
 - new function: `chi_test_table()`: Compares the proportions of a dichotomos variable in two groups for multiple variables and puts the results into a table. Like t_test_table() put für dichtomous variables.

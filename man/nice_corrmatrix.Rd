@@ -38,7 +38,7 @@ nice_corrmatrix(
 
 \item{stars}{TRUE if stars should be included}
 
-\item{char_nsig}{Charcter indexing non-significant values}
+\item{char_nsig}{Character indexing non-significant values}
 
 \item{char_autocor}{Character for diagonal (e.g. "-" or "1.00")}
 

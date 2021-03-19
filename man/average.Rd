@@ -10,11 +10,11 @@ average(x, min_valid, max_na)
 \arguments{
 \item{x}{Vector}
 
-\item{min_valid}{Minimal number of valid values that is requiered for calculating the mean.
+\item{min_valid}{Minimal number of valid values that is required for calculating the mean.
 A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).}
 
 \item{max_na}{Maximum number of NAs that are allowed before returning NA.
-A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).}
+A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).}
 }
 \description{
 Average

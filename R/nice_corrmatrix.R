@@ -7,7 +7,7 @@
 #' @param lower TRUE if lower triangle should be included
 #' @param alpha Alpha level
 #' @param digits Round to given digit position
-#' @param char_nsig Charcter indexing non-significant values
+#' @param char_nsig Character indexing non-significant values
 #' @param char_NA Character for NA values
 #' @param char_autocor Character for diagonal (e.g. "-" or "1.00")
 #' @param char_p10 Character indexing .10 significance level
