@@ -16,7 +16,7 @@ nice_corrmatrix(
   descriptives = TRUE,
   char_nsig,
   char_autocor = "-",
-  char_p10 = "✝",
+  char_p10 = "<U+271D>",
   char_NA = "",
   caption = "Correlation matrix.",
   drop_zero = TRUE,
