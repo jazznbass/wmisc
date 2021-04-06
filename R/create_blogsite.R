@@ -2,9 +2,10 @@
 #'
 #' Just a little helper for something like Blogs with Rmarkdown pages
 #'
-#' @param subdir Subdirectory where blog entries are saved
+#' @param source_dir A directory path with blogposts 
 #' @param template A template file to create a blog-website from
-#' @param file Output Rmd file with list of blog entries and references (based on template)
+#' @param outfile Output Rmd file with list of blog entries and references (based on template)
+#' @param subdir Subdirectory where blog entries will be saved
 #' @param render Default is FALSE. When TRUE, all Markdown files in subdirectory are rendered to html. Otherwise, the function just takes available html files in the subdirectory folder
 #' @param date_format A character string how to format the Date
 #' @param filepattern File extensions that are included.
@@ -14,95 +15,152 @@
 #' @return A markdown file in the project directory.
 #' @export
 
-create_blogsite <- function(subdir = "posts",
+
+create_blogsite <- function(source_dir = "posts",
                             template = "_blog.Rmd",
-                            file = "blog.Rmd",
+                            outfile = "blog.Rmd",
+                            subdir = "posts",
                             render = FALSE,
                             date_format = "%A, %B %d",
                             filepattern = c(".rmd", ".md", ".Rmd"),
                             no_temp_files = TRUE, # files starting with "_" are not considered
                             root = getwd()) {
   
-  on.exit(setwd(root))
-  setwd(root)
-  index <- readLines(template)
   
-  setwd(file.path(root, subdir))
-  files <- dir()
-  files <- files[which(str_sub(files, -4) %in% filepattern)]
-  if (no_temp_files) files <- files[!startsWith(files, "_")]
+  on.exit(setwd(root))
+  
+  args <-  as.list(environment()) # c(as.list(environment()), list(...))
+  
+  if (!any(endsWith(dir(), ".Rproj"))) stop("No project directory found!")
+  if (!file.exists(("_site.yml"))){ 
+    warnings("_site.yml not found!")
+  } else {
+    yaml <- yaml::read_yaml("_site.yml")$blog
+    args <- c(yaml, args)
+    args <- args[unique(names(args))]
+  }
+
+  do.call(.create_blogsite, args)
+}
+
+.create_blogsite <- function(...) {
+  
+  args <- list(...)
+  setwd(args$root)
+  index <- readLines(args$template, encoding = "UTF-8")
+  
+  # copy files with posts to local directory --------------------------------
+  
+  if (!identical(args$source_dir, args$subdir)) {
+    unlink(args$subdir, recursive = TRUE)  
+    dir.create(args$subdir, showWarnings = FALSE)
+    setwd(args$source_dir)
+    source <- dir()
+    source <- source[!endsWith(source, ".Rproj")]
+    source <- source[source != "README.md"]
+    file.copy(source, file.path(args$root, args$subdir), recursive = TRUE)
+  }
   
   # extracts dates and titles -----------------------------------------------
+  
+  setwd(file.path(args$root, args$subdir))
+  files <- dir()
+  files <- files[which(substr(files, nchar(files) - 3, nchar(files)) %in% args$filepattern)]
+  if (args$no_temp_files) files <- files[!startsWith(files, "_")]
+  
   title <- list()
   date <- list()
   abstract <- list()
   
-  
   for(i in seq_along(files)) {
-    lines <- readLines(files[i], n = 10)
     
-    tmp <- startsWith(lines, "title:")
-    if (any(tmp)) {
-      title[i] <- lines[tmp]
+    yaml <- rmarkdown::yaml_front_matter(files[i])
+    
+    if (!is.null(yaml$title)) {
+      title[i] <- yaml$title
     } else {
-      title[i] <- paste0("title: ", str_sub(files[i], end = -4), collapse = "") 
+      title[i] <- paste0(substr(files[i], 1, nchar(files[i]) - 4 ), collapse = "") 
     }
     
-    title[i] <- trimws(str_sub(title[i], 7))   
-    
-    tmp <- startsWith(lines, "date:")
-    if (any(tmp)) {
-      date[i] <- lines[tmp]
+    if (!is.null(yaml$date)) {
+      date[i] <- yaml$date
     } else {
-      date[i] <- "date: 1972-04-29"
+      date[i] <- "1972-04-29"
     }
-    date[i] <- trimws(str_sub(date[i], 6))
     
-    tmp <- startsWith(lines, "abstract:")
-    if (any(tmp)) {
-      abstract[i] <- lines[tmp]
+    if (!is.null(yaml$abstract)) {
+      abstract[i] <- yaml$abstract
     } else {
       abstract[i] <- ""
     }
-    abstract[i] <- trimws(str_sub(abstract[i], 10))
   }  
   
   date <- lapply(date, as.Date)
   
   # render all files in posts folder ----------------------------------------
   
-  if (render) for(file in files) rmarkdown::render(file)
+  if (args$render) for(file in files) rmarkdown::render(file, encoding = "UTF-8")
   
   # appends _blog.Rmd file with links -------------------------------------
   
-  posts <- dir(file.path(root, subdir))
+  posts <- dir(file.path(args$root, args$subdir))
   posts <- posts[which(endsWith(posts, ".html"))]
-  if (no_temp_files) posts <- posts[!startsWith(posts, "_")]
+  if (args$no_temp_files) posts <- posts[!startsWith(posts, "_")]
   
   add <- c()
   year <- "2000"
+  
   for(i in order(unlist(date), decreasing = TRUE)) {
     
+    # Year
     if (format(date[[i]], format = "%Y") != year) {
       year <- format(date[[i]], format = "%Y")
-      add <- c(add, paste0("## ", year, collapse = ""), "")
+      add <- c(
+        add, 
+        paste0("<h1 class = 'blog_year'>", year, "</h1>", collapse = ""), 
+        ""
+      )
     }
     
-    add <- c(add, paste0("### ", format(date[[i]], format = date_format), collapse = ""))
+    # Date
+    add <- c(
+      add, 
+      paste0("<p class = 'blog_date'>", format(date[[i]], format = args$date_format), 
+             "</p>",collapse = ""
+      )
+    )
     
-    link <- paste0('./', subdir, '/',posts[i], collapse = "")
-    text <- paste0("**", title[[i]] ,"**", collapse = "")
-    link <- paste0("### <a href = '", link, "'>", text, "</a>", collapse = "")
-    add <- c(add, "", link, "")
+    # Title
+    link <- paste0('./', args$subdir, '/', posts[i], collapse = "")
+    text <- paste0("<p class = 'blog_title'>", title[[i]] ,"</p>", collapse = "")
+    
+    add <- c(add, 
+             "", 
+             paste0(
+               "<a href = '", link, "' class = 'blog_link'>", text, "</a>", 
+               collapse = ""
+             ), 
+             ""
+    )
+    
+    # Abstract
     if (nchar(abstract[[i]]) > 0) {
-      abst <- paste0("", abstract[[i]], collapse = "")
+      abst <- paste0(
+        "<p class = 'blog_abstract'>", abstract[[i]], "</p>", collapse = ""
+      )
       add <- c(add, abst, "")
     }
   }
   
   new_index <- c(index, add)
   
-  setwd(root)
+  setwd(args$root)
   
-  writeLines(new_index, file)
+  out <- file(args$outfile, encoding = "UTF-8")
+  writeLines(new_index, out)
+  close(out)
+  
+  #Sys.setlocale("LC_TIME", lct)
+  
 }
+

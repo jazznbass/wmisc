@@ -5,9 +5,10 @@
 \title{Create a blogsite for Rmakrdown webpages}
 \usage{
 create_blogsite(
-  subdir = "posts",
+  source_dir = "posts",
   template = "_blog.Rmd",
-  file = "blog.Rmd",
+  outfile = "blog.Rmd",
+  subdir = "posts",
   render = FALSE,
   date_format = "\%A, \%B \%d",
   filepattern = c(".rmd", ".md", ".Rmd"),
@@ -16,11 +17,13 @@ create_blogsite(
 )
 }
 \arguments{
-\item{subdir}{Subdirectory where blog entries are saved}
+\item{source_dir}{A directory path with blogposts}
 
 \item{template}{A template file to create a blog-website from}
 
-\item{file}{Output Rmd file with list of blog entries and references (based on template)}
+\item{outfile}{Output Rmd file with list of blog entries and references (based on template)}
+
+\item{subdir}{Subdirectory where blog entries will be saved}
 
 \item{render}{Default is FALSE. When TRUE, all Markdown files in subdirectory are rendered to html. Otherwise, the function just takes available html files in the subdirectory folder}
 
