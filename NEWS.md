@@ -1,7 +1,8 @@
 # wmisc 0.2.8
 
-New function:
+New function to extend Rmarkdown pages:  
 `create_blogsite()`: Helps to create a blog-like site for Rmarkdown webpages
+`new_blog_entry()`: Sets up a new blog entry markdown page
 
 # wmisc 0.2.5
 
