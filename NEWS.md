@@ -1,3 +1,12 @@
+
+
+# wmisc 0.2.9
+
+- new function: `fill_missing_l2()`: Fills in missing data for cases in a multilevel/ 
+repeated measurement long format data frame. This is useful when you have a variable
+on level 2 (e.g., gender) but this variable only has a valid value for one measurement time (the others are na). This function will fill in the nas with this one valid value.
+
+
 # wmisc 0.2.8
 
 New function to extend Rmarkdown pages:  
