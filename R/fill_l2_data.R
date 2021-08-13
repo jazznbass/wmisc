@@ -36,7 +36,9 @@ fill_missing_l2 <- function(data, id, vars) {
         )
       }
       if (length(values) == 1 && length(nas) > 0) {
-        data[nas, vars[i]] <- values
+        
+        data[[vars[i]]][nas] <- values 
+        #data[nas, vars[i]] <- values
         out_string <- c(out_string, as.character(units[k]))
       } 
       
