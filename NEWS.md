@@ -1,4 +1,11 @@
 
+# wmisc 0.2.11
+
+- new functions: `check(), start_check(). end_check(), check_within(), check_in(), check_not()`
+
+# wmisc 0.2.10
+
+- new function: `progress_feedback.R()`
 
 # wmisc 0.2.9
 

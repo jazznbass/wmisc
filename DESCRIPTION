@@ -2,8 +2,8 @@ Package: wmisc
 Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
-Version: 0.2.9
-Date: 2021-08-13
+Version: 0.2.11
+Date: 2022-03-28
 Author: Juergen Wilbert
 Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
 Imports: 
@@ -25,4 +25,4 @@ Imports:
   lavaan
 License: GPL (>= 3)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
