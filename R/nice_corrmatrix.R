@@ -7,6 +7,8 @@
 #' @param lower TRUE if lower triangle should be included
 #' @param alpha Alpha level
 #' @param digits Round to given digit position
+#' @param labels Character string. If "auto" labels are taken from a 
+#'   label attribute.
 #' @param char_nsig Character indexing non-significant values
 #' @param char_NA Character for NA values
 #' @param char_autocor Character for diagonal (e.g. "-" or "1.00")
@@ -15,7 +17,7 @@
 #' @param stars TRUE if stars should be included
 #' @param caption Caption for a html table.
 
-#' @param type Charcater string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)
+#' @param type Character string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)
 #'
 #' @return A data-frame or a html table object
 #' @export
@@ -25,6 +27,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
                             values = TRUE, stars = TRUE, 
                             numbered_columns = FALSE,
                             descriptives = TRUE,
+                            labels = NULL,
                             char_nsig, char_autocor = "-",
                             char_p10 = "\u271d", char_NA = "", 
                             caption = "Correlation matrix.",
@@ -32,6 +35,14 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
                             type = "df") {
   
   if ("data.frame" %in% class(cr)) {
+    
+    if (identical(labels, "auto")) {
+      labels <- map2_chr(
+        cr, names(cr), 
+        ~ if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+      )    
+    }
+    
     .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
     .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
     cr <- psych::corr.test(cr)
@@ -66,6 +77,8 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   
   r <- as.data.frame(r)
   
+  if (!is.null(labels)) rownames(r) <- labels
+  
   if (numbered_columns) {
     rownames(r) <- paste0(1:nrow(r), " ", rownames(r))
     colnames(r) <- paste0(1:nrow(r), "") 
@@ -77,7 +90,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
     r$SD <- round(.sds, digits)
     r <- r[, c("M", "SD", .varnames)]
   }
-  
+ 
   if (type == "df") {
     cat("Correlation matrix.\nProbability signs above the diagonal are adjusted for multiple tests.\n")
     if (stars) cat(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")

@@ -14,6 +14,7 @@ nice_corrmatrix(
   stars = TRUE,
   numbered_columns = FALSE,
   descriptives = TRUE,
+  labels = "auto",
   char_nsig,
   char_autocor = "-",
   char_p10 = "✝",
@@ -38,6 +39,9 @@ nice_corrmatrix(
 
 \item{stars}{TRUE if stars should be included}
 
+\item{labels}{Character string. If "auto" labels are taken from a 
+label attribute.}
+
 \item{char_nsig}{Character indexing non-significant values}
 
 \item{char_autocor}{Character for diagonal (e.g. "-" or "1.00")}
@@ -48,7 +52,7 @@ nice_corrmatrix(
 
 \item{caption}{Caption for a html table.}
 
-\item{type}{Charcater string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)}
+\item{type}{Character string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)}
 }
 \value{
 A data-frame or a html table object
