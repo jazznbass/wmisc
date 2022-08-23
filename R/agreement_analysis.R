@@ -16,7 +16,17 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
   if (class(grouping) == "character") vars <- vars[!vars %in% grouping]
   if (missing(label)) label <- names(data[vars])
 
+  if (identical(label, "haven")) {
+    label <- map2_chr(
+      data[vars], 
+      names(data[vars]), 
+      ~ if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+    )    
+  }
+  
   r.wg <- c()
+  r.wg_min <- c()
+  r.wg_max <- c()
   r.wg.95 <- c()
   r.wg.p <- c() # anteil der rwg > 95% ci
   r.wg.crit <- c()
@@ -53,18 +63,20 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     
     agreement <- multilevel::rwg(x, group, ranvar = ranvar(rv))
     r.wg[i] <- mean(agreement$rwg, na.rm = TRUE)
+    r.wg_min[i] <- min(agreement$rwg, na.rm = TRUE)
+    r.wg_max[i] <- max(agreement$rwg, na.rm = TRUE)    
     n.classes[i] <- sum(!is.na(agreement$rwg))
     r.wg.crit[i] <- mean(agreement$rwg >= crit, na.rm = TRUE)
-    r.wg.95 <- multilevel::rwg.sim(gsize = mean.gsize, nresp = rv, nrep = n_sim)$rwg.95
+    r.wg95 <- multilevel::rwg.sim(gsize = mean.gsize, nresp = rv, nrep = n_sim)$rwg.95
  
-    if (length(r.wg.95) == 0) {
+    if (length(r.wg95) == 0) {
       r.wg.95[i] <- NA
     } else {
-      r.wg.95[i] <- r.wg.95
+      r.wg.95[i] <- r.wg95
     }
 
     r.wg.p[i] <- mean(agreement$rwg > r.wg.95[i], na.rm = TRUE)
-    if (length(r.wg.95) == 0) r.wg.p[i] <- NA
+    if (length(r.wg95) == 0) r.wg.p[i] <- NA
     
     fit <- aov(x ~ group)
     icc1[i] <- multilevel::ICC1(fit)
@@ -74,17 +86,20 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
     dif <- anova(null.model, model.without)
     L.icc[i] <- dif$L.Ratio[2]
     p.icc[i] <- dif$"p-value"[2]
-    G.rel[i] <- mean(multilevel::GmeanRel(null.model)$MeanRel, na.rm = TRUE)
+    G.rel[i] <- mean(multilevel::gmeanrel(null.model)$MeanRel, na.rm = TRUE)
     v <- VarCorr(null.model)
     G.var[i] <- as.numeric(v[[1]][1]) / (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
   }
   
   out <- tibble(
-    Var = label, 
+    Var = names(data[vars]), 
+    label = label,
     n = n, 
     "n l2" = n.classes, 
+    "min rwg" = round(r.wg_min, 2),
+    "max rwg" = round(r.wg_max, 2),
     "mean rwg" = round(r.wg, 2),
-    "rwg >= crit" = r.wg.crit, 
+    "rwg >= crit" = paste0(round(r.wg.crit * 100, 1), "%"), 
     "rwg upper 95% CI" = round(r.wg.95, 2),
     "Proportion > 95%CI" = round(r.wg.p, 2), 
     ICC = round(icc1, 2),
@@ -96,11 +111,13 @@ agreement_analysis <- function(data, vars = names(data), grouping, rv, crit = 0.
   )
   if (type == "df") return(out)
   if (type == "html") {
-    knitr::kable(out, caption = "Agreement analyses", align = c("l", rep("c", ncol(out) - 1)), row.names = FALSE) %>%
-      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
-      kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
-      kableExtra::row_spec(1, hline_after = TRUE)
+    out <- knitr::kable(out, caption = "Agreement analyses") %>%
+      kableExtra::kable_classic_2()
+    #out <- knitr::kable(out, caption = "Agreement analyses", align = c("l", rep("c", ncol(out) - 1)), row.names = FALSE) %>%
+    #  kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+    #  kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
+    #  kableExtra::row_spec(1, hline_after = TRUE)
   }
-  return(out)
+  out
 }
 

@@ -1,4 +1,8 @@
 
+# wmisc 0.2.13
+
+- reworked `agreement_analysis()`
+
 # wmisc 0.2.11
 
 - new functions: `check(), start_check(). end_check(), check_within(), check_in(), check_not()`
