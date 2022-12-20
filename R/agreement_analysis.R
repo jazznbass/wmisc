@@ -27,7 +27,7 @@ agreement_analysis <- function(data,
     label <- map2_chr(
       data[vars], 
       names(data[vars]), 
-      ~ if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+      function(.x, .y) if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
     )    
   }
   
@@ -46,7 +46,8 @@ agreement_analysis <- function(data,
   n <- c()
   n.classes <- c()
 
-  ranvar <- function(a) (a^2 - 1) / 12 # A = Number of response options, nach Bliese 2013
+  ranvar <- function(a) (a^2 - 1) / 12 
+  # a = Number of response options, nach Bliese 2013
 
   if (class(grouping) == "character") {
     group.total <- as.factor(data[[grouping]])
@@ -74,7 +75,9 @@ agreement_analysis <- function(data,
     r.wg_max[i] <- max(agreement$rwg, na.rm = TRUE)    
     n.classes[i] <- sum(!is.na(agreement$rwg))
     r.wg.crit[i] <- mean(agreement$rwg >= crit, na.rm = TRUE)
-    r.wg95 <- multilevel::rwg.sim(gsize = mean.gsize, nresp = rv, nrep = n_sim)$rwg.95
+    r.wg95 <- multilevel::rwg.sim(
+      gsize = mean.gsize, nresp = rv, nrep = n_sim
+    )$rwg.95
  
     if (length(r.wg95) == 0) {
       r.wg.95[i] <- NA
@@ -95,7 +98,8 @@ agreement_analysis <- function(data,
     p.icc[i] <- dif$"p-value"[2]
     G.rel[i] <- mean(multilevel::gmeanrel(null.model)$MeanRel, na.rm = TRUE)
     v <- VarCorr(null.model)
-    G.var[i] <- as.numeric(v[[1]][1]) / (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
+    G.var[i] <- as.numeric(v[[1]][1]) / 
+                (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
   }
   
   out <- tibble(

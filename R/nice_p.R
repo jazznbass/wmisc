@@ -10,22 +10,18 @@
 #' nice_p(p)
 #' paste0("p", nice_p(p, equal_sign = TRUE))
 nice_p <- function(p, equal_sign = FALSE) {
-  sapply(p, .nice_p, equal_sign = equal_sign) %>%
-    unlist()
+  unlist(lapply(p, .nice_p, equal_sign = equal_sign))
 }
 
-.nice_p <- function(p, equal_sign = FALSE) {
+.nice_p <- function(p, equal_sign) {
   if (is.na(p)) return(NA)
   if (equal_sign) {equal_sign <- "="} else {equal_sign <- ""}
-  if (isTRUE(p >= 0.05) && isTRUE(p < 1)) {
-    x <- sprintf("%.2f", trunc(p * 100) / 100) %>%
-      substring(2)
-    x <- paste0(equal_sign, x)
-    return(x)
+  if (isTRUE(p >= 0.05)) {
+    return(paste0(equal_sign, nice_statnum(p)))
   }
   if (isTRUE(p < 0.001)) return("<.001")
   if (isTRUE(p < 0.01)) return("<.01")
   if (isTRUE(p < 0.05)) return("<.05")
-  if (isTRUE(p == 1)) return(paste0(equal_sign, "1.00"))
 }
+
 

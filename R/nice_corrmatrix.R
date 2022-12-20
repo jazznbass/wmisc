@@ -34,12 +34,15 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
                             drop_zero = TRUE,
                             type = "df") {
   
-  if ("data.frame" %in% class(cr)) {
+  if (inherits(cr, "data.frame")) {
     
     if (identical(labels, "auto")) {
       labels <- map2_chr(
-        cr, names(cr), 
-        ~ if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+        cr, 
+        names(cr), 
+        function(.x, .y) { 
+          if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+        }
       )    
     }
     
@@ -51,7 +54,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   r <- cr$r
   p <- cr$p
 
-  r <- format(round(r, digits = digits), nsmall = digits)
+  r <- format(r, digits = digits, nsmall = digits)
 
   if (!values) r[TRUE] <- ""
 
@@ -92,19 +95,31 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   }
  
   if (type == "df") {
-    cat("Correlation matrix.\nProbability signs above the diagonal are adjusted for multiple tests.\n")
-    if (stars) cat(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
-    cat("\n")
-    r <- format(r, justify = "left")
-    return(r)
-  }
+   cat(
+     "Correlation matrix.\n",
+     "Probability signs above the diagonal are adjusted for multiple tests.\n",
+     sep = ""
+   )
+   if (stars) cat(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
+   cat("\n")
+   r <- format(r, justify = "left")
+   return(r)
+ }
 
   if (type == "html") {
-    knitr::kable(r, format = "html", caption = caption, row.names = TRUE, align = "c") %>%
-      kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
+    knitr::kable(
+      r, format = "html", caption = caption, row.names = TRUE, align = "c"
+    ) %>%
+      kableExtra::kable_styling(
+        bootstrap_options = "basic", full_width = FALSE
+      ) %>%
       kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
       kableExtra::row_spec(1, hline_after = TRUE) %>%
-      kableExtra::footnote(general = paste0(char_p10, "p < .10; \\*p < .05; \\*\\*p < .01; \\*\\*\\*p < .001")) %>%
+      kableExtra::footnote(
+        general = paste0(
+          char_p10, 
+          "p < .10; \\*p < .05; \\*\\*p < .01; \\*\\*\\*p < .001")
+        ) %>%
       return()
   }
 }

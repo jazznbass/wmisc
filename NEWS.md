@@ -1,4 +1,8 @@
 
+# wmisc 0.2.14
+
+- new functions: `nive_statnum()`
+
 # wmisc 0.2.13
 
 - reworked `agreement_analysis()`
