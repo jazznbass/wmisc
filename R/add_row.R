@@ -4,7 +4,7 @@ add_row <- function(base, addon) {
   rbind(base, addon)
 }
 
-
+#' @export
 combine_data_frames <- function(...) {
   dfs <- list(...)
   
