@@ -43,8 +43,10 @@ primp <- function(x, cat = TRUE) {
   }
   
   out <- c(substr(x, 0, start[1]-1), args[1])
-  for(i in 2:n_styles) {
-    out <- c(out, substr(x, stop[i-1]+1, start[i]-1), .cset(), args[i])
+  if (n_styles > 1) {
+    for(i in 2:n_styles) {
+      out <- c(out, substr(x, stop[i-1]+1, start[i]-1), .cset(), args[i])
+    }
   }
   
   out <- c(out, substr(x, stop[n_styles]+1, nchar(x)), .cset())
