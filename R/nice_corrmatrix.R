@@ -7,8 +7,8 @@
 #' @param lower TRUE if lower triangle should be included
 #' @param alpha Alpha level
 #' @param digits Round to given digit position
-#' @param labels Character string. If "auto" labels are taken from a 
-#'   label attribute.
+#' @param labels Character string. If "auto" labels are taken from a label
+#'   attribute.
 #' @param char_nsig Character indexing non-significant values
 #' @param char_NA Character for NA values
 #' @param char_autocor Character for diagonal (e.g. "-" or "1.00")
@@ -16,8 +16,8 @@
 #' @param values TRUE if values should be included
 #' @param stars TRUE if stars should be included
 #' @param caption Caption for a html table.
-
-#' @param type Character string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)
+#' @param type Character string. "df" for data-frame. "html" for html table
+#'   (needs knitr and kableExtra packages)
 #'
 #' @return A data-frame or a html table object
 #' @export
@@ -54,6 +54,7 @@ nice_corrmatrix <- function(cr, upper = TRUE, lower = TRUE,
   r <- cr$r
   p <- cr$p
 
+  r <- round(r, digits)
   r <- format(r, digits = digits, nsmall = digits)
 
   if (!values) r[TRUE] <- ""

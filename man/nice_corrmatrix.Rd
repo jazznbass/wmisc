@@ -39,8 +39,8 @@ nice_corrmatrix(
 
 \item{stars}{TRUE if stars should be included}
 
-\item{labels}{Character string. If "auto" labels are taken from a 
-label attribute.}
+\item{labels}{Character string. If "auto" labels are taken from a label
+attribute.}
 
 \item{char_nsig}{Character indexing non-significant values}
 
@@ -52,7 +52,8 @@ label attribute.}
 
 \item{caption}{Caption for a html table.}
 
-\item{type}{Character string. "df" for data-frame. "html" for html table (needs knitr and kableExtra packages)}
+\item{type}{Character string. "df" for data-frame. "html" for html table
+(needs knitr and kableExtra packages)}
 }
 \value{
 A data-frame or a html table object

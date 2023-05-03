@@ -24,16 +24,20 @@ t_test_table(
 )
 }
 \arguments{
-\item{dv}{A data frame with the dependent variables or a character vector with variable names when data is defined.}
+\item{dv}{A data frame with the dependent variables or a character vector
+with variable names when data is defined.}
 
-\item{iv}{A data frame or vector with the independent variable or a character if data is defined.}
+\item{iv}{A data frame or vector with the independent variable or a character
+if data is defined.}
 
 \item{data}{A data frame.}
 
-\item{conditions}{A character vectot of length two with the names of the two conditions.
-Defaults to the first two levels of the independent variable 'iv' if applicable.}
+\item{conditions}{A character vectot of length two with the names of the two
+conditions. Defaults to the first two levels of the independent variable
+'iv' if applicable.}
 
-\item{labels}{A character vector of length two with labels for the dependent variables.}
+\item{labels}{A character vector of length two with labels for the dependent
+variables.}
 
 \item{concise}{A more concise table with mean and sd in one column.}
 
@@ -43,7 +47,8 @@ Defaults to the first two levels of the independent variable 'iv' if applicable.
 
 \item{var_equal}{If FALSE, a t-test for unequal variances is calculated.}
 
-\item{order}{Either "12" or "21" depicting whether group two is compared to group one or vice versa.}
+\item{order}{Either "12" or "21" depicting whether group two is compared to
+group one or vice versa.}
 
 \item{type}{Either "df" for data frame or "html" for html table.}
 
@@ -61,7 +66,7 @@ Creats a t.test tabel for multiple dependent variables
 }
 \examples{
 dv <- data.frame(
-  a = c(runif(85) * 150, runif(115) * 100), 
+  a = c(runif(85) * 150, runif(115) * 100),
   b = runif(200) * 100
   )
 iv <- factor(c(rep("A", 85), rep("B", 115)))

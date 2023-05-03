@@ -2,7 +2,7 @@
 % Please edit documentation in R/alpha_CI.R
 \name{alpha_CI}
 \alias{alpha_CI}
-\title{Cronbachs Alpha Confidence Interval}
+\title{alpha_CI}
 \usage{
 alpha_CI(alpha, n, items, ci)
 }
@@ -15,6 +15,13 @@ alpha_CI(alpha, n, items, ci)
 
 \item{ci}{Confidence level (e.g. 0.95 for 95 percent)}
 }
+\value{
+a numeric vector containing the upper and lower bounds of the confidence interval
+}
 \description{
-Cronbachs Alpha Confidence Interval
+Calculate the confidence interval for Cronbach's alpha
+}
+\examples{
+alpha_CI(0.8, 10, 50, 0.99)
+
 }
