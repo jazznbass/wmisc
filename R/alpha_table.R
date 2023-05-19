@@ -1,10 +1,12 @@
 #' Table with alpha values
-#' 
+#'
 #' Returns a list of alpha cronbachs.
-#' 
+#'
 #' @param data A data Frame
-#' @param scales A list containing vectors with variable names. Each list element defines one scale. Named list elements are used as labels.
-#' @param labels Label names for scales (defaults to named list elements in 'scales').
+#' @param scales A list containing vectors with variable names. Each list
+#'   element defines one scale. Named list elements are used as labels.
+#' @param labels Label names for scales (defaults to named list elements in
+#'   'scales').
 #' @param round Rounds values to given decimal position.
 #' @param CI If TRUE confidence intervals are calculated.
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
@@ -12,7 +14,8 @@
 #' @param omega If TRUE Omega reliability estimation is calculated.
 #' @param keys Optional key argument for the psych::alpha function.
 #' @param RMSEA If TRUE RMSEA is calculated.
-#' @param values Sets maximum and minimum valid values necessary to calculate item difficulty
+#' @param values Sets maximum and minimum valid values necessary to calculate
+#'   item difficulty
 #' @export
 
 alpha_table <- function(data, scales, labels = NULL, round = 2, CI = TRUE, 

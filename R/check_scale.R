@@ -5,7 +5,8 @@
 #' @param min minimum of scale
 #' @param max maximum of scale
 #'
-#' @return A dataframe containing all cases with valies above and below the alowed values.
+#' @return A dataframe containing all cases with values above and below the
+#'   allowed values.
 #' @export
 
 check_scale <- function(data, var.names, min, max) {

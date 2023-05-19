@@ -12,7 +12,7 @@ nice_p(p, equal_sign = FALSE)
 \item{equal_sign}{If TRUE an equal sign is set before p values.}
 }
 \value{
-A character vector with nicely formated p values
+A character vector with nicely formatted p values
 }
 \description{
 Format p values

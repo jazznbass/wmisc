@@ -2,62 +2,70 @@
 % Please edit documentation in R/nice_corrmatrix.R
 \name{nice_corrmatrix}
 \alias{nice_corrmatrix}
-\title{Nice correlationmatrix}
+\title{Nice correlation matrix}
 \usage{
 nice_corrmatrix(
   cr,
-  upper = TRUE,
+  upper = FALSE,
   lower = TRUE,
-  alpha = 0.1,
   digits = 2,
   values = TRUE,
   stars = TRUE,
-  numbered_columns = FALSE,
+  numbered_columns = TRUE,
   descriptives = TRUE,
   labels = NULL,
+  ci = FALSE,
+  nsig_p = 0.1,
   char_nsig,
   char_autocor = "-",
   char_p10 = "✝",
   char_NA = "",
   caption = "Correlation matrix.",
   drop_zero = TRUE,
-  type = "df"
+  type = "df",
+  ...
 )
 }
 \arguments{
 \item{cr}{A data frame or a correlation matrix returned by the psych package}
 
-\item{upper}{TRUE if upper triangle should be included}
+\item{upper}{TRUE if upper triangle should be included.}
 
-\item{lower}{TRUE if lower triangle should be included}
+\item{lower}{TRUE if lower triangle should be included.}
 
-\item{alpha}{Alpha level}
+\item{digits}{Round to given digit position.}
 
-\item{digits}{Round to given digit position}
+\item{values}{TRUE if values should be included.}
 
-\item{values}{TRUE if values should be included}
-
-\item{stars}{TRUE if stars should be included}
+\item{stars}{TRUE if stars should be included.}
 
 \item{labels}{Character string. If "auto" labels are taken from a label
 attribute.}
 
-\item{char_nsig}{Character indexing non-significant values}
+\item{nsig_p}{p level below which correlations are considered not significant.}
 
-\item{char_autocor}{Character for diagonal (e.g. "-" or "1.00")}
+\item{char_nsig}{Character indexing non-significant values.}
 
-\item{char_p10}{Character indexing .10 significance level}
+\item{char_autocor}{Character for diagonal (e.g. "-" or "1.00").}
 
-\item{char_NA}{Character for NA values}
+\item{char_p10}{Character indexing .10 significance level.}
+
+\item{char_NA}{Character for NA values.}
 
 \item{caption}{Caption for a html table.}
 
 \item{type}{Character string. "df" for data-frame. "html" for html table
-(needs knitr and kableExtra packages)}
+(needs knitr and kableExtra packages).}
+
+\item{...}{Further arguments passed to the [psych::corr.test()] function.}
 }
 \value{
 A data-frame or a html table object
 }
 \description{
-From a psych corr object it gives a correlationmatrix formated for overview
+From a psych corr object it gives a correlation matrix formatted for overview
+}
+\examples{
+nice_corrmatrix(mtcars, type = "html", ci = TRUE)
+
 }

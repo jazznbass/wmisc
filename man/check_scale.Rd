@@ -16,7 +16,8 @@ check_scale(data, var.names, min, max)
 \item{max}{maximum of scale}
 }
 \value{
-A dataframe containing all cases with valies above and below the alowed values.
+A dataframe containing all cases with values above and below the
+  allowed values.
 }
 \description{
 Check scale for typos

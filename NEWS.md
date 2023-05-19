@@ -1,7 +1,8 @@
 
-# wmisc 0.2.14
+# wmisc 0.2.17
 
-- new functions: `nive_statnum()`
+- new functions: `nice_statnum()`
+- new functions: `nice_descriptives()`
 
 # wmisc 0.2.13
 
