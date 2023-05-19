@@ -8,6 +8,7 @@ t_test_table(
   dv,
   iv,
   data,
+  method = "pooled",
   conditions = levels(factor(iv))[1:2],
   labels = NULL,
   concise = TRUE,
@@ -17,7 +18,7 @@ t_test_table(
   label_attr = TRUE,
   manova = TRUE,
   order = "12",
-  type = "df",
+  type = "html",
   caption = "t-test table",
   bootstrap_options = c("condensed", "striped", "hover"),
   full_width = TRUE
@@ -66,9 +67,13 @@ Creats a t.test tabel for multiple dependent variables
 }
 \examples{
 dv <- data.frame(
-  a = c(runif(85) * 150, runif(115) * 100),
-  b = runif(200) * 100
-  )
-iv <- factor(c(rep("A", 85), rep("B", 115)))
-t_test_table(dv, iv, labels = c("Motivation", "Achievement"))
+  a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
+  b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
+  iv = factor(c(rep("A", 85), rep("B", 200)))
+)
+
+t_test_table(
+  c("a", "b"), "iv", data = dv, 
+  labels = c("Motivation", "Achievement")
+)
 }

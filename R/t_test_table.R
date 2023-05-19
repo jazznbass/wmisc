@@ -26,16 +26,30 @@
 #'
 #' @examples
 #' dv <- data.frame(
-#'   a = c(runif(85) * 150, runif(115) * 100),
-#'   b = runif(200) * 100
-#'   )
-#' iv <- factor(c(rep("A", 85), rep("B", 115)))
-#' t_test_table(dv, iv, labels = c("Motivation", "Achievement"))
-t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
-                         labels = NULL, concise = TRUE, 
-                         nice_p = TRUE, digits = 1, var_equal = FALSE, 
+#'   a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
+#'   b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
+#'   iv = factor(c(rep("A", 85), rep("B", 200)))
+#' )
+#'
+#' t_test_table(
+#'   c("a", "b"), "iv", data = dv, 
+#'   labels = c("Motivation", "Achievement")
+#' )
+
+t_test_table <- function(dv, 
+                         iv, 
+                         data, 
+                         method = "pooled",
+                         conditions = levels(factor(iv))[order], 
+                         labels = NULL, 
+                         concise = TRUE, 
+                         nice_p = TRUE, 
+                         digits = 1, 
+                         var_equal = FALSE, 
                          label_attr = TRUE,
-                         manova = TRUE, order = "12", type = "df",
+                         manova = TRUE, 
+                         order = 1:2, 
+                         type = "html",
                          caption = "t-test table", 
                          bootstrap_options = c("condensed", "striped", "hover"), 
                          full_width = TRUE) {
@@ -46,7 +60,7 @@ t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
   }
   dv <- dv[iv %in% conditions, ]
   iv <- iv[iv %in% conditions]
-  iv <- factor(iv)
+  iv <- factor(iv, levels = levels(iv)[order])
   lev <- levels(iv)
 
   out <- tibble(
@@ -57,40 +71,49 @@ t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
 
   if (is.null(labels)) labels <- names(dv)
   
-  
-  
   for (i in 1:ncol(dv)) {
     res <- t.test(dv[[i]] ~ iv, var.equal = var_equal)
-    sds <- aggregate(dv[[i]], by = list(iv), sd, na.rm = TRUE)
-    if (label_attr && !is.null(attr(dv[[i]], "label"))) labels[i] <- attr(dv[[i]], "label")
-    out[i, "SD1"] <- sds[1, 2]
-    out[i, "SD2"] <- sds[2, 2]
+    sds <- aggregate(dv[[i]], by = list(iv), sd, na.rm = TRUE)[,2]
+    vars <- aggregate(dv[[i]], by = list(iv), var, na.rm = TRUE)[,2]
+    ns <- aggregate(dv[[i]], by = list(iv), function(x) sum(!is.na(x)))[,2]
+ 
+    if (label_attr && !is.null(attr(dv[[i]], "label"))) 
+      labels[i] <- attr(dv[[i]], "label")
+    out[i, "SD1"] <- sds[1]
+    out[i, "SD2"] <- sds[2]
     out[i, "p"] <- res$p.value
     out[i, "df"] <- res$parameter
     out[i, "t"] <- res$statistic
     out[i, "M1"] <- res$estimate[1]
     out[i, "M2"] <- res$estimate[2]
     out[i, "Scale"] <- labels[i]
-    out[i, "d"] <- (res$estimate[1] - res$estimate[2]) / sds[1, 2]
-    out[i, "n1"] <- sum(!is.na(dv[iv == conditions[1], i]))
-    out[i, "n2"] <- sum(!is.na(dv[iv == conditions[2], i]))
+    sd <- switch(method,
+      "glass" = sds[1],
+      "cohen" = sqrt((vars[1] + vars[2]) / 2),
+      "pooled" = sqrt(
+        ((ns[1] - 1) * vars[1] + (ns[2] - 1) * vars[2]) / 
+        (ns[1] + ns[2] - 2)
+      )
+    )
+    
+    out[i, "d"] <- (res$estimate[1] - res$estimate[2]) / sd
+    out[i, "n1"] <- ns[1]
+    out[i, "n2"] <- ns[2]
   }
   
   round_ <- function(x, digits) {
-    format(round(x, digits=digits), nsmall = digits) 
+    format(round(x, digits = digits), nsmall = digits) 
   }
+
+  out[i, "p"] <- round(out$p[i], digits)
   
   out <- out %>%
     mutate_at(c(2:5), round_, digits = digits) %>%
-    mutate_at("p", round_, 3) %>%
     mutate_at("d", round_, digits = digits) %>%
     mutate_at("df", round_, 1) %>%
     mutate_at("t", round_, 2)
   
-  if (order == "21") {
-    out$t <- out$t * -1
-    out$d <- out$d * -1
-  }
+
   colnames(out)[2:3] <- paste0("M ", lev)
   colnames(out)[4:5] <- paste0("SD ", lev)
   colnames(out)[10:11] <- paste0("n ", lev)
@@ -102,13 +125,21 @@ t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
         bind_cols(out[c(6:ncol(out))])
     colnames(out)[2:3] <- paste0("M (SD) ", lev)
   }
-  if (nice_p) out$p <- nice_p(out$p)
+
+  if (nice_p) out$p <- nice_p(out$p, digits = 2)
 
   if(type == "html") {
-    out <- knitr::kable(out, caption = caption, align = c("l", rep("c", 8)), row.names = FALSE) %>%
-      kableExtra::kable_styling(bootstrap_options = bootstrap_options, full_width = full_width) %>%
-      kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
-      kableExtra::row_spec(1, hline_after = TRUE)
+    out <- out %>% 
+      knitr::kable(
+        caption = caption, 
+        align = c("l", rep("c", ncol(out))), 
+        row.names = FALSE
+      ) %>%
+      kableExtra::kable_classic(
+        bootstrap_options = bootstrap_options, full_width = full_width
+      )
+    
+    note <- paste0("Method for estimating standard deviation: ", method)
     
     if (manova) {
       res <- lm(as.matrix(dv) ~ iv) %>%
@@ -116,14 +147,15 @@ t_test_table <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
         summary() %>%
         .$"stats"
       
-      pillai <- sprintf(
+      note <- paste0(note, "; ", sprintf(
         "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
         res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
-      )
-      
-      out <- kableExtra::footnote(out, general = pillai)
+      ))
+  
+
     }  
 
+    out <- kableExtra::footnote(out, general = note)
     
     return(out)
   }
