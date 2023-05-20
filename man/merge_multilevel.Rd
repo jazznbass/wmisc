@@ -2,22 +2,40 @@
 % Please edit documentation in R/merge_multilevel.R
 \name{merge_multilevel}
 \alias{merge_multilevel}
-\title{Helps merging multilevel datasets}
+\title{Merge Multiple Level Data}
 \usage{
-merge_multilevel(dat.l1, dat.l2 = NULL, id, var.mean)
+merge_multilevel(
+  dat_l1,
+  dat_l2 = NULL,
+  id,
+  var_agg,
+  suffix_l = c(".l1", ".l2"),
+  suffix_m = c("", ".mean"),
+  agg_func = function(x) mean(x, na.rm = TRUE)
+)
 }
 \arguments{
-\item{dat.l1}{A data Frame for Level 1}
+\item{dat_l1}{Level 1 data frame containing data to merge}
 
-\item{dat.l2}{A data frame for Level 2}
+\item{dat_l2}{Level 2 data frame containing data to merge}
 
-\item{id}{Stirng with variable name for matching datasets}
+\item{id}{String with variable name for matching datasets}
 
-\item{var.mean}{Vector with strings of L1 variables that are aggregated as Level2 means}
+\item{var_agg}{Vector with strings of L1 variables that are aggregated at
+Level2 with the `agg_func` function.}
+
+\item{suffix_l}{A character vector of suffixes for the merged Level 2 columns
+(default: c('.l1', '.l2'))}
+
+\item{suffix_m}{A character vector of suffixes for the merged aggregated
+columns (default: c('', '.mean'))}
+
+\item{agg_func}{The function used in aggregation (default: function(x)
+mean(x, na.rm = TRUE))}
 }
 \value{
-A data frame
+Returns a merged data frame
 }
 \description{
-Helps merging multilevel datasets
+Merges two data frames with different levels to create a single data frame
 }
