@@ -2,7 +2,7 @@
 % Please edit documentation in R/agreement_analysis.R
 \name{agreement_analysis}
 \alias{agreement_analysis}
-\title{Agreement Analysis}
+\title{Perform agreement analysis}
 \usage{
 agreement_analysis(
   data,
@@ -18,9 +18,10 @@ agreement_analysis(
 \arguments{
 \item{data}{A data-frame}
 
-\item{vars}{Vector of character strings with names of vairables to be analyzed}
+\item{vars}{Vector of character strings with names of variables to be
+analyzed}
 
-\item{grouping}{Grouping variable. Either as a character String or a vector}
+\item{grouping}{Grouping variable. Either as a character string or a vector}
 
 \item{rv}{Number of response options for calculating random variance}
 
@@ -34,5 +35,8 @@ agreement_analysis(
 A Data-frame
 }
 \description{
-Agreement Analysis
+This function performs an agreement analysis including intraclass correlation
+coefficients, group-related variance, and related diagnostics for items with
+a nominal or ordinal scale. The function outputs a data.frame or a HTML table
+giving the results.
 }

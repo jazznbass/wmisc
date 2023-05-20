@@ -2,14 +2,14 @@
 % Please edit documentation in R/t_test_table.R
 \name{t_test_table}
 \alias{t_test_table}
-\title{Creats a t.test tabel for multiple dependent variables}
+\title{Creates a t.test table for multiple dependent variables}
 \usage{
 t_test_table(
   dv,
   iv,
   data,
-  method = "pooled",
-  conditions = levels(factor(iv))[1:2],
+  method = "cohen",
+  conditions = levels(factor(iv))[order],
   labels = NULL,
   concise = TRUE,
   nice_p = TRUE,
@@ -17,7 +17,7 @@ t_test_table(
   var_equal = FALSE,
   label_attr = TRUE,
   manova = TRUE,
-  order = "12",
+  order = 1:2,
   type = "html",
   caption = "t-test table",
   bootstrap_options = c("condensed", "striped", "hover"),
@@ -33,18 +33,18 @@ if data is defined.}
 
 \item{data}{A data frame.}
 
-\item{conditions}{A character vectot of length two with the names of the two
+\item{conditions}{A character vector of length two with the names of the two
 conditions. Defaults to the first two levels of the independent variable
 'iv' if applicable.}
 
 \item{labels}{A character vector of length two with labels for the dependent
 variables.}
 
-\item{concise}{A more concise table with mean and sd in one column.}
+\item{concise}{A more concise table with mean and SD in one column.}
 
 \item{nice_p}{If TRUE, p values are printed in a nice format.}
 
-\item{digits}{Number of digits for rounding mean and sd values}
+\item{digits}{Number of digits for rounding mean and SD values}
 
 \item{var_equal}{If FALSE, a t-test for unequal variances is calculated.}
 
@@ -53,7 +53,7 @@ group one or vice versa.}
 
 \item{type}{Either "df" for data frame or "html" for html table.}
 
-\item{caption}{Tabel caption is type = "html"}
+\item{caption}{Table caption is type = "html"}
 
 \item{bootstrap_options}{see kable_styling()}
 
@@ -63,7 +63,7 @@ group one or vice versa.}
 A tibble or a kableExtra object
 }
 \description{
-Creats a t.test tabel for multiple dependent variables
+Creates a t.test table for multiple dependent variables
 }
 \examples{
 dv <- data.frame(

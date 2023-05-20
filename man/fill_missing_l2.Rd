@@ -2,7 +2,7 @@
 % Please edit documentation in R/fill_l2_data.R
 \name{fill_missing_l2}
 \alias{fill_missing_l2}
-\title{Fills in missing data for wide format}
+\title{Fills in missing level 2 data}
 \usage{
 fill_missing_l2(data, id, vars)
 }
@@ -11,18 +11,19 @@ fill_missing_l2(data, id, vars)
 
 \item{id}{Character string with L2 variable}
 
-\item{vars}{Vector of strings with varible names}
+\item{vars}{Vector of strings with variable names}
 }
 \value{
-A data frame with replaced values
+A data frame with added values. It also reports if l2 values conflict.
 }
 \description{
-Fills in missing data for wide format
+For cases where you have a long format data set and it contains level 2 data but some of the level 2 data are missing although the necessary information in available in other data rows of the same grouping value.
 }
 \examples{
-x <- data.frame(id = rep(1:3, each = 3), gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA))
-fill_missing_l2(x, "id", "gender")
-
-x <- data.frame(id = rep(1:3, each = 3), gender = c(1, 1, NA, 0, 0, 0, 1, 0, NA))
+x <- data.frame(
+  id = rep(1:5, each = 3), 
+  gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA, NA, NA, NA, 1, 0, NA)
+)
+x
 fill_missing_l2(x, "id", "gender")
 }

@@ -1,24 +1,26 @@
-#' Fills in missing data for wide format
+#' Fills in missing level 2 data
 #' 
+#' For cases where you have a long format data set and it contains level 2 data but some of the level 2 data are missing although the necessary information in available in other data rows of the same grouping value.
 #' 
 #' @param data A data frame
 #' @param id Character string with L2 variable
-#' @param vars Vector of strings with varible names
+#' @param vars Vector of strings with variable names
 #'
-#' @return A data frame with replaced values
+#' @return A data frame with added values. It also reports if l2 values conflict.
 #' @export
 #'
 #' @examples
-#' x <- data.frame(id = rep(1:3, each = 3), gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA))
-#' fill_missing_l2(x, "id", "gender")
-#' 
-#' x <- data.frame(id = rep(1:3, each = 3), gender = c(1, 1, NA, 0, 0, 0, 1, 0, NA))
+#' x <- data.frame(
+#'   id = rep(1:5, each = 3), 
+#'   gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA, NA, NA, NA, 1, 0, NA)
+#' )
+#' x
 #' fill_missing_l2(x, "id", "gender")
 fill_missing_l2 <- function(data, id, vars) {
   
   units <- unique(data[[id]])
   
-  out_string <- "Replaced at id "
+  out_string <- "Complemented at id: "
   
   for(i in seq_along(vars)) {
     

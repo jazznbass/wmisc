@@ -2,7 +2,7 @@
 % Please edit documentation in R/chi_test_table.R
 \name{chi_test_table}
 \alias{chi_test_table}
-\title{Creats a chi.sqaured test tabel for multiple dependent variables}
+\title{Creates a chi.squared test table for multiple dependent variables}
 \usage{
 chi_test_table(
   dv,
@@ -15,51 +15,55 @@ chi_test_table(
   digits = 2,
   order = "12",
   label_attr = TRUE,
-  type = "df",
-  caption = "X-sqaured-test table",
-  bootstrap_options = c("condensed", "striped", "hover"),
-  full_width = TRUE
+  type = "html",
+  ...
 )
 }
 \arguments{
-\item{dv}{A data frame with the dependent variables or a character vector when argument data is set.}
+\item{dv}{A data frame with the dependent variables or a character vector
+when argument data is set.}
 
-\item{iv}{A data frame or vector with the independent variable or a character if argument data is set.}
+\item{iv}{A data frame or vector with the independent variable or a character
+if argument data is set.}
 
 \item{data}{A data frame.}
 
-\item{conditions}{A character vectot of length two with the names of the two conditions.
-Defaults to the first two levels of the independent variable 'iv' if applicable.}
+\item{conditions}{A character vector of length two with the names of the two
+conditions. Defaults to the first two levels of the independent variable
+'iv' if applicable.}
 
-\item{ref_levels}{Vector with the reference level for each dependent variable. Values are repeated if length of levels vector is smaller than number dependent variables.}
+\item{ref_levels}{Vector with the reference level for each dependent
+variable. Values are repeated if length of levels vector is smaller than
+number dependent variables.}
 
-\item{labels}{A character vector of length two with labels for the dependent variables.}
+\item{labels}{A character vector of length two with labels for the dependent
+variables.}
 
 \item{nice_p}{If TRUE, p values are printed in a nice format.}
 
 \item{digits}{Number of digits for rounding mean and sd values}
 
-\item{order}{Either "12" or "21" depicting whether group two is compared to group one or vice versa.}
+\item{order}{Either "12" or "21" depicting whether group two is compared to
+group one or vice versa.}
 
 \item{type}{Either "df" for data frame or "html" for html table.}
 
-\item{caption}{Tabel caption is type = "html"}
-
-\item{bootstrap_options}{see kable_styling()}
-
-\item{full_width}{see kable_styling()}
+\item{...}{Further arguments passed to [nice_table()]}
 }
 \value{
 A tibble or a kableExtra object
 }
 \description{
-Creats a chi.sqaured test tabel for multiple dependent variables
+Creates a chi.squared test table for multiple dependent variables
 }
 \examples{
 dat <- data.frame(
-  a = factor(rbinom(100, 1, 0.3), labels = c("m", "f")),
-  b = factor(rbinom(100, 1, 0.3), labels = c("no", "yes")),
-  g = factor(rbinom(100, 1, 0.5), labels = c("no_sen", "sen"))
+  gender = factor(rbinom(100, 1, 0.3), labels = c("male", "female")),
+  glasses = factor(rbinom(100, 1, 0.3), labels = c("no", "yes")),
+  sen = factor(rbinom(100, 1, 0.5), labels = c("no_sen", "sen"))
  )
-chi_test_table(c("a", "b"), "g", data = dat, nice_p = TRUE, ref_levels = c("m", "no"))
+chi_test_table(
+  c("gender", "glasses"), "sen", data = dat, 
+  ref_levels = c("male", "no")
+)
 }

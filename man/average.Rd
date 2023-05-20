@@ -2,23 +2,23 @@
 % Please edit documentation in R/average.R
 \name{average}
 \alias{average}
-\title{Average
-Computes arithmetic mean}
+\title{Average}
 \usage{
 average(x, min_valid, max_na)
 }
 \arguments{
 \item{x}{Vector}
 
-\item{min_valid}{Minimal number of valid values that is required for calculating the mean.
-A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).}
+\item{min_valid}{Minimal number of valid values that is required for
+calculating the mean. A value between 0 and 1 indicates a proportion of
+values (e.g., 0.5 = 50 percent of values have to be valid).}
 
-\item{max_na}{Maximum number of NAs that are allowed before returning NA.
-A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).}
+\item{max_na}{Maximum number of NAs that are allowed before returning NA. A
+value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
+percent NAs are allowed).}
 }
 \description{
-Average
-Computes arithmetic mean
+Computes arithmetic means
 }
 \examples{
 dat <- c(1:5, NA, NA)

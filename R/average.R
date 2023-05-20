@@ -1,11 +1,14 @@
 #' Average
-#' Computes arithmetic mean
-#' 
-#' @param x Vector 
-#' @param min_valid Minimal number of valid values that is required for calculating the mean.
-#' A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).
-#' @param max_na Maximum number of NAs that are allowed before returning NA.
-#' A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).
+#'
+#' Computes arithmetic means
+#'
+#' @param x Vector
+#' @param min_valid Minimal number of valid values that is required for
+#'   calculating the mean. A value between 0 and 1 indicates a proportion of
+#'   values (e.g., 0.5 = 50 percent of values have to be valid).
+#' @param max_na Maximum number of NAs that are allowed before returning NA. A
+#'   value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
+#'   percent NAs are allowed).
 #' @export
 #' @examples
 #' dat <- c(1:5, NA, NA)
@@ -15,7 +18,6 @@
 #' average(dat, max_na = 1)
 #' average(dat, min_valid = 0.5)
 #' average(dat, min_valid = 0.9)
-
 
 average <- function(x, min_valid, max_na) {
   

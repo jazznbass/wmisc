@@ -1,8 +1,14 @@
-#' Agreement Analysis
+#' Perform agreement analysis
+#'
+#' This function performs an agreement analysis including intraclass correlation
+#' coefficients, group-related variance, and related diagnostics for items with
+#' a nominal or ordinal scale. The function outputs a data.frame or a HTML table
+#' giving the results.
 #'
 #' @param data A data-frame
-#' @param vars Vector of character strings with names of vairables to be analyzed
-#' @param grouping Grouping variable. Either as a character String or a vector
+#' @param vars Vector of character strings with names of variables to be
+#'   analyzed
+#' @param grouping Grouping variable. Either as a character string or a vector
 #' @param rv Number of response options for calculating random variance
 #' @param crit Critical agreement level
 #' @param label Character vector with new variable labels
@@ -10,7 +16,6 @@
 #'
 #' @return A Data-frame
 #' @export
-
 agreement_analysis <- function(data, 
                                vars = names(data), 
                                grouping, 
@@ -20,7 +25,7 @@ agreement_analysis <- function(data,
                                label, 
                                n_sim = 10000) {
   
-  if (class(grouping) == "character") vars <- vars[!vars %in% grouping]
+  if (inherits(grouping, "character")) vars <- vars[!vars %in% grouping]
   if (missing(label)) label <- names(data[vars])
 
   if (identical(label, "haven")) {
@@ -122,12 +127,7 @@ agreement_analysis <- function(data,
   )
   if (type == "df") return(out)
   if (type == "html") {
-    out <- knitr::kable(out, caption = "Agreement analyses") %>%
-      kableExtra::kable_classic_2()
-    #out <- knitr::kable(out, caption = "Agreement analyses", align = c("l", rep("c", ncol(out) - 1)), row.names = FALSE) %>%
-    #  kableExtra::kable_styling(bootstrap_options = "basic", full_width = FALSE) %>%
-    #  kableExtra::column_spec(1, bold = TRUE, color = "black") %>%
-    #  kableExtra::row_spec(1, hline_after = TRUE)
+    out <- nice_table(out, caption = "Agreement analyses")
   }
   out
 }

@@ -9,7 +9,8 @@ analysis_missing(dat, scale)
 \arguments{
 \item{dat}{A data-frame}
 
-\item{scale}{A list with character vectors. Each list element containing the variable names of a scale}
+\item{scale}{A list with character vectors. Each list element containing the
+variable names of a scale}
 }
 \value{
 A data-frame

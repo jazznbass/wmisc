@@ -2,16 +2,15 @@
 % Please edit documentation in R/batch_convert_csv.R
 \name{batch_convert_csv}
 \alias{batch_convert_csv}
-\title{Batch convert csv
-Convert all csv fies in a folder to xlsx and rds files}
+\title{Batch convert csv}
 \usage{
 batch_convert_csv(
   folder,
   xlsx = TRUE,
   rds = TRUE,
   move_csv = "",
-  dec = ",",
-  sep = ";",
+  dec = ".",
+  sep = ",",
   ...
 )
 }
@@ -22,18 +21,20 @@ batch_convert_csv(
 
 \item{rds}{If TRUE creates rds files.}
 
-\item{move_csv}{If not an empty string it names a folder to move csv to after conversion}
+\item{move_csv}{If not an empty string it names a folder to move csv to after
+conversion}
 
 \item{dec}{Decimal sign}
 
 \item{sep}{Separator sign}
 
-\item{...}{Further functions for the underlying read.csv. (e.g. fileEncoding = "WINDOWS-1252")}
+\item{...}{Further functions for the underlying read.csv. (e.g. `fileEncoding
+= "WINDOWS-1252"`)}
 }
 \value{
-Writes xlsx and/or rds files into the source folder for each csv file.
+Writes xlsx and/or rds files into the source folder for each csv
+  file.
 }
 \description{
-Batch convert csv
-Convert all csv fies in a folder to xlsx and rds files
+Convert all csv files in a folder to xlsx and rds files
 }
