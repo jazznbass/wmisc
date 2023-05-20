@@ -12,7 +12,7 @@ reference_package_version(packages, ...)
 \item{...}{Package names}
 }
 \value{
-A markdown formated for citation of the packages.
+A markdown formatted for citation of the packages.
 }
 \description{
 Reference package version for markdown

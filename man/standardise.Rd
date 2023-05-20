@@ -10,13 +10,16 @@ standardise(x, grouping, min_valid, max_na, m = 0, sd = 1)
 \arguments{
 \item{x}{A vector}
 
-\item{grouping}{A variable with group values for calculating grouped centered.}
+\item{grouping}{A variable with group values for calculating grouped
+centered.}
 
-\item{min_valid}{Minimal number of valid values that is requiered for calculation.
-A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).}
+\item{min_valid}{Minimal number of valid values that is requiered for
+calculation. A value between 0 and 1 indicates a proportion of values
+(e.g., 0.5 = 50 percent of values have to be valid).}
 
-\item{max_na}{Maximum number of NAs that are allowed before returning NA.
-A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).}
+\item{max_na}{Maximum number of NAs that are allowed before returning NA. A
+value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
+percent NAs are allowed).}
 
 \item{m}{Mean after standardisation (default = 0)}
 

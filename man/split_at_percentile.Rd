@@ -15,15 +15,17 @@ split_at_percentile(
 \arguments{
 \item{x}{A vector}
 
-\item{frac}{Fractions to split at (e.g., c(1/3, 2/3) will result in three groups and 0.5 will result in a median split)}
+\item{frac}{Fractions to split at (e.g., `c(1/3, 2/3)` will result in three
+groups and 0.5 will result in a median split)}
 
 \item{lab}{Vector with factor labels.}
 
-\item{type}{"higher" will split group below fraction and last group equal above last fraction.
-and "lower" will split group below median (vs. equal and above)}
+\item{type}{"higher" will split group below fraction and last group equal
+above last fraction. and "lower" will split group below median (vs. equal
+and above)}
 
-\item{explicit_na}{If not NA, NAs will be recoded as a factor level of the provided name.
-If TRUE, the name will default to '(Missing)'.}
+\item{explicit_na}{If not NA, NAs will be recoded as a factor level of the
+provided name. If TRUE, the name will default to '(Missing)'.}
 }
 \value{
 A vector of type factor with two levels.

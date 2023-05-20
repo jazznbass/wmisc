@@ -2,15 +2,18 @@
 #'
 #' @aliases standardise standardize
 #' @param x A vector
-#' @param grouping A variable with group values for calculating grouped centered.
-#' @param min_valid Minimal number of valid values that is requiered for calculation.
-#' A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).
-#' @param max_na Maximum number of NAs that are allowed before returning NA.
-#' A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).
+#' @param grouping A variable with group values for calculating grouped
+#'   centered.
+#' @param min_valid Minimal number of valid values that is requiered for
+#'   calculation. A value between 0 and 1 indicates a proportion of values
+#'   (e.g., 0.5 = 50 percent of values have to be valid).
+#' @param max_na Maximum number of NAs that are allowed before returning NA. A
+#'   value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
+#'   percent NAs are allowed).
 #' @param m Mean after standardisation (default = 0)
 #' @param sd Mean after standardisation (default = 1)
 #' @export
-#' @examples 
+#' @examples
 #' standardise( c(1:9, NA, NA, NA, NA, NA), m = 100, sd = 15)
 #' standardise( c(1:95, NA, NA, NA, NA, NA), min_valid = 0.96)
 standardise <- function(x, grouping, min_valid, max_na, m = 0, sd = 1) {

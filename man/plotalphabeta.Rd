@@ -11,7 +11,7 @@ plotalphabeta(
   d = 2,
   alpha = 0.05,
   fill = TRUE,
-  col_fill = c("grey75", "grey50")
+  col_fill = c("pink", "lightblue")
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ plotalphabeta(
 
 \item{fill}{If TRUE, intersections are filled out in grey}
 
-\item{col_fill}{Vector of length two with colornames to fill area below curve}
+\item{col_fill}{Vector of length two with color names to fill area below curve}
 }
 \description{
 Plot Alpha / Beta graph

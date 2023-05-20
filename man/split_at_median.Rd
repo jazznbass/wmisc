@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_at_median.R
 \name{split_at_median}
 \alias{split_at_median}
-\title{Dichotomize vector valeues at their median}
+\title{Dichotomize vector values at their median}
 \usage{
 split_at_median(
   x,
@@ -17,8 +17,8 @@ split_at_median(
 \item{type}{"higher" will split group at above median (vs. equal and below)
 and "lower" will split group below median (vs. equal and above)}
 
-\item{explicit_na}{If not NA, NAs will be recoded as a fector level of the provided name.
-If TRUE, the name will default to '(Missing)'.}
+\item{explicit_na}{If not NA, NAs will be recoded as a factor level of the
+provided name. If TRUE, the name will default to '(Missing)'.}
 
 \item{lab}{Vector with two factor labels.}
 }
@@ -26,7 +26,7 @@ If TRUE, the name will default to '(Missing)'.}
 A vector of type factor with two levels.
 }
 \description{
-Dichotomize vector valeues at their median
+Dichotomize vector values at their median
 }
 \examples{
 x <- sample(c(1:10, NA), 100, replace = TRUE)

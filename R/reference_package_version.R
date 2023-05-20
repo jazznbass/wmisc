@@ -3,7 +3,7 @@
 #' @param packages Vector of strings with package names.
 #' @param ... Package names
 #'
-#' @return A markdown formated for citation of the packages.
+#' @return A markdown formatted for citation of the packages.
 #' @export
 
 reference_package_version <- function(packages, ...) {

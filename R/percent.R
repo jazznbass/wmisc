@@ -1,16 +1,19 @@
 #' Percent of TRUE values
-#' 
-#' Returns percentage of the occurance of TRUE values in a vector of logical values.
+#'
+#' Returns percentage of the occurance of TRUE values in a vector of logical
+#' values.
 #'
 #' @param x A vector
 #' @param round Demical positions (default = 2).
-#' @param min_valid Minimal number of valid values that is requiered for calculation.
-#' A value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50 percent of values have to be valid).
-#' @param max_na Maximum number of NAs that are allowed before returning NA.
-#' A value between 0 and 1 dicates a proportion of values (e.g., 0.5 = 50 percent NAs are allowed).
+#' @param min_valid Minimal number of valid values that is required for
+#'   calculation. A value between 0 and 1 indicates a proportion of values
+#'   (e.g., 0.5 = 50 percent of values have to be valid).
+#' @param max_na Maximum number of NAs that are allowed before returning NA. A
+#'   value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
+#'   percent NAs are allowed).
 #' @return A percentage
 #' @export
-#' @examples 
+#' @examples
 #' percent(runif(10000) > 0.50)
 percent <- function(x, round = 2, min_valid, max_na) {
   if (!missing(min_valid)) {

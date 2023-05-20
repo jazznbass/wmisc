@@ -1,22 +1,40 @@
-#' Helps merging multilevel datasets
+#' Merge Multiple Level Data
 #'
-#' @param dat.l1 A data Frame for Level 1
-#' @param dat.l2 A data frame for Level 2
-#' @param id Stirng with variable name for matching datasets
-#' @param var.mean Vector with strings of L1 variables that are aggregated as Level2 means
+#' Merges two data frames with different levels to create a single data frame
 #'
-#' @return A data frame
+#' @param dat_l1  Level 1 data frame containing data to merge
+#' @param dat_l2  Level 2 data frame containing data to merge
+#' @param id String with variable name for matching datasets
+#' @param var_agg Vector with strings of L1 variables that are aggregated at
+#'   Level2 with the `agg_func` function.
+#' @param suffix_l A character vector of suffixes for the merged Level 2 columns
+#'   (default: c('.l1', '.l2'))
+#' @param suffix_m A character vector of suffixes for the merged aggregated
+#'   columns (default: c('', '.mean'))
+#' @param agg_func The function used in aggregation (default: function(x)
+#'   mean(x, na.rm = TRUE))
+#' @return Returns a merged data frame
+#'
 #' @export
-
-merge_multilevel <- function(dat.l1, dat.l2 = NULL, id, var.mean) {
-  names.l1 <- names(dat.l1)
-  dat.means <- aggregate(dat.l1[, var.mean], by = list(dat.l1[[id]]), FUN = mean, na.rm = TRUE)
-  names(dat.means)[1] <- id
-  dat.l1 <- merge(dat.l1, dat.means, by = id, suffix = c("", ".mean"))
-  if (is.null(dat.l2)) {
-    out <- dat.l1
+merge_multilevel <- function(dat_l1, 
+                             dat_l2 = NULL, 
+                             id, 
+                             var_agg,
+                             suffix_l = c(".l1", ".l2"),
+                             suffix_m = c("", ".mean"),
+                             agg_func = function(x) mean(x, na.rm = TRUE)) {
+  
+  dat_means <- aggregate(
+    dat_l1[, var_agg], by = list(dat_l1[[id]]), 
+    FUN = agg_func
+  )
+                                                        
+  names(dat_means)[1] <- id
+  dat_l1 <- merge(dat_l1, dat_means, by = id, suffix = suffix_m)
+  if (is.null(dat_l2)) {
+    out <- dat_l1
   } else {
-    out <- merge(dat.l1, dat.l2, by = id, suffix = c(".l1", ".l2"))
+    out <- merge(dat_l1, dat_l2, by = id, suffix = suffix_l)
   }
   out
 }

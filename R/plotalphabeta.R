@@ -5,12 +5,12 @@
 #' @param d Effect size
 #' @param alpha Alpha Level
 #' @param fill If TRUE, intersections are filled out in grey
-#' @param col_fill Vector of length two with colornames to fill area below curve 
+#' @param col_fill Vector of length two with color names to fill area below curve 
 #' @export
 #' @examples
 #' plotalphabeta()
 #' 
-plotalphabeta <- function(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE, col_fill = c("grey75", "grey50")) {
+plotalphabeta <- function(m = 0, sd = 1, d = 2, alpha = 0.05, fill = TRUE, col_fill = c("pink", "lightblue")) {
   crit <- qnorm(1 - alpha, 0, 1)
   x <- seq(-4 * sd + m, (4 + d) * sd + m, length = 1000)
   y <- dnorm(x, mean = m, sd = sd)
