@@ -16,7 +16,8 @@ alpha_CI(alpha, n, items, ci)
 \item{ci}{Confidence level (e.g. 0.95 for 95 percent)}
 }
 \value{
-a numeric vector containing the upper and lower bounds of the confidence interval
+a numeric vector containing the upper and lower bounds of the
+  confidence interval
 }
 \description{
 Calculate the confidence interval for Cronbach's alpha

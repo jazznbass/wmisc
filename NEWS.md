@@ -1,6 +1,7 @@
 
-# wmisc 0.2.17
+# wmisc 0.2.18
 
+- new functions: `auto_corr()`
 - new functions: `nice_statnum()`
 - new functions: `nice_descriptives()`
 
