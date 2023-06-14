@@ -28,6 +28,9 @@
     <loc>/reference/analysis_missing.html</loc>
   </url>
   <url>
+    <loc>/reference/auto_corr.html</loc>
+  </url>
+  <url>
     <loc>/reference/average.html</loc>
   </url>
   <url>
@@ -35,6 +38,9 @@
   </url>
   <url>
     <loc>/reference/center.html</loc>
+  </url>
+  <url>
+    <loc>/reference/change_values.html</loc>
   </url>
   <url>
     <loc>/reference/check_args.html</loc>
