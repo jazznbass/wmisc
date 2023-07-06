@@ -104,7 +104,12 @@ alpha_table <- function(data,
     }
     
     a <- invisible(
-      psych::alpha(data_scale, check.key = check_key, keys = key,use = "pairwise")
+      psych::alpha(
+        data_scale, 
+        check.keys = check_key, 
+        keys = key,
+        use = "pairwise"
+      )
     )
     
     if (fa) f <- invisible(psych::fa(data_scale))
