@@ -89,7 +89,7 @@ alpha_table <- function(data,
     }
     
     if (keys == "auto") {
-      if (requireNamespace("help", quietly = TRUE)) {
+      if (requireNamespace("scaledic", quietly = TRUE)) {
         key <- data_scale |>
           map_dbl(~ as.numeric(scaledic::dic_attr(.x, "weight"))) |>
           sign()
