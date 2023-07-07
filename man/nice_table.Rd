@@ -4,7 +4,7 @@
 \alias{nice_table}
 \title{Create a nicely formatted table}
 \usage{
-nice_table(x, ..., extra = NULL)
+nice_table(x, ..., extra = NULL, footnote = "")
 }
 \arguments{
 \item{x}{The data frame to be formatted into a table}
@@ -12,6 +12,8 @@ nice_table(x, ..., extra = NULL)
 \item{...}{Additional arguments passed to `knitr::kable()`}
 
 \item{extra}{Additional arguments passed to `kableExtra::kable_classic_2()`}
+
+\item{footnote}{Add footnote}
 }
 \value{
 A nicely formatted HTML table
