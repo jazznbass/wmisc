@@ -9,8 +9,6 @@
 #' 
 #' @return A nicely formatted HTML table
 #' 
-#' @import knitr
-#' @import kableExtra
 #' 
 #' @examples
 #' df <- data.frame(x = 1:5, y = rnorm(5))

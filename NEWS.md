@@ -1,4 +1,6 @@
 
+
+- new functions: `exploratory_fa()`
 - new functions: `change_values()`
 
 # wmisc 0.2.18

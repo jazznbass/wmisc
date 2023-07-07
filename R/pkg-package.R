@@ -14,8 +14,10 @@
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
 #' @importFrom lavaan fitMeasures
-#' @importFrom psych scoreFast alpha describe
+#' @importFrom psych scoreFast alpha describe fa fa.sort
 #' @importFrom nlme lme VarCorr gls
 #' @importFrom stats aggregate anova aov dnorm lm manova 
+#' @importFrom kableExtra kable_classic kable_classic_2 row_spec footnote kable_styling column_spec
+#' @importFrom knitr kable
 #' median pchisq qf qnorm qt sd t.test
 NULL
