@@ -9,7 +9,7 @@ alpha_table(
   scales,
   labels = NULL,
   round = 2,
-  CI = TRUE,
+  ci = TRUE,
   conf_level = 0.95,
   check_key = TRUE,
   keys = "auto",
@@ -30,13 +30,14 @@ element defines one scale. Named list elements are used as labels.}
 
 \item{round}{Rounds values to given decimal position.}
 
-\item{CI}{If TRUE confidence intervals are calculated.}
+\item{ci}{If TRUE confidence intervals are calculated.}
 
 \item{conf_level}{Confidence level (e.g. 0.95 for 95 percent).}
 
 \item{check_key}{Check_key for the psych::alpha function.}
 
-\item{keys}{Optional key argument for the psych::alpha function.}
+\item{keys}{Optional key argument for the psych::alpha function. When set to
+"auto" it looks for dictionary information from the scaledic package.}
 
 \item{RMSEA}{If TRUE RMSEA is calculated.}
 

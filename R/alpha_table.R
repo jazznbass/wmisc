@@ -8,10 +8,11 @@
 #' @param labels Label names for scales (defaults to named list elements in
 #'   'scales').
 #' @param round Rounds values to given decimal position.
-#' @param CI If TRUE confidence intervals are calculated.
+#' @param ci If TRUE confidence intervals are calculated.
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
 #' @param check_key Check_key for the psych::alpha function.
-#' @param keys Optional key argument for the psych::alpha function.
+#' @param keys Optional key argument for the psych::alpha function. When set to
+#'   "auto" it looks for dictionary information from the scaledic package.
 #' @param RMSEA If TRUE RMSEA is calculated.
 #' @param difficulty If TRUE, the difficulty of the item is calculated.
 #' @param values Sets maximum and minimum valid values necessary to calculate
@@ -30,7 +31,7 @@ alpha_table <- function(data,
                         scales,
                         labels = NULL,
                         round = 2,
-                        CI = TRUE,
+                        ci = TRUE,
                         conf_level = 0.95,
                         check_key = TRUE,
                         keys = "auto",
@@ -113,30 +114,30 @@ alpha_table <- function(data,
     
     df$"n items"[i] <- a$nvar
     
-    if (!CI) df$Alpha[i] <- nice_statnum(alpha, 2)
+    if (!ci) df$Alpha[i] <- nice_statnum(alpha, 2)
     
-    if (CI) {
-      a.CI <- .alpha_CI(
+    if (ci) {
+      alpha_ci <- .alpha_CI(
         alpha, nrow(data_scale), length(scales[[i]]), conf_level
       )
       df$Alpha[i] <- glue(
-        "{nice_statnum(alpha, round)} [{nice_statnum(a.CI[1], 2)}, ",
-        "{nice_statnum(a.CI[2], 2)}]"
+        "{nice_statnum(alpha, round)} [{nice_statnum(alpha_ci[1], 2)}, ",
+        "{nice_statnum(alpha_ci[2], 2)}]"
       )
     }
     
-    alpha.std <- a$total$std.alpha
-    if (!CI) {
-      df$"Std.Alpha"[i] <- nice_statnum(alpha.std, 2)
+    alpha_std <- a$total$std.alpha
+    if (!ci) {
+      df$"Std.Alpha"[i] <- nice_statnum(alpha_std, 2)
     }
     
-    if (CI) {
-      a.std.CI <- .alpha_CI(
-        alpha.std, nrow(data_scale), length(scales[[i]]), conf_level
+    if (ci) {
+      alpha_std_ci <- .alpha_CI(
+        alpha_std, nrow(data_scale), length(scales[[i]]), conf_level
       )
       df$"Std.Alpha"[i] <- glue(
-        "{nice_statnum(alpha.std, 2)} [{nice_statnum(a.std.CI[1], 2)}, ",
-        "{nice_statnum(a.std.CI[2], 2)}]"
+        "{nice_statnum(alpha_std, 2)} [{nice_statnum(alpha_std_ci[1], 2)}, ",
+        "{nice_statnum(alpha_std_ci[2], 2)}]"
       )
     }
     
@@ -173,10 +174,10 @@ alpha_table <- function(data,
     if (RMSEA) df$"RMSEA"[i] <- nice_statnum(f$RMSEA[1], 3)
   }
   
-  if (CI) {
+  if (ci) {
     names(df)[which(names(df) == "Alpha")] <- glue("Alpha CI{conf_level*100}%")
     names(df)[which(names(df) == "Std.Alpha")] <- glue(
-      "Std.Alph CI{conf_level * 100}%"
+      "Std.Alpha CI{conf_level * 100}%"
     )
   }
   message("Note. values in brackets depict upper and lower bound of ",
