@@ -12,6 +12,7 @@
 #' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na
 #' @importFrom magrittr %>%
+#' @importFrom glue glue
 #' @importFrom lavaan fitMeasures
 #' @importFrom psych scoreFast alpha describe
 #' @importFrom nlme lme VarCorr gls
