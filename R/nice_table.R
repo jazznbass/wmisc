@@ -19,6 +19,6 @@
 nice_table <- function(x, ..., extra = NULL, title = "", footnote = "") {
   title <- paste0("Table.<br><i>", title, "</i>")
   x <- knitr::kable(x, caption = title, ...)
-  do.call(kableExtra::kable_classic_2, c(list(x), extra)) %>%
+  do.call(kableExtra::kable_classic, c(list(x), extra)) %>%
     kableExtra::footnote(footnote)
 }
