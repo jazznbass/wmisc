@@ -7,7 +7,7 @@
 #' @docType package
 #' @author Juergen Wilbert [aut, cre]
 #' @keywords package
-#' @import dplyr
+#' @import dplyr 
 #' @import graphics
 #' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na
@@ -19,5 +19,5 @@
 #' @importFrom stats aggregate anova aov dnorm lm manova 
 #' @importFrom kableExtra kable_classic kable_classic_2 row_spec footnote kable_styling column_spec
 #' @importFrom knitr kable
-#' median pchisq qf qnorm qt sd t.test
+#' @importFrom stats median pchisq qf qnorm qt sd t.test
 NULL

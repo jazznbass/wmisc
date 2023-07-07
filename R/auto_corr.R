@@ -19,14 +19,17 @@
 #'
 #' Ljung, G. M., & Box, G. E. P. (1978). On a measure of lack of fit in time
 #' series models. \emph{Biometrika}, 65(2), 297-303.
-#'
-#' @seealso \url{https://de.wikipedia.org/wiki/Korrelogramm}
-#' \url{http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xegbohtmlnode39.html}
-#' \url{https://en.wikipedia.org/wiki/Ljung%E2%80%93Box_test}
-#'
+#' 
+#' https://de.wikipedia.org/wiki/Korrelogramm
+#' 
+#' http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xegbohtmlnode39.html
+#' 
+#' https://en.wikipedia.org/wiki/Ljung%E2%80%93Box_test
+#' 
 #' @examples
 #' data <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #' auto_corr(data, lag = 3)
+#' @export
 auto_corr <- function(x, lag, alpha = 0.05) {
   m_x <- mean(x)
   t <- length(x)
@@ -55,6 +58,14 @@ auto_corr <- function(x, lag, alpha = 0.05) {
   
   # return
   data.frame(
-    lag = 1:lag, ar = ar, se = se, statistic = z, p_z = p, p_t, se_all = se_all, 
-    q_lb = q_lb, p_all = p_all)
+    lag = 1:lag, 
+    ar = ar, 
+    se = se, 
+    statistic = z, 
+    p_z = p, 
+    p_t, 
+    se_all = se_all, 
+    q_lb = q_lb, 
+    p_all = p_all
+  )
 }

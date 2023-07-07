@@ -35,7 +35,10 @@ Journal of the Royal Statistical Society}, 8(1), 27-41.
 
 Ljung, G. M., & Box, G. E. P. (1978). On a measure of lack of fit in time
 series models. \emph{Biometrika}, 65(2), 297-303.
-}
-\seealso{
 
+https://de.wikipedia.org/wiki/Korrelogramm
+
+http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xegbohtmlnode39.html
+
+https://en.wikipedia.org/wiki/Ljung%E2%80%93Box_test
 }
