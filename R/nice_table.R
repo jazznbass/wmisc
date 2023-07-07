@@ -6,6 +6,7 @@
 #' @param x The data frame to be formatted into a table
 #' @param ... Additional arguments passed to `knitr::kable()`
 #' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
+#' @param title Title string.
 #' @param footnote Add footnote
 #' @return A nicely formatted HTML table
 #' 
@@ -15,8 +16,9 @@
 #' nice_table(df, extra = list(full_width = FALSE))
 #' 
 #' @export
-nice_table <- function(x, ..., extra = NULL, footnote = "") {
-  x <- knitr::kable(x, ...)
+nice_table <- function(x, ..., extra = NULL, title = "", footnote = "") {
+  title <- paste0("Table.<br><i>", title, "</i>")
+  x <- knitr::kable(x, caption = title, ...)
   do.call(kableExtra::kable_classic_2, c(list(x), extra)) %>%
     kableExtra::footnote(footnote)
 }
