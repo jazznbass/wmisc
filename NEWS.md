@@ -1,7 +1,8 @@
 
-
-- new functions: `exploratory_fa()`
+- added gt table support for nice table
+- new functions: `nice_loadings()`
 - new functions: `change_values()`
+- new functions: `percentage_bar()`
 
 # wmisc 0.2.18
 

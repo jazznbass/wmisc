@@ -9,6 +9,7 @@
 #' @keywords package
 #' @import dplyr 
 #' @import graphics
+#' @importFrom gt gt html opt_table_lines tab_options opt_table_font
 #' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na
 #' @importFrom magrittr %>%
