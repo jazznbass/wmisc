@@ -18,6 +18,8 @@
 #' @export
 nice_table <- function(x, ..., extra = NULL, title = NULL, footnote = NULL, engine = "extra") {
   
+  if (!is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
+  
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) title <- attr(x, "wmisc_title")
   if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) footnote <- attr(x, "wmisc_note")
   if (!is.null(title)) title <- paste0("Table.<br><i>", title, "</i>")
@@ -40,33 +42,25 @@ nice_table <- function(x, ..., extra = NULL, title = NULL, footnote = NULL, engi
       .gt_apa_style()
   }
   
-  
   out
 }
 
 
 .gt_apa_style <- function(gt_tbl) {
   gt_tbl  |> 
-    opt_table_lines(extent = "none")  |> 
     tab_options(
-      heading.border.bottom.width = 2,
-      heading.border.bottom.color = "black",
-      heading.border.bottom.style = "solid",
-      table.border.top.color = "white",
-      table_body.hlines.color = "white",
-      table_body.border.top.color = "black",
-      table_body.border.top.style = "solid",
-      table_body.border.top.width = 1,
-      heading.title.font.size = 12,
-      table.font.size = 12,
-      heading.subtitle.font.size = 12,
-      table_body.border.bottom.color = "black",
-      table_body.border.bottom.width = 1,
-      table_body.border.bottom.style = "solid",
+      table.border.bottom.color = "black",
+      table.border.bottom.width = 3,
+      
+      table.border.top.color = "black",
+      table.border.top.width = 3,
+      
+      table_body.hlines.width = 0,
+      
+      column_labels.border.bottom.width = 2,
       column_labels.border.bottom.color = "black",
-      column_labels.border.bottom.style = "solid",
-      column_labels.border.bottom.width = 1
     )  |> 
-    opt_table_font(font = "times")
+    opt_table_font(font = "times") |> 
+    gt::cols_align(align = "center") |> 
+    gt::cols_align(align = "left", columns = 1)
 }
-
