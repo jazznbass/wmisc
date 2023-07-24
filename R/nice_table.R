@@ -16,7 +16,23 @@
 #' nice_table(df, extra = list(full_width = FALSE))
 #' 
 #' @export
-nice_table <- function(x, ..., extra = NULL, title = NULL, footnote = NULL, engine = "extra") {
+nice_table <- function(x, 
+                       ..., 
+                       extra = NULL, 
+                       title = NULL, 
+                       footnote = NULL, 
+                       engine = "extra", 
+                       rownames = FALSE, 
+                       flip = FALSE) {
+  
+  if (flip) {
+    x <- as.data.frame(t(x))
+    x <- setNames(x, x[1, ]) 
+    x <- x[-1, ]
+    x <- cbind(" " = rownames(x), x)
+    rownames(x) <- NULL
+  }
+  
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) title <- attr(x, "wmisc_title")
   if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) footnote <- attr(x, "wmisc_note")
@@ -35,7 +51,11 @@ nice_table <- function(x, ..., extra = NULL, title = NULL, footnote = NULL, engi
   }
 
   if (engine == "gt") {
-    if (!is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
+    if (!inherits(x, "data.frame")) {
+      x <- as.data.frame(x)
+      rownames(x) <- NULL
+    }
+    if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
     if (!is.null(title)) title <- gt::html(title)
     out <- gt::gt(x, caption = title) |> 
       .gt_apa_style()

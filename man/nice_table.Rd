@@ -10,7 +10,9 @@ nice_table(
   extra = NULL,
   title = NULL,
   footnote = NULL,
-  engine = "extra"
+  engine = "extra",
+  rownames = FALSE,
+  flip = FALSE
 )
 }
 \arguments{
