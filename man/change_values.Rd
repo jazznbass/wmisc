@@ -9,9 +9,12 @@ change_values(x, ..., .default = NULL)
 \arguments{
 \item{x}{A vector in which values will be replaced.}
 
-\item{...}{An ellipsis of pairs of values to be replaced. Each pair consists of the original value and the corresponding replacement value.}
+\item{...}{An ellipsis of pairs of values to be replaced. Each pair consists
+of the original value and the corresponding replacement value.}
 
-\item{.default}{The default value to be used for elements not specified in the replacement pairs. If not provided, elements not specified will remain unchanged.}
+\item{.default}{The default value to be used for elements not specified in
+the replacement pairs. If not provided, elements not specified will remain
+unchanged.}
 }
 \value{
 A modified vector with replaced values.

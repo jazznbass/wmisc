@@ -3,8 +3,11 @@
 #' Replace specific values in a vector with new values.
 #'
 #' @param x A vector in which values will be replaced.
-#' @param ... An ellipsis of pairs of values to be replaced. Each pair consists of the original value and the corresponding replacement value.
-#' @param .default The default value to be used for elements not specified in the replacement pairs. If not provided, elements not specified will remain unchanged.
+#' @param ... An ellipsis of pairs of values to be replaced. Each pair consists
+#'   of the original value and the corresponding replacement value.
+#' @param .default The default value to be used for elements not specified in
+#'   the replacement pairs. If not provided, elements not specified will remain
+#'   unchanged.
 #'
 #' @return A modified vector with replaced values.
 #'
