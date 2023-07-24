@@ -4,7 +4,14 @@
 \alias{nice_table}
 \title{Create a nicely formatted table}
 \usage{
-nice_table(x, ..., extra = NULL, title = "", footnote = "", engine = "extra")
+nice_table(
+  x,
+  ...,
+  extra = NULL,
+  title = NULL,
+  footnote = NULL,
+  engine = "extra"
+)
 }
 \arguments{
 \item{x}{The data frame to be formatted into a table}

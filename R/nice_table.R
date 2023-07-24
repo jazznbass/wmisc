@@ -16,20 +16,26 @@
 #' nice_table(df, extra = list(full_width = FALSE))
 #' 
 #' @export
-nice_table <- function(x, ..., extra = NULL, title = "", footnote = "", engine = "extra") {
+nice_table <- function(x, ..., extra = NULL, title = NULL, footnote = NULL, engine = "extra") {
   
-  if (!is.null(attr(x, "wmisc_note")) && footnote == "") footnote <- attr(x, "wmisc_note")
-  
+  if (!is.null(attr(x, "wmisc_title")) && is.null(title)) title <- attr(x, "wmisc_title")
+  if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) footnote <- attr(x, "wmisc_note")
+  if (!is.null(title)) title <- paste0("Table.<br><i>", title, "</i>")
   
   if (engine == "extra") {
-    title <- paste0("Table.<br><i>", title, "</i>")
-    x <- knitr::kable(x, caption = title, ...)
-    out <- do.call(kableExtra::kable_classic, c(list(x), extra))  |> 
-      kableExtra::footnote(footnote)
+    
+    x <- knitr::kable(
+      x, 
+      caption = title, 
+      align = c("l", rep("c", ncol(x) - 1)),  
+      ...
+    )
+    out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
+    if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
   }
 
   if (engine == "gt") {
-    title <- gt::html(paste0("Table.<br><i>", title, "</i>"))
+    if (!is.null(title)) title <- gt::html(title)
     out <- gt::gt(x, caption = title) |> 
       .gt_apa_style()
   }

@@ -137,6 +137,20 @@ t_test_table <- function(dv,
 
   if (nice_p) out$p <- nice_p(out$p, digits = 2)
 
+  note <- paste0("Method for estimating standard deviation: ", method)
+  
+  if (manova) {
+    res <- lm(as.matrix(dv) ~ iv) %>%
+      manova() %>%
+      summary() %>%
+      .$"stats"
+    
+    note <- paste0(note, "; ", sprintf(
+      "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
+      res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
+    ))
+  }  
+  
   if(type == "html") {
     out <- out %>% 
       knitr::kable(
@@ -147,27 +161,12 @@ t_test_table <- function(dv,
       kableExtra::kable_classic(
         bootstrap_options = bootstrap_options, full_width = full_width
       )
-    
-    note <- paste0("Method for estimating standard deviation: ", method)
-    
-    if (manova) {
-      res <- lm(as.matrix(dv) ~ iv) %>%
-        manova() %>%
-        summary() %>%
-        .$"stats"
-      
-      note <- paste0(note, "; ", sprintf(
-        "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
-        res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]
-      ))
-  
-
-    }  
-
     out <- kableExtra::footnote(out, general = note)
-    
     return(out)
   }
     
+  attr(out, "wmisc_note") <- note
+  attr(out, "wmisc_title") <- caption
+  
   out
 }
