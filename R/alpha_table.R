@@ -187,7 +187,7 @@ alpha_table <- function(data,
   }
   
   
-  attr(df, "note") <- "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals."
+  attr(df, "wmisc_note") <- "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals."
   
   message("Note. values in brackets depict upper and lower bound of ",
           "confidence intervals or [min,max] intervals.")

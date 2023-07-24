@@ -18,7 +18,7 @@
 #' @export
 nice_table <- function(x, ..., extra = NULL, title = "", footnote = "", engine = "extra") {
   
-  if (!is.null(attr(x, "note")) && footnote == "") footnote <- attr(x, "note")
+  if (!is.null(attr(x, "wmisc_note")) && footnote == "") footnote <- attr(x, "wmisc_note")
   
   
   if (engine == "extra") {
