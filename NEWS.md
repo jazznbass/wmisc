@@ -1,8 +1,9 @@
 
 - added gt table support for nice table
-- new functions: `nice_loadings()`
-- new functions: `change_values()`
-- new functions: `percentage_bar()`
+- new functions: `nice_loadings()` extract loadings from psych::fa object
+- new functions: `flip()`: flip a data.frame or matrix
+- new functions: `change_values()` recode values
+- new functions: `percentage_bar()` creates ggplot percentage bar
 
 # wmisc 0.2.18
 

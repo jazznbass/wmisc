@@ -11,8 +11,7 @@ nice_table(
   title = NULL,
   footnote = NULL,
   engine = "extra",
-  rownames = FALSE,
-  flip = FALSE
+  rownames = FALSE
 )
 }
 \arguments{

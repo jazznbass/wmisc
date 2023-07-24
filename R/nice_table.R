@@ -22,17 +22,7 @@ nice_table <- function(x,
                        title = NULL, 
                        footnote = NULL, 
                        engine = "extra", 
-                       rownames = FALSE, 
-                       flip = FALSE) {
-  
-  if (flip) {
-    x <- as.data.frame(t(x))
-    x <- setNames(x, x[1, ]) 
-    x <- x[-1, ]
-    x <- cbind(" " = rownames(x), x)
-    rownames(x) <- NULL
-  }
-  
+                       rownames = FALSE) {
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) title <- attr(x, "wmisc_title")
   if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) footnote <- attr(x, "wmisc_note")
