@@ -49,6 +49,9 @@ nice_table <- function(x,
     if (!is.null(title)) title <- gt::html(title)
     out <- gt::gt(x, caption = title) |> 
       .gt_apa_style()
+    if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
+    
+    
   }
   
   out

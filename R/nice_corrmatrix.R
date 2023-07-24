@@ -134,9 +134,16 @@ nice_corrmatrix <- function(cr,
      "Correlation matrix.\n",
      sep = ""
    )
-   if (stars) cat(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
+
    cat("\n")
    r <- format(r, justify = "left")
+    
+   if (stars) {
+     note <- paste0(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
+     cat(note)
+     attr(r, "wmisc_note") <- note
+     attr(r, "wmisc_title") <- caption
+   }
    return(r)
  }
 
