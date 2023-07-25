@@ -22,7 +22,8 @@ Imports:
   multilevel,
   forcats,
   magrittr,
-  lavaan
+  lavaan,
+  gt
 License: GPL (>= 3)
 Encoding: UTF-8
 RoxygenNote: 7.2.3
