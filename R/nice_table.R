@@ -61,11 +61,17 @@ nice_table <- function(x,
 .gt_apa_style <- function(gt_tbl) {
   gt_tbl  |> 
     tab_options(
-      table.border.bottom.color = "black",
-      table.border.bottom.width = 3,
+      table.border.bottom.color = "white",
+      #table.border.bottom.width = 3,
       
       table.border.top.color = "black",
       table.border.top.width = 3,
+      
+      table_body.border.bottom.color = "black",
+      table_body.border.bottom.width = 3,
+      
+      table_body.hlines.width = 0,
+      
       
       table_body.hlines.width = 0,
       
