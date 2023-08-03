@@ -64,19 +64,22 @@ nice_table <- function(x,
       table.border.bottom.color = "white",
       #table.border.bottom.width = 3,
       
-      table.border.top.color = "black",
-      table.border.top.width = 3,
+      table.border.top.color = "white",
+      #table.border.top.width = 3,
       
       table_body.border.bottom.color = "black",
       table_body.border.bottom.width = 3,
       
+      table_body.border.top.color = "black",
+      table_body.border.top.width = 3,
+      
       table_body.hlines.width = 0,
       
-      
-      table_body.hlines.width = 0,
-      
+      heading.border.bottom.width = 3,
+      heading.border.bottom.color = "black",
+      heading.title.font.size = "100%",
       column_labels.border.bottom.width = 2,
-      column_labels.border.bottom.color = "black",
+      column_labels.border.bottom.color = "black"
     )  |> 
     opt_table_font(font = "times") |> 
     gt::cols_align(align = "center") |> 
