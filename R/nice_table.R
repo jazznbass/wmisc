@@ -21,11 +21,18 @@ nice_table <- function(x,
                        extra = NULL, 
                        title = NULL, 
                        footnote = NULL, 
-                       engine = "extra", 
+                       engine = "extra",
+                       header = NULL,
+                       pack = NULL,
                        rownames = FALSE) {
   
-  if (!is.null(attr(x, "wmisc_title")) && is.null(title)) title <- attr(x, "wmisc_title")
-  if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) footnote <- attr(x, "wmisc_note")
+  if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
+    title <- attr(x, "wmisc_title")
+  }
+  if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) {
+    footnote <- attr(x, "wmisc_note")
+  }
+  
   if (!is.null(title)) title <- paste0("Table.<br><i>", title, "</i>")
   
   if (engine == "extra") {
@@ -37,6 +44,15 @@ nice_table <- function(x,
       ...
     )
     out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
+    
+    if (!is.null(pack)) {
+      out <- kableExtra::pack_rows(out, index = pack, bold = FALSE)
+    }
+    
+    if (!is.null(header)) {
+      out <- kableExtra::add_header_above(out, header)
+    }
+    
     if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
   }
 
@@ -49,6 +65,13 @@ nice_table <- function(x,
     if (!is.null(title)) title <- gt::html(title)
     out <- gt::gt(x, caption = title) |> 
       .gt_apa_style()
+    
+    if (!is.null(pack)) {
+      for(i in length(pack):1)
+        out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
+      #gt::row_group_order(names(pack)))
+    }
+    
     if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
     
     
