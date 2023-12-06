@@ -1,20 +1,22 @@
 #' Create a nicely formatted table
-#' 
-#' This function takes a data frame and formats it into a nicely
-#' formatted HTML table using the `knitr` and `kableExtra` packages.
-#' 
+#'
+#' This function takes a data frame and formats it into a nicely formatted HTML
+#' table using the `knitr` and `kableExtra` packages.
+#'
 #' @param x The data frame to be formatted into a table
 #' @param ... Additional arguments passed to `knitr::kable()`
 #' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
 #' @param title Title string.
 #' @param footnote Add footnote
+#' @param file (works only when `engine = "gt"`) If set, an additional file with
+#'   the table is produced.
 #' @return A nicely formatted HTML table
-#' 
-#' 
+#'
+#'
 #' @examples
 #' df <- data.frame(x = 1:5, y = rnorm(5))
 #' nice_table(df, extra = list(full_width = FALSE))
-#' 
+#'
 #' @export
 nice_table <- function(x, 
                        ..., 
@@ -24,7 +26,8 @@ nice_table <- function(x,
                        engine = "extra",
                        header = NULL,
                        pack = NULL,
-                       rownames = FALSE) {
+                       rownames = FALSE,
+                       file = NULL) {
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
     title <- attr(x, "wmisc_title")
@@ -74,6 +77,7 @@ nice_table <- function(x,
     
     if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
     
+    if (!is.null(file)) gt::gtsave(out, file)
     
   }
   

@@ -11,7 +11,10 @@ nice_table(
   title = NULL,
   footnote = NULL,
   engine = "extra",
-  rownames = FALSE
+  header = NULL,
+  pack = NULL,
+  rownames = FALSE,
+  file = NULL
 )
 }
 \arguments{
@@ -24,13 +27,16 @@ nice_table(
 \item{title}{Title string.}
 
 \item{footnote}{Add footnote}
+
+\item{file}{(works only when `engine = "gt"`) If set, an additional file with
+the table is produced.}
 }
 \value{
 A nicely formatted HTML table
 }
 \description{
-This function takes a data frame and formats it into a nicely
-formatted HTML table using the `knitr` and `kableExtra` packages.
+This function takes a data frame and formats it into a nicely formatted HTML
+table using the `knitr` and `kableExtra` packages.
 }
 \examples{
 df <- data.frame(x = 1:5, y = rnorm(5))
