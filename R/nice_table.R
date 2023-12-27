@@ -74,7 +74,11 @@ nice_table <- function(x,
         out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
       #gt::row_group_order(names(pack)))
     }
-    
+    if (!is.null(header)) {
+      for(i in seq_along(header)) {
+        out <- gt::tab_spanner(out, label = names(header)[i], columns = header[[i]])  
+      }
+    }
     if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
     
     if (!is.null(file)) gt::gtsave(out, file)
