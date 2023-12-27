@@ -10,6 +10,7 @@
 #' @param footnote Add footnote
 #' @param file (works only when `engine = "gt"`) If set, an additional file with
 #'   the table is produced.
+#' @param cols_label List with renaming information for columns (old_name = new_name)
 #' @return A nicely formatted HTML table
 #'
 #'
@@ -23,11 +24,12 @@ nice_table <- function(x,
                        extra = NULL, 
                        title = NULL, 
                        footnote = NULL, 
-                       engine = "extra",
+                       engine = getOption("wmisc.nice.table.engine"),
                        header = NULL,
                        pack = NULL,
                        rownames = FALSE,
-                       file = NULL) {
+                       file = NULL,
+                       cols_label = NULL) {
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
     title <- attr(x, "wmisc_title")
@@ -36,7 +38,7 @@ nice_table <- function(x,
     footnote <- attr(x, "wmisc_note")
   }
   
-  if (!is.null(title)) title <- paste0("Table.<br><i>", title, "</i>")
+  if (!is.null(title)) title <- paste0("Table.<br>  *", title, "*</i>")
   
   if (engine == "extra") {
     
@@ -65,10 +67,10 @@ nice_table <- function(x,
       rownames(x) <- NULL
     }
     if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
-    if (!is.null(title)) title <- gt::html(title)
-    out <- gt::gt(x, caption = title) |> 
-      .gt_apa_style()
     
+    out <- gt::gt(x, ...) |> gt_apa_style()
+    
+    if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
     if (!is.null(pack)) {
       for(i in length(pack):1)
         out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
@@ -79,6 +81,8 @@ nice_table <- function(x,
         out <- gt::tab_spanner(out, label = names(header)[i], columns = header[[i]])  
       }
     }
+    
+    if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
     if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
     
     if (!is.null(file)) gt::gtsave(out, file)
@@ -88,8 +92,8 @@ nice_table <- function(x,
   out
 }
 
-
-.gt_apa_style <- function(gt_tbl) {
+#' @export
+gt_apa_style <- function(gt_tbl) {
   gt_tbl  |> 
     tab_options(
       table.border.bottom.color = "white",
@@ -106,6 +110,7 @@ nice_table <- function(x,
       
       table_body.hlines.width = 0,
       
+      heading.align = "left",
       heading.border.bottom.width = 3,
       heading.border.bottom.color = "black",
       heading.title.font.size = "100%",

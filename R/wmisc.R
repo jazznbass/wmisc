@@ -9,5 +9,5 @@
 }
 
 .onLoad <- function(lib, pkg, ...) {
-
+  options(wmisc.nice.table.engine = "gt")
 }

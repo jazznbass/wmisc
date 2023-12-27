@@ -10,11 +10,12 @@ nice_table(
   extra = NULL,
   title = NULL,
   footnote = NULL,
-  engine = "extra",
+  engine = getOption("wmisc.nice.table.engine"),
   header = NULL,
   pack = NULL,
   rownames = FALSE,
-  file = NULL
+  file = NULL,
+  cols_label = NULL
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ nice_table(
 
 \item{file}{(works only when `engine = "gt"`) If set, an additional file with
 the table is produced.}
+
+\item{cols_label}{List with renaming information for columns (old_name = new_name)}
 }
 \value{
 A nicely formatted HTML table
