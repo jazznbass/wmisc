@@ -12,6 +12,7 @@ nice_table(
   footnote = NULL,
   engine = getOption("wmisc.nice.table.engine"),
   header = NULL,
+  spanner = header,
   pack = NULL,
   rownames = FALSE,
   file = NULL,

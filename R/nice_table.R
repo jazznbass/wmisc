@@ -26,6 +26,7 @@ nice_table <- function(x,
                        footnote = NULL, 
                        engine = getOption("wmisc.nice.table.engine"),
                        header = NULL,
+                       spanner = header,
                        pack = NULL,
                        rownames = FALSE,
                        file = NULL,
@@ -38,7 +39,8 @@ nice_table <- function(x,
     footnote <- attr(x, "wmisc_note")
   }
   
-  if (!is.null(title)) title <- paste0("Table.<br>  *", title, "*</i>")
+  if (!is.null(title)) title <- paste0("**Table**<br>  *", title, "*")
+  if (!is.null(footnote)) footnote <- paste0("*Note.* ", footnote)
   
   if (engine == "extra") {
     
@@ -54,8 +56,8 @@ nice_table <- function(x,
       out <- kableExtra::pack_rows(out, index = pack, bold = FALSE)
     }
     
-    if (!is.null(header)) {
-      out <- kableExtra::add_header_above(out, header)
+    if (!is.null(spanner)) {
+      out <- kableExtra::add_header_above(out, spanner)
     }
     
     if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
@@ -76,14 +78,18 @@ nice_table <- function(x,
         out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
       #gt::row_group_order(names(pack)))
     }
-    if (!is.null(header)) {
-      for(i in seq_along(header)) {
-        out <- gt::tab_spanner(out, label = names(header)[i], columns = header[[i]])  
+    if (!is.null(spanner)) {
+      for(i in seq_along(spanner)) {
+        out <- gt::tab_spanner(
+          out, 
+          label = names(spanner)[i], 
+          columns = spanner[[i]]
+        )  
       }
     }
     
     if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
-    if (!is.null(footnote)) out <- gt::tab_footnote(out, footnote)
+    if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote))
     
     if (!is.null(file)) gt::gtsave(out, file)
     
@@ -115,7 +121,9 @@ gt_apa_style <- function(gt_tbl) {
       heading.border.bottom.color = "black",
       heading.title.font.size = "100%",
       column_labels.border.bottom.width = 2,
-      column_labels.border.bottom.color = "black"
+      column_labels.border.bottom.color = "black",
+      column_labels.border.top.width = 3,
+      column_labels.border.top.color = "black"
     )  |> 
     opt_table_font(font = "times") |> 
     gt::cols_align(align = "center") |> 

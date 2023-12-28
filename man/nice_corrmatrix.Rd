@@ -20,9 +20,10 @@ nice_corrmatrix(
   char_autocor = "－",
   char_p10 = "✞",
   char_NA = "",
-  caption = "Correlation matrix.",
+  caption = "Correlation matrix",
   drop_zero = TRUE,
-  type = "df",
+  type = "html",
+  file = NULL,
   ...
 )
 }

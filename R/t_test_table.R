@@ -18,8 +18,6 @@
 #'   group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param caption Table caption is type = "html"
-#' @param bootstrap_options see kable_styling()
-#' @param full_width see kable_styling()
 #'
 #' @return A tibble or a kableExtra object
 #' @export
@@ -50,9 +48,7 @@ t_test_table <- function(dv,
                          manova = TRUE, 
                          order = 1:2, 
                          type = "html",
-                         caption = "t-test table", 
-                         bootstrap_options = c("condensed", "striped", "hover"), 
-                         full_width = TRUE) {
+                         caption = "T-test table") {
 
   if (!missing(data)) {
     dv <- data[, dv]
@@ -64,9 +60,12 @@ t_test_table <- function(dv,
   lev <- levels(iv)
 
   out <- tibble(
-    Scale = character(), M1 = numeric(), M2 = numeric(), SD1 = numeric(),
-    SD2 = numeric(), d = numeric(), t = numeric(), df = numeric(),
-    p = numeric(), n1 = numeric(), n2 = numeric()
+    Scale = character(), 
+    n1 = numeric(), n2 = numeric(),
+    M1 = numeric(), M2 = numeric(), 
+    SD1 = numeric(), SD2 = numeric(), 
+    d = numeric(), 
+    t = numeric(), df = numeric(), p = numeric()
   )
 
   if (is.null(labels)) labels <- names(dv)
@@ -117,22 +116,26 @@ t_test_table <- function(dv,
   out[i, "p"] <- round(out$p[i], digits)
   
   out <- out %>%
-    mutate_at(c(2:5), round_, digits = digits) %>%
+    mutate_at(c(4:7), round_, digits = digits) %>%
     mutate_at("d", round_, digits = digits) %>%
     mutate_at("df", round_, 1) %>%
     mutate_at("t", round_, 2)
   
 
-  colnames(out)[2:3] <- paste0("M ", lev)
-  colnames(out)[4:5] <- paste0("SD ", lev)
-  colnames(out)[10:11] <- paste0("n ", lev)
+  colnames(out)[4:5] <- paste0("M ", lev)
+  colnames(out)[6:7] <- paste0("SD ", lev)
+  colnames(out)[2:3] <- paste0("n ", lev)
   if (concise) {
-    MS_A <- paste0(out[[2]], " (", out[[4]], ")")
-    MS_B <- paste0(out[[3]], " (", out[[5]], ")")
-    out <- 
-      tibble(Scale = out[[1]], MS_A, MS_B) %>%
-        bind_cols(out[c(6:ncol(out))])
-    colnames(out)[2:3] <- paste0("M (SD) ", lev)
+    MS_A <- paste0(out[[4]], " (", out[[6]], ")")
+    MS_B <- paste0(out[[5]], " (", out[[7]], ")")
+    out <- tibble(
+      Scale = out[[1]],
+      nA = out[[2]],
+      nb = out[[3]],
+      MS_A, MS_B
+    ) %>%
+        bind_cols(out[c(8:ncol(out))])
+    colnames(out)[4:5] <- paste0("M (SD) ", lev)
   }
 
   if (nice_p) out$p <- nice_p(out$p, digits = 2)
@@ -151,22 +154,18 @@ t_test_table <- function(dv,
     ))
   }  
   
-  if(type == "html") {
-    out <- out %>% 
-      knitr::kable(
-        caption = caption, 
-        align = c("l", rep("c", ncol(out))), 
-        row.names = FALSE
-      ) %>%
-      kableExtra::kable_classic(
-        bootstrap_options = bootstrap_options, full_width = full_width
-      )
-    out <- kableExtra::footnote(out, general = note)
-    return(out)
-  }
-    
   attr(out, "wmisc_note") <- note
   attr(out, "wmisc_title") <- caption
   
+  if(type == "html") {
+    names(out)[4:5] <- lev
+    names(out)[2:3] <- paste0(" ", lev, " ")
+    out <- nice_table(
+      out,
+      spanner = list("M (SD)" = 4:5, "N" = 2:3)
+    )
+    return(out)
+  }
+    
   out
 }

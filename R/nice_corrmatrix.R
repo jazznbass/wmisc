@@ -41,9 +41,10 @@ nice_corrmatrix <- function(cr,
                             char_autocor = "\uFF0D",
                             char_p10 = "\u271e", 
                             char_NA = "", 
-                            caption = "Correlation matrix.",
+                            caption = "Correlation matrix",
                             drop_zero = TRUE,
-                            type = "df", 
+                            type = "html", 
+                            file = NULL,
                             ...) {
   
   if (inherits(cr, "data.frame")) {
@@ -148,14 +149,13 @@ nice_corrmatrix <- function(cr,
  }
 
   if (type == "html") {
-    r %>%
-      knitr::kable(caption = caption, align = c("l", rep("c", ncol(r))), format = "html", escape = FALSE) %>%
-      kableExtra::kable_classic() %>%
-      kableExtra::row_spec(1, hline_after = TRUE) %>%
-      kableExtra::footnote(
-        general = paste0(
-          char_p10, "p < .10; *p < .05; **p < .01; ***p < .001")
-        ) %>%
-      return()
+    out <- nice_table(
+      r,
+      title = caption,
+      footnote = paste0(char_p10, "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"),
+      file = file
+    ) |> gt::fmt_markdown(columns = 5:ncol(r))
+    return(out)
+    
   }
 }

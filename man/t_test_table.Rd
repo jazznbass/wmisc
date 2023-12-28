@@ -19,9 +19,7 @@ t_test_table(
   manova = TRUE,
   order = 1:2,
   type = "html",
-  caption = "t-test table",
-  bootstrap_options = c("condensed", "striped", "hover"),
-  full_width = TRUE
+  caption = "T-test table"
 )
 }
 \arguments{
@@ -54,10 +52,6 @@ group one or vice versa.}
 \item{type}{Either "df" for data frame or "html" for html table.}
 
 \item{caption}{Table caption is type = "html"}
-
-\item{bootstrap_options}{see kable_styling()}
-
-\item{full_width}{see kable_styling()}
 }
 \value{
 A tibble or a kableExtra object
