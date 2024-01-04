@@ -16,7 +16,8 @@ nice_table(
   pack = NULL,
   rownames = FALSE,
   file = NULL,
-  cols_label = NULL
+  cols_label = NULL,
+  decimals = NULL
 )
 }
 \arguments{

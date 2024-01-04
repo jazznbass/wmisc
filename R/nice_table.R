@@ -30,7 +30,8 @@ nice_table <- function(x,
                        pack = NULL,
                        rownames = FALSE,
                        file = NULL,
-                       cols_label = NULL) {
+                       cols_label = NULL,
+                       decimals = NULL) {
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
     title <- attr(x, "wmisc_title")
@@ -39,8 +40,17 @@ nice_table <- function(x,
     footnote <- attr(x, "wmisc_note")
   }
   
+  if (isTRUE(file)) {
+    file <- gsub(" ", "-" , x = title)
+    file <- gsub("\\.", "" , x = file)
+    file <- tolower(file)
+    file <- paste0("tab-", file, ".docx")
+  } 
+  
   if (!is.null(title)) title <- paste0("**Table**<br>  *", title, "*")
-  if (!is.null(footnote)) footnote <- paste0("*Note.* ", footnote)
+  if (!is.null(footnote)) {
+    footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
+  }
   
   if (engine == "extra") {
     
@@ -76,7 +86,11 @@ nice_table <- function(x,
     if (!is.null(pack)) {
       for(i in length(pack):1)
         out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
-      #gt::row_group_order(names(pack)))
+      for(i in length(pack):1)  
+        out <- gt::tab_style(
+          out, style = gt::cell_text(align = "center"),
+          locations = gt::cells_row_groups(groups = names(pack)[i])
+        )
     }
     if (!is.null(spanner)) {
       for(i in seq_along(spanner)) {
@@ -90,6 +104,8 @@ nice_table <- function(x,
     
     if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
     if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote))
+    if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
+    
     
     if (!is.null(file)) gt::gtsave(out, file)
     
@@ -123,7 +139,12 @@ gt_apa_style <- function(gt_tbl) {
       column_labels.border.bottom.width = 2,
       column_labels.border.bottom.color = "black",
       column_labels.border.top.width = 3,
-      column_labels.border.top.color = "black"
+      column_labels.border.top.color = "black",
+      
+      row_group.border.bottom.color = "white",
+      row_group.border.bottom.style = NULL,
+      row_group.border.bottom.width = NULL
+      
     )  |> 
     opt_table_font(font = "times") |> 
     gt::cols_align(align = "center") |> 
