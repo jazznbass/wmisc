@@ -15,8 +15,16 @@
 #'
 #'
 #' @examples
-#' df <- data.frame(x = 1:5, y = rnorm(5))
-#' nice_table(df, extra = list(full_width = FALSE))
+#' df <- data.frame(x = 1:5, y = rnorm(5, mean = 10, sd = 12), c = letters[5:1], d = sample(letters, 5))
+#' nice_table(
+#'   df,
+#'   title = "A nice title",
+#'   footnote = c("Footnote 1", "Footnote 2"),
+#'   spanner = list("One" = 1:2, "Two" = 3:4),
+#'   pack = list("Start" = 1:2, "That is the second" = 3:5),
+#'   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
+#'   decimals = 1
+#' )
 #'
 #' @export
 nice_table <- function(x, 

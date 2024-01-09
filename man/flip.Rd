@@ -4,7 +4,7 @@
 \alias{flip}
 \title{Flip a Data Frame or Matrix}
 \usage{
-flip(x, rownames = FALSE)
+flip(x, rownames = NULL)
 }
 \arguments{
 \item{x}{A data frame or matrix to be flipped.}
