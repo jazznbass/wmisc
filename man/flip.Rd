@@ -9,14 +9,13 @@ flip(x, rownames = FALSE)
 \arguments{
 \item{x}{A data frame or matrix to be flipped.}
 
-\item{rownames}{Logical. If \code{TRUE}, the resulting data frame will have
-row names (if \code{x} is a matrix) or row names will be included as the 
-first column (if \code{x} is a data frame).}
+\item{rownames}{Logical or string. If `TRUE`, row names will be included as the 
+first column. If `character`, the column will be named respectively.}
 }
 \value{
 A data frame with flipped rows and columns. If \code{rownames} is 
-  \code{TRUE}, row names (if \code{x} is a matrix) or the first column will 
-  contain the original row names (if \code{x} is a data frame).
+  \code{TRUE}, row names (if `x` is a matrix) or the first column will 
+  contain the original row names (if `x` is a data frame).
 }
 \description{
 This function takes a data frame or matrix and flips its rows and columns,
@@ -32,15 +31,6 @@ flipped_df <- flip(df)
 
 # Flip the data frame with row names included
 flipped_df_with_rownames <- flip(df, rownames = TRUE)
-
-# Create a sample matrix
-mat <- matrix(1:9, nrow = 3)
-
-# Flip the matrix
-flipped_mat <- flip(mat)
-
-# Flip the matrix with row names included
-flipped_mat_with_rownames <- flip(mat, rownames = TRUE)
 
 }
 \seealso{
