@@ -1,9 +1,17 @@
 
-- added gt table support for nice table
-- new functions: `nice_loadings()` extract loadings from psych::fa object
-- new functions: `flip()`: flip a data.frame or matrix
-- new functions: `change_values()` recode values
-- new functions: `percentage_bar()` creates ggplot percentage bar
+
+## New Functions
+
+- `add_label()`: Adds haven labels. With a List option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
+- `nice_loadings()` extract loadings from psych::fa object
+- `flip()`: flip a data.frame or matrix: `flip(mtcars, rownames = TRUE)`
+- `change_values()` recode values: `change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")`
+- `percentage_bar()` creates ggplot percentage bar: `percentage_bar(20, "test")`
+
+## Changes
+
+- added gt table support for nice table and set to default. Retiring "kable".
+
 
 # wmisc 0.2.18
 

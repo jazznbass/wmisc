@@ -15,6 +15,7 @@ nice_table(
   rownames = FALSE,
   file = NULL,
   cols_label = NULL,
+  use_labels = TRUE,
   decimals = NULL,
   digits = NULL,
   engine = getOption("wmisc.nice.table.engine"),

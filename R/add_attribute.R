@@ -13,3 +13,17 @@ add_title <- function(x, value) {
 add_note <- function(x, value) {
   add_attribute(x, "note", value)
 }
+
+#' @export
+add_label <- function(x, value) {
+  
+  if (inherits(value, "list")) {
+    for(i in seq_along(value)) {
+      attr(x[[names(value)[i]]], "label") <- value[[i]]
+    }
+  } else {
+    attr(x, "label") <- value
+  }
+  x
+}
+

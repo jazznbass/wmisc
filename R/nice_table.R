@@ -39,6 +39,7 @@ nice_table <- function(x,
                        rownames = FALSE,
                        file = NULL,
                        cols_label = NULL,
+                       use_labels = TRUE,
                        decimals = NULL,
                        digits = NULL,
                        engine = getOption("wmisc.nice.table.engine"),
@@ -67,6 +68,14 @@ nice_table <- function(x,
   if (!is.null(footnote)) {
     footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
   }
+  
+  if (FALSE) {
+    new_cols_label <- lapply(x, \(x) attr(x, "label")) 
+    new_cols_label <- new_cols_label[which(!is.null(new_cols_label))]
+    cols_label <- c(cols_label, new_cols_label)
+    cols_label <- cols_label[which(!duplicated(names(cols_label)))]
+  }
+  
   
   if (engine == "extra") {
     
