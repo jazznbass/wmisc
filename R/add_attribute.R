@@ -19,6 +19,12 @@ add_label <- function(x, value) {
   
   if (inherits(value, "list")) {
     for(i in seq_along(value)) {
+      variable <- names(value)[i]
+      if (is.null(x[[names(value)[i]]])) {
+        warning("'", variable, "' does not exist.\n", call. = FALSE)
+        next
+      }
+      
       attr(x[[names(value)[i]]], "label") <- value[[i]]
     }
   } else {
