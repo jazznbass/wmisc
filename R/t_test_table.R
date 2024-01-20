@@ -48,7 +48,8 @@ t_test_table <- function(dv,
                          manova = TRUE, 
                          order = 1:2, 
                          type = "html",
-                         caption = "T-test table") {
+                         caption = "T-test table",
+                         file = NULL) {
 
   if (!missing(data)) {
     dv <- data[, dv]
@@ -162,7 +163,8 @@ t_test_table <- function(dv,
     names(out)[2:3] <- paste0(" ", lev, " ")
     out <- nice_table(
       out,
-      spanner = list("M (SD)" = 4:5, "N" = 2:3)
+      spanner = list("M (SD)" = 4:5, "N" = 2:3),
+      file = file
     )
     return(out)
   }

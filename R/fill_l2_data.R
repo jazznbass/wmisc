@@ -1,17 +1,20 @@
 #' Fills in missing level 2 data
-#' 
-#' For cases where you have a long format data set and it contains level 2 data but some of the level 2 data are missing although the necessary information in available in other data rows of the same grouping value.
-#' 
+#'
+#' For cases where you have a long format data set and it contains level 2 data
+#' but some of the level 2 data are missing although the necessary information
+#' in available in other data rows of the same grouping value.
+#'
 #' @param data A data frame
 #' @param id Character string with L2 variable
 #' @param vars Vector of strings with variable names
 #'
-#' @return A data frame with added values. It also reports if l2 values conflict.
+#' @return A data frame with added values. It also reports if l2 values
+#'   conflict.
 #' @export
 #'
 #' @examples
 #' x <- data.frame(
-#'   id = rep(1:5, each = 3), 
+#'   id = rep(1:5, each = 3),
 #'   gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA, NA, NA, NA, 1, 0, NA)
 #' )
 #' x

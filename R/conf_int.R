@@ -6,9 +6,10 @@
 #' @param ci Numeric, confidence level (default = 0.95)
 #' @param r Numeric, correlation coefficient (default = NA)
 #' @param s Numeric, standard deviation of population (default = NA)
-#' @param se Numeric, standard error of the sample mean (default = s * sqrt(1 - r))
+#' @param se Numeric, standard error of the sample mean (default = s * sqrt(1 -
+#'   r))
 #' @param n Numeric, sample size (default = NA)
-#' 
+#'
 #' @return A list containing confidence intervals from Z and t methods.
 #'
 #' @examples
@@ -28,18 +29,18 @@ conf_int <- function(x, ci = 0.95, r = NA, s = NA, se = NA, n = NA) {
   low <- paste0((0.5 - ci / 2) * 100, "%")
   high <- paste0((0.5 + ci / 2) * 100, "%")
   Z <- qnorm(ci + ((1 - ci) / 2))
-  ci.z <- c(x - Z * se, x + Z * se)
-  names(ci.z) <- c(low, high)
-  ci.t <- NA
+  ci_z <- c(x - Z * se, x + Z * se)
+  names(ci_z) <- c(low, high)
+  ci_t <- NA
   
   if (!is.na(n)) {
     t <- qt(ci + ((1 - ci) / 2), df = n - 1)
-    ci.t <- c(x - t * se, x + t * se)
-    names(ci.t) <- c(low, high)
+    ci_t <- c(x - t * se, x + t * se)
+    names(ci_t) <- c(low, high)
   }
   out <- list()
-  out$"Z based confidence interval" <- ci.z
-  out$"t based confidence interval" <- ci.t
+  out$"Z based confidence interval" <- ci_z
+  out$"t based confidence interval" <- ci_t
   cat("Confidence intervalls\n\n")
   out
 }

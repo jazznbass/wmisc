@@ -2,13 +2,17 @@
 #'
 #' @param data A data frame
 #' @param round Digits for round function
-#' @param labels Deprecated. Use [rename_items()] instead.
+#' @param labels Item labels.
 #'
 #' @return A data frame with descriptive statistics
 #' @examples
 #' nice_descriptives(mtcars)
 #' @export
-nice_descriptives <- function(data, round = 2, labels = FALSE) {
+nice_descriptives <- function(data, 
+                              round = NULL, 
+                              labels = FALSE,
+                              title = "Descriptive statistics",
+                              note = "MAD is the Median average deviation") {
   
   msg <- c()
   
@@ -37,12 +41,15 @@ nice_descriptives <- function(data, round = 2, labels = FALSE) {
     ))
   
   out <- t(out)
-  out <- round(out, round)
+  if (!is.null(round)) out <- round(out, round)
   out <- data.frame(out)
   out <- cbind(Variable = rownames(out), out)
   rownames(out) <- NULL
   
   return_messages(msg)
+  
+  attr(out, "wmisc_note") <- note
+  attr(out, "wmisc_title") <- title
   
   out
 }

@@ -6,26 +6,25 @@
 \usage{
 nice_table(
   x,
-  ...,
-  extra = NULL,
   title = NULL,
   footnote = NULL,
-  engine = getOption("wmisc.nice.table.engine"),
-  header = NULL,
   spanner = header,
+  row_group = NULL,
+  header = NULL,
   pack = NULL,
   rownames = FALSE,
   file = NULL,
   cols_label = NULL,
-  decimals = NULL
+  decimals = NULL,
+  digits = NULL,
+  engine = getOption("wmisc.nice.table.engine"),
+  extra = NULL,
+  gt = NULL,
+  kable = NULL
 )
 }
 \arguments{
 \item{x}{The data frame to be formatted into a table}
-
-\item{...}{Additional arguments passed to `knitr::kable()`}
-
-\item{extra}{Additional arguments passed to `kableExtra::kable_classic_2()`}
 
 \item{title}{Title string.}
 
@@ -34,7 +33,14 @@ nice_table(
 \item{file}{(works only when `engine = "gt"`) If set, an additional file with
 the table is produced.}
 
-\item{cols_label}{List with renaming information for columns (old_name = new_name)}
+\item{cols_label}{List with renaming information for columns (old_name =
+new_name)}
+
+\item{extra}{Additional arguments passed to `kableExtra::kable_classic_2()`}
+
+\item{gt}{Additional arguments passed to `gt::gt()`}
+
+\item{kable}{Additional arguments passed to `knitr::kable()`}
 }
 \value{
 A nicely formatted HTML table
@@ -50,7 +56,7 @@ nice_table(
   title = "A nice title",
   footnote = c("Footnote 1", "Footnote 2"),
   spanner = list("One" = 1:2, "Two" = 3:4),
-  pack = list("Start" = 1:2, "That is the second" = 3:5),
+  row_group = list("Start" = 1:2, "That is the second" = 3:5),
   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
   decimals = 1
 )

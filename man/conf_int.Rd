@@ -15,7 +15,8 @@ conf_int(x, ci = 0.95, r = NA, s = NA, se = NA, n = NA)
 
 \item{s}{Numeric, standard deviation of population (default = NA)}
 
-\item{se}{Numeric, standard error of the sample mean (default = s * sqrt(1 - r))}
+\item{se}{Numeric, standard error of the sample mean (default = s * sqrt(1 -
+r))}
 
 \item{n}{Numeric, sample size (default = NA)}
 }

@@ -4,14 +4,20 @@
 \alias{nice_descriptives}
 \title{Table with descriptive statistics}
 \usage{
-nice_descriptives(data, round = 2, labels = FALSE)
+nice_descriptives(
+  data,
+  round = NULL,
+  labels = FALSE,
+  title = "Descriptive statistics",
+  note = "MAD is the Median average deviation"
+)
 }
 \arguments{
 \item{data}{A data frame}
 
 \item{round}{Digits for round function}
 
-\item{labels}{Deprecated. Use [rename_items()] instead.}
+\item{labels}{Item labels.}
 }
 \value{
 A data frame with descriptive statistics

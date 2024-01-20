@@ -7,7 +7,7 @@
 split_at_percentile(
   x,
   frac = c(1/3, 2/3),
-  lab = c("low", "middle", "high"),
+  labels = c("low", "middle", "high"),
   type = "higher",
   explicit_na = NA
 )
@@ -18,10 +18,10 @@ split_at_percentile(
 \item{frac}{Fractions to split at (e.g., `c(1/3, 2/3)` will result in three
 groups and 0.5 will result in a median split)}
 
-\item{lab}{Vector with factor labels.}
+\item{labels}{Vector with factor labels.}
 
 \item{type}{"higher" will split group below fraction and last group equal
-above last fraction. and "lower" will split group below median (vs. equal
+above last fraction. and "lower" will split group below fraction (vs. equal
 and above)}
 
 \item{explicit_na}{If not NA, NAs will be recoded as a factor level of the
@@ -37,5 +37,11 @@ Factorizes a vector by percentiles
 x <- sample(c(1:10, NA), 100, replace = TRUE)
 x <- split_at_percentile(x, explicit_na = TRUE)
 table(x)
+
+split_at_percentile(
+  1:100, 
+  frac = c(0.25, 0.5, 0.75), 
+  labels = c("0-24", "25-49", "50-74", "75-100")
+)
 
 }

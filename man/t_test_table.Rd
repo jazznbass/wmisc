@@ -19,7 +19,8 @@ t_test_table(
   manova = TRUE,
   order = 1:2,
   type = "html",
-  caption = "T-test table"
+  caption = "T-test table",
+  file = NULL
 )
 }
 \arguments{

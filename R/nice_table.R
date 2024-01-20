@@ -4,13 +4,15 @@
 #' table using the `knitr` and `kableExtra` packages.
 #'
 #' @param x The data frame to be formatted into a table
-#' @param ... Additional arguments passed to `knitr::kable()`
-#' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
 #' @param title Title string.
 #' @param footnote Add footnote
 #' @param file (works only when `engine = "gt"`) If set, an additional file with
 #'   the table is produced.
-#' @param cols_label List with renaming information for columns (old_name = new_name)
+#' @param cols_label List with renaming information for columns (old_name =
+#'   new_name)
+#' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
+#' @param gt Additional arguments passed to `gt::gt()`
+#' @param kable Additional arguments passed to `knitr::kable()`
 #' @return A nicely formatted HTML table
 #'
 #'
@@ -21,25 +23,28 @@
 #'   title = "A nice title",
 #'   footnote = c("Footnote 1", "Footnote 2"),
 #'   spanner = list("One" = 1:2, "Two" = 3:4),
-#'   pack = list("Start" = 1:2, "That is the second" = 3:5),
+#'   row_group = list("Start" = 1:2, "That is the second" = 3:5),
 #'   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
 #'   decimals = 1
 #' )
 #'
 #' @export
 nice_table <- function(x, 
-                       ..., 
-                       extra = NULL, 
                        title = NULL, 
                        footnote = NULL, 
-                       engine = getOption("wmisc.nice.table.engine"),
-                       header = NULL,
                        spanner = header,
+                       row_group = NULL,
+                       header = NULL,
                        pack = NULL,
                        rownames = FALSE,
                        file = NULL,
                        cols_label = NULL,
-                       decimals = NULL) {
+                       decimals = NULL,
+                       digits = NULL,
+                       engine = getOption("wmisc.nice.table.engine"),
+                       extra = NULL, 
+                       gt = NULL,
+                       kable = NULL) {
   
   if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
     title <- attr(x, "wmisc_title")
@@ -47,6 +52,9 @@ nice_table <- function(x,
   if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) {
     footnote <- attr(x, "wmisc_note")
   }
+  
+  if (!is.null(digits)) decimals <- digits
+  if (!is.null(pack)) row_group <- pack
   
   if (isTRUE(file)) {
     file <- gsub(" ", "-" , x = title)
@@ -62,16 +70,15 @@ nice_table <- function(x,
   
   if (engine == "extra") {
     
-    x <- knitr::kable(
-      x, 
-      caption = title, 
-      align = c("l", rep("c", ncol(x) - 1)),  
-      ...
+    args <- c(
+      list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
+      kable
     )
+    x <- do.call(knitr::kable, args)
     out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
-    
-    if (!is.null(pack)) {
-      out <- kableExtra::pack_rows(out, index = pack, bold = FALSE)
+
+    if (!is.null(row_group)) {
+      out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
     }
     
     if (!is.null(spanner)) {
@@ -88,16 +95,20 @@ nice_table <- function(x,
     }
     if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
     
-    out <- gt::gt(x, ...) |> gt_apa_style()
+    args <- c(list(data = x), gt)
     
+    out <- do.call(gt::gt, args)|> gt_apa_style()
+
     if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
-    if (!is.null(pack)) {
-      for(i in length(pack):1)
-        out <- gt::tab_row_group(out, label = names(pack)[i], rows = pack[[i]])
-      for(i in length(pack):1)  
+    if (!is.null(row_group)) {
+      for(i in length(row_group):1)
+        out <- gt::tab_row_group(
+          out, label = names(row_group)[i], rows = row_group[[i]]
+        )
+      for(i in length(row_group):1)  
         out <- gt::tab_style(
           out, style = gt::cell_text(align = "center"),
-          locations = gt::cells_row_groups(groups = names(pack)[i])
+          locations = gt::cells_row_groups(groups = names(row_group)[i])
         )
     }
     if (!is.null(spanner)) {

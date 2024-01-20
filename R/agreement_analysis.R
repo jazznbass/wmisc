@@ -40,7 +40,7 @@ agreement_analysis <- function(data,
   r.wg_min <- c()
   r.wg_max <- c()
   r.wg.95 <- c()
-  r.wg.p <- c() # anteil der rwg > 95% ci
+  r.wg.p <- c() # proportion of rwg > 95% ci
   r.wg.crit <- c()
   icc1 <- c()
   icc2 <- c()
@@ -52,7 +52,7 @@ agreement_analysis <- function(data,
   n.classes <- c()
 
   ranvar <- function(a) (a^2 - 1) / 12 
-  # a = Number of response options, nach Bliese 2013
+  # a = Number of response options (Bliese 2013)
 
   if (class(grouping) == "character") {
     group.total <- as.factor(data[[grouping]])
@@ -125,10 +125,15 @@ agreement_analysis <- function(data,
     M.G.Real = round(G.rel, 2), 
     G.Var = round(G.var, 2)
   )
+  
+  attr(out, "wmisc_note") <- note
+  attr(out, "wmisc_title") <- "Agreement analysis"
+  
   if (type == "df") return(out)
   if (type == "html") {
-    out <- nice_table(out, caption = "Agreement analyses")
+    out <- nice_table(out)
   }
+
   out
 }
 
