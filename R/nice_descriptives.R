@@ -2,7 +2,7 @@
 #'
 #' @param data A data frame
 #' @param round Digits for round function
-#' @param labels Item labels.
+#' @param auto_labels If TRUE, variable names are taken from a label attribute.
 #'
 #' @return A data frame with descriptive statistics
 #' @examples
@@ -10,9 +10,9 @@
 #' @export
 nice_descriptives <- function(data, 
                               round = NULL, 
-                              labels = FALSE,
+                              auto_labels = FALSE,
                               title = "Descriptive statistics",
-                              note = "MAD is the Median average deviation") {
+                              footnote = "MAD is the Median average deviation") {
   
   msg <- c()
   
@@ -26,6 +26,8 @@ nice_descriptives <- function(data,
   }
   
   data <- data[, .filter]
+  
+  if (auto_labels) data <- rename_from_labels(data)
   
   out <- apply(data, 2, function(x)
     c(
@@ -48,7 +50,7 @@ nice_descriptives <- function(data,
   
   return_messages(msg)
   
-  attr(out, "wmisc_note") <- note
+  attr(out, "wmisc_note") <- footnote
   attr(out, "wmisc_title") <- title
   
   out

@@ -33,3 +33,13 @@ add_label <- function(x, value) {
   x
 }
 
+#' Renames the variables from a data frame to a label that is provided in the label attribute
+#' @param data A dataframe
+#' @return A dataframe wit renamed labels
+#' @export
+rename_from_labels <- function(data) {
+  for(i in seq_along(data)) {
+    if (!is.null(attr(data[[i]], "label"))) names(data)[i] <- attr(data[[i]], "label")
+  }
+  data
+}

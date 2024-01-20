@@ -7,9 +7,9 @@
 nice_descriptives(
   data,
   round = NULL,
-  labels = FALSE,
+  auto_labels = FALSE,
   title = "Descriptive statistics",
-  note = "MAD is the Median average deviation"
+  footnote = "MAD is the Median average deviation"
 )
 }
 \arguments{
@@ -17,7 +17,7 @@ nice_descriptives(
 
 \item{round}{Digits for round function}
 
-\item{labels}{Item labels.}
+\item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 }
 \value{
 A data frame with descriptive statistics
