@@ -2,13 +2,24 @@
 % Please edit documentation in R/nice_loadings.R
 \name{nice_loadings}
 \alias{nice_loadings}
+\alias{nice_fa}
 \title{Creates table of loadings of exploratory factor analysis based on the
 psych::fa function}
 \usage{
-nice_loadings(object, factor_names = NULL, sort = TRUE, cut = 0.2, round = 2)
+nice_loadings(
+  x,
+  factor_names = NULL,
+  sort = TRUE,
+  cut = 0.2,
+  round = 2,
+  title = "Loading matrix",
+  footnote = NULL
+)
+
+nice_fa(..., file = NULL)
 }
 \arguments{
-\item{object}{Object returned from the psych::fa function.}
+\item{x}{Object returned from the psych::fa function.}
 
 \item{factor_names}{A character vector with names for the resulting factors.
 If not provided, default names are chosen.}

@@ -5,6 +5,7 @@
 - `logit2prob()`/ `prob2logit()`: Convert Logit to Probability and vice versa
 - `add_label()`: Adds haven labels. With a List option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
 - `nice_loadings()` extract loadings from psych::fa object
+- `nice_fa()` Returns a nice table from an psych::fa object.
 - `flip()`: flip a data.frame or matrix: `flip(mtcars, rownames = TRUE)`
 - `change_values()` recode values: `change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")`
 - `percentage_bar()` creates ggplot percentage bar: `percentage_bar(20, "test")`
