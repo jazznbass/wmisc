@@ -131,22 +131,16 @@ nice_corrmatrix <- function(cr,
   r <- r[, c(ncol(r), 1:(ncol(r) - 1))]
   
   if (type == "df") {
-   cat(
-     "Correlation matrix.\n",
-     sep = ""
-   )
-
-   cat("\n")
-   r <- format(r, justify = "left")
-    
-   if (stars) {
-     note <- paste0(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
-     cat(note)
-     attr(r, "wmisc_note") <- note
-     attr(r, "wmisc_title") <- caption
-   }
-   return(r)
- }
+    cat("Correlation matrix.\n", sep = "")
+    cat("\n")
+    r <- format(r, justify = "left")
+    if (stars) {
+      note <- paste0(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
+      cat(note)
+      r <- set_wmisc_attributes(r, title = caption, note = note)
+    }
+    return(r)
+  }
 
   if (type == "html") {
     out <- nice_table(

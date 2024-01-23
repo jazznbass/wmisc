@@ -1,17 +1,48 @@
 #' @export
-add_attribute <- function(x, attribute, value) {
-  attr(x, paste0("wmisc_", attribute)) <- value
+get_wmisc_attributes <- function(x) {
+  attr(x, "wmisc")
+}
+
+#' @export
+set_wmisc_attributes <- function(x, ...) {
+  args <- attr(x, "wmisc")
+  args <- c(args, list(...))
+  args <- args[!duplicated(names(args))]
+  attr(x, "wmisc") <- args
   x
 }
 
 #' @export
-add_title <- function(x, value) {
-  add_attribute(x, "title", value)
+set_wmisc_attribute <- function(x, attribute, value) {
+  args <- attr(x, "wmisc")
+  args[[attribute]] <- value
+  attr(x, "wmisc") <- args
+  x
 }
 
 #' @export
-add_note <- function(x, value) {
-  add_attribute(x, "note", value)
+get_wmisc_attribute <- function(x, attribute) {
+  attr(x, "wmisc")[[attribute]]
+}
+
+#' @export
+set_title <- function(x, value) {
+  set_wmisc_attribute(x, "title", value)
+}
+
+#' @export
+get_title <- function(x) {
+  get_wmisc_attribute(x, "title")
+}
+
+#' @export
+set_note <- function(x, value) {
+  set_wmisc_attribute(x, "note", value)
+}
+
+#' @export
+get_note <- function(x) {
+  get_wmisc_attribute(x, "note")
 }
 
 #' @export

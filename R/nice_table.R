@@ -47,11 +47,21 @@ nice_table <- function(x,
                        gt = NULL,
                        kable = NULL) {
   
-  if (!is.null(attr(x, "wmisc_title")) && is.null(title)) {
-    title <- attr(x, "wmisc_title")
-  }
-  if (!is.null(attr(x, "wmisc_note")) && is.null(footnote)) {
-    footnote <- attr(x, "wmisc_note")
+  args <- get_wmisc_attributes(x)
+  
+  if (!is.null(args)) {
+    if (!is.null(args$spanner) && is.null(spanner)) 
+      spanner <- args$spanner
+    if (!is.null(args$row_group) && is.null(row_group)) 
+      row_group <- args$row_group
+    if (!is.null(args$cols_label) && is.null(cols_label)) 
+      cols_label <- args$cols_label
+    if (!is.null(args$file) && is.null(file)) 
+      file <- args$file
+    if (!is.null(args$title) && is.null(title)) 
+      title <- args$title
+    if (!is.null(args$note) && is.null(footnote)) 
+      footnote <- args$note
   }
   
   if (!is.null(digits)) decimals <- digits

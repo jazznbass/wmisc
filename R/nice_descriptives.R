@@ -50,8 +50,10 @@ nice_descriptives <- function(data,
   
   return_messages(msg)
   
-  attr(out, "wmisc_note") <- footnote
-  attr(out, "wmisc_title") <- title
+  out <- set_wmisc_attributes(out, 
+    title = title,
+    note = footnote
+  )
   
   out
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_loadings.R
 \name{nice_loadings}
 \alias{nice_loadings}
-\alias{nice_fa}
+\alias{nice_efa}
 \title{Creates table of loadings of exploratory factor analysis based on the
 psych::fa function}
 \usage{
@@ -16,7 +16,7 @@ nice_loadings(
   footnote = NULL
 )
 
-nice_fa(..., file = NULL)
+nice_efa(..., file = NULL)
 }
 \arguments{
 \item{x}{Object returned from the psych::fa function.}
@@ -37,4 +37,8 @@ A data.frame
 \description{
 Creates table of loadings of exploratory factor analysis based on the
 psych::fa function
+}
+\examples{
+mtcars |> psych::fa(nfactors = 2) |> nice_efa()
+
 }

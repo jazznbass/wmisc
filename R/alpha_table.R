@@ -22,11 +22,17 @@
 #'   loadings are reported.
 #' @return A data frame with concise scale indices.
 #' @examples
-#' scales <- get_scales(ex_itrf,
+#' ## Example needs packages scaledic and purrr installed and active
+#' scales <- scaledic::get_scales(scaledic::ex_itrf,
 #'   Int = scale == "ITRF" & subscale == "Int",
 #'   Ext = scale == "ITRF" & subscale == "Ext"
 #' )
-#' alpha_table(ex_itrf, scales = scales, difficulty = TRUE, values = list(c(0, 3)), RMSEA = TRUE)
+#' alpha_table(scaledic::ex_itrf, 
+#'   scales = scales, 
+#'   difficulty = TRUE, 
+#'   values = list(c(0, 3)), 
+#'   RMSEA = TRUE
+#' )
 #' @export
 alpha_table <- function(data,
                         scales,
@@ -186,8 +192,10 @@ alpha_table <- function(data,
     )
   }
   
-  
-  attr(df, "wmisc_note") <- "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals."
+  df <- set_wmisc_attributes(df, 
+    note = "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals.",
+    title = "Item analysis"
+  )
   
   message("Note. values in brackets depict upper and lower bound of ",
           "confidence intervals or [min,max] intervals.")

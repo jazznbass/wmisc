@@ -155,18 +155,20 @@ t_test_table <- function(dv,
     ))
   }  
   
-  attr(out, "wmisc_note") <- note
-  attr(out, "wmisc_title") <- caption
+  out <- set_wmisc_attributes(out, 
+    title = caption,
+    note = note
+  )
   
   if(type == "html") {
     names(out)[4:5] <- lev
     names(out)[2:3] <- paste0(" ", lev, " ")
-    out <- nice_table(
-      out,
+
+    out <- set_wmisc_attributes(out,
       spanner = list("M (SD)" = 4:5, "N" = 2:3),
       file = file
     )
-    return(out)
+    out <- nice_table(out)
   }
     
   out

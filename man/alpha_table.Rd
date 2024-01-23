@@ -59,9 +59,15 @@ A data frame with concise scale indices.
 Returns a data.frame with item analyses for the provided scales.
 }
 \examples{
-scales <- get_scales(ex_itrf,
+## Example needs packages scaledic and purrr installed and active
+scales <- scaledic::get_scales(scaledic::ex_itrf,
   Int = scale == "ITRF" & subscale == "Int",
   Ext = scale == "ITRF" & subscale == "Ext"
 )
-alpha_table(ex_itrf, scales = scales, difficulty = TRUE, values = list(c(0, 3)), RMSEA = TRUE)
+alpha_table(scaledic::ex_itrf, 
+  scales = scales, 
+  difficulty = TRUE, 
+  values = list(c(0, 3)), 
+  RMSEA = TRUE
+)
 }

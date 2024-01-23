@@ -125,9 +125,8 @@ agreement_analysis <- function(data,
     M.G.Real = round(G.rel, 2), 
     G.Var = round(G.var, 2)
   )
-  
-  attr(out, "wmisc_note") <- note
-  attr(out, "wmisc_title") <- "Agreement analysis"
+
+  out <- set_wmisc_attributes(out, title = "Agreement analysis")
   
   if (type == "df") return(out)
   if (type == "html") {

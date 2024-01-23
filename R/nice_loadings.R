@@ -9,6 +9,9 @@
 #' @param round Number of digits to round loadings (based on the base::round
 #'   function)
 #' @return A data.frame
+#' @examples
+#' mtcars |> psych::fa(nfactors = 2) |> nice_efa()
+#' 
 #' @export
 
 nice_loadings <- function(x,
@@ -40,26 +43,28 @@ nice_loadings <- function(x,
   rownames(object) <- NULL
   
   if (is.null(footnote)) {
-    attr(object, "wmisc_note") <- c(
-      paste0("Extraction method is ", x$fm), 
-      paste0("Rotation method is ", x$rotation),
-      paste0(
-        "RMSEA is ", x$RMSEA[1] |> round(3), 
-        " CI", round(x$RMSEA[4] * 100), "% [", round(x$RMSEA[2], 3), 
-        ", ", round(x$RMSEA[3], 3), "]"
-      ),
-      if (is.numeric(cut)) paste0(
-        "Loadings below |", cut, "| are not displayed"
-      )
-    )
+    object <- set_note(object, 
+      c(
+        paste0("Extraction method is ", x$fm), 
+        paste0("Rotation method is ", x$rotation),
+        paste0(
+          "RMSEA is ", x$RMSEA[1] |> round(3), 
+          " CI", round(x$RMSEA[4] * 100), "% [", round(x$RMSEA[2], 3), 
+          ", ", round(x$RMSEA[3], 3), "]"
+        ),
+        if (is.numeric(cut)) paste0(
+          "Loadings below |", cut, "| are not displayed"
+        )
+    ))
   }
-  attr(object, "wmisc_title") <- title
+  
+  object <- set_title(object, title)
   object
 }
 
 #' @rdname nice_loadings
 #' @export
-nice_fa <- function(..., file = NULL) {
+nice_efa <- function(..., file = NULL) {
   out <- nice_loadings(...)
   rows <- nrow(out)
   out[(rows - 4):rows, 1] <- c(
@@ -69,14 +74,18 @@ nice_fa <- function(..., file = NULL) {
     "Cumulative proportion explained variance"
   )
   
-  out <- nice_table(
-    out,
-    spanner = list("Factors" = 2:(ncol(out) - 2)),
-    row_group = list(
-      "Loadings" = 1:(rows - 5), 
-      "Variances" = (rows - 4):rows
-    ),
-    file = file
+  out <- set_wmisc_attribute(
+    out, 
+    "nice_table",
+    list(
+      spanner = list("Factors" = 2:(ncol(out) - 2)),
+      row_group = list(
+        "Loadings" = 1:(rows - 5), 
+        "Variances" = (rows - 4):rows
+      ),
+      file = file
+    )
   )
-  out
+  
+  nice_table(out)
 }

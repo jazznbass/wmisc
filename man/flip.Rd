@@ -24,10 +24,12 @@ resulting data frame.
 }
 \examples{
 # Create a sample data frame
-df <- data.frame(A = 1:3, B = 4:6, C = 7:9)
+df <- data.frame(Car = c("BMW", "Volvo", "Honda"), Cost = (1:3)*10000, Speed = c(140, 160, 180), Colour = c("Red", "Blue", "Brown"))
 
 # Flip the data frame
-flipped_df <- flip(df)
+flip(df)
+
+flip(df) |> nice_table()
 
 # Flip the data frame with row names included
 flipped_df_with_rownames <- flip(df, rownames = TRUE)
