@@ -44,6 +44,7 @@ nice_table <- function(x,
                        use_labels = TRUE,
                        decimals = NULL,
                        round = NULL,
+                       na_label = NULL,
                        engine = getOption("wmisc.nice.table.engine"),
                        extra = NULL, 
                        gt = NULL,
@@ -146,7 +147,7 @@ nice_table <- function(x,
     if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
     if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote))
     if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
-    
+    if (!is.null(na_label)) out <- gt::sub_missing(out, missing_text = na_label)
     
     if (!is.null(file)) gt::gtsave(out, file)
     
