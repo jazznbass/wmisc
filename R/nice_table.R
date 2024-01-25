@@ -9,7 +9,9 @@
 #' @param file (works only when `engine = "gt"`) If set, an additional file with
 #'   the table is produced.
 #' @param cols_label List with renaming information for columns (old_name =
-#'   new_name)
+#'   new_name).
+#' @param decimals Number of decimals that will be printed.
+#' @param round Number of digits to which numbers should be rounded.
 #' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
 #' @param gt Additional arguments passed to `gt::gt()`
 #' @param kable Additional arguments passed to `knitr::kable()`
@@ -41,7 +43,7 @@ nice_table <- function(x,
                        cols_label = NULL,
                        use_labels = TRUE,
                        decimals = NULL,
-                       digits = NULL,
+                       round = NULL,
                        engine = getOption("wmisc.nice.table.engine"),
                        extra = NULL, 
                        gt = NULL,
@@ -64,7 +66,6 @@ nice_table <- function(x,
       footnote <- args$note
   }
   
-  if (!is.null(digits)) decimals <- digits
   if (!is.null(pack)) row_group <- pack
   
   if (isTRUE(file)) {
@@ -78,6 +79,8 @@ nice_table <- function(x,
   if (!is.null(footnote)) {
     footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
   }
+  
+  if (!is.null(round)) x <- round_numeric(x, round)
   
   if (FALSE) {
     new_cols_label <- lapply(x, \(x) attr(x, "label")) 

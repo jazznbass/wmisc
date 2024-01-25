@@ -17,7 +17,7 @@ nice_table(
   cols_label = NULL,
   use_labels = TRUE,
   decimals = NULL,
-  digits = NULL,
+  round = NULL,
   engine = getOption("wmisc.nice.table.engine"),
   extra = NULL,
   gt = NULL,
@@ -35,7 +35,11 @@ nice_table(
 the table is produced.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
-new_name)}
+new_name).}
+
+\item{decimals}{Number of decimals that will be printed.}
+
+\item{round}{Number of digits to which numbers should be rounded.}
 
 \item{extra}{Additional arguments passed to `kableExtra::kable_classic_2()`}
 
