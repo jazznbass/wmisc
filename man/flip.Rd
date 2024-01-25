@@ -32,7 +32,7 @@ flip(df)
 flip(df) |> nice_table()
 
 # Flip the data frame with row names included
-flipped_df_with_rownames <- flip(df, rownames = TRUE)
+flip(df, rownames = TRUE)
 
 }
 \seealso{

@@ -2,6 +2,7 @@
 
 ## New Functions
 
+- `round_numeric()`: This function rounds numeric columns in a data frame to a specified number of digits.
 - `logit2prob()`/ `prob2logit()`: Convert Logit to Probability and vice versa
 - `add_label()`: Adds haven labels. With a List option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
 - `nice_loadings()` extract loadings from psych::fa object

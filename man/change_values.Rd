@@ -23,13 +23,16 @@ A modified vector with replaced values.
 Replace specific values in a vector with new values.
 }
 \examples{
-change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")
-# Output: c(1, "two", "three")
+## Retains NAs
+change_values(c(1, 2, 3, NA), 2 ~ "two", 3 ~ "three")
 
+## Set a specific default value
 change_values(c(1, 2, 3), 2 ~ "two", .default = "default")
-# Output: c("default", "two", "default")
 
+## No error message when no value to convert is found
 change_values(c(1, 2, 3), 4 ~ "four")
-# Output: c("1", "2", "3")
+
+## Recode NAs and implicit conversion from numeric to character
+change_values(c(NA, 1, NA, 2), NA ~ "This is a missing value")
 
 }

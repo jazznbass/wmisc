@@ -29,15 +29,15 @@ nice_loadings <- function(x,
   object <- unclass(object)
   
   complexity <- x$complexity#[object$order]
-  h2 <- 1-x$uniquenesses#[object$order]
-  object <- cbind(object, h2 = h2, Complexity = complexity)
+  communalities <- 1-x$uniquenesses#[object$order]
+  object <- cbind(object, Communalities = communalities, Complexity = complexity)
   
   object <- round(object, round)
   object[abs(object) < cut] <- ""
   object <- as.data.frame(object)
   if (!is.null(factor_names)) names(object) <- factor_names[1:ncol(names)]
   var_exp <- round(var_exp, round)
-  var_exp <- cbind(var_exp, "h2" = "", Complexity = "")
+  var_exp <- cbind(var_exp, Communalities = "", Complexity = "")
   object <- rbind(object, var_exp)
   object <- cbind("Variables" = rownames(object), object)
   rownames(object) <- NULL
@@ -74,18 +74,16 @@ nice_efa <- function(..., file = NULL) {
     "Cumulative proportion explained variance"
   )
   
-  out <- set_wmisc_attribute(
+  out <- set_wmisc_attributes(
     out, 
-    "nice_table",
-    list(
-      spanner = list("Factors" = 2:(ncol(out) - 2)),
-      row_group = list(
-        "Loadings" = 1:(rows - 5), 
-        "Variances" = (rows - 4):rows
-      ),
-      file = file
-    )
+    spanner = list("Factors" = 2:(ncol(out) - 2)),
+    row_group = list(
+      "Loadings" = 1:(rows - 5), 
+      "Variances" = (rows - 4):rows
+    ),
+    file = file
   )
   
   nice_table(out)
 }
+
