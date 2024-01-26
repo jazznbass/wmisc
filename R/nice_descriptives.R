@@ -12,7 +12,11 @@ nice_descriptives <- function(data,
                               round = NULL, 
                               auto_labels = FALSE,
                               title = "Descriptive statistics",
-                              footnote = "MAD is the Median average deviation") {
+                              footnote = NULL) {
+  
+  if (is.null(footnote)) 
+    footnote <- paste0("MAD is the median average deviation with a ",
+                       "consistency adjustment")
   
   msg <- c()
   
