@@ -14,19 +14,20 @@ nice_descriptives <- function(data,
                               title = "Descriptive statistics",
                               footnote = NULL) {
   
+  on.exit(print_messages())
+  
   if (is.null(footnote)) 
     footnote <- paste0("MAD is the median average deviation with a ",
                        "consistency adjustment")
   
-  msg <- c()
   
   .filter <- sapply(data, is.numeric)
   
   if (any(!.filter)) {
-    msg <- c(msg, paste0(
+    add_message(
       "Some variables are not numeric and dropped from the analysis: ",
       paste0(names(.filter)[!.filter], collapse = ", ")
-    ))
+    )
   }
   
   data <- data[, .filter]
@@ -51,9 +52,7 @@ nice_descriptives <- function(data,
   out <- data.frame(out)
   out <- cbind(Variable = rownames(out), out)
   rownames(out) <- NULL
-  
-  return_messages(msg)
-  
+ 
   out <- set_wmisc_attributes(out, 
     title = title,
     note = footnote

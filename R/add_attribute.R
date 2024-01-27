@@ -48,11 +48,13 @@ get_note <- function(x) {
 #' @export
 add_label <- function(x, value) {
   
+  on.exit(print_messages())
+  
   if (inherits(value, "list")) {
     for(i in seq_along(value)) {
       variable <- names(value)[i]
       if (is.null(x[[names(value)[i]]])) {
-        warning("'", variable, "' does not exist.\n", call. = FALSE)
+        add_message("'", variable, "' does not exist.")
         next
       }
       

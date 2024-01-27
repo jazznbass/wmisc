@@ -9,7 +9,7 @@ t_test_table(
   iv,
   data,
   method = "cohen",
-  conditions = levels(factor(iv))[order],
+  conditions = NULL,
   labels = NULL,
   concise = TRUE,
   nice_p = TRUE,
@@ -61,14 +61,19 @@ A tibble or a kableExtra object
 Creates a t.test table for multiple dependent variables
 }
 \examples{
-dv <- data.frame(
+df <- data.frame(
   a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
   b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
   iv = factor(c(rep("A", 85), rep("B", 200)))
 )
 
 t_test_table(
-  c("a", "b"), "iv", data = dv, 
+  c("a", "b"), "iv", data = df, 
   labels = c("Motivation", "Achievement")
+)
+t_test_table(
+  data = mtcars, 
+  iv = "am", 
+  dv = c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "gear", "carb")
 )
 }

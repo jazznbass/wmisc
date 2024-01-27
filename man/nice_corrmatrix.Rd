@@ -67,6 +67,6 @@ A data-frame or a html table object
 From a psych corr object it gives a correlation matrix formatted for overview
 }
 \examples{
-nice_corrmatrix(mtcars, type = "html", ci = TRUE)
+nice_corrmatrix(mtcars, ci = TRUE)
 
 }

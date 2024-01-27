@@ -23,22 +23,27 @@
 #' @export
 #'
 #' @examples
-#' dv <- data.frame(
+#' df <- data.frame(
 #'   a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
 #'   b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
 #'   iv = factor(c(rep("A", 85), rep("B", 200)))
 #' )
 #'
 #' t_test_table(
-#'   c("a", "b"), "iv", data = dv, 
+#'   c("a", "b"), "iv", data = df, 
 #'   labels = c("Motivation", "Achievement")
+#' )
+#' t_test_table(
+#'   data = mtcars, 
+#'   iv = "am", 
+#'   dv = c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "gear", "carb")
 #' )
 
 t_test_table <- function(dv, 
                          iv, 
                          data, 
                          method = "cohen",
-                         conditions = levels(factor(iv))[order], 
+                         conditions = NULL, 
                          labels = NULL, 
                          concise = TRUE, 
                          nice_p = TRUE, 
@@ -51,11 +56,19 @@ t_test_table <- function(dv,
                          caption = "T-test table",
                          file = NULL) {
 
+  on.exit(print_messages())
+  
   if (!missing(data)) {
-    dv <- data[, dv]
+    if (!is.character(iv)) {
+      add_message("iv should be a character string when data are provided")
+    }
+    dv <- data[, dv, drop = FALSE]
     iv <- data[[iv]]
   }
-  dv <- dv[iv %in% conditions, ]
+  
+  if (is.null(conditions)) conditions <- levels(factor(iv))[order]
+  
+  dv <- dv[iv %in% conditions, , drop = FALSE]
   iv <- iv[iv %in% conditions]
   iv <- factor(iv, levels = levels(iv)[order])
   lev <- levels(iv)
@@ -171,5 +184,7 @@ t_test_table <- function(dv,
     out <- nice_table(out)
   }
     
+  
+  
   out
 }

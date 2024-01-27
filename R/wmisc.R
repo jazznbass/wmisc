@@ -9,5 +9,10 @@
 }
 
 .onLoad <- function(lib, pkg, ...) {
-  options(wmisc.nice.table.engine = "gt")
+  options(list(
+    wmisc.nice.table.engine = "gt"
+    #wmisc.errorbuffer = c(),
+    #wmisc.errorbuffer.last = c()
+  ))
 }
+

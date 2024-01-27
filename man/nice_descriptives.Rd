@@ -9,7 +9,7 @@ nice_descriptives(
   round = NULL,
   auto_labels = FALSE,
   title = "Descriptive statistics",
-  footnote = "MAD is the Median average deviation"
+  footnote = NULL
 )
 }
 \arguments{
