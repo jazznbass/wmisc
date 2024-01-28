@@ -5,6 +5,7 @@
 #' @param iv A data frame or vector with the independent variable or a character
 #'   if data is defined.
 #' @param data A data frame.
+#' @param method Either "cohen", "glass, or "hedges".
 #' @param conditions A character vector of length two with the names of the two
 #'   conditions. Defaults to the first two levels of the independent variable
 #'   'iv' if applicable.
@@ -14,8 +15,6 @@
 #' @param nice_p If TRUE, p values are printed in a nice format.
 #' @param digits Number of digits for rounding mean and SD values
 #' @param var_equal If FALSE, a t-test for unequal variances is calculated.
-#' @param order Either "12" or "21" depicting whether group two is compared to
-#'   group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param caption Table caption is type = "html"
 #'
@@ -23,20 +22,23 @@
 #' @export
 #'
 #' @examples
-#' df <- data.frame(
-#'   a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
-#'   b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
-#'   iv = factor(c(rep("A", 85), rep("B", 200)))
-#' )
-#'
-#' t_test_table(
-#'   c("a", "b"), "iv", data = df, 
-#'   labels = c("Motivation", "Achievement")
-#' )
 #' t_test_table(
 #'   data = mtcars, 
 #'   iv = "am", 
 #'   dv = c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "gear", "carb")
+#' )
+#' 
+#' df <- data.frame(
+#'   a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
+#'   b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
+#'   iv = factor(c(rep("Regular", 85), rep("Special", 100), rep("Restricted", 100)))
+#' )
+#' 
+#' t_test_table(
+#'   c("a", "b"), "iv", 
+#'   data = df,
+#'   conditions = c("Restricted","Special"), 
+#'   labels = c("Motivation", "Achievement")
 #' )
 
 t_test_table <- function(dv, 
@@ -51,9 +53,9 @@ t_test_table <- function(dv,
                          var_equal = FALSE, 
                          label_attr = TRUE,
                          manova = TRUE, 
-                         order = 1:2, 
                          type = "html",
                          caption = "T-test table",
+                         alternative = "two.sided",
                          file = NULL) {
 
   on.exit(print_messages())
@@ -70,9 +72,8 @@ t_test_table <- function(dv,
   
   dv <- dv[iv %in% conditions, , drop = FALSE]
   iv <- iv[iv %in% conditions]
-  iv <- factor(iv, levels = levels(iv)[order])
-  lev <- levels(iv)
-
+  iv <- factor(iv, levels = conditions, labels = conditions)
+  
   out <- tibble(
     Scale = character(), 
     n1 = numeric(), n2 = numeric(),
@@ -83,9 +84,13 @@ t_test_table <- function(dv,
   )
 
   if (is.null(labels)) labels <- names(dv)
-  
+
   for (i in 1:ncol(dv)) {
-    res <- t.test(dv[[i]] ~ iv, var.equal = var_equal)
+    res <- t.test(
+      dv[[i]] ~ iv, 
+      var.equal = var_equal, 
+      alternative = alternative
+    )
     sds <- aggregate(dv[[i]], by = list(iv), sd, na.rm = TRUE)[,2]
     vars <- aggregate(dv[[i]], by = list(iv), var, na.rm = TRUE)[,2]
     ns <- aggregate(dv[[i]], by = list(iv), function(x) sum(!is.na(x)))[,2]
@@ -96,12 +101,12 @@ t_test_table <- function(dv,
     out[i, "SD2"] <- sds[2]
     out[i, "p"] <- res$p.value
     out[i, "df"] <- res$parameter
-    out[i, "t"] <- res$statistic
+    out[i, "t"] <- res$statistic*-1
     out[i, "M1"] <- res$estimate[1]
     out[i, "M2"] <- res$estimate[2]
     out[i, "Scale"] <- labels[i]
     sd <- switch(method,
-      "glass" = sds[2],
+      "glass" = sds[1],
       #"cohen" = sqrt((vars[1] + vars[2]) / 2),
       "cohen" = sqrt(
         ((ns[1] - 1) * vars[1] + (ns[2] - 1) * vars[2]) / 
@@ -113,7 +118,7 @@ t_test_table <- function(dv,
       )
     )
     
-    out[i, "d"] <- (res$estimate[1] - res$estimate[2]) / sd
+    out[i, "d"] <- (res$estimate[2] - res$estimate[1]) / sd
     
     if (method == "hedges") {
       out[i, "d"] <- (1 - (3) / (4 * (ns[1] + ns[2]) - 9)) * out[i, "d"]
@@ -136,9 +141,9 @@ t_test_table <- function(dv,
     mutate_at("t", round_, 2)
   
 
-  colnames(out)[4:5] <- paste0("M ", lev)
-  colnames(out)[6:7] <- paste0("SD ", lev)
-  colnames(out)[2:3] <- paste0("n ", lev)
+  colnames(out)[4:5] <- paste0("M ", conditions)
+  colnames(out)[6:7] <- paste0("SD ", conditions)
+  colnames(out)[2:3] <- paste0("n ", conditions)
   if (concise) {
     MS_A <- paste0(out[[4]], " (", out[[6]], ")")
     MS_B <- paste0(out[[5]], " (", out[[7]], ")")
@@ -149,7 +154,7 @@ t_test_table <- function(dv,
       MS_A, MS_B
     ) %>%
         bind_cols(out[c(8:ncol(out))])
-    colnames(out)[4:5] <- paste0("M (SD) ", lev)
+    colnames(out)[4:5] <- paste0("M (SD) ", conditions)
   }
 
   if (nice_p) out$p <- nice_p(out$p, digits = 2)
@@ -174,8 +179,8 @@ t_test_table <- function(dv,
   )
   
   if(type == "html") {
-    names(out)[4:5] <- lev
-    names(out)[2:3] <- paste0(" ", lev, " ")
+    names(out)[4:5] <- conditions
+    names(out)[2:3] <- paste0(" ", conditions, " ")
 
     out <- set_wmisc_attributes(out,
       spanner = list("M (SD)" = 4:5, "N" = 2:3),

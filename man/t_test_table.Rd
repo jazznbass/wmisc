@@ -17,9 +17,9 @@ t_test_table(
   var_equal = FALSE,
   label_attr = TRUE,
   manova = TRUE,
-  order = 1:2,
   type = "html",
   caption = "T-test table",
+  alternative = "two.sided",
   file = NULL
 )
 }
@@ -31,6 +31,8 @@ with variable names when data is defined.}
 if data is defined.}
 
 \item{data}{A data frame.}
+
+\item{method}{Either "cohen", "glass, or "hedges".}
 
 \item{conditions}{A character vector of length two with the names of the two
 conditions. Defaults to the first two levels of the independent variable
@@ -47,9 +49,6 @@ variables.}
 
 \item{var_equal}{If FALSE, a t-test for unequal variances is calculated.}
 
-\item{order}{Either "12" or "21" depicting whether group two is compared to
-group one or vice versa.}
-
 \item{type}{Either "df" for data frame or "html" for html table.}
 
 \item{caption}{Table caption is type = "html"}
@@ -61,19 +60,22 @@ A tibble or a kableExtra object
 Creates a t.test table for multiple dependent variables
 }
 \examples{
-df <- data.frame(
-  a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
-  b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
-  iv = factor(c(rep("A", 85), rep("B", 200)))
-)
-
-t_test_table(
-  c("a", "b"), "iv", data = df, 
-  labels = c("Motivation", "Achievement")
-)
 t_test_table(
   data = mtcars, 
   iv = "am", 
   dv = c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "gear", "carb")
+)
+
+df <- data.frame(
+  a = c(rnorm(85, 50, 10), rnorm(200, 70, 20)),
+  b = c(rnorm(85, 50, 10), rnorm(200, 55, 20)),
+  iv = factor(c(rep("Regular", 85), rep("Special", 100), rep("Restricted", 100)))
+)
+
+t_test_table(
+  c("a", "b"), "iv", 
+  data = df,
+  conditions = c("Restricted","Special"), 
+  labels = c("Motivation", "Achievement")
 )
 }
