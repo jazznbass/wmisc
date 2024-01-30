@@ -58,7 +58,7 @@ chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
     P2 = numeric(), 
     d = numeric(), 
     X = numeric(), 
-    df = numeric(), 
+    #df = numeric(), 
     p = numeric(), 
     n1 = numeric(), 
     n2 = numeric()
@@ -76,7 +76,7 @@ chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
     res <- chisq.test(dv[[i]], iv)
     out[i, "Level"] <- l
     out[i, "p"] <- res$p.value
-    out[i, "df"] <- res$parameter
+    #out[i, "df"] <- res$parameter
     out[i, "X"] <- res$statistic
     out[i, "P1"] <- res$observed[1, 1] / sum(res$observed[,1])
     out[i, "P2"] <- res$observed[1, 2] / sum(res$observed[,2])
@@ -98,12 +98,23 @@ chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
   }
   
   colnames(out)[3:4] <- paste0("Proportion ", lev)
-  colnames(out)[6] <- "X squared"
+  colnames(out)[6] <- "X\u00B2(1)"
   colnames(out)[5] <- "Difference"
-  colnames(out)[9:10] <- paste0("n ", lev)
+  colnames(out)[8:9] <- paste0("n ", lev)
   
   out$p <- if (nice_p) nice_p(out$p) else round_(out$p, 3)
 
+  
+  cols_label <- list(lev[1], lev[2], paste0(lev[1], " "), paste0(lev[2], " "))
+  names(cols_label) <- names(out)[c(3,4,8,9)]
+  
+  out <- set_wmisc_attributes(out, 
+    title = "Chi-squared test",
+    note = "One degree of freedom for all tests",
+    spanner = list("Proportion" =3:5, "n" = 8:9),
+    cols_label = cols_label
+  )
+  
   if(type == "html") {
     out <- nice_table(out,...)
     return(out)
