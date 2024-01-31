@@ -154,8 +154,6 @@ nice_corrmatrix <- function(cr,
   if (type == "html") {
     out <- nice_table(
       r,
-      #title = caption,
-      #footnote = paste0(char_p10, "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"),
       file = file
     ) |> gt::fmt_markdown(columns = 5:ncol(r))
     return(out)
