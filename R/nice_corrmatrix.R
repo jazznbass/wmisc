@@ -130,14 +130,23 @@ nice_corrmatrix <- function(cr,
   rownames(r) <- NULL
   r <- r[, c(ncol(r), 1:(ncol(r) - 1))]
   
+  r <- format(r, justify = "left")
+  
+  r <- set_wmisc_attributes(
+    r, 
+    title = caption, 
+    note = paste0(
+      char_p10, 
+      "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"
+    )
+  )
+  
   if (type == "df") {
     cat("Correlation matrix.\n", sep = "")
     cat("\n")
-    r <- format(r, justify = "left")
     if (stars) {
       note <- paste0(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
       cat(note)
-      r <- set_wmisc_attributes(r, title = caption, note = note)
     }
     return(r)
   }
@@ -145,8 +154,8 @@ nice_corrmatrix <- function(cr,
   if (type == "html") {
     out <- nice_table(
       r,
-      title = caption,
-      footnote = paste0(char_p10, "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"),
+      #title = caption,
+      #footnote = paste0(char_p10, "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"),
       file = file
     ) |> gt::fmt_markdown(columns = 5:ncol(r))
     return(out)
