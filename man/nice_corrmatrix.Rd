@@ -14,7 +14,7 @@ nice_corrmatrix(
   show_stars = TRUE,
   show_ci = FALSE,
   numbered_columns = TRUE,
-  descriptives = TRUE,
+  show_descriptives = TRUE,
   labels = NULL,
   nsig_p = 0.1,
   char_nsig,
@@ -76,7 +76,7 @@ defined by file ending eith html or docx).}
 
 \item{...}{Further arguments passed to the [cor.test()] function.}
 
-\item{discriptives}{If TRUE, mean and sd columns are added.}
+\item{show_discriptives}{If TRUE, mean and sd columns are added.}
 }
 \value{
 A data-frame or a html table object
@@ -85,11 +85,12 @@ A data-frame or a html table object
 From a data.frame object it gives a correlation matrix formatted for overview
 }
 \examples{
-nice_corrmatrix(mtcars, ci = TRUE)
+nice_corrmatrix(mtcars)
 nice_corrmatrix(mtcars, 
   show_p = TRUE, 
   show_ci = TRUE, 
   show_stars = FALSE, 
+  show_descriptives = FALSE,
   conf.level = 0.99
 )
 }

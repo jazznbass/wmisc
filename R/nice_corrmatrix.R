@@ -20,7 +20,7 @@
 #' @param show_r TRUE if r-values should be included.
 #' @param show_p TRUE if r-values should be included.
 #' @param show_stars TRUE if stars should be included.
-#' @param discriptives If TRUE, mean and sd columns are added.
+#' @param show_discriptives If TRUE, mean and sd columns are added.
 #' @param drop_zero If TRUE, leadning zeros are dropped.
 #' @param caption Caption for an html table.
 #' @param file If TRUE or a filename is provided, a file is exportet (format is
@@ -30,11 +30,12 @@
 #'
 #' @return A data-frame or a html table object
 #' @examples
-#' nice_corrmatrix(mtcars, ci = TRUE)
+#' nice_corrmatrix(mtcars)
 #' nice_corrmatrix(mtcars, 
 #'   show_p = TRUE, 
 #'   show_ci = TRUE, 
 #'   show_stars = FALSE, 
+#'   show_descriptives = FALSE,
 #'   conf.level = 0.99
 #' )
 #' @export
@@ -48,7 +49,7 @@ nice_corrmatrix <- function(cr,
                             show_stars = TRUE, 
                             show_ci = FALSE, 
                             numbered_columns = TRUE,
-                            descriptives = TRUE,
+                            show_descriptives = TRUE,
                             labels = NULL,
                             nsig_p = .10, 
                             char_nsig, 
@@ -138,7 +139,7 @@ nice_corrmatrix <- function(cr,
     colnames(r) <- paste0(1:nrow(r), "") 
   }
   
-  if (descriptives) {
+  if (show_descriptives) {
     .varnames <- names(r)
     r$n <- .n
     r$M <- round(.means, digits)
@@ -154,10 +155,10 @@ nice_corrmatrix <- function(cr,
   r <- set_wmisc_attributes(
     r, 
     title = caption, 
-    note = paste0(
+    note = if (show_stars) {paste0(
       char_p10, 
       "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"
-    )
+    )} else NULL
   )
   
   if (type == "df") {
