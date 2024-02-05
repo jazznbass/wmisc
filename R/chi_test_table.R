@@ -19,7 +19,7 @@
 #'   group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param ... Further arguments passed to [nice_table()]
-#' @return A tibble or a kableExtra object
+#' @return A tibble or an html table
 #' @export
 #'
 #' @examples

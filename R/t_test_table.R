@@ -18,7 +18,7 @@
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param caption Table caption is type = "html"
 #'
-#' @return A tibble or a kableExtra object
+#' @return A tibble or an html table
 #' @export
 #'
 #' @examples

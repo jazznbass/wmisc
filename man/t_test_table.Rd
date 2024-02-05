@@ -54,7 +54,7 @@ variables.}
 \item{caption}{Table caption is type = "html"}
 }
 \value{
-A tibble or a kableExtra object
+A tibble or an html table
 }
 \description{
 Creates a t.test table for multiple dependent variables

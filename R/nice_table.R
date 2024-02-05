@@ -1,7 +1,7 @@
 #' Create a nicely formatted table
 #'
 #' This function takes a data frame and formats it into a nicely formatted HTML
-#' table using the `knitr` and `kableExtra` packages.
+#' table using the `gt` packages.
 #'
 #' @param x The data frame to be formatted into a table
 #' @param title Title string.
@@ -19,7 +19,10 @@
 #'
 #'
 #' @examples
-#' df <- data.frame(x = 1:5, y = rnorm(5, mean = 10, sd = 12), c = letters[5:1], d = sample(letters, 5))
+#' df <- data.frame(
+#'   x = 1:5, y = rnorm(5, mean = 10, sd = 12), 
+#'   c = letters[5:1], d = sample(letters, 5)
+#' )
 #' nice_table(
 #'   df,
 #'   title = "A nice title",

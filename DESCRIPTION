@@ -3,7 +3,7 @@ Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
 Version: 0.2.22.9000
-Date: 2024-01-25
+Date: 2024-02-05
 Author: Juergen Wilbert
 Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
 Imports: 
@@ -23,7 +23,8 @@ Imports:
   forcats,
   magrittr,
   lavaan,
-  gt
+  gt,
+  glue
 License: GPL (>= 3)
 Encoding: UTF-8
 RoxygenNote: 7.2.3

@@ -20,6 +20,7 @@ nice_corrmatrix(
   char_autocor = "－",
   char_p10 = "✞",
   char_NA = "",
+  string_ci = "{r}{break_sign}[{ci_lower},{ci_upper}]",
   caption = "Correlation matrix",
   drop_zero = TRUE,
   type = "html",
@@ -28,7 +29,7 @@ nice_corrmatrix(
 )
 }
 \arguments{
-\item{cr}{A data frame or a correlation matrix returned by the psych package}
+\item{cr}{A data frame}
 
 \item{upper}{TRUE if upper triangle should be included.}
 
@@ -36,14 +37,15 @@ nice_corrmatrix(
 
 \item{digits}{Round to given digit position.}
 
-\item{values}{TRUE if values should be included.}
+\item{values}{TRUE if r-values should be included.}
 
 \item{stars}{TRUE if stars should be included.}
 
 \item{labels}{Character string. If "auto" labels are taken from a label
 attribute.}
 
-\item{nsig_p}{p level below which correlations are considered not significant.}
+\item{nsig_p}{p level below which correlations are considered not
+significant.}
 
 \item{char_nsig}{Character indexing non-significant values.}
 
@@ -53,18 +55,26 @@ attribute.}
 
 \item{char_NA}{Character for NA values.}
 
-\item{caption}{Caption for a html table.}
+\item{string_ci}{Character string in glue format for confindence internvals.}
 
-\item{type}{Character string. "df" for data-frame. "html" for html table
-(needs knitr and kableExtra packages).}
+\item{caption}{Caption for an html table.}
 
-\item{...}{Further arguments passed to the [psych::corr.test()] function.}
+\item{drop_zero}{If TRUE, leadning zeros are dropped.}
+
+\item{type}{Character string. "df" for data-frame. "html" for html table.}
+
+\item{file}{If TRUE or a filename is provided, a file is exportet (format is
+defined by file ending eith html or docx).}
+
+\item{...}{Further arguments passed to the [cor.test()] function.}
+
+\item{discriptives}{If TRUE, mean and sd columns are added.}
 }
 \value{
 A data-frame or a html table object
 }
 \description{
-From a psych corr object it gives a correlation matrix formatted for overview
+From a data.frame object it gives a correlation matrix formatted for overview
 }
 \examples{
 nice_corrmatrix(mtcars, ci = TRUE)
