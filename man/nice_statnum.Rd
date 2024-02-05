@@ -16,3 +16,7 @@ nice_statnum(x, digits = 2)
 Nice statnum
 Formats numbers in the -1 to 1 range
 }
+\examples{
+nice_statnum(c(1, -1, runif(4, -1, 1)))
+
+}
