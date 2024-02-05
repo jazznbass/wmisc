@@ -8,7 +8,7 @@
 #' @param digits Round to given digit position.
 #' @param labels Character string. If "auto" labels are taken from a label
 #'   attribute.
-#' @param ci If TRUE, confidence intervals are added.
+#' @param show_ci If TRUE, confidence intervals are added.
 #' @param nsig_p p level below which correlations are considered not
 #'   significant.
 #' @param char_nsig Character indexing non-significant values.
@@ -16,8 +16,10 @@
 #' @param char_autocor Character for diagonal (e.g. "-" or "1.00").
 #' @param char_p10 Character indexing .10 significance level.
 #' @param string_ci Character string in glue format for confindence internvals.
-#' @param values TRUE if r-values should be included.
-#' @param stars TRUE if stars should be included.
+#' @param string_p Character string in glue format for p-values.
+#' @param show_r TRUE if r-values should be included.
+#' @param show_p TRUE if r-values should be included.
+#' @param show_stars TRUE if stars should be included.
 #' @param discriptives If TRUE, mean and sd columns are added.
 #' @param drop_zero If TRUE, leadning zeros are dropped.
 #' @param caption Caption for an html table.
@@ -29,25 +31,32 @@
 #' @return A data-frame or a html table object
 #' @examples
 #' nice_corrmatrix(mtcars, ci = TRUE)
-#'
+#' nice_corrmatrix(mtcars, 
+#'   show_p = TRUE, 
+#'   show_ci = TRUE, 
+#'   show_stars = FALSE, 
+#'   conf.level = 0.99
+#' )
 #' @export
 
 nice_corrmatrix <- function(cr, 
                             upper = FALSE, 
                             lower = TRUE,
                             digits = 2, 
-                            values = TRUE, 
-                            stars = TRUE, 
+                            show_r = TRUE, 
+                            show_p = FALSE,
+                            show_stars = TRUE, 
+                            show_ci = FALSE, 
                             numbered_columns = TRUE,
                             descriptives = TRUE,
                             labels = NULL,
-                            ci = FALSE, 
                             nsig_p = .10, 
                             char_nsig, 
                             char_autocor = "\uFF0D",
                             char_p10 = "\u271e", 
                             char_NA = "", 
-                            string_ci = "{r}{break_sign}[{ci_lower},{ci_upper}]",
+                            string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
+                            string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
                             caption = "Correlation matrix",
                             drop_zero = TRUE,
                             type = "html", 
@@ -78,13 +87,13 @@ nice_corrmatrix <- function(cr,
   r <- round(r, digits)
   r <- format(r, digits = digits, nsmall = digits)
 
-  if (!values) r[TRUE] <- ""
+  if (!show_r) r[TRUE] <- ""
 
   if (!missing(char_nsig)) r[p > nsig_p] <- char_nsig
   r[is.na(cr$r)] <- char_NA
   diag(r) <- char_autocor
   diag(p) <- 1
-  if (stars) {
+  if (show_stars) {
     copy_r <- r
     r[which(p <= .10)] <- paste0(copy_r[which(p <= .10)], char_p10)
     r[which(p <= .05)] <- paste0(copy_r[which(p <= .05)], "*  ")
@@ -95,14 +104,25 @@ nice_corrmatrix <- function(cr,
   
   r[which(cr$r >= 0)] <- paste0(" ", r[which(cr$r >= 0)])
   
-  if (ci) {
-    break_sign <- if (identical(type, "html")) "<br>" else " "
-    ci_lower <- formatC(cr$ci$lower, format = 'f', digits = digits)
-    ci_upper <- formatC(cr$ci$upper, format = 'f', digits = digits)
+  if (show_ci) {
+    new_env <- new.env()
+    new_env$break_sign <- if (identical(type, "html")) "<br>" else " "
+    new_env$ci_lower <- formatC(cr$ci$lower, format = 'f', digits = digits)
+    new_env$ci_upper <- formatC(cr$ci$upper, format = 'f', digits = digits)
+    new_env$r <- r
     #r[] <- paste0(r, break_sign, "[", lb, ", ", ub, "]")
-    r[] <- glue::glue(string_ci)
-    diag(r) <- char_autocor
+    r[] <- glue::glue("{r} ", string_ci, .envir = new_env)
   }
+  
+  if (show_p) {
+    new_env <- new.env()
+    new_env$p <- cr$p
+    new_env$r <- r
+    new_env$break_sign <- if (identical(type, "html")) "<br>" else " "
+    r[] <- glue::glue("{r} ", string_p, .envir = new_env)
+  }
+  
+  diag(r) <- char_autocor
   
   if (!upper) r[upper.tri(r)] <- ""
   if (!lower) r[lower.tri(r)] <- ""
@@ -143,7 +163,7 @@ nice_corrmatrix <- function(cr,
   if (type == "df") {
     cat("Correlation matrix.\n", sep = "")
     cat("\n")
-    if (stars) {
+    if (show_stars) {
       note <- paste0(char_p10, "p<.10; *p<.05; **p<.01; ***p<.001.\n", sep = "")
       cat(note)
     }
@@ -192,8 +212,8 @@ corrmatrix <- function(x, digits = 2, p = TRUE, ci = FALSE, ...) {
   
   diag(out_p) <- 1
   list(
-    r = out_r,#round(out_r, digits),
-    p = out_p,#round(out_p, digits),
+    r = out_r,
+    p = out_p,
     df = out_df,
     ci = list(lower = out_lower, upper = out_upper),
     t = out_t

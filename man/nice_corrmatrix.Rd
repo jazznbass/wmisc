@@ -9,18 +9,20 @@ nice_corrmatrix(
   upper = FALSE,
   lower = TRUE,
   digits = 2,
-  values = TRUE,
-  stars = TRUE,
+  show_r = TRUE,
+  show_p = FALSE,
+  show_stars = TRUE,
+  show_ci = FALSE,
   numbered_columns = TRUE,
   descriptives = TRUE,
   labels = NULL,
-  ci = FALSE,
   nsig_p = 0.1,
   char_nsig,
   char_autocor = "－",
   char_p10 = "✞",
   char_NA = "",
-  string_ci = "{r}{break_sign}[{ci_lower},{ci_upper}]",
+  string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
+  string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
   caption = "Correlation matrix",
   drop_zero = TRUE,
   type = "html",
@@ -37,9 +39,13 @@ nice_corrmatrix(
 
 \item{digits}{Round to given digit position.}
 
-\item{values}{TRUE if r-values should be included.}
+\item{show_r}{TRUE if r-values should be included.}
 
-\item{stars}{TRUE if stars should be included.}
+\item{show_p}{TRUE if r-values should be included.}
+
+\item{show_stars}{TRUE if stars should be included.}
+
+\item{show_ci}{If TRUE, confidence intervals are added.}
 
 \item{labels}{Character string. If "auto" labels are taken from a label
 attribute.}
@@ -56,6 +62,8 @@ significant.}
 \item{char_NA}{Character for NA values.}
 
 \item{string_ci}{Character string in glue format for confindence internvals.}
+
+\item{string_p}{Character string in glue format for p-values.}
 
 \item{caption}{Caption for an html table.}
 
@@ -78,5 +86,10 @@ From a data.frame object it gives a correlation matrix formatted for overview
 }
 \examples{
 nice_corrmatrix(mtcars, ci = TRUE)
-
+nice_corrmatrix(mtcars, 
+  show_p = TRUE, 
+  show_ci = TRUE, 
+  show_stars = FALSE, 
+  conf.level = 0.99
+)
 }
