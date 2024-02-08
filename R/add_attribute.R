@@ -76,3 +76,8 @@ rename_from_labels <- function(data) {
   }
   data
 }
+
+#' @export
+get_labels <- function(data) {
+  lapply(data, \(x) attr(x, "label")) |> unlist()
+}
