@@ -34,3 +34,11 @@ change_values <- function(x, ..., .default = NULL) {
   }
   out
 }
+
+change_by_list <- function(x, rn) {
+  for(i in seq_along(rn)) {
+    x[which(x %in% names(rn)[i])] <- rn[i]
+  }
+  x
+}
+
