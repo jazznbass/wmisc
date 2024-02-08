@@ -1,15 +1,21 @@
-
+#' Create a nice table from one or more regression models
+#' @examples
+#' lm(mpg ~ am + disp + hp, data = mtcars) |> 
+#'   nice_regression_table()
+#' nice_regression_table(
+#'   wmisc:::model1, wmisc:::model2, 
+#'   rename_labels = list(
+#'     "EffectTrend" = "Trend", "EffectSlope" = "Slope"), 
+#'   rename_cols = list("Estimate" = "b", "SE" = "se")
+#' )
 #' @export
 nice_regression_table <- function(
     ..., 
     digits = 2, 
     label_models = NULL,
-    label_predictor = "Predictor",
-    label_estimate = "Estimate",
-    label_se = "SE",
-    label_statistic = "t",
-    label_p = "p",
-    rename_labels = list()
+    rename_labels = list(),
+    rename_cols = list(),
+    auto_col_names = TRUE
 ) {
   
   models <- list(...)
@@ -22,21 +28,32 @@ nice_regression_table <- function(
   #if (inherits(models[[1]], "lme"))
   #  models_summary <- models
   
+  labels <- list(
+    predictor = "Predictor",
+    estimate = "Estimate",
+    se = "SE",
+    statistic = "t",
+    p = "p"
+  )
+
   
   get_coef_table <- function(x) {
     out <- as.data.frame(coef(x))
     
-    rn <- list(
-      Value = label_estimate,
-      Estimate = label_estimate,
-      "t-value" = "t",
-      "t value" = "t",
-      "Std.Error" = label_se,
-      "Std. Error" = label_se,
-      "Pr(>|t|)" = label_p,
-      "t-value" = "t"      
-    )
-    names(out) <- change_by_list(names(out), rn)
+    if (auto_col_names) {
+      rn <- list(
+        Value = label_estimate,
+        Estimate = labels$estimate,
+        "t-value" = "t",
+        "t value" = "t",
+        "Std.Error" = labels$se,
+        "Std. Error" = labels$se,
+        "Pr(>|t|)" = labels$p,
+        "t-value" = "t"
+      )
+      names(out) <- change_by_list(names(out), rn)
+    }
+    names(out) <- change_by_list(names(out), rename_cols)
     out$p <- nice_p(out$p, stars = TRUE)
     out
   }
