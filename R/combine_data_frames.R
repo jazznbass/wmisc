@@ -29,8 +29,32 @@ combine_data_frames <- function(...) {
   out
 }
 
-add_row <- function(base, addon) {
-  base[names(addon)[!(names(addon) %in% names(base))]] <- NA
-  addon[names(base)[!(names(base) %in% names(addon))]] <- NA
-  rbind(base, addon)
+
+combine_cols <- function(...) {
+  dfs <- list(...)
+  
+  add <- function(base, addon) {
+    base[rownames(addon)[!(rownames(addon) %in% rownames(base))],] <- NA
+    addon[rownames(base)[!(rownames(base) %in% rownames(addon))],] <- NA
+    sort <- lapply(rownames(base), \(x) which(rownames(addon) %in% x)) |> unlist()
+    addon <- addon[sort, ]
+    cbind(base, addon)
+  }
+  
+  out <- dfs[[1]]
+  for(i in 2:length(dfs)) {
+    out <- add(out, dfs[[i]])
+  }
+  out
 }
+
+#add_row <- function(base, addon) {
+#  base[names(addon)[!(names(addon) %in% names(base))]] <- NA
+#  addon[names(base)[!(names(base) %in% names(addon))]] <- NA
+#  rbind(base, addon)
+#}
+
+
+
+
+
