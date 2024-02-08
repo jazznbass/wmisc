@@ -4,7 +4,7 @@
 \alias{nice_p}
 \title{Format p values}
 \usage{
-nice_p(p, equal_sign = FALSE, digits = 3)
+nice_p(p, equal_sign = FALSE, digits = 3, stars = FALSE)
 }
 \arguments{
 \item{p}{Vector of p values.}

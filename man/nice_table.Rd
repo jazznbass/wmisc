@@ -18,7 +18,7 @@ nice_table(
   use_labels = TRUE,
   decimals = NULL,
   round = NULL,
-  na_label = NULL,
+  label_na = NULL,
   engine = getOption("wmisc.nice.table.engine"),
   extra = NULL,
   gt = NULL,
