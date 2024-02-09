@@ -12,7 +12,7 @@
 nice_regression_table <- function(
     ..., 
     digits = 2, 
-    label_models = NULL,
+    labels_models = NULL,
     rename_labels = list(),
     rename_cols = list(),
     auto_col_names = TRUE
@@ -20,14 +20,11 @@ nice_regression_table <- function(
   
   models <- list(...)
   
-  cl <- class(models[[1]])
+  class(models) <- c(class(models[[1]]), "list")
+  models_params <- extract_model_param(models)
+  
   n_models <- length(models)
-  
-  #if (inherits(models[[1]], "lm"))
-  models_summary <- lapply(models, summary)
-  #if (inherits(models[[1]], "lme"))
-  #  models_summary <- models
-  
+
   labels <- list(
     predictor = "Predictor",
     estimate = "Estimate",
@@ -38,11 +35,12 @@ nice_regression_table <- function(
 
   
   get_coef_table <- function(x) {
+    x <- summary(x)
     out <- as.data.frame(coef(x))
     
     if (auto_col_names) {
       rn <- list(
-        Value = label_estimate,
+        Value = labels$estimate,
         Estimate = labels$estimate,
         "t-value" = "t",
         "t value" = "t",
@@ -58,7 +56,7 @@ nice_regression_table <- function(
     out
   }
   
-  out <- lapply(models_summary, \(x) get_coef_table(x))
+  out <- lapply(models, \(x) get_coef_table(x))
   n_param <- ncol(out[[1]])
   
   if (length(out) > 1) out <- do.call(combine_cols, out) else out <- out[[1]]
@@ -78,37 +76,20 @@ nice_regression_table <- function(
     out[nrow(out), 2 + (0:(n_models - 1)) * n_param] <- param
     out
   }
-  
-  if (cl == "lm") n <- lapply(models, \(x) nrow(x$model)) |> unlist()
-  if (cl == "lme") n <- lapply(models, \(x) nrow(x$data)) |> unlist()
-  if (cl == "lmerModLmerTest") n <- lapply(models, \(x) length(x@resp$y)) |> unlist()
-  
-  out <- add_param(n, "N")
 
-  if (cl == "lm") {
-    out <- add_param(
-      lapply(models_summary, \(x) x$r.squared) |> unlist(), 
-      "R\u00b2"
-    )
-    out <- add_param(
-      lapply(models_summary, \(x) x$adj.r.squared) |> unlist(), 
-      "R\u00b2 adjusted"
-    )
+  # add model parameters from extract -----
+  for(i in seq_along(models_params$add_param)) {
+    out <- add_param(models_params$add_param[[i]], names(models_params$add_param)[i])
   }
 
+  
+  # round and rename cols and predictor labels ----
+  
   out <- round_numeric(out, digit = digits)
   
-  names(out)[1] <- label_predictor
+  names(out)[1] <- labels$predictor
   
-  if (cl == "lmerModLmerTest") {
-    auto_labels <- lapply(models, \(x) get_labels(x@frame)) |> unlist()
-  }
-
-  if (cl %in% c("lm", "lme")) {
-    auto_labels <- lapply(models, \(x) get_labels(x$model)) |> unlist()
-  }
-  
-  auto_labels <- c(unlist(rename_labels), auto_labels)
+  auto_labels <- c(unlist(rename_labels), models_params$auto_labels)
   
   out[[1]] <- change_by_list(out[[1]], auto_labels)
   
@@ -116,23 +97,13 @@ nice_regression_table <- function(
   
   spanner <- 2 + (0:(n_models - 1)) * n_param
   spanner <- lapply(spanner, \(x) x:(x + n_param - 1))
-  
-  if (is.null(label_models)) {
-    if (cl == "lmerModLmerTest") {
-      label_models <- unlist(
-        lapply(models, \(x) x@call$formula[[2]] |> as.character())
-      )
-    } else {
-      label_models <- unlist(
-        lapply(models, \(x) x$terms[[2]] |> as.character())
-      )
-    }
 
-    label_models <- change_by_list(label_models, auto_labels)
-    label_models <- make.unique(label_models, sep = " ")
+  if (is.null(labels_models)) {
+    labels_models <- change_by_list(models_params$labels_models, auto_labels)
+    labels_models <- make.unique(labels_models, sep = " ")
   }
-  
-  names(spanner) <- label_models
+
+  names(spanner) <- labels_models
   
   row_group <- list(
     #Coefficients = 1:(n_predic),
@@ -151,6 +122,51 @@ nice_regression_table <- function(
   nice_table(out) |> 
     gt::row_group_order(groups = c(NA, "Model"))
   
+}
+
+
+extract_model_param <- function (x, ...) {
+  UseMethod("extract_model_param", x)
+}
+
+extract_model_param.lm <- function(models) {
+  models_summary <- lapply(models, summary)
+  out <- list()
+  
+  out$auto_labels <- lapply(models, \(x) get_labels(x$model)) |> unlist()
+  out$labels_models <-
+    lapply(models, \(x) x$terms[[2]] |> as.character()) |> 
+    unlist()
+  
+  out$add_param$N <- lapply(models, \(x) nrow(x$model)) |> unlist()
+  out$add_param[["R\u00b2"]] <- 
+    lapply(models_summary, \(x) x$r.squared) |> unlist()
+  out$add_param[["R\u00b2 adjusted"]] <- 
+    lapply(models_summary, \(x) x$adj.r.squared) |> unlist()
+
+  out
+}
+
+extract_model_param.lme <- function(models) {
+  out <- list()
+  out$add_param$N <- lapply(models, \(x) nrow(x$data)) |> unlist()
+  out$auto_labels <- lapply(models, \(x) get_labels(x$model)) |> unlist()
+  out$labels_models <-
+    lapply(models, \(x) x$terms[[2]] |> as.character()) |> 
+    unlist()
+  out
+}
+
+extract_model_param.lmerModLmerTest <- function(models) {
+  out <- list()
+  out$add_param$N <- lapply(models, \(x) length(x@resp$y)) |> unlist()
+  out$auto_labels <- lapply(models, \(x) get_labels(x@frame)) |> unlist()
+  
+  out$labels_models <- 
+    lapply(models, \(x) x@call$formula[[2]] |> as.character()) |> 
+    unlist()
+    
+  out
 }
 
 
