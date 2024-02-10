@@ -7,7 +7,7 @@
 nice_regression_table(
   ...,
   digits = 2,
-  label_models = NULL,
+  labels_models = NULL,
   rename_labels = list(),
   rename_cols = list(),
   auto_col_names = TRUE
