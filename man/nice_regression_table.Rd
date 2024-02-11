@@ -19,8 +19,14 @@ Create a nice table from one or more regression models
 \examples{
 lm(mpg ~ am + disp + hp, data = mtcars) |> 
   nice_regression_table()
+  
 nice_regression_table(
-  wmisc:::model1, wmisc:::model2,
+  nlme::lme(mpg~disp, data = mtcars, random = ~1|am),
+  nlme::lme(mpg~disp + hp, data = mtcars, random = ~1|am)
+)   
+  
+nice_regression_table(
+  wmisc:::model_lmer_1, wmisc:::model_lmer_2,
   rename_labels = list(
     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
     "ConditionTraining" = "Training", "id_subject" = "Subject"),

@@ -2,8 +2,14 @@
 #' @examples
 #' lm(mpg ~ am + disp + hp, data = mtcars) |> 
 #'   nice_regression_table()
+#'   
 #' nice_regression_table(
-#'   wmisc:::model1, wmisc:::model2,
+#'   nlme::lme(mpg~disp, data = mtcars, random = ~1|am),
+#'   nlme::lme(mpg~disp + hp, data = mtcars, random = ~1|am)
+#' )   
+#'   
+#' nice_regression_table(
+#'   wmisc:::model_lmer_1, wmisc:::model_lmer_2,
 #'   rename_labels = list(
 #'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
 #'     "ConditionTraining" = "Training", "id_subject" = "Subject"),
@@ -100,7 +106,7 @@ nice_regression_table <- function(
   }
   
   names_params <- names(new_params)
-  to_end <- names_params[which(names_params %in% c("Residual", "ICC", "N"))]
+  to_end <- names_params[which(names_params %in% c("Residual", "ICC", "N", "Observations"))]
   to_front <- names_params[!names_params %in% to_end]
   new_params <- new_params[c(to_front, to_end)]
   
@@ -119,15 +125,11 @@ nice_regression_table <- function(
   for(i in seq_along(auto_labels)) 
     out[[1]] <- gsub(names(auto_labels)[i], auto_labels[i],  out[[1]])
   
-  #out[[1]] <- change_by_list(out[[1]], auto_labels)
-  
   # spanner ----
   
   spanner <- 2 + (0:(n_models - 1)) * n_param
   spanner <- lapply(spanner, \(x) x:(x + n_param - 1))
 
-  
-  
   if (is.null(labels_models)) {
     labels_models <- change_by_list(
       lapply(models_params, \(x) x$labels_models) |> unlist(), 
@@ -172,37 +174,45 @@ extract_model_param.lm <- function(model) {
   out$auto_labels <- get_labels(model$model)
   out$labels_models <- model$terms[[2]] |> as.character()
   
-  out$add_param$N <- nrow(model$model)
+  out$add_param$Observations <- nrow(model$model)
   out$add_param[["R\u00b2"]] <- model_summary$r.squared
   out$add_param[["R\u00b2 adjusted"]] <- model_summary$adj.r.squared
-  
-  get_coef_table <- function(x) {
-    out <- as.data.frame(coef(x))
-    out
-  }
-  
-  out$estimates$fixed <- get_coef_table(model_summary)
+
+  out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
   out
 }
 
+#' @export
 extract_model_param.lme <- function(model) {
   
   model_summary <- summary(model)
   
   out <- list()
-  out$add_param$N <- nrow(model$data)
+
   out$auto_labels <- get_labels(model$model)
   out$labels_models <- model$terms[[2]] |> as.character()
   
-  get_coef_table <- function(x) {
-    out <- as.data.frame(coef(x))
-    out
-  }
-  
-  out$estimates$fixed <- get_coef_table(model_summary)
+  out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
 
+  varcov <- nlme::getVarCov(model)
+  random <- cbind(
+    paste0(names(varcov |> diag()), " ",  attr(varcov, "group.levels")) |> as.data.frame(), 
+    varcov |> diag() 
+  )
+  
+  
+  for(j in 1:nrow(random)) {
+    out$add_param[[random[j ,1]]] <- random[j ,2]
+  }
+  
+  out$add_param$Residual <- model$sigma^2
+  out$add_param$ICC <- sum(random[[2]]) / (sum(random[[2]]) + model$sigma^2)
+  
+  out$add_param$N <- model$dims$ngrps[1:model$dims$Q]
+  out$add_param$Observations <- model$dims$N
+  
   out
 }
 
@@ -213,56 +223,36 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   out <- list()
 
   out$auto_labels <- get_labels(model@frame)
-  
   out$labels_models <- model@call$formula[[2]] |> as.character() 
-  
-  get_coef_table <- function(x) {
-    out <- as.data.frame(coef(x))
-    out
-  }
-  out$estimates$fixed <- get_coef_table(model_summary)
+  out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- 
     names(out$estimates$fixed)[ncol(out$estimates$fixed)]
   
-  get_random <- function(x) {
-    random <- x$varcor |> as.data.frame()
-    names(random)[1] <- "Effect"
-    n_effects <- nrow(random) - 1 
-    var_effects <- sum(random$vcov[1:n_effects])
-    var_intercept_effects <- 
-      sum(random$vcov[which(random$var1 == "(Intercept)")])
-    var_total <- sum(random$vcov)
-    random$Partial_explained <- NA
-    random$Partial_explained[1:n_effects] <- 
-      random$vcov[1:n_effects] /  var_effects
-    random$Total_explained <- NA
-    random$Total_explained <- random$vcov /  var_total
-    
-    random$Effect[1:n_effects] <- 
-      paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
-    random <- random[nrow(random):1, c(1,4)]
-    
-    random[nrow(random) + 1, "Effect"] <- "ICC"
-    random[nrow(random), 2] <- var_intercept_effects / var_total
-    
-    #names(random) <- c("Effect", "")
-    random
-  }
+  # random effect
+  random <- model_summary$varcor |> as.data.frame()
+  names(random)[1] <- "Effect"
+  n_effects <- nrow(random) - 1 
+  var_effects <- sum(random$vcov[1:n_effects])
+  var_intercept_effects <- 
+    sum(random$vcov[which(random$var1 == "(Intercept)")])
+  var_total <- sum(random$vcov)
+  random$Partial_explained <- NA
+  random$Partial_explained[1:n_effects] <- 
+    random$vcov[1:n_effects] /  var_effects
+  random$Total_explained <- NA
+  random$Total_explained <- random$vcov /  var_total
+  random$Effect[1:n_effects] <- 
+    paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
+  random <- random[nrow(random):1, c(1,4)]
   
-  
-  random <- get_random(model_summary)
+  random[nrow(random) + 1, "Effect"] <- "ICC"
+  random[nrow(random), 2] <- var_intercept_effects / var_total
 
   for(j in 1:nrow(random)) {
-    if (is.null(out$add_param[[random[j ,1]]]))
-      out$add_param[[random[j ,1]]] <- rep(NA, length(random))
     out$add_param[[random[j ,1]]] <- random[j ,2]
   }
   
-  id <- which(!names(out$add_param) %in% c("Residual", "ICC"))
-  new <- c(names(out$add_param)[id], "Residual", "ICC")
-  out$add_param <- out$add_param[new]
-  
-  out$add_param$N <- length(model@resp$y)
+  out$add_param$Observations <- length(model@resp$y)
   out
 }
 
