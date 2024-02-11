@@ -3,12 +3,10 @@
 #' lm(mpg ~ am + disp + hp, data = mtcars) |> 
 #'   nice_regression_table()
 #' nice_regression_table(
-#'   wmisc:::model1, wmisc:::model2,
+#'   wmisc:::model1, wmisc:::model2, 
 #'   rename_labels = list(
-#'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
-#'     "ConditionTraining" = "Training"),
-#'   rename_cols = list("Estimate" = "b", "SE" = "se"),
-#'   labels_models = c("Only pretest", "Pre- and posttest") 
+#'     "EffectTrend" = "Trend", "EffectSlope" = "Slope"), 
+#'   rename_cols = list("Estimate" = "b", "SE" = "se")
 #' )
 #' @export
 nice_regression_table <- function(
@@ -22,18 +20,17 @@ nice_regression_table <- function(
   
   models <- list(...)
   
-  #class(models) <- c(class(models[[1]]), "list")
-  models_params <- lapply(models, extract_model_param)
+  class(models) <- c(class(models[[1]]), "list")
+  models_params <- extract_model_param(models)
   
   n_models <- length(models)
   
-  out <- lapply(models_params, \(x) x$estimates$fixed)
+  out <- models_params$estimates$fixed
   n_param <- ncol(out[[1]])
 
-  p_label <- models_params[[1]]$estimates$p_label
-  
   out <- lapply(out, \(x) {
-    x[[p_label]] <- nice_p(x[[p_label]], stars = TRUE)
+    x[[models_params$estimates$p_label]] <- 
+      nice_p(x[[models_params$estimates$p_label]], stars = TRUE)
     x
   })
 
@@ -64,7 +61,6 @@ nice_regression_table <- function(
     )
     names(out) <- change_by_list(names(out), rn)
   }
-  
   names(out) <- change_by_list(names(out), rename_cols)
   names(out) <- make.unique(names(out))
   
@@ -85,27 +81,9 @@ nice_regression_table <- function(
     out
   }
 
-  all_params <- lapply(models_params, \(x) x$add_param)
-  
-  new_params <- lapply(all_params, \(x) names(x)) |> 
-    unlist() |> 
-    unique() |> 
-    sapply(\(x) rep(NA, n_models), simplify = FALSE)
-
-  for(i in seq_along(all_params)) {
-    names_params <- names(all_params[[i]])
-    for(j in 1:length(names_params)) {
-      new_params[[names_params[j]]][i] <- all_params[[i]][[names_params[j]]]
-    }
-  }
-  
-  names_params <- names(new_params)
-  to_end <- names_params[which(names_params %in% c("Residual", "ICC", "N"))]
-  to_front <- names_params[!names_params %in% to_end]
-  new_params <- new_params[c(to_front, to_end)]
-  
-  for(i in seq_along(new_params)) {
-    out <- add_param(new_params[[i]], names(new_params)[i])
+ 
+  for(i in seq_along(models_params$add_param)) {
+    out <- add_param(models_params$add_param[[i]], names(models_params$add_param)[i])
   }
 
   # round and rename cols and predictor labels ----
@@ -116,23 +94,15 @@ nice_regression_table <- function(
   
   auto_labels <- c(unlist(rename_labels), models_params$auto_labels)
   
-  for(i in seq_along(auto_labels)) 
-    out[[1]] <- gsub(names(auto_labels)[i], auto_labels[i],  out[[1]])
-  
-  #out[[1]] <- change_by_list(out[[1]], auto_labels)
+  out[[1]] <- change_by_list(out[[1]], auto_labels)
   
   # spanner ----
   
   spanner <- 2 + (0:(n_models - 1)) * n_param
   spanner <- lapply(spanner, \(x) x:(x + n_param - 1))
 
-  
-  
   if (is.null(labels_models)) {
-    labels_models <- change_by_list(
-      lapply(models_params, \(x) x$labels_models) |> unlist(), 
-      auto_labels
-    )
+    labels_models <- change_by_list(models_params$labels_models, auto_labels)
     labels_models <- make.unique(labels_models, sep = " ")
   }
 
@@ -157,32 +127,38 @@ nice_regression_table <- function(
   
 }
 
-#' @export
-extract_model_param <- function (model, ...) {
-  UseMethod("extract_model_param", model)
+
+extract_model_param <- function (x, ...) {
+  UseMethod("extract_model_param", x)
 }
 
-#' @export
-extract_model_param.lm <- function(model) {
+extract_model_param.lm <- function(models) {
   
-  model_summary <- summary(model)
+  models_summary <- lapply(models, summary)
   
   out <- list()
   
-  out$auto_labels <- get_labels(model$model)
-  out$labels_models <- model$terms[[2]] |> as.character()
+  out$auto_labels <- lapply(models, \(x) get_labels(x$model)) |> unlist()
+  out$labels_models <-
+    lapply(models, \(x) x$terms[[2]] |> as.character()) |> 
+    unlist()
   
-  out$add_param$N <- nrow(model$model)
-  out$add_param[["R\u00b2"]] <- model_summary$r.squared
-  out$add_param[["R\u00b2 adjusted"]] <- model_summary$adj.r.squared
+  out$add_param$N <- lapply(models, \(x) nrow(x$model)) |> unlist()
+  out$add_param[["R\u00b2"]] <- 
+    lapply(models_summary, \(x) x$r.squared) |> unlist()
+  out$add_param[["R\u00b2 adjusted"]] <- 
+    lapply(models_summary, \(x) x$adj.r.squared) |> unlist()
+
   
   get_coef_table <- function(x) {
     out <- as.data.frame(coef(x))
     out
   }
   
-  out$estimates$fixed <- get_coef_table(model_summary)
-  out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+  out$estimates$fixed <- lapply(models_summary, \(x) get_coef_table(x))
+  out$estimates$p_label <- names(out$estimates$fixed[[1]])[ncol(out$estimates$fixed[[1]])]
+  out$estimates$random <- NULL
+
   out
 }
 
@@ -209,23 +185,23 @@ extract_model_param.lme <- function(models) {
   out
 }
 
-#' @export
-extract_model_param.lmerModLmerTest <- function(model, ...) {
-  tmp <- c(...)
-  model_summary <- summary(model)
+extract_model_param.lmerModLmerTest <- function(models) {
+  models_summary <- lapply(models, summary)
   out <- list()
 
-  out$auto_labels <- get_labels(model@frame)
+  out$auto_labels <- lapply(models, \(x) get_labels(x@frame)) |> unlist()
   
-  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$labels_models <- 
+    lapply(models, \(x) x@call$formula[[2]] |> as.character()) |> 
+    unlist()
   
   get_coef_table <- function(x) {
     out <- as.data.frame(coef(x))
     out
   }
-  out$estimates$fixed <- get_coef_table(model_summary)
+  out$estimates$fixed <- lapply(models_summary, \(x) get_coef_table(x))
   out$estimates$p_label <- 
-    names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+    names(out$estimates$fixed[[1]])[ncol(out$estimates$fixed[[1]])]
   
   get_random <- function(x) {
     random <- x$varcor |> as.data.frame()
@@ -252,20 +228,25 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
     random
   }
   
-  
-  random <- get_random(model_summary)
+  random <- lapply(models_summary, get_random)
 
-  for(j in 1:nrow(random)) {
-    if (is.null(out$add_param[[random[j ,1]]]))
-      out$add_param[[random[j ,1]]] <- rep(NA, length(random))
-    out$add_param[[random[j ,1]]] <- random[j ,2]
+  for(i in 1:length(random)) {
+    for(j in 1:nrow(random[[i]])) {
+      if (is.null(out$add_param[[random[[i]][j ,1]]]))
+        out$add_param[[random[[i]][j ,1]]] <- rep(NA, length(random))
+      out$add_param[[random[[i]][j ,1]]][i] <- random[[i]][j ,2]
+    }
   }
   
   id <- which(!names(out$add_param) %in% c("Residual", "ICC"))
   new <- c(names(out$add_param)[id], "Residual", "ICC")
   out$add_param <- out$add_param[new]
   
-  out$add_param$N <- length(model@resp$y)
+  
+  out$add_param$N <- lapply(models, \(x) length(x@resp$y)) |> unlist()
+  
   out
 }
+
+
 

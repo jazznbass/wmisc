@@ -20,9 +20,11 @@ Create a nice table from one or more regression models
 lm(mpg ~ am + disp + hp, data = mtcars) |> 
   nice_regression_table()
 nice_regression_table(
-  wmisc:::model1, wmisc:::model2, 
+  wmisc:::model1, wmisc:::model2,
   rename_labels = list(
-    "EffectTrend" = "Trend", "EffectSlope" = "Slope"), 
-  rename_cols = list("Estimate" = "b", "SE" = "se")
+    "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
+    "ConditionTraining" = "Training"),
+  rename_cols = list("Estimate" = "b", "SE" = "se"),
+  labels_models = c("Only pretest", "Pre- and posttest") 
 )
 }
