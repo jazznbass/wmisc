@@ -23,8 +23,8 @@ nice_regression_table(
   wmisc:::model1, wmisc:::model2,
   rename_labels = list(
     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
-    "ConditionTraining" = "Training"),
-  rename_cols = list("Estimate" = "b", "SE" = "se"),
+    "ConditionTraining" = "Training", "id_subject" = "Subject"),
+  rename_cols = list("Estimate" = "B", "SE" = "se"),
   labels_models = c("Only pretest", "Pre- and posttest") 
 )
 }

@@ -6,8 +6,8 @@
 #'   wmisc:::model1, wmisc:::model2,
 #'   rename_labels = list(
 #'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
-#'     "ConditionTraining" = "Training"),
-#'   rename_cols = list("Estimate" = "b", "SE" = "se"),
+#'     "ConditionTraining" = "Training", "id_subject" = "Subject"),
+#'   rename_cols = list("Estimate" = "B", "SE" = "se"),
 #'   labels_models = c("Only pretest", "Pre- and posttest") 
 #' )
 #' @export
@@ -186,26 +186,23 @@ extract_model_param.lm <- function(model) {
   out
 }
 
-extract_model_param.lme <- function(models) {
+extract_model_param.lme <- function(model) {
   
-  models_summary <- lapply(models, summary)
+  model_summary <- summary(model)
   
   out <- list()
-  out$add_param$N <- lapply(models, \(x) nrow(x$data)) |> unlist()
-  out$auto_labels <- lapply(models, \(x) get_labels(x$model)) |> unlist()
-  out$labels_models <-
-    lapply(models, \(x) x$terms[[2]] |> as.character()) |> 
-    unlist()
+  out$add_param$N <- nrow(model$data)
+  out$auto_labels <- get_labels(model$model)
+  out$labels_models <- model$terms[[2]] |> as.character()
   
   get_coef_table <- function(x) {
     out <- as.data.frame(coef(x))
     out
   }
   
-  out$estimates$fixed <- lapply(models_summary, \(x) get_coef_table(x))
-  out$estimates$p_label <- names(out$estimates$fixed[[1]])[ncol(out$estimates$fixed[[1]])]
-  out$estimates$random <- NULL
-  
+  out$estimates$fixed <- get_coef_table(model_summary)
+  out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+
   out
 }
 
