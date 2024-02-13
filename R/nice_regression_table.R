@@ -110,11 +110,13 @@ nice_regression_table <- function(
   
   ## sort output params
   names_params <- names(new_params)
-  
+  names_params[startsWith(names_params, "n ")]
+
   vars_end <- c(
-     "Residual", "ICC", 
+    "Residual", "ICC", 
+    names_params[startsWith(names_params, "N ")],
     "R\u00b2 Conditional", "R\u00b2 Marginal",
-    "N", "Observations"
+    "Observations"
   )
   id <- sapply(vars_end, \(x) which(names_params %in% x)) |> as.numeric()
   id <- id[!is.na(id)]    
@@ -219,10 +221,18 @@ extract_model_param.lme <- function(model) {
   
   out$add_param$Residual <- model$sigma^2
   out$add_param$ICC <- sum(random[[2]]) / (sum(random[[2]]) + model$sigma^2)
-  r_squared <- performance::r2_nakagawa(model) 
-  out$add_param$"R\u00b2 Conditional" <-  r_squared[1]
-  out$add_param$"R\u00b2 Marginal" <-  r_squared[2]
-  out$add_param$N <- model$dims$ngrps[1:model$dims$Q]
+  
+  performance <- performance::model_performance(model)
+  out$add_param$ICC <- performance$ICC
+  out$add_param$"R\u00b2 Conditional" <-  performance$"R2_conditional"
+  out$add_param$"R\u00b2 Marginal" <-  performance$"R2_marginal"
+  
+  random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
+  n_random <- lapply(random_vars, \(x) model$data[[x]] |> unique() |> length()) |> unlist()
+  for(i in seq_along(n_random)) {
+    out$add_param[[paste0("N ", random_vars[i])]] <- n_random[i]
+  }
+  #out$add_param$N <- model$dims$ngrps[1:model$dims$Q]
   out$add_param$Observations <- model$dims$N
   
   out
@@ -273,7 +283,7 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
   n_random <- lapply(random_vars, \(x) model@frame[[x]] |> unique() |> length()) |> unlist()
   for(i in seq_along(n_random)) {
-    out$add_param[[paste0("n ", random_vars[i])]] <- n_random[i]
+    out$add_param[[paste0("N ", random_vars[i])]] <- n_random[i]
   }
   
   out$add_param$Observations <- length(model@resp$y)
@@ -331,7 +341,7 @@ extract_model_param.glmerMod <- function(model) {
   random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
   n_random <- lapply(random_vars, \(x) model@frame[[x]] |> unique() |> length()) |> unlist()
   for(i in seq_along(n_random)) {
-    out$add_param[[paste0("n ", random_vars[i])]] <- n_random[i]
+    out$add_param[[paste0("N ", random_vars[i])]] <- n_random[i]
   }
   
   out
