@@ -29,6 +29,9 @@ nice_regression_table <- function(
   models <- list(...)
   
   #class(models) <- c(class(models[[1]]), "list")
+  
+  
+  
   models_params <- lapply(models, extract_model_param)
   
   n_models <- length(models)
@@ -105,10 +108,17 @@ nice_regression_table <- function(
     }
   }
   
+  ## sort output params
   names_params <- names(new_params)
-  to_end <- names_params[which(names_params %in% c("Residual", "ICC", "N", "Observations"))]
-  to_front <- names_params[!names_params %in% to_end]
-  new_params <- new_params[c(to_front, to_end)]
+  
+  vars_end <- c(
+     "Residual", "ICC", 
+    "R\u00b2 Conditional", "R\u00b2 Marginal",
+    "N", "Observations"
+  )
+  id <- sapply(vars_end, \(x) which(names_params %in% x)) |> as.numeric()
+  id <- id[!is.na(id)]    
+  new_params <- new_params[c(names_params[-id], names_params[id])]
   
   for(i in seq_along(new_params)) {
     out <- add_param(new_params[[i]], names(new_params)[i])
@@ -209,7 +219,9 @@ extract_model_param.lme <- function(model) {
   
   out$add_param$Residual <- model$sigma^2
   out$add_param$ICC <- sum(random[[2]]) / (sum(random[[2]]) + model$sigma^2)
-  
+  r_squared <- performance::r2_nakagawa(model) 
+  out$add_param$"R\u00b2 Conditional" <-  r_squared[1]
+  out$add_param$"R\u00b2 Marginal" <-  r_squared[2]
   out$add_param$N <- model$dims$ngrps[1:model$dims$Q]
   out$add_param$Observations <- model$dims$N
   
@@ -245,14 +257,89 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
     paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
   random <- random[nrow(random):1, c(1,4)]
   
-  random[nrow(random) + 1, "Effect"] <- "ICC"
-  random[nrow(random), 2] <- var_intercept_effects / var_total
+  #random[nrow(random) + 1, "Effect"] <- "ICC"
+  #random[nrow(random), 2] <- var_intercept_effects / var_total
 
   for(j in 1:nrow(random)) {
     out$add_param[[random[j ,1]]] <- random[j ,2]
   }
   
+  performance <- performance::model_performance(model)
+  
+  out$add_param$ICC <- performance$ICC
+  out$add_param$"R\u00b2 Conditional" <-  performance$"R2_conditional"
+  out$add_param$"R\u00b2 Marginal" <-  performance$"R2_marginal"
+
+  random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
+  n_random <- lapply(random_vars, \(x) model@frame[[x]] |> unique() |> length()) |> unlist()
+  for(i in seq_along(n_random)) {
+    out$add_param[[paste0("n ", random_vars[i])]] <- n_random[i]
+  }
+  
   out$add_param$Observations <- length(model@resp$y)
+  
+  
   out
+}
+
+#' @export
+extract_model_param.glmerMod <- function(model) {
+  model_summary <- summary(model)
+  out <- list()
+  
+  out$auto_labels <- get_labels(model@frame)
+  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$estimates$fixed <- as.data.frame(coef(model_summary))
+  out$estimates$p_label <- 
+    names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+  
+  # random effect
+  random <- model_summary$varcor |> as.data.frame()
+  names(random)[1] <- "Effect"
+  n_effects <- nrow(random) 
+  var_effects <- sum(random$vcov[1:n_effects])
+  var_intercept_effects <- 
+    sum(random$vcov[which(random$var1 == "(Intercept)")])
+  #var_total <- sum(random$vcov)
+  #random$Partial_explained <- NA
+  #random$Partial_explained[1:n_effects] <- 
+  #  random$vcov[1:n_effects] /  var_effects
+  #random$Total_explained <- NA
+  #random$Total_explained <- random$vcov /  var_total
+  random$Effect[1:n_effects] <- 
+    paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
+  random <- random[nrow(random):1, c(1,4)]
+  
+  #random[nrow(random) + 1, "Effect"] <- "ICC"
+  #random[nrow(random), 2] <- var_intercept_effects / var_total
+  
+  for(j in 1:nrow(random)) {
+    out$add_param[[random[j ,1]]] <- random[j ,2]
+  }
+  
+  #out$add_param$ICC <- var_effects / (var_effects + pi*pi/3)
+  
+  out$add_param$Residual <- pi*pi/3
+  out$add_param$Observations <- length(model@resp$y)
+  
+  performance <- performance::model_performance(model)
+  
+  out$add_param$ICC <- performance$ICC
+  out$add_param$"R\u00b2 Conditional" <-  performance$"R2_conditional"
+  out$add_param$"R\u00b2 Marginal" <-  performance$"R2_marginal"
+
+  random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
+  n_random <- lapply(random_vars, \(x) model@frame[[x]] |> unique() |> length()) |> unlist()
+  for(i in seq_along(n_random)) {
+    out$add_param[[paste0("n ", random_vars[i])]] <- n_random[i]
+  }
+  
+  out
+}
+
+#' @export
+extract_model_param.lmerMod <- function(model) {
+  message("Converted lmerMod object to lmerModLmerTest.")
+  extract_model_param(lmerTest::as_lmerModLmerTest(model))
 }
 

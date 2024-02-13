@@ -2,6 +2,7 @@
 
 ## New Functions
 
+- `nice_regression_table()`: Provides html and word tables for one or multiple `lm`, `lme`, `lmerTest`, or `glmer` objects.
 - `round_numeric()`: This function rounds numeric columns in a data frame to a specified number of digits.
 - `logit2prob()`/ `prob2logit()`: Convert Logit to Probability and vice versa
 - `add_label()`: Adds haven labels. With a List option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
