@@ -19,11 +19,13 @@
 #' @export
 nice_regression_table <- function(
     ..., 
-    digits = 2, 
+    round = 2, 
     labels_models = NULL,
     rename_labels = list(),
     rename_cols = list(),
-    auto_col_names = TRUE
+    auto_col_names = TRUE,
+    file = NULL,
+    or = FALSE
 ) {
   
   models <- list(...)
@@ -32,7 +34,7 @@ nice_regression_table <- function(
   
   
   
-  models_params <- lapply(models, extract_model_param)
+  models_params <- lapply(models, \(x) extract_model_param(x, or = or))
   
   n_models <- length(models)
   
@@ -69,7 +71,9 @@ nice_regression_table <- function(
       "Std.Error" = labels$se,
       "Std. Error" = labels$se,
       "Pr(>|t|)" = labels$p,
-      "t-value" = "t"
+      "Pr(>|z|)" = labels$p,
+      "z-value" = "z",
+      "z value" = "z"
     )
     names(out) <- change_by_list(names(out), rn)
   }
@@ -128,7 +132,7 @@ nice_regression_table <- function(
 
   # round and rename cols and predictor labels ----
   
-  out <- round_numeric(out, digit = digits)
+  out <- round_numeric(out, digit = round)
   
   names(out)[1] <- labels$predictor
   
@@ -163,11 +167,11 @@ nice_regression_table <- function(
     cols_label = cols_label,
     spanner = spanner,
     row_group = row_group,
+    row_group_order = c(NA, "Model"),
     label_na = "",
     title = "Regression model"
   )
-  nice_table(out) |> 
-    gt::row_group_order(groups = c(NA, "Model"))
+  nice_table(out, file = file) 
   
 }
 
@@ -177,7 +181,7 @@ extract_model_param <- function (model, ...) {
 }
 
 #' @export
-extract_model_param.lm <- function(model) {
+extract_model_param.lm <- function(model, ...) {
   
   model_summary <- summary(model)
   
@@ -196,7 +200,7 @@ extract_model_param.lm <- function(model) {
 }
 
 #' @export
-extract_model_param.lme <- function(model) {
+extract_model_param.lme <- function(model, ...) {
   
   model_summary <- summary(model)
   
@@ -293,13 +297,19 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
 }
 
 #' @export
-extract_model_param.glmerMod <- function(model) {
+extract_model_param.glmerMod <- function(model, or = FALSE) {
   model_summary <- summary(model)
   out <- list()
   
   out$auto_labels <- get_labels(model@frame)
   out$labels_models <- model@call$formula[[2]] |> as.character() 
   out$estimates$fixed <- as.data.frame(coef(model_summary))
+ 
+  if (or) {
+    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
+    #out$estimates$fixed[[2]] <- exp(out$estimates$fixed[[2]])
+  }  
+  
   out$estimates$p_label <- 
     names(out$estimates$fixed)[ncol(out$estimates$fixed)]
   
@@ -348,7 +358,7 @@ extract_model_param.glmerMod <- function(model) {
 }
 
 #' @export
-extract_model_param.lmerMod <- function(model) {
+extract_model_param.lmerMod <- function(model, ...) {
   message("Converted lmerMod object to lmerModLmerTest.")
   extract_model_param(lmerTest::as_lmerModLmerTest(model))
 }

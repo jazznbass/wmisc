@@ -19,7 +19,8 @@
 #' @seealso \code{\link{round}}
 #'
 #' @export
-round_numeric <- function(x, digits = 0) {
+round_numeric <- function(x, digits) {
+  if (is.null(digits)) return(x)
   id <- lapply(x, \(.) is.numeric(.)) |> unlist() |> which()
   x[, id] <- round(x[, id], digits)
   x

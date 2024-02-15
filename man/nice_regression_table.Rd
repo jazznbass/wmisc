@@ -6,11 +6,13 @@
 \usage{
 nice_regression_table(
   ...,
-  digits = 2,
+  round = 2,
   labels_models = NULL,
   rename_labels = list(),
   rename_cols = list(),
-  auto_col_names = TRUE
+  auto_col_names = TRUE,
+  file = NULL,
+  or = FALSE
 )
 }
 \description{

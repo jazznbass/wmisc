@@ -10,6 +10,8 @@
 #'   the table is produced.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
+#' @param row_group List with information on grouping rows `row_group = list("Start" = 1:2, "That is the second" = 3:5)`
+#' @param row_group_order List with information on grouping order.
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
 #' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
@@ -39,6 +41,7 @@ nice_table <- function(x,
                        footnote = NULL, 
                        spanner = header,
                        row_group = NULL,
+                       row_group_order = NULL,
                        header = NULL,
                        pack = NULL,
                        rownames = FALSE,
@@ -70,6 +73,8 @@ nice_table <- function(x,
       footnote <- args$note
     if (!is.null(args$label_na) && is.null(label_na)) 
       label_na <- args$label_na
+    if (!is.null(args$row_group_order) && is.null(row_group_order)) 
+      row_group_order <- args$row_group_order
   }
   
   if (!is.null(pack)) row_group <- pack
@@ -86,7 +91,7 @@ nice_table <- function(x,
     footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
   }
   
-  if (!is.null(round)) x <- round_numeric(x, round)
+  x <- round_numeric(x, round)
   
   if (FALSE) {
     new_cols_label <- lapply(x, \(x) attr(x, "label")) 
@@ -139,6 +144,11 @@ nice_table <- function(x,
           locations = gt::cells_row_groups(groups = names(row_group)[i])
         )
     }
+    
+    if (!is.null(row_group)) {
+      out <- gt::row_group_order(out, groups = row_group_order)
+    }
+    
     if (!is.null(spanner)) {
       for(i in seq_along(spanner)) {
         out <- gt::tab_spanner(

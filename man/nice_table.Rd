@@ -10,6 +10,7 @@ nice_table(
   footnote = NULL,
   spanner = header,
   row_group = NULL,
+  row_group_order = NULL,
   header = NULL,
   pack = NULL,
   rownames = FALSE,
@@ -31,6 +32,10 @@ nice_table(
 \item{title}{Title string.}
 
 \item{footnote}{Add footnote}
+
+\item{row_group}{List with information on grouping rows `row_group = list("Start" = 1:2, "That is the second" = 3:5)`}
+
+\item{row_group_order}{List with information on grouping order.}
 
 \item{file}{(works only when `engine = "gt"`) If set, an additional file with
 the table is produced.}

@@ -4,7 +4,7 @@
 \alias{round_numeric}
 \title{This function rounds numeric columns in a data frame to a specified number of digits.}
 \usage{
-round_numeric(x, digits = 0)
+round_numeric(x, digits)
 }
 \arguments{
 \item{x}{A data frame.}
