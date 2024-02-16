@@ -1,4 +1,6 @@
 #' Create a nice table from one or more regression models
+#' 
+#' @param remove_cols Either column number or column names to be removed. 
 #' @examples
 #' lm(mpg ~ am + disp + hp, data = mtcars) |> 
 #'   nice_regression_table()
@@ -23,6 +25,7 @@ nice_regression_table <- function(
     labels_models = NULL,
     rename_labels = list(),
     rename_cols = list(),
+    remove_cols = NULL,
     auto_col_names = TRUE,
     file = NULL,
     or = FALSE
@@ -32,14 +35,11 @@ nice_regression_table <- function(
   
   #class(models) <- c(class(models[[1]]), "list")
   
-  
-  
   models_params <- lapply(models, \(x) extract_model_param(x, or = or))
   
   n_models <- length(models)
   
   out <- lapply(models_params, \(x) x$estimates$fixed)
-  n_param <- ncol(out[[1]])
 
   p_label <- models_params[[1]]$estimates$p_label
   
@@ -48,6 +48,18 @@ nice_regression_table <- function(
     x
   })
 
+  # remove cols ----
+  
+  if (!is.null(remove_cols)) {
+    remove_cols <- unlist(remove_cols)
+    if (is.character(remove_cols))
+      remove_cols <- which(names(out[[1]]) %in% remove_cols)
+    out <- lapply(out, \(x) {
+      x[, -remove_cols]
+    })
+  }
+  
+  n_param <- ncol(out[[1]])
   
   # join tables -----
   
@@ -349,7 +361,10 @@ extract_model_param.glmerMod <- function(model, or = FALSE) {
   out$add_param$"R\u00b2 Marginal" <-  performance$"R2_marginal"
 
   random_vars <- insight::find_random(model, split_nested = TRUE, flatten = TRUE)
-  n_random <- lapply(random_vars, \(x) model@frame[[x]] |> unique() |> length()) |> unlist()
+  n_random <- lapply(
+    random_vars, 
+    \(x) model@frame[[x]] |> unique() |> length()
+  ) |> unlist()
   for(i in seq_along(n_random)) {
     out$add_param[[paste0("N ", random_vars[i])]] <- n_random[i]
   }

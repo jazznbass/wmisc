@@ -10,10 +10,14 @@ nice_regression_table(
   labels_models = NULL,
   rename_labels = list(),
   rename_cols = list(),
+  remove_cols = NULL,
   auto_col_names = TRUE,
   file = NULL,
   or = FALSE
 )
+}
+\arguments{
+\item{remove_cols}{Either column number or column names to be removed.}
 }
 \description{
 Create a nice table from one or more regression models
