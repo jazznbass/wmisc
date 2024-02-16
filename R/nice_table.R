@@ -145,7 +145,7 @@ nice_table <- function(x,
         )
     }
     
-    if (!is.null(row_group)) {
+    if (!is.null(row_group_order)) {
       out <- gt::row_group_order(out, groups = row_group_order)
     }
     
