@@ -23,12 +23,9 @@
 #' @return A data frame with concise scale indices.
 #' @examples
 #' ## Example needs packages scaledic and purrr installed and active
-#' scales <- scaledic::get_scales(scaledic::ex_itrf,
-#'   Int = scale == "ITRF" & subscale == "Int",
-#'   Ext = scale == "ITRF" & subscale == "Ext"
-#' )
-#' alpha_table(scaledic::ex_itrf, 
-#'   scales = scales, 
+#' nice_alpha_table(
+#'   data = wmisc:::ex_itrf, 
+#'   scales = wmisc:::ex_itrf_scales, 
 #'   difficulty = TRUE, 
 #'   values = list(c(0, 3)), 
 #'   RMSEA = TRUE
@@ -101,7 +98,7 @@ alpha_table <- function(data,
     if (keys_from_weights) {
       if (requireNamespace("scaledic", quietly = TRUE)) {
         keys <- data_scale |>
-          map_dbl(~ as.numeric(scaledic::dic_attr(.x, "weight"))) |>
+          purrr::map_dbl(~ as.numeric(scaledic::dic_attr(.x, "weight"))) |>
           sign()
         check_key <- FALSE
       } else {
@@ -197,10 +194,17 @@ alpha_table <- function(data,
     title = "Item analysis"
   )
   
-  message("Note. values in brackets depict upper and lower bound of ",
-          "confidence intervals or [min,max] intervals.")
+  #message("Note. values in brackets depict upper and lower bound of ",
+  #        "confidence intervals or [min,max] intervals.")
   df
 }
+
+#' @export
+#' @rdname alpha_table
+nice_alpha_table <- function(...) {
+  alpha_table(...) |> nice_table()
+}
+
 
 .alpha_CI <- function(alpha, n, items, ci) {
   f <- qf(c(1 - (1 - ci) / 2, (1 - ci) / 2), n - 1, (n - 1) * (items - 1))

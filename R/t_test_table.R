@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' t_test_table(
+#' nice_t_test_table(
 #'   data = mtcars, 
 #'   iv = "am", 
 #'   dv = c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "gear", "carb")
@@ -34,14 +34,14 @@
 #'   iv = factor(c(rep("Regular", 85), rep("Special", 100), rep("Restricted", 100)))
 #' )
 #' 
-#' t_test_table(
+#' nice_t_test_table(
 #'   c("a", "b"), "iv", 
 #'   data = df,
 #'   conditions = c("Restricted","Special"), 
 #'   labels = c("Motivation", "Achievement")
 #' )
 
-t_test_table <- function(dv, 
+nice_t_test_table <- function(dv, 
                          iv, 
                          data, 
                          method = "cohen",
@@ -68,7 +68,7 @@ t_test_table <- function(dv,
     iv <- data[[iv]]
   }
   
-  if (is.null(conditions)) conditions <- levels(factor(iv))[order]
+  if (is.null(conditions)) conditions <- levels(factor(iv))
   
   dv <- dv[iv %in% conditions, , drop = FALSE]
   iv <- iv[iv %in% conditions]
@@ -193,3 +193,9 @@ t_test_table <- function(dv,
   
   out
 }
+
+#' @export
+#' @rdname nice_t_test_table
+t_test_table <- function(...) nice_t_test_table(...)
+
+  

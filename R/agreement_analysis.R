@@ -15,6 +15,24 @@
 #' @param n_sim Number of simulations for the agreement analyses
 #'
 #' @return A Data-frame
+#' 
+#' @examples
+#' 
+#' vars <- c("Norm_Pop_academic", "Norm_Pop_conform", "Norm_Pop_sporty", 
+#'   "Norm_Pop_cool_clothes", "Norm_Pop_helpful", "Norm_Unpop_academic", 
+#'   "Norm_Unpop_nonconform", "Norm_Unpop_sporty", "Norm_Unpop_cool_clothes", 
+#'   "Norm_Unpop_language", "Norm_LM_academic", "Norm_LM_conform", 
+#'   "Norm_LM_sporty", "Norm_LM_cool_clothes", "Norm_LM_helpful", 
+#'   "Norm_LL_academic", "Norm_LL_nonconform", "Norm_LL_sporty", "Norm_LL_cool_clothes", 
+#'   "Norm_LL_language", "Unpop_in", "Pop_in", "LL_in", "LM_in", "Unpop_out", 
+#'   "Pop_out", "LL_out", "LM_out")
+#'   
+#' nice_agreement_table(
+#'     data = wmisc:::ex_agreement, 
+#'     vars = vars, grouping = "id_class_teacher", 
+#'     rv = 4, 
+#'     crit = 0.6, 
+#'     n_sim = 100)
 #' @export
 agreement_analysis <- function(data, 
                                vars = names(data), 
@@ -29,69 +47,69 @@ agreement_analysis <- function(data,
   if (missing(label)) label <- names(data[vars])
 
   if (identical(label, "haven")) {
-    label <- map2_chr(
-      data[vars], 
-      names(data[vars]), 
-      function(.x, .y) if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
+    label <- mapply(
+      function(.x, .y) if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y,
+      .x = data[vars], 
+      .y = names(data[vars])
     )    
   }
   
-  r.wg <- c()
-  r.wg_min <- c()
-  r.wg_max <- c()
-  r.wg.95 <- c()
-  r.wg.p <- c() # proportion of rwg > 95% ci
-  r.wg.crit <- c()
+  r_wg <- c()
+  r_wg_min <- c()
+  r_wg_max <- c()
+  r_wg_95 <- c()
+  r_wg_p <- c() # proportion of rwg > 95% ci
+  r_wg_crit <- c()
   icc1 <- c()
   icc2 <- c()
-  p.icc <- c()
-  L.icc <- c()
-  G.rel <- c()
-  G.var <- c()
+  p_icc <- c()
+  L_icc <- c()
+  G_rel <- c()
+  G_var <- c()
   n <- c()
-  n.classes <- c()
+  n_classes <- c()
 
   ranvar <- function(a) (a^2 - 1) / 12 
   # a = Number of response options (Bliese 2013)
 
-  if (class(grouping) == "character") {
-    group.total <- as.factor(data[[grouping]])
+  if (inherits(grouping, "character")) {
+    group_total <- as.factor(data[[grouping]])
   } else {
-    group.total <- as.factor(grouping)
+    group_total <- as.factor(grouping)
   }
 
   for (i in 1:length(vars)) {
     valid <- !is.na(data[[vars[i]]])
     x <- data[[vars[i]]][valid]
-    group <- group.total[valid]
-    #mean.gsize <- round(mean(table(group), na.rm = TRUE))
-    mean.gsize <- 
-      group %>%
-      table() %>%
-      mean(na.rm = TRUE) %>%
+    group <- group_total[valid]
+  
+    mean_gsize <- 
+      group  |> 
+      table()  |> 
+      mean(na.rm = TRUE)  |> 
       round()
     
-    if (mean.gsize == 0) mean.gsize <- 1
+    if (mean_gsize == 0) mean_gsize <- 1
     n[i] <- length(x)
     
     agreement <- multilevel::rwg(x, group, ranvar = ranvar(rv))
-    r.wg[i] <- mean(agreement$rwg, na.rm = TRUE)
-    r.wg_min[i] <- min(agreement$rwg, na.rm = TRUE)
-    r.wg_max[i] <- max(agreement$rwg, na.rm = TRUE)    
-    n.classes[i] <- sum(!is.na(agreement$rwg))
-    r.wg.crit[i] <- mean(agreement$rwg >= crit, na.rm = TRUE)
-    r.wg95 <- multilevel::rwg.sim(
-      gsize = mean.gsize, nresp = rv, nrep = n_sim
+    r_wg[i] <- mean(agreement$rwg, na.rm = TRUE)
+    r_wg_min[i] <- min(agreement$rwg, na.rm = TRUE)
+    r_wg_max[i] <- max(agreement$rwg, na.rm = TRUE)    
+    n_classes[i] <- sum(!is.na(agreement$rwg))
+    r_wg_crit[i] <- mean(agreement$rwg >= crit, na.rm = TRUE)
+    r_wg95 <- multilevel::rwg.sim(
+      gsize = mean_gsize, nresp = rv, nrep = n_sim
     )$rwg.95
  
-    if (length(r.wg95) == 0) {
-      r.wg.95[i] <- NA
+    if (length(r_wg95) == 0) {
+      r_wg_95[i] <- NA
     } else {
-      r.wg.95[i] <- r.wg95
+      r_wg_95[i] <- r_wg95
     }
 
-    r.wg.p[i] <- mean(agreement$rwg > r.wg.95[i], na.rm = TRUE)
-    if (length(r.wg95) == 0) r.wg.p[i] <- NA
+    r_wg_p[i] <- mean(agreement$rwg > r_wg_95[i], na.rm = TRUE)
+    if (length(r_wg95) == 0) r_wg_p[i] <- NA
     
     fit <- aov(x ~ group)
     icc1[i] <- multilevel::ICC1(fit)
@@ -99,40 +117,45 @@ agreement_analysis <- function(data,
     null.model <- lme(x ~ 1, random = ~ 1 | group, method = "ML")
     model.without <- gls(x ~ 1, method = "ML")
     dif <- anova(null.model, model.without)
-    L.icc[i] <- dif$L.Ratio[2]
-    p.icc[i] <- dif$"p-value"[2]
-    G.rel[i] <- mean(multilevel::gmeanrel(null.model)$MeanRel, na.rm = TRUE)
+    L_icc[i] <- dif$L.Ratio[2]
+    p_icc[i] <- dif$"p-value"[2]
+    G_rel[i] <- mean(multilevel::gmeanrel(null.model)$MeanRel, na.rm = TRUE)
     v <- VarCorr(null.model)
-    G.var[i] <- as.numeric(v[[1]][1]) / 
-                (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
+    #G_var[i] <- as.numeric(v[[1]][1]) / 
+    #            (as.numeric(v[[1]][1]) + as.numeric(v[[2]][1]))
   }
   
   out <- tibble(
-    Var = names(data[vars]), 
-    label = label,
+    #Var = names(data[vars]), 
+    Label = label,
     n = n, 
-    "n l2" = n.classes, 
-    "min rwg" = round(r.wg_min, 2),
-    "max rwg" = round(r.wg_max, 2),
-    "mean rwg" = round(r.wg, 2),
-    "rwg >= crit" = paste0(round(r.wg.crit * 100, 1), "%"), 
-    "rwg upper 95% CI" = round(r.wg.95, 2),
-    "Proportion > 95%CI" = round(r.wg.p, 2), 
+    "N l2" = n_classes, 
+    "Min rwg" = round(r_wg_min, 2),
+    "Max rwg" = round(r_wg_max, 2),
+    "Mean rwg" = round(r_wg, 2),
+    "Rwg >= crit" = paste0(round(r_wg_crit * 100, 1), "%"), 
+    "Rwg upper 95% CI" = round(r_wg_95, 2),
+    "Proportion > 95%CI" = round(r_wg_p, 2), 
     ICC = round(icc1, 2),
-    L.icc = round(L.icc, 1), 
-    p.icc = round(p.icc, 3),
+    "L icc" = round(L_icc, 1), 
+    "p icc" = round(p_icc, 3),
     "ICC(2)" = round(icc2, 2), 
-    M.G.Real = round(G.rel, 2), 
-    G.Var = round(G.var, 2)
+    "Group mean reliability" = round(G_rel, 2)#, 
+    #"Group explained variance" = round(G_var, 2)
   )
 
   out <- set_wmisc_attributes(out, title = "Agreement analysis")
   
   if (type == "df") return(out)
   if (type == "html") {
-    out <- nice_table(out)
+    return(nice_table(out))
   }
 
   out
 }
 
+#' @export
+#' @rdname agreement_analysis
+nice_agreement_table <- function(..., type = "html") {
+  agreement_analysis(..., type = type)
+}

@@ -2,6 +2,7 @@
 % Please edit documentation in R/agreement_analysis.R
 \name{agreement_analysis}
 \alias{agreement_analysis}
+\alias{nice_agreement_table}
 \title{Perform agreement analysis}
 \usage{
 agreement_analysis(
@@ -14,6 +15,8 @@ agreement_analysis(
   label,
   n_sim = 10000
 )
+
+nice_agreement_table(..., type = "html")
 }
 \arguments{
 \item{data}{A data-frame}
@@ -39,4 +42,22 @@ This function performs an agreement analysis including intraclass correlation
 coefficients, group-related variance, and related diagnostics for items with
 a nominal or ordinal scale. The function outputs a data.frame or a HTML table
 giving the results.
+}
+\examples{
+
+vars <- c("Norm_Pop_academic", "Norm_Pop_conform", "Norm_Pop_sporty", 
+  "Norm_Pop_cool_clothes", "Norm_Pop_helpful", "Norm_Unpop_academic", 
+  "Norm_Unpop_nonconform", "Norm_Unpop_sporty", "Norm_Unpop_cool_clothes", 
+  "Norm_Unpop_language", "Norm_LM_academic", "Norm_LM_conform", 
+  "Norm_LM_sporty", "Norm_LM_cool_clothes", "Norm_LM_helpful", 
+  "Norm_LL_academic", "Norm_LL_nonconform", "Norm_LL_sporty", "Norm_LL_cool_clothes", 
+  "Norm_LL_language", "Unpop_in", "Pop_in", "LL_in", "LM_in", "Unpop_out", 
+  "Pop_out", "LL_out", "LM_out")
+  
+nice_agreement_table(
+    data = wmisc:::ex_agreement, 
+    vars = vars, grouping = "id_class_teacher", 
+    rv = 4, 
+    crit = 0.6, 
+    n_sim = 100)
 }

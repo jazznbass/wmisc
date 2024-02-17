@@ -2,6 +2,7 @@
 % Please edit documentation in R/alpha_table.R
 \name{alpha_table}
 \alias{alpha_table}
+\alias{nice_alpha_table}
 \title{Table with alpha values}
 \usage{
 alpha_table(
@@ -19,6 +20,8 @@ alpha_table(
   values = NULL,
   fa = TRUE
 )
+
+nice_alpha_table(...)
 }
 \arguments{
 \item{data}{A data Frame}
@@ -60,12 +63,9 @@ Returns a data.frame with item analyses for the provided scales.
 }
 \examples{
 ## Example needs packages scaledic and purrr installed and active
-scales <- scaledic::get_scales(scaledic::ex_itrf,
-  Int = scale == "ITRF" & subscale == "Int",
-  Ext = scale == "ITRF" & subscale == "Ext"
-)
-alpha_table(scaledic::ex_itrf, 
-  scales = scales, 
+nice_alpha_table(
+  data = wmisc:::ex_itrf, 
+  scales = wmisc:::ex_itrf_scales, 
   difficulty = TRUE, 
   values = list(c(0, 3)), 
   RMSEA = TRUE
