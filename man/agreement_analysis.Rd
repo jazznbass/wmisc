@@ -3,7 +3,7 @@
 \name{agreement_analysis}
 \alias{agreement_analysis}
 \alias{nice_agreement_table}
-\title{Perform agreement analysis}
+\title{Perform within agreement analysis}
 \usage{
 agreement_analysis(
   data,
@@ -11,12 +11,14 @@ agreement_analysis(
   grouping,
   rv,
   crit = 0.7,
+  min_group_size = 10,
+  auto_labels = TRUE,
   type = "df",
-  label,
+  labels = NULL,
   n_sim = 10000
 )
 
-nice_agreement_table(..., type = "html")
+nice_agreement_table(...)
 }
 \arguments{
 \item{data}{A data-frame}
@@ -28,9 +30,13 @@ analyzed}
 
 \item{rv}{Number of response options for calculating random variance}
 
-\item{crit}{Critical agreement level}
+\item{crit}{Critical agreement level.}
 
-\item{label}{Character vector with new variable labels}
+\item{min_group_size}{Minimal group size. Smaller groups are excluded.}
+
+\item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
+
+\item{labels}{Character vector with new variable labels.}
 
 \item{n_sim}{Number of simulations for the agreement analyses}
 }
@@ -51,12 +57,12 @@ vars <- c("Norm_Pop_academic", "Norm_Pop_conform", "Norm_Pop_sporty",
   "Norm_Unpop_language", "Norm_LM_academic", "Norm_LM_conform", 
   "Norm_LM_sporty", "Norm_LM_cool_clothes", "Norm_LM_helpful", 
   "Norm_LL_academic", "Norm_LL_nonconform", "Norm_LL_sporty", "Norm_LL_cool_clothes", 
-  "Norm_LL_language", "Unpop_in", "Pop_in", "LL_in", "LM_in", "Unpop_out", 
-  "Pop_out", "LL_out", "LM_out")
+  "Norm_LL_language")
   
 nice_agreement_table(
     data = wmisc:::ex_agreement, 
-    vars = vars, grouping = "id_class_teacher", 
+    vars = vars, 
+    grouping = "id_class_teacher", 
     rv = 4, 
     crit = 0.6, 
     n_sim = 100)
