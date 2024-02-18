@@ -26,6 +26,7 @@
 #' nice_alpha_table(
 #'   data = wmisc:::ex_itrf, 
 #'   scales = wmisc:::ex_itrf_scales, 
+#'   labels = c("Inernalizing", "Externalizing"),
 #'   difficulty = TRUE, 
 #'   values = list(c(0, 3)), 
 #'   RMSEA = TRUE
@@ -46,6 +47,7 @@ alpha_table <- function(data,
                         fa = TRUE) {
   
   
+  on.exit(print_messages())
   
   if (!is.null(keys)) {
     check_key <- FALSE
@@ -53,8 +55,10 @@ alpha_table <- function(data,
   }
   
   if (difficulty && is.null(values)) {
-    stop("Can not calculate item difficulty without min and max scale values.")
+    add_message("Can not calculate item difficulty without min and max scale values.")
+    difficulty <- FALSE
   }
+  
   if (is.null(labels)) labels <- labels(scales)
   df <- data.frame(Scale = labels)
   
@@ -65,7 +69,7 @@ alpha_table <- function(data,
     data_scale <- data[, scales[[i]]]
     .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
     if (length(.id) > 0) {
-      message(
+      add_message(
         "Removed ", length(id), " rows because all items were missing."
       )
       data_scale <- data_scale[-.id, ]
@@ -75,7 +79,7 @@ alpha_table <- function(data,
     
     if (any(.var == 0, na.rm = TRUE)) {
       filter_names <- names(data_scale)[which(.var == 0)]
-      message(
+      add_message(
         "Variable with no variance dropped from analyses: ",
         paste0(filter_names, collapse = ", ")
       )
@@ -86,7 +90,7 @@ alpha_table <- function(data,
     
     if (any(is.na(.var), na.rm = TRUE)) {
       filter_names <- names(data_scale)[which(is.na(.var))]
-      message(
+      add_message(
         "Variable with NA variance dropped from analyses: ",
         paste0(filter_names, collapse = ", ")
       )
@@ -97,30 +101,41 @@ alpha_table <- function(data,
      
     if (keys_from_weights) {
       if (requireNamespace("scaledic", quietly = TRUE)) {
-        keys <- data_scale |>
-          purrr::map_dbl(~ as.numeric(scaledic::dic_attr(.x, "weight"))) |>
+        keys <- lapply(
+          data_scale, 
+          \(.) as.numeric(scaledic::dic_attr(., "weight"))
+        ) |> 
+          unlist() |> 
           sign()
         check_key <- FALSE
       } else {
         keys <- NULL
-        message("Scaledic is not installed, keys can not be extracted automatically.")
+        add_message("Scaledic is not installed, keys can not be extracted automatically.")
       }
     }
-    
+
     if (!is.null(values)) {
       min <- values[[i]][1]
       max <- values[[i]][2]
     }
-    
+
+
     a <- invisible(
-      psych::alpha(data_scale, check.key = check_key, keys = keys, use = "pairwise")
+      psych::alpha(
+        data_scale, 
+        check.key = check_key, 
+        keys = keys, 
+        use = "pairwise"
+      )
     )
     
     if (fa) f <- invisible(psych::fa(data_scale))
     alpha <- a$total$raw_alpha
-    df$"n"[i] <- min(a$item.stats$n, na.rm = TRUE)
+    df$"items"[i] <- a$nvar
+    df$"cases"[i] <- glue("[{min(a$item.stats$n, na.rm = TRUE)}, {max(a$item.stats$n, na.rm = TRUE)}]")
+      
+      #sum(complete.cases(data_scale))#min(a$item.stats$n, na.rm = TRUE)
     
-    df$"n items"[i] <- a$nvar
     
     if (!ci) df$Alpha[i] <- nice_statnum(alpha, 2)
     
@@ -128,7 +143,7 @@ alpha_table <- function(data,
       alpha_ci <- .alpha_CI(
         alpha, nrow(data_scale), length(scales[[i]]), conf_level
       )
-      df$Alpha[i] <- glue(
+      df$Raw[i] <- glue(
         "{nice_statnum(alpha, round)} [{nice_statnum(alpha_ci[1], 2)}, ",
         "{nice_statnum(alpha_ci[2], 2)}]"
       )
@@ -136,14 +151,14 @@ alpha_table <- function(data,
     
     alpha.std <- a$total$std.alpha
     if (!ci) {
-      df$"Std.Alpha"[i] <- nice_statnum(alpha.std, 2)
+      df$"Standardized"[i] <- nice_statnum(alpha.std, 2)
     }
     
     if (ci) {
       alpha_std_ci <- .alpha_CI(
         alpha.std, nrow(data_scale), length(scales[[i]]), conf_level
       )
-      df$"Std.Alpha"[i] <- glue(
+      df$"Standardized"[i] <- glue(
         "{nice_statnum(alpha.std, 2)} [{nice_statnum(alpha_std_ci[1], 2)}, ",
         "{nice_statnum(alpha_std_ci[2], 2)}]"
       )
@@ -190,12 +205,13 @@ alpha_table <- function(data,
   }
   
   df <- set_wmisc_attributes(df, 
-    note = "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals.",
-    title = "Item analysis"
+    note = c(
+      "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals", 
+      "N cases is the min and max number of non-missing cases for the scale items"),
+    title = "Item analysis",
+    spanner = list(N = 2:3, "Alpha [95% CI]" = 4:5)
   )
   
-  #message("Note. values in brackets depict upper and lower bound of ",
-  #        "confidence intervals or [min,max] intervals.")
   df
 }
 
