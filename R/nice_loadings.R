@@ -20,7 +20,8 @@ nice_loadings <- function(x,
                           cut = 0.2,
                           round = 2,
                           title = "Loading matrix",
-                          footnote = NULL){
+                          footnote = NULL,
+                          auto_labels = TRUE){
   
   object <- x
   var_exp <- object$Vaccounted

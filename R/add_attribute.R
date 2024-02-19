@@ -70,9 +70,12 @@ add_label <- function(x, value) {
 #' @param data A dataframe
 #' @return A dataframe wit renamed labels
 #' @export
-rename_from_labels <- function(data) {
+rename_from_labels <- function(data, keep = FALSE) {
   for(i in seq_along(data)) {
-    if (!is.null(attr(data[[i]], "label"))) names(data)[i] <- attr(data[[i]], "label")
+    if (!is.null(attr(data[[i]], "label"))) {
+      if (!keep) names(data)[i] <- attr(data[[i]], "label")
+      if (keep) names(data)[i] <- glue("{names(data)[i]}: {attr(data[[i]], 'label')}") 
+    }
   }
   data
 }

@@ -4,7 +4,7 @@
 \alias{rename_from_labels}
 \title{Renames the variables from a data frame to a label that is provided in the label attribute}
 \usage{
-rename_from_labels(data)
+rename_from_labels(data, keep = FALSE)
 }
 \arguments{
 \item{data}{A dataframe}

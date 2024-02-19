@@ -13,7 +13,8 @@ nice_loadings(
   cut = 0.2,
   round = 2,
   title = "Loading matrix",
-  footnote = NULL
+  footnote = NULL,
+  auto_labels = TRUE
 )
 
 nice_efa(..., file = NULL)
