@@ -74,7 +74,7 @@ significant.}
 \item{file}{If TRUE or a filename is provided, a file is exportet (format is
 defined by file ending eith html or docx).}
 
-\item{...}{Further arguments passed to the [cor.test()] function.}
+\item{...}{Further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
 
 \item{show_discriptives}{If TRUE, mean and sd columns are added.}
 }

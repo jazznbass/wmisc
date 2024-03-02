@@ -15,7 +15,7 @@ split_at_percentile(
 \arguments{
 \item{x}{A vector}
 
-\item{frac}{Fractions to split at (e.g., `c(1/3, 2/3)` will result in three
+\item{frac}{Fractions to split at (e.g., \code{c(1/3, 2/3)} will result in three
 groups and 0.5 will result in a median split)}
 
 \item{labels}{Vector with factor labels.}

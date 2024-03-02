@@ -15,7 +15,7 @@ fill_missing_l2(data, id, vars)
 }
 \value{
 A data frame with added values. It also reports if l2 values
-  conflict.
+conflict.
 }
 \description{
 For cases where you have a long format data set and it contains level 2 data

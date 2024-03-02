@@ -28,12 +28,11 @@ conversion}
 
 \item{sep}{Separator sign}
 
-\item{...}{Further functions for the underlying read.csv. (e.g. `fileEncoding
-= "WINDOWS-1252"`)}
+\item{...}{Further functions for the underlying read.csv. (e.g. \code{fileEncoding = "WINDOWS-1252"})}
 }
 \value{
 Writes xlsx and/or rds files into the source folder for each csv
-  file.
+file.
 }
 \description{
 Convert all csv files in a folder to xlsx and rds files

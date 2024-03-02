@@ -10,7 +10,8 @@
 #'   the table is produced.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
-#' @param row_group List with information on grouping rows `row_group = list("Start" = 1:2, "That is the second" = 3:5)`
+#' @param row_group List with information on grouping rows `row_group =
+#'   list("Start" = 1:2, "That is the second" = 3:5)`
 #' @param row_group_order List with information on grouping order.
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
@@ -22,7 +23,7 @@
 #'
 #' @examples
 #' df <- data.frame(
-#'   x = 1:5, y = rnorm(5, mean = 10, sd = 12), 
+#'   x = 1:5, y = rnorm(5, mean = 10, sd = 12),
 #'   c = letters[5:1], d = sample(letters, 5)
 #' )
 #' nice_table(
@@ -101,25 +102,8 @@ nice_table <- function(x,
   }
   
   
-  if (engine == "extra") {
-    
-    args <- c(
-      list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
-      kable
-    )
-    x <- do.call(knitr::kable, args)
-    out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
-
-    if (!is.null(row_group)) {
-      out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
-    }
-    
-    if (!is.null(spanner)) {
-      out <- kableExtra::add_header_above(out, spanner)
-    }
-    
-    if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
-  }
+  if (engine == "extra") 
+    out <- .nice_table_kable(x, title, row_group, spanner, footnote)
 
   if (engine == "gt") {
     if (!inherits(x, "data.frame")) {
@@ -206,4 +190,26 @@ gt_apa_style <- function(gt_tbl) {
     opt_table_font(font = "times") |> 
     gt::cols_align(align = "center") |> 
     gt::cols_align(align = "left", columns = 1)
+}
+
+.nice_table_kable <- function(x, title, row_group, spanner, footnote) {
+
+    args <- c(
+      list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
+      kable
+    )
+    x <- do.call(knitr::kable, args)
+    out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
+    
+    if (!is.null(row_group)) {
+      out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
+    }
+    
+    if (!is.null(spanner)) {
+      out <- kableExtra::add_header_above(out, spanner)
+    }
+    
+    if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
+    
+    out
 }

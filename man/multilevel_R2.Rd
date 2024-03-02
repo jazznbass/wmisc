@@ -15,11 +15,11 @@ multilevel_R2(model1, model2, n = NULL)
 }
 \value{
 A list with the following components: \item{R2.L1}{The R squared
-  value for level 1.} \item{R2.L2}{The R squared value for level 2.}
-  \item{R2.L1.2}{The combined R squared value for levels 1 and 2.}
-  \item{R2.L2.2}{The adjusted R squared value for levels 1 and 2 (with
-  optional group sizes).} \item{n}{The harmonic mean of the group sizes (if
-  provided).}
+value for level 1.} \item{R2.L2}{The R squared value for level 2.}
+\item{R2.L1.2}{The combined R squared value for levels 1 and 2.}
+\item{R2.L2.2}{The adjusted R squared value for levels 1 and 2 (with
+optional group sizes).} \item{n}{The harmonic mean of the group sizes (if
+provided).}
 }
 \description{
 Calculates the multilevel R squared for two-level models.
@@ -32,5 +32,5 @@ multilevel_R2(model1, model2, table(sleepstudy$Subject))
 }
 \references{
 Snijders, T. A. B., & Bosker, R. J. (1994). Modeled Variance in
-  Two-Level Models. Sociological Methods & Research, 22(3), 342-363.
+Two-Level Models. Sociological Methods & Research, 22(3), 342-363.
 }

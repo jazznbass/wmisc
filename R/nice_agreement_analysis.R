@@ -7,14 +7,14 @@
 #'
 #' @param data A data-frame
 #' @param vars Vector of character strings with names of variables to be
-#'   analyzed
-#' @param grouping Grouping variable. Either as a character string or a vector
-#' @param rv Number of response options for calculating random variance
+#'   analyzed.
+#' @param grouping Grouping variable. Either as a character string or a vector.
+#' @param rv Number of response options for calculating random variance.
 #' @param crit Critical agreement level.
 #' @param min_group_size Minimal group size. Smaller groups are excluded.
 #' @param labels Character vector with new variable labels.
 #' @param auto_labels If TRUE, variable names are taken from a label attribute.
-#' @param n_sim Number of simulations for the agreement analyses
+#' @param n_sim Number of simulations for the agreement analyses.
 #'
 #' @return A Data-frame
 #' 
@@ -41,15 +41,14 @@ agreement_analysis <- function(data,
                                grouping, 
                                rv, 
                                crit = 0.7, 
-                               min_group_size = 10,
+                               min_group_size = NULL,
                                auto_labels = TRUE,
-                               type = "df", 
                                labels = NULL, 
                                n_sim = 10000) {
   
   if (inherits(grouping, "character")) vars <- vars[!vars %in% grouping]
   
-  if (auto_labels) labels <- names(rename_from_labels(data[vars]))
+  if (auto_labels) labels <- get_labels(data[vars])
   if (is.null(labels)) labels <- names(data[vars])
   
   r_wg <- c()
@@ -183,7 +182,16 @@ agreement_analysis <- function(data,
 
 #' @export
 #' @rdname agreement_analysis
-nice_agreement_table <- function(...) {
-  agreement_analysis(...) |> nice_table()
-    
+nice_agreement_table <- function(data, 
+                                 vars = names(data), 
+                                 grouping, 
+                                 rv, 
+                                 crit = 0.7, 
+                                 min_group_size = NULL,
+                                 auto_labels = TRUE,
+                                 labels = NULL, 
+                                 n_sim = 10000) {
+  
+  out <- do.call(agreement_analysis, as.list(environment()))
+  nice_table(out)
 }

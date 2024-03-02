@@ -11,24 +11,33 @@ agreement_analysis(
   grouping,
   rv,
   crit = 0.7,
-  min_group_size = 10,
+  min_group_size = NULL,
   auto_labels = TRUE,
-  type = "df",
   labels = NULL,
   n_sim = 10000
 )
 
-nice_agreement_table(...)
+nice_agreement_table(
+  data,
+  vars = names(data),
+  grouping,
+  rv,
+  crit = 0.7,
+  min_group_size = NULL,
+  auto_labels = TRUE,
+  labels = NULL,
+  n_sim = 10000
+)
 }
 \arguments{
 \item{data}{A data-frame}
 
 \item{vars}{Vector of character strings with names of variables to be
-analyzed}
+analyzed.}
 
-\item{grouping}{Grouping variable. Either as a character string or a vector}
+\item{grouping}{Grouping variable. Either as a character string or a vector.}
 
-\item{rv}{Number of response options for calculating random variance}
+\item{rv}{Number of response options for calculating random variance.}
 
 \item{crit}{Critical agreement level.}
 
@@ -38,7 +47,7 @@ analyzed}
 
 \item{labels}{Character vector with new variable labels.}
 
-\item{n_sim}{Number of simulations for the agreement analyses}
+\item{n_sim}{Number of simulations for the agreement analyses.}
 }
 \value{
 A Data-frame

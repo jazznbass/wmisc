@@ -1,48 +1,10 @@
 #' @export
-get_wmisc_attributes <- function(x) {
-  attr(x, "wmisc")
-}
-
-#' @export
 set_wmisc_attributes <- function(x, ...) {
   args <- attr(x, "wmisc")
   args <- c(args, list(...))
   args <- args[!duplicated(names(args))]
   attr(x, "wmisc") <- args
   x
-}
-
-#' @export
-set_wmisc_attribute <- function(x, attribute, value) {
-  args <- attr(x, "wmisc")
-  args[[attribute]] <- value
-  attr(x, "wmisc") <- args
-  x
-}
-
-#' @export
-get_wmisc_attribute <- function(x, attribute) {
-  attr(x, "wmisc")[[attribute]]
-}
-
-#' @export
-set_title <- function(x, value) {
-  set_wmisc_attribute(x, "title", value)
-}
-
-#' @export
-get_title <- function(x) {
-  get_wmisc_attribute(x, "title")
-}
-
-#' @export
-set_note <- function(x, value) {
-  set_wmisc_attribute(x, "note", value)
-}
-
-#' @export
-get_note <- function(x) {
-  get_wmisc_attribute(x, "note")
 }
 
 #' @export
@@ -66,21 +28,45 @@ add_label <- function(x, value) {
   x
 }
 
-#' Renames the variables from a data frame to a label that is provided in the label attribute
-#' @param data A dataframe
-#' @return A dataframe wit renamed labels
+#' Renames the variables from a data frame to a label that is provided in the
+#' label attribute
+#' @param data A data.frame.
+#' @param keep If TRUE, new names are a combination of var names and label
+#'   names.
+#' @param pattern Pattern for gleu function when `keep = TRUE`.
+#' @return A data.frame with renamed labels or for get_labels a character vector
+#'   with label names.
 #' @export
-rename_from_labels <- function(data, keep = FALSE) {
+rename_from_labels <- function(data, 
+                               keep = FALSE,
+                               pattern = "{old_name}: {label}") {
+  ne <- new.env(parent = globalenv())
   for(i in seq_along(data)) {
     if (!is.null(attr(data[[i]], "label"))) {
       if (!keep) names(data)[i] <- attr(data[[i]], "label")
-      if (keep) names(data)[i] <- glue("{names(data)[i]}: {attr(data[[i]], 'label')}") 
+      if (keep) {
+        
+        ne$label <- attr(data[[i]], 'label')
+        ne$old_name <- names(data)[i]
+        out <- glue::glue(pattern, .envir = ne)
+        names(data)[i] <- glue::glue(pattern, .envir = ne)
+      }
     }
   }
   data
 }
 
 #' @export
-get_labels <- function(data) {
-  lapply(data, \(x) attr(x, "label")) |> unlist()
+#' @rdname rename_from_labels
+get_labels <- function(data,
+                       keep = FALSE,
+                       pattern = "{old_name}: {label}") {
+  out <- lapply(data, \(.) attr(., "label")) |> unlist()
+  if (keep) {
+    ne <- new.env(parent = globalenv())
+    ne$label <- out
+    ne$old_name <- names(out)
+    out <- glue::glue(pattern, .envir = ne)
+  }
+  out
 }

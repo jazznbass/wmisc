@@ -175,7 +175,7 @@ nice_corrmatrix <- function(cr,
     out <- nice_table(
       r,
       file = file
-    ) |> gt::fmt_markdown(columns = 5:ncol(r))
+    ) #|> gt::fmt_markdown(columns = 5:ncol(r))
     return(out)
     
   }

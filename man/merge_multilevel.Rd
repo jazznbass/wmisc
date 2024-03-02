@@ -22,7 +22,7 @@ merge_multilevel(
 \item{id}{String with variable name for matching datasets}
 
 \item{var_agg}{Vector with strings of L1 variables that are aggregated at
-Level2 with the `agg_func` function.}
+Level2 with the \code{agg_func} function.}
 
 \item{suffix_l}{A character vector of suffixes for the merged Level 2 columns
 (default: c('.l1', '.l2'))}

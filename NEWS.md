@@ -1,13 +1,16 @@
 
+# wmisc 0.2.23.999
 
 ## New Functions
 
 - `nice_regression_table()`: Provides html and word tables for one or multiple `lm`, `lme`, `lmerTest`, or `glmer` objects.
 - `round_numeric()`: This function rounds numeric columns in a data frame to a specified number of digits.
-- `logit2prob()`/ `prob2logit()`: Convert Logit to Probability and vice versa
-- `add_label()`: Adds haven labels. With a List option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
+- `logit2prob()`/ `prob2logit()`: Convert Logit to probability and vice versa
+- `add_label()`: Adds haven labels. With a list option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
+- `get_labels()`: Adds haven labels. With a list option: `mtcars <- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))`
 - `nice_loadings()` extract loadings from psych::fa object
 - `nice_efa()` Returns a nice table from an psych::fa object.
+- `nice_agreement_table()` Returns a nice table for agreement_analyses.
 - `flip()`: flip a data.frame or matrix: `flip(mtcars, rownames = TRUE)`
 - `change_values()` recode values: `change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")`
 - `percentage_bar()` creates ggplot percentage bar: `percentage_bar(20, "test")`

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.18.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.23.9000</span>
       </span>
     </div>
 
@@ -57,11 +57,14 @@
 
 
 <dt>...</dt>
-<dd><p>An ellipsis of pairs of values to be replaced. Each pair consists of the original value and the corresponding replacement value.</p></dd>
+<dd><p>An ellipsis of pairs of values to be replaced. Each pair consists
+of the original value and the corresponding replacement value.</p></dd>
 
 
 <dt>.default</dt>
-<dd><p>The default value to be used for elements not specified in the replacement pairs. If not provided, elements not specified will remain unchanged.</p></dd>
+<dd><p>The default value to be used for elements not specified in
+the replacement pairs. If not provided, elements not specified will remain
+unchanged.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -73,17 +76,22 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">change_values</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">2</span> <span class="op">~</span> <span class="st">"two"</span>, <span class="fl">3</span> <span class="op">~</span> <span class="st">"three"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"     "two"   "three"</span>
-<span class="r-in"><span><span class="co"># Output: c(1, "two", "three")</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Retains NAs</span></span></span>
+<span class="r-in"><span><span class="fu">change_values</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="fl">2</span> <span class="op">~</span> <span class="st">"two"</span>, <span class="fl">3</span> <span class="op">~</span> <span class="st">"three"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"     "two"   "three" NA     </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Set a specific default value</span></span></span>
 <span class="r-in"><span><span class="fu">change_values</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">2</span> <span class="op">~</span> <span class="st">"two"</span>, .default <span class="op">=</span> <span class="st">"default"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "default" "two"     "default"</span>
-<span class="r-in"><span><span class="co"># Output: c("default", "two", "default")</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## No error message when no value to convert is found</span></span></span>
 <span class="r-in"><span><span class="fu">change_values</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">4</span> <span class="op">~</span> <span class="st">"four"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2" "3"</span>
-<span class="r-in"><span><span class="co"># Output: c("1", "2", "3")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Recode NAs and implicit conversion from numeric to character</span></span></span>
+<span class="r-in"><span><span class="fu">change_values</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span>, <span class="cn">NA</span> <span class="op">~</span> <span class="st">"This is a missing value"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "This is a missing value" "1"                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "This is a missing value" "2"                      </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

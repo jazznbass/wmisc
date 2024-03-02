@@ -15,9 +15,9 @@ auto_corr(x, lag, alpha = 0.05)
 }
 \value{
 A data frame containing the lag, autocorrelation coefficients (ar),
-  standard errors (se), test statistics (statistic), p-values (p_z and p_t),
-  overall standard errors (se_all), Ljung-Box test statistic (q_lb), and
-  p-value for the Ljung-Box test (p_all).
+standard errors (se), test statistics (statistic), p-values (p_z and p_t),
+overall standard errors (se_all), Ljung-Box test statistic (q_lb), and
+p-value for the Ljung-Box test (p_all).
 }
 \description{
 This function calculates the autocorrelation for a given time series data. It
@@ -40,5 +40,5 @@ https://de.wikipedia.org/wiki/Korrelogramm
 
 http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xegbohtmlnode39.html
 
-https://en.wikipedia.org/wiki/Ljung%E2%80%93Box_test
+https://en.wikipedia.org/wiki/Ljung\%E2\%80\%93Box_test
 }

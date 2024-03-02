@@ -2,16 +2,27 @@
 % Please edit documentation in R/add_attribute.R
 \name{rename_from_labels}
 \alias{rename_from_labels}
-\title{Renames the variables from a data frame to a label that is provided in the label attribute}
+\alias{get_labels}
+\title{Renames the variables from a data frame to a label that is provided in the
+label attribute}
 \usage{
-rename_from_labels(data, keep = FALSE)
+rename_from_labels(data, keep = FALSE, pattern = "{old_name}: {label}")
+
+get_labels(data, keep = FALSE, pattern = "{old_name}: {label}")
 }
 \arguments{
-\item{data}{A dataframe}
+\item{data}{A data.frame.}
+
+\item{keep}{If TRUE, new names are a combination of var names and label
+names.}
+
+\item{pattern}{Pattern for gleu function when \code{keep = TRUE}.}
 }
 \value{
-A dataframe wit renamed labels
+A data.frame with renamed labels or for get_labels a character vector
+with label names.
 }
 \description{
-Renames the variables from a data frame to a label that is provided in the label attribute
+Renames the variables from a data frame to a label that is provided in the
+label attribute
 }

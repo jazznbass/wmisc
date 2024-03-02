@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.18.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.23.9000</span>
       </span>
     </div>
 
@@ -45,15 +45,19 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="agreement_analysis.html">agreement_analysis()</a></code> </p>
+          <p><code><a href="agreement_analysis.html">agreement_analysis()</a></code> <code><a href="agreement_analysis.html">nice_agreement_table()</a></code> </p>
         </td>
-        <td><p>Perform agreement analysis</p></td>
+        <td><p>Perform within agreement analysis</p></td>
       </tr><tr><td>
           <p><code><a href="alpha_CI.html">alpha_CI()</a></code> </p>
         </td>
         <td><p>alpha_CI</p></td>
       </tr><tr><td>
-          <p><code><a href="alpha_table.html">alpha_table()</a></code> </p>
+          <p><code><a href="alpha_table.html">alpha_table()</a></code> <code><a href="alpha_table.html">nice_alpha_table()</a></code> </p>
+        </td>
+        <td><p>Table with alpha values</p></td>
+      </tr><tr><td>
+          <p><code><a href="alpha_table_old.html">alpha_table_old()</a></code> </p>
         </td>
         <td><p>Table with alpha values</p></td>
       </tr><tr><td>
@@ -101,6 +105,18 @@
         </td>
         <td><p>Fills in missing level 2 data</p></td>
       </tr><tr><td>
+          <p><code><a href="fisher_z.html">fisher_z()</a></code> <code><a href="fisher_z.html">inv_fisher_z()</a></code> </p>
+        </td>
+        <td><p>Fisher's Z Transformation</p></td>
+      </tr><tr><td>
+          <p><code><a href="flip.html">flip()</a></code> </p>
+        </td>
+        <td><p>Flip a Data Frame or Matrix</p></td>
+      </tr><tr><td>
+          <p><code><a href="logit2prob.html">logit2prob()</a></code> <code><a href="logit2prob.html">prob2logit()</a></code> </p>
+        </td>
+        <td><p>Convert Logit to Probability and vice versa</p></td>
+      </tr><tr><td>
           <p><code><a href="mean_corr.html">mean_corr()</a></code> </p>
         </td>
         <td><p>Average correlations by Fisher Z transformation</p></td>
@@ -121,14 +137,27 @@
         </td>
         <td><p>Table with descriptive statistics</p></td>
       </tr><tr><td>
+          <p><code><a href="nice_loadings.html">nice_loadings()</a></code> <code><a href="nice_loadings.html">nice_efa()</a></code> </p>
+        </td>
+        <td><p>Creates table of loadings of exploratory factor analysis based on the
+psych::fa function</p></td>
+      </tr><tr><td>
           <p><code><a href="nice_p.html">nice_p()</a></code> </p>
         </td>
         <td><p>Format p values</p></td>
+      </tr><tr><td>
+          <p><code><a href="nice_regression_table.html">nice_regression_table()</a></code> </p>
+        </td>
+        <td><p>Create a nice table from one or more regression models</p></td>
       </tr><tr><td>
           <p><code><a href="nice_statnum.html">nice_statnum()</a></code> </p>
         </td>
         <td><p>Nice statnum
 Formats numbers in the -1 to 1 range</p></td>
+      </tr><tr><td>
+          <p><code><a href="nice_t_test_table.html">nice_t_test_table()</a></code> <code><a href="nice_t_test_table.html">t_test_table()</a></code> </p>
+        </td>
+        <td><p>Creates a t.test table for multiple dependent variables</p></td>
       </tr><tr><td>
           <p><code><a href="nice_table.html">nice_table()</a></code> </p>
         </td>
@@ -138,6 +167,10 @@ Formats numbers in the -1 to 1 range</p></td>
         </td>
         <td><p>Percent of TRUE values</p></td>
       </tr><tr><td>
+          <p><code><a href="percentage_bar.html">percentage_bar()</a></code> </p>
+        </td>
+        <td><p>Create a Percentage Bar Chart</p></td>
+      </tr><tr><td>
           <p><code><a href="plotalphabeta.html">plotalphabeta()</a></code> </p>
         </td>
         <td><p>Plot Alpha / Beta graph
@@ -146,6 +179,15 @@ Generates a graphic for visualizing alpha and beta error</p></td>
           <p><code><a href="reference_package_version.html">reference_package_version()</a></code> </p>
         </td>
         <td><p>Reference package version for markdown</p></td>
+      </tr><tr><td>
+          <p><code><a href="rename_from_labels.html">rename_from_labels()</a></code> <code><a href="rename_from_labels.html">get_labels()</a></code> </p>
+        </td>
+        <td><p>Renames the variables from a data frame to a label that is provided in the
+label attribute</p></td>
+      </tr><tr><td>
+          <p><code><a href="round_numeric.html">round_numeric()</a></code> </p>
+        </td>
+        <td><p>This function rounds numeric columns in a data frame to a specified number of digits.</p></td>
       </tr><tr><td>
           <p><code><a href="split_at_median.html">split_at_median()</a></code> </p>
         </td>
@@ -158,10 +200,6 @@ Generates a graphic for visualizing alpha and beta error</p></td>
           <p><code><a href="standardise.html">standardise()</a></code> </p>
         </td>
         <td><p>Standardise values</p></td>
-      </tr><tr><td>
-          <p><code><a href="t_test_table.html">t_test_table()</a></code> </p>
-        </td>
-        <td><p>Creates a t.test table for multiple dependent variables</p></td>
       </tr><tr><td>
           <p><code><a href="wmisc-package.html">wmisc-package</a></code> <code><a href="wmisc-package.html">wmisc</a></code> </p>
         </td>

@@ -44,22 +44,26 @@ nice_loadings <- function(x,
   rownames(object) <- NULL
   
   if (is.null(footnote)) {
-    object <- set_note(object, 
-      c(
-        paste0("Extraction method is ", x$fm), 
-        paste0("Rotation method is ", x$rotation),
-        paste0(
-          "RMSEA is ", x$RMSEA[1] |> round(3), 
-          " CI", round(x$RMSEA[4] * 100), "% [", round(x$RMSEA[2], 3), 
-          ", ", round(x$RMSEA[3], 3), "]"
-        ),
-        if (is.numeric(cut)) paste0(
-          "Loadings below |", cut, "| are not displayed"
-        )
-    ))
+    footnote <- c(
+      paste0("Extraction method is ", x$fm), 
+      paste0("Rotation method is ", x$rotation),
+      paste0(
+        "RMSEA is ", x$RMSEA[1] |> round(3), 
+        " CI", round(x$RMSEA[4] * 100), "% [", round(x$RMSEA[2], 3), 
+        ", ", round(x$RMSEA[3], 3), "]"
+      ),
+      if (is.numeric(cut)) paste0(
+        "Loadings below |", cut, "| are not displayed"
+      )
+    )
   }
   
-  object <- set_title(object, title)
+  object <- set_wmisc_attributes(
+    object, 
+    title = title,
+    note = footnote
+  )
+  
   object
 }
 

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.18.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.23.9000</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">split_at_percentile</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  frac <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>  lab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"low"</span>, <span class="st">"middle"</span>, <span class="st">"high"</span><span class="op">)</span>,</span>
+<span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"low"</span>, <span class="st">"middle"</span>, <span class="st">"high"</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"higher"</span>,</span>
 <span>  explicit_na <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -63,17 +63,17 @@
 
 
 <dt>frac</dt>
-<dd><p>Fractions to split at (e.g., `c(1/3, 2/3)` will result in three
+<dd><p>Fractions to split at (e.g., <code>c(1/3, 2/3)</code> will result in three
 groups and 0.5 will result in a median split)</p></dd>
 
 
-<dt>lab</dt>
+<dt>labels</dt>
 <dd><p>Vector with factor labels.</p></dd>
 
 
 <dt>type</dt>
 <dd><p>"higher" will split group below fraction and last group equal
-above last fraction. and "lower" will split group below median (vs. equal
+above last fraction. and "lower" will split group below fraction (vs. equal
 and above)</p></dd>
 
 
@@ -96,7 +96,24 @@ provided name. If TRUE, the name will default to '(Missing)'.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       low    middle      high (Missing) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        22        30        36        12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        29        25        35        11 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">split_at_percentile</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, </span></span>
+<span class="r-in"><span>  frac <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0-24"</span>, <span class="st">"25-49"</span>, <span class="st">"50-74"</span>, <span class="st">"75-100"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24   0-24  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0-24   0-24   0-24   0-24   0-24   25-49  25-49  25-49  25-49  25-49 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49  25-49 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74  50-74 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 50-74  50-74  50-74  50-74  50-74  75-100 75-100 75-100 75-100 75-100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100 75-100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: 0-24 25-49 50-74 75-100</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

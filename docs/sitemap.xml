@@ -25,6 +25,9 @@
     <loc>/reference/alpha_table.html</loc>
   </url>
   <url>
+    <loc>/reference/alpha_table_old.html</loc>
+  </url>
+  <url>
     <loc>/reference/analysis_missing.html</loc>
   </url>
   <url>
@@ -61,10 +64,19 @@
     <loc>/reference/fill_missing_l2.html</loc>
   </url>
   <url>
+    <loc>/reference/fisher_z.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flip.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/list_class.html</loc>
+  </url>
+  <url>
+    <loc>/reference/logit2prob.html</loc>
   </url>
   <url>
     <loc>/reference/mean_corr.html</loc>
@@ -85,16 +97,28 @@
     <loc>/reference/nice_descriptives.html</loc>
   </url>
   <url>
+    <loc>/reference/nice_loadings.html</loc>
+  </url>
+  <url>
     <loc>/reference/nice_p.html</loc>
   </url>
   <url>
+    <loc>/reference/nice_regression_table.html</loc>
+  </url>
+  <url>
     <loc>/reference/nice_statnum.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nice_t_test_table.html</loc>
   </url>
   <url>
     <loc>/reference/nice_table.html</loc>
   </url>
   <url>
     <loc>/reference/percent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/percentage_bar.html</loc>
   </url>
   <url>
     <loc>/reference/plotalphabeta.html</loc>
@@ -104,6 +128,12 @@
   </url>
   <url>
     <loc>/reference/reference_package_version.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rename_from_labels.html</loc>
+  </url>
+  <url>
+    <loc>/reference/round_numeric.html</loc>
   </url>
   <url>
     <loc>/reference/split_at_median.html</loc>

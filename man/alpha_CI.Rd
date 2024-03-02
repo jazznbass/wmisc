@@ -17,7 +17,7 @@ alpha_CI(alpha, n, items, ci)
 }
 \value{
 a numeric vector containing the upper and lower bounds of the
-  confidence interval
+confidence interval
 }
 \description{
 Calculate the confidence interval for Cronbach's alpha

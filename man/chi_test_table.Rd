@@ -48,7 +48,7 @@ group one or vice versa.}
 
 \item{type}{Either "df" for data frame or "html" for html table.}
 
-\item{...}{Further arguments passed to [nice_table()]}
+\item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}}
 }
 \value{
 A tibble or an html table

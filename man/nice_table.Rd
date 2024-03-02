@@ -33,11 +33,11 @@ nice_table(
 
 \item{footnote}{Add footnote}
 
-\item{row_group}{List with information on grouping rows `row_group = list("Start" = 1:2, "That is the second" = 3:5)`}
+\item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}}
 
 \item{row_group_order}{List with information on grouping order.}
 
-\item{file}{(works only when `engine = "gt"`) If set, an additional file with
+\item{file}{(works only when \code{engine = "gt"}) If set, an additional file with
 the table is produced.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
@@ -47,22 +47,22 @@ new_name).}
 
 \item{round}{Number of digits to which numbers should be rounded.}
 
-\item{extra}{Additional arguments passed to `kableExtra::kable_classic_2()`}
+\item{extra}{Additional arguments passed to \code{kableExtra::kable_classic_2()}}
 
-\item{gt}{Additional arguments passed to `gt::gt()`}
+\item{gt}{Additional arguments passed to \code{gt::gt()}}
 
-\item{kable}{Additional arguments passed to `knitr::kable()`}
+\item{kable}{Additional arguments passed to \code{knitr::kable()}}
 }
 \value{
 A nicely formatted HTML table
 }
 \description{
 This function takes a data frame and formats it into a nicely formatted HTML
-table using the `gt` packages.
+table using the \code{gt} packages.
 }
 \examples{
 df <- data.frame(
-  x = 1:5, y = rnorm(5, mean = 10, sd = 12), 
+  x = 1:5, y = rnorm(5, mean = 10, sd = 12),
   c = letters[5:1], d = sample(letters, 5)
 )
 nice_table(
