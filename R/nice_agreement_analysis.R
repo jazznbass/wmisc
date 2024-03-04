@@ -36,6 +36,22 @@
 #'     crit = 0.6, 
 #'     n_sim = 100)
 #' @export
+nice_agreement_table <- function(data, 
+                                 vars = names(data), 
+                                 grouping, 
+                                 rv, 
+                                 crit = 0.7, 
+                                 min_group_size = NULL,
+                                 auto_labels = TRUE,
+                                 labels = NULL, 
+                                 n_sim = 10000) {
+  
+  out <- do.call(agreement_analysis, as.list(environment()))
+  nice_table(out)
+}
+
+#' @export
+#' @rdname nice_agreement_analysis
 agreement_analysis <- function(data, 
                                vars = names(data), 
                                grouping, 
@@ -180,18 +196,5 @@ agreement_analysis <- function(data,
   out
 }
 
-#' @export
-#' @rdname agreement_analysis
-nice_agreement_table <- function(data, 
-                                 vars = names(data), 
-                                 grouping, 
-                                 rv, 
-                                 crit = 0.7, 
-                                 min_group_size = NULL,
-                                 auto_labels = TRUE,
-                                 labels = NULL, 
-                                 n_sim = 10000) {
-  
-  out <- do.call(agreement_analysis, as.list(environment()))
-  nice_table(out)
-}
+
+

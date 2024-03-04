@@ -32,7 +32,7 @@
 #'   c("gender", "glasses"), "sen", data = dat, 
 #'   ref_levels = c("male", "no")
 #' )
-chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
+nice_chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
                          ref_levels = 2,
                          labels = NULL, 
                          nice_p = TRUE, 
@@ -121,4 +121,10 @@ chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2],
   }
     
   out
+}
+
+#' @export
+#' @rdname nice_chi_test_table
+chi_test_table  <- function(...) {
+  nice_chi_test_table(...)
 }

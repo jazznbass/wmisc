@@ -32,6 +32,25 @@
 #'   RMSEA = TRUE
 #' )
 #' @export
+nice_alpha_table <- function(data,
+                             scales,
+                             labels = NULL,
+                             round = 2,
+                             ci = TRUE,
+                             conf_level = 0.95,
+                             check_key = TRUE,
+                             keys = NULL,
+                             keys_from_weights = TRUE,
+                             RMSEA = FALSE,
+                             difficulty = FALSE,
+                             values = NULL,
+                             fa = TRUE) {
+  out <- do.call(alpha_table, as.list(environment()))
+  nice_table(out)
+}
+
+#' @export
+#' @rdname nice_alpha_table
 alpha_table <- function(data,
                         scales,
                         labels = NULL,
@@ -48,6 +67,12 @@ alpha_table <- function(data,
   
   
   on.exit(print_messages())
+  
+  if (!inherits(data, "data.frame")) 
+    add_message("Provided data must be of class data.frame")
+  
+  if (!inherits(scales, "list")) 
+    add_message("Scales must be provided in a list")
   
   if (!is.null(keys)) {
     check_key <- FALSE
@@ -98,7 +123,7 @@ alpha_table <- function(data,
       scales[[i]] <- scales[[i]][.id]
       data_scale <- data_scale[, scales[[i]]]
     }
-     
+    
     if (keys_from_weights) {
       if (requireNamespace("scaledic", quietly = TRUE)) {
         keys <- lapply(
@@ -113,13 +138,12 @@ alpha_table <- function(data,
         add_message("Scaledic is not installed, keys can not be extracted automatically.")
       }
     }
-
+    
     if (!is.null(values)) {
       min <- values[[i]][1]
       max <- values[[i]][2]
     }
-
-
+    
     a <- invisible(
       psych::alpha(
         data_scale, 
@@ -133,8 +157,8 @@ alpha_table <- function(data,
     alpha <- a$total$raw_alpha
     df$"items"[i] <- a$nvar
     df$"cases"[i] <- glue("[{min(a$item.stats$n, na.rm = TRUE)}, {max(a$item.stats$n, na.rm = TRUE)}]")
-      
-      #sum(complete.cases(data_scale))#min(a$item.stats$n, na.rm = TRUE)
+    
+    #sum(complete.cases(data_scale))#min(a$item.stats$n, na.rm = TRUE)
     
     
     if (!ci) df$Alpha[i] <- nice_statnum(alpha, 2)
@@ -205,21 +229,16 @@ alpha_table <- function(data,
   }
   
   df <- set_wmisc_attributes(df, 
-    note = c(
-      "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals", 
-      "N cases is the min and max number of non-missing cases for the scale items"),
-    title = "Item analysis",
-    spanner = list(N = 2:3, "Alpha [95% CI]" = 4:5)
+                             note = c(
+                               "Values in brackets depict upper and lower bound of confidence intervals or [min,max] intervals", 
+                               "N cases is the min and max number of non-missing cases for the scale items"),
+                             title = "Item analysis",
+                             spanner = list(N = 2:3, "Alpha [95% CI]" = 4:5)
   )
   
   df
 }
 
-#' @export
-#' @rdname alpha_table
-nice_alpha_table <- function(...) {
-  alpha_table(...) |> nice_table()
-}
 
 
 .alpha_CI <- function(alpha, n, items, ci) {
