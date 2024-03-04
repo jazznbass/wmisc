@@ -94,6 +94,9 @@
     <loc>/reference/nice_agreement_table.html</loc>
   </url>
   <url>
+    <loc>/reference/nice_alpha_table.html</loc>
+  </url>
+  <url>
     <loc>/reference/nice_chi_test_table.html</loc>
   </url>
   <url>
@@ -155,6 +158,9 @@
   </url>
   <url>
     <loc>/reference/wmisc-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wmisc_data.html</loc>
   </url>
   <url>
     <loc>/reference/x_names.html</loc>
