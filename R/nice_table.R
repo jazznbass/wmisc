@@ -130,11 +130,16 @@ nice_table <- function(x,
         out <- gt::tab_row_group(
           out, label = names(row_group)[i], rows = row_group[[i]]
         )
-      for(i in length(row_group):1)  
-        out <- gt::tab_style(
-          out, style = gt::cell_text(align = "center"),
-          locations = gt::cells_row_groups(groups = names(row_group)[i])
-        )
+      #for(i in length(row_group):1)  
+      #  out <- gt::tab_style(
+      #    out, style = gt::cell_text(align = "center"),
+      #    locations = gt::cells_row_groups(groups = names(row_group)[i])
+      #  )
+      out <- gt::tab_style(
+        out, style = gt::cell_text(align = "center"),
+        #locations = gt::cells_row_groups(groups = names(row_group)[i])
+        locations = gt::cells_row_groups()
+      )
     }
     
     if (!is.null(row_group_order)) {
