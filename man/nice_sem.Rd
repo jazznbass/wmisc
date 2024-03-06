@@ -12,7 +12,8 @@ nice_sem(
   remove_cols = NULL,
   round = 2,
   title = "Structure equation model",
-  footnote = NULL
+  footnote = NULL,
+  file = NULL
 )
 }
 \arguments{
