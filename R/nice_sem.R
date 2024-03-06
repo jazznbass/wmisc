@@ -16,7 +16,8 @@ nice_sem <- function(x,
                      remove_cols = NULL,
                      round = 2,
                      title = "Structure equation model",
-                     footnote = NULL) {
+                     footnote = NULL,
+                     file = NULL) {
 
   if (standardized) out <- lavaan::standardizedsolution(x) |> as.data.frame()
   if (!standardized) out <- lavaan::parameterestimates(x) |> as.data.frame()
@@ -70,10 +71,10 @@ nice_sem <- function(x,
   out[nrow(out), 2] <- fit_first["ntotal"]
   
   
-  out[nrow(out)+1, 1] <- paste0("\u03a7\u00b2(", fit_first["df"], ")")
+  out[nrow(out)+1, 1] <- paste0("\u03a7\u00b2(", fit_first["df"], ") / p-value")
   out[nrow(out), 2] <- fit_first["chisq"]
-  out[nrow(out)+1, 1] <- "p"
-  out[nrow(out), 2] <- fit_first["pvalue"]
+  #out[nrow(out)+1, 1] <- "p"
+  out[nrow(out), 3] <- fit_first["pvalue"]
   
   fit <- fitmeasures(x, fitmeasures)
   
@@ -95,7 +96,8 @@ nice_sem <- function(x,
     title = title,
     row_group = row_group,
     footnote = footnote,
-    label_na = ""
+    label_na = "",
+    file = file
   )
   
   if (!remove_ci) out <- set_wmisc_attributes(
