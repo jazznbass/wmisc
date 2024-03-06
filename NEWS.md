@@ -3,6 +3,7 @@
 
 ## New Functions
 
+- `nice_sem()`: Provides html and word tables for lavaan sem objects.
 - `nice_regression_table()`: Provides html and word tables for one or multiple `lm`, `lme`, `lmerTest`, or `glmer` objects.
 - `round_numeric()`: This function rounds numeric columns in a data frame to a specified number of digits.
 - `logit2prob()`/ `prob2logit()`: Convert Logit to probability and vice versa

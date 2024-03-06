@@ -14,6 +14,13 @@ set_wmisc_attributes <- function(x, ...) {
 }
 
 #' @export
+#' @param x A data frame or a vector.
+#' @param value Either a single character string when `x` is a vector or a named
+#'   list (`columnname = label`) with character strings when `x` is a
+#'   data.frame.
+#' @rdname rename_from_labels
+#' @return For add_label: A vector or a data.frame with added label
+#'   attribute(s).
 add_label <- function(x, value) {
   
   on.exit(print_messages())
@@ -34,14 +41,18 @@ add_label <- function(x, value) {
   x
 }
 
-#' Renames the variables from a data frame to a label that is provided in the
-#' label attribute
+#' Various functions that add and retrieve labels for variabes
+#'
+#' @description These functions work with an attribute `label`. Which has been
+#' introduced by other packages (e.g. `haven`) and is implemented into the
+#' R-Studiio environment.
+#'
 #' @param data A data.frame.
 #' @param keep If TRUE, new names are a combination of var names and label
 #'   names.
 #' @param pattern Pattern for gleu function when `keep = TRUE`.
-#' @return A data.frame with renamed labels or for get_labels a character vector
-#'   with label names.
+#' @return For rename_from_labels: A data.frame with renamed labels or for
+#'   get_labels a character vector with label names.
 #' @export
 rename_from_labels <- function(data, 
                                keep = FALSE,
@@ -64,6 +75,8 @@ rename_from_labels <- function(data,
 
 #' @export
 #' @rdname rename_from_labels
+#' @return For `get_labels`: A names character vector with labels (and columnnames
+#'   as names).
 get_labels <- function(data,
                        keep = FALSE,
                        pattern = "{old_name}: {label}") {

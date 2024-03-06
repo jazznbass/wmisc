@@ -58,6 +58,5 @@ nice_descriptives <- function(data,
     note = footnote
   )
   
-  out
+  nice_table(out)
 }
-

@@ -57,6 +57,12 @@ nice_table <- function(x,
                        gt = NULL,
                        kable = NULL) {
   
+  on.exit(print_messages())
+  
+  if (!inherits(x, "data.frame")) {
+    add_message("Object is no data.frame")
+    return(FALSE)
+  }
   args <- get_wmisc_attributes(x)
   
   if (!is.null(args)) {
@@ -72,6 +78,8 @@ nice_table <- function(x,
       title <- args$title
     if (!is.null(args$note) && is.null(footnote)) 
       footnote <- args$note
+    if (!is.null(args$footnote) && is.null(footnote)) 
+      footnote <- args$footnote
     if (!is.null(args$label_na) && is.null(label_na)) 
       label_na <- args$label_na
     if (!is.null(args$row_group_order) && is.null(row_group_order)) 
@@ -144,7 +152,7 @@ nice_table <- function(x,
     }
     
     if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
-    if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote))
+    if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote), placement = "left")
     if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
     if (!is.null(label_na)) out <- gt::sub_missing(out, missing_text = label_na)
     
