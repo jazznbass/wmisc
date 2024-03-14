@@ -24,6 +24,7 @@ set_wmisc_attributes <- function(x, ...) {
 add_label <- function(x, value) {
   
   on.exit(print_messages())
+  if (!inherits(value, "list") && length(values) > 0) values <- as.list(values)
   
   if (inherits(value, "list")) {
     for(i in seq_along(value)) {

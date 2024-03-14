@@ -30,5 +30,5 @@ nice_sem(
 Nice html table for lavaan structure equation model fitted objects
 }
 \examples{
-nice_sem(wmisc::lavaan_fit) |> print()
+nice_sem(wmisc::lavaan_fit)
 }
