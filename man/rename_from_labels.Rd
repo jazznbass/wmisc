@@ -15,7 +15,7 @@ rename_from_labels(
   max_char = NULL
 )
 
-get_labels(data, keep = FALSE, pattern = "{old_name}: {label}")
+get_labels(data, keep = FALSE, pattern = "{name}: {label}", max_char = NULL)
 }
 \arguments{
 \item{x}{A data frame or a vector.}

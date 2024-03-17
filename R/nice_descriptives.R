@@ -55,7 +55,7 @@ nice_descriptives <- function(data,
  
   out <- set_wmisc_attributes(out, 
     title = title,
-    note = footnote
+    footnote = footnote
   )
   
   nice_table(out)

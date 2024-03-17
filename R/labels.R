@@ -50,10 +50,8 @@ rename_from_labels <- function(data,
     if (!is.null(attr(data[[i]], "label"))) {
       if (!keep) names(data)[i] <- attr(data[[i]], "label")
       if (keep) {
-        
         ne$label <- attr(data[[i]], 'label')
         ne$name <- names(data)[i]
-        #out <- glue::glue(pattern, .envir = ne)
         new_name <- glue::glue(pattern, .envir = ne) 
         if (!is.null(max_char)) new_name <- substr(new_name, 1, max_char)
         names(data)[i] <- new_name
@@ -69,13 +67,17 @@ rename_from_labels <- function(data,
 #'   as names).
 get_labels <- function(data,
                        keep = FALSE,
-                       pattern = "{old_name}: {label}") {
+                       pattern = "{name}: {label}",
+                       max_char = NULL) {
   out <- lapply(data, \(.) attr(., "label")) |> unlist()
+
   if (keep) {
     ne <- new.env(parent = globalenv())
     ne$label <- out
-    ne$old_name <- names(out)
-    out <- glue::glue(pattern, .envir = ne)
+    ne$name <- names(out)
+    new_name <- glue::glue(pattern, .envir = ne) |> as.character()
+    if (!is.null(max_char)) new_name <- substr(new_name, 1, max_char)
+    out <- setNames(new_name, names(out))
   }
   out
 }
