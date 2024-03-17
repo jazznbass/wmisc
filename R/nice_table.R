@@ -6,21 +6,23 @@
 #' @param x The data frame to be formatted into a table
 #' @param title Title string.
 #' @param footnote Add footnote
-#' @param file (works only when `engine = "gt"`) If set, an additional file with
-#'   the table is produced.
+#' @param file Character string with filename. If set, an additional file is
+#'   exported (html or docx format is possible). If set `TRUE`, a filename is
+#'   automatically created based on the title.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
+#' @param spanner List with informatioon on grouping columns. E.g. `spanner =
+#'   list("M" = 2:3, "SD" = 4:6)`.
 #' @param row_group List with information on grouping rows `row_group =
 #'   list("Start" = 1:2, "That is the second" = 3:5)`
 #' @param row_group_order List with information on grouping order.
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
-#' @param extra Additional arguments passed to `kableExtra::kable_classic_2()`
+#' @param rownames Logical. If TRUE, rownames are shown.
+#' @param label_na = Label for replacing missing values.
 #' @param gt Additional arguments passed to `gt::gt()`
-#' @param kable Additional arguments passed to `knitr::kable()`
-#' @return A nicely formatted HTML table
-#'
-#'
+#' @param ... Various arguments for backward compatibility.
+#' @return A gt table object.
 #' @examples
 #' df <- data.frame(
 #'   x = 1:5, y = rnorm(5, mean = 10, sd = 12),
@@ -40,29 +42,38 @@
 nice_table <- function(x, 
                        title = NULL, 
                        footnote = NULL, 
-                       spanner = header,
+                       spanner = NULL,
                        row_group = NULL,
                        row_group_order = NULL,
-                       header = NULL,
-                       pack = NULL,
                        rownames = FALSE,
                        file = NULL,
                        cols_label = NULL,
-                       use_labels = TRUE,
                        decimals = NULL,
                        round = NULL,
                        label_na = NULL,
-                       engine = getOption("wmisc.nice.table.engine"),
-                       extra = NULL, 
                        gt = NULL,
-                       kable = NULL) {
+                       ...) {
   
   on.exit(print_messages())
+  
+  if (inherits(x, "matrix")) {
+    x <- as.data.frame(x, optional = TRUE)
+    rownames = TRUE
+  }
   
   if (!inherits(x, "data.frame")) {
     add_message("Object is no data.frame")
     return(FALSE)
   }
+  
+  # handle deprecated arguments ----
+  deprecated <- list(...)
+  engine <- getOption("wmisc.nice.table.engine")
+  if (!is.null(deprecated$header)) spanner <- deprecated$header
+  if (!is.null(deprecated$pack)) row_group <- deprecated$pack
+  
+  # Extract attributes ----
+  
   args <- get_wmisc_attributes(x)
   
   if (!is.null(args)) {
@@ -85,8 +96,6 @@ nice_table <- function(x,
     if (!is.null(args$row_group_order) && is.null(row_group_order)) 
       row_group_order <- args$row_group_order
   }
-  
-  if (!is.null(pack)) row_group <- pack
   
   if (isTRUE(file)) {
     file <- gsub(" ", "-" , x = title)
@@ -111,59 +120,50 @@ nice_table <- function(x,
   
   
   if (engine == "extra") 
-    out <- .nice_table_kable(x, title, row_group, spanner, footnote)
+    return(.nice_table_kable(x, title, row_group, spanner, footnote))
 
-  if (engine == "gt") {
-    if (!inherits(x, "data.frame")) {
-      x <- as.data.frame(x)
-      rownames(x) <- NULL
-    }
-    if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
-    
-    args <- c(list(data = x), gt)
-    
-    out <- do.call(gt::gt, args)|> gt_apa_style()
+  if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
+  
+  args <- c(list(data = x), gt)
+  
+  out <- do.call(gt::gt, args)|> gt_apa_style()
 
-    if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
-    if (!is.null(row_group)) {
-      for(i in length(row_group):1)
-        out <- gt::tab_row_group(
-          out, label = names(row_group)[i], rows = row_group[[i]]
-        )
-      #for(i in length(row_group):1)  
-      #  out <- gt::tab_style(
-      #    out, style = gt::cell_text(align = "center"),
-      #    locations = gt::cells_row_groups(groups = names(row_group)[i])
-      #  )
-      out <- gt::tab_style(
-        out, style = gt::cell_text(align = "center"),
-        #locations = gt::cells_row_groups(groups = names(row_group)[i])
-        locations = gt::cells_row_groups()
+  if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
+  if (!is.null(row_group)) {
+    for(i in length(row_group):1)
+      out <- gt::tab_row_group(
+        out, label = names(row_group)[i], rows = row_group[[i]]
       )
-    }
-    
-    if (!is.null(row_group_order)) {
-      out <- gt::row_group_order(out, groups = row_group_order)
-    }
-    
-    if (!is.null(spanner)) {
-      for(i in seq_along(spanner)) {
-        out <- gt::tab_spanner(
-          out, 
-          label = names(spanner)[i], 
-          columns = spanner[[i]]
-        )  
-      }
-    }
-    
-    if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
-    if (!is.null(footnote)) out <- gt::tab_footnote(out, gt::md(footnote), placement = "left")
-    if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
-    if (!is.null(label_na)) out <- gt::sub_missing(out, missing_text = label_na)
-    
-    if (!is.null(file)) gt::gtsave(out, file)
-    
+    out <- gt::tab_style(
+      out, style = gt::cell_text(align = "center"),
+      #locations = gt::cells_row_groups(groups = names(row_group)[i])
+      locations = gt::cells_row_groups()
+    )
   }
+  
+  if (!is.null(row_group_order)) {
+    out <- gt::row_group_order(out, groups = row_group_order)
+  }
+  
+  if (!is.null(spanner)) {
+    for(i in seq_along(spanner)) {
+      out <- gt::tab_spanner(
+        out, 
+        label = names(spanner)[i], 
+        columns = spanner[[i]]
+      )  
+    }
+  }
+  
+  if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
+  if (!is.null(footnote)) {
+    out <- gt::tab_footnote(out, gt::md(footnote), placement = "left")
+  }
+  if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
+  if (!is.null(label_na)) out <- gt::sub_missing(out, missing_text = label_na)
+  
+  if (!is.null(file)) gt::gtsave(out, file)
+    
   
   out
 }
@@ -209,10 +209,10 @@ gt_apa_style <- function(gt_tbl) {
 
     args <- c(
       list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
-      kable
+      depecated$kable
     )
     x <- do.call(knitr::kable, args)
-    out <- do.call(kableExtra::kable_classic, c(list(x), extra)) 
+    out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
     
     if (!is.null(row_group)) {
       out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)

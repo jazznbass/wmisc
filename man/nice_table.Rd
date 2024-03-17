@@ -8,22 +8,17 @@ nice_table(
   x,
   title = NULL,
   footnote = NULL,
-  spanner = header,
+  spanner = NULL,
   row_group = NULL,
   row_group_order = NULL,
-  header = NULL,
-  pack = NULL,
   rownames = FALSE,
   file = NULL,
   cols_label = NULL,
-  use_labels = TRUE,
   decimals = NULL,
   round = NULL,
   label_na = NULL,
-  engine = getOption("wmisc.nice.table.engine"),
-  extra = NULL,
   gt = NULL,
-  kable = NULL
+  ...
 )
 }
 \arguments{
@@ -33,12 +28,17 @@ nice_table(
 
 \item{footnote}{Add footnote}
 
+\item{spanner}{List with informatioon on grouping columns. E.g. \code{spanner = list("M" = 2:3, "SD" = 4:6)}.}
+
 \item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}}
 
 \item{row_group_order}{List with information on grouping order.}
 
-\item{file}{(works only when \code{engine = "gt"}) If set, an additional file with
-the table is produced.}
+\item{rownames}{Logical. If TRUE, rownames are shown.}
+
+\item{file}{Character string with filename. If set, an additional file is
+exported (html or docx format is possible). If set \code{TRUE}, a filename is
+automatically created based on the title.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
 new_name).}
@@ -47,14 +47,14 @@ new_name).}
 
 \item{round}{Number of digits to which numbers should be rounded.}
 
-\item{extra}{Additional arguments passed to \code{kableExtra::kable_classic_2()}}
+\item{label_na}{= Label for replacing missing values.}
 
 \item{gt}{Additional arguments passed to \code{gt::gt()}}
 
-\item{kable}{Additional arguments passed to \code{knitr::kable()}}
+\item{...}{Various arguments for backward compatibility.}
 }
 \value{
-A nicely formatted HTML table
+A gt table object.
 }
 \description{
 This function takes a data frame and formats it into a nicely formatted HTML

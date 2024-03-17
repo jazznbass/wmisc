@@ -31,7 +31,7 @@ names.}
 
 \item{pattern}{Pattern for gleu function when \code{keep = TRUE}.}
 
-\item{max_char}{Maximim number of characters for the labal.}
+\item{max_char}{Maximum number of characters for the label.}
 }
 \value{
 For add_label: A vector or a data.frame with added label
