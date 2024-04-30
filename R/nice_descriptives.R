@@ -12,7 +12,8 @@ nice_descriptives <- function(data,
                               round = NULL, 
                               auto_labels = FALSE,
                               title = "Descriptive statistics",
-                              footnote = NULL) {
+                              footnote = NULL,
+                              file = NULL) {
   
   on.exit(print_messages())
   
@@ -55,7 +56,8 @@ nice_descriptives <- function(data,
  
   out <- set_wmisc_attributes(out, 
     title = title,
-    footnote = footnote
+    footnote = footnote,
+    file = file
   )
   
   nice_table(out)

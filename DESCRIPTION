@@ -3,7 +3,7 @@ Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
 Version: 0.2.23.9000
-Date: 2024-03-06
+Date: 2024-04-30
 Author: Juergen Wilbert
 Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
 Imports: 
