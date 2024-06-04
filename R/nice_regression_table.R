@@ -28,25 +28,25 @@ nice_regression_table <- function(
     remove_cols = NULL,
     auto_col_names = TRUE,
     file = NULL,
-    or = FALSE
+    or = FALSE,
+    nice_p = TRUE
 ) {
   
   models <- list(...)
-  
-  #class(models) <- c(class(models[[1]]), "list")
-  
   models_params <- lapply(models, \(x) extract_model_param(x, or = or))
   
   n_models <- length(models)
   
   out <- lapply(models_params, \(x) x$estimates$fixed)
 
-  p_label <- models_params[[1]]$estimates$p_label
   
-  out <- lapply(out, \(x) {
-    x[[p_label]] <- nice_p(x[[p_label]], stars = TRUE)
-    x
-  })
+  if (nice_p) {
+    p_label <- models_params[[1]]$estimates$p_label
+    out <- lapply(out, \(x) {
+      x[[p_label]] <- nice_p(x[[p_label]], stars = TRUE)
+      x
+    })
+  }
 
   # remove cols ----
   
@@ -152,6 +152,8 @@ nice_regression_table <- function(
   
   for(i in seq_along(auto_labels)) 
     out[[1]] <- gsub(names(auto_labels)[i], auto_labels[i],  out[[1]])
+ 
+  out <- lapply(out, function(x) as.character(x)) |> as.data.frame(check.names = FALSE)
   
   # spanner ----
   
@@ -193,7 +195,7 @@ extract_model_param <- function (model, ...) {
 }
 
 #' @export
-extract_model_param.lm <- function(model, ...) {
+extract_model_param.lm <- function(model, or = FALSE, ...) {
   
   model_summary <- summary(model)
   
@@ -206,8 +208,15 @@ extract_model_param.lm <- function(model, ...) {
   out$add_param[["R\u00b2"]] <- model_summary$r.squared
   out$add_param[["R\u00b2 adjusted"]] <- model_summary$adj.r.squared
 
+  if (inherits(model, "glm")) out$add_param$"R\u00b2 Tjur" <-  performance::r2_tjur(model)
+  
   out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+  
+  if (or) {
+    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
+  }  
+  
   out
 }
 
