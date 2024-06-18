@@ -13,7 +13,8 @@ nice_regression_table(
   remove_cols = NULL,
   auto_col_names = TRUE,
   file = NULL,
-  or = FALSE
+  or = FALSE,
+  nice_p = TRUE
 )
 }
 \arguments{

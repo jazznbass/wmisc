@@ -9,7 +9,8 @@ nice_descriptives(
   round = NULL,
   auto_labels = FALSE,
   title = "Descriptive statistics",
-  footnote = NULL
+  footnote = NULL,
+  file = NULL
 )
 }
 \arguments{

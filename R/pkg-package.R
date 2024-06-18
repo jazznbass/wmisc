@@ -4,7 +4,6 @@
 #'
 #' @name wmisc-package
 #' @aliases wmisc-package wmisc
-#' @docType package
 #' @author Juergen Wilbert [aut, cre]
 #' @keywords package
 #' @import dplyr
@@ -22,4 +21,4 @@
 #'   kable_styling column_spec
 #' @importFrom knitr kable
 #' @importFrom stats median pchisq qf qnorm qt sd t.test
-NULL
+"_PACKAGE"
