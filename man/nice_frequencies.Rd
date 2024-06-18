@@ -7,7 +7,7 @@
 nice_frequencies(
   data,
   label = NULL,
-  auto_labels = FALSE,
+  auto_labels = TRUE,
   title = NULL,
   footnote = NULL,
   file = NULL,

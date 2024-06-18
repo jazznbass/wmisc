@@ -13,14 +13,14 @@
 #' @export
 nice_frequencies <- function(data,
                              label = NULL,
-                             auto_labels = FALSE,
+                             auto_labels = TRUE,
                              title = NULL,
                              footnote = NULL,
                              file = NULL,
                              ...) {
   
   on.exit(print_messages())
-  if (auto_labels) label <- attr(data, "label") 
+  if (auto_labels && is.null(label)) label <- attr(data, "label") 
   if (is.null(label)) label <- deparse(substitute(data))
   if (is.null(title)) {
     title <- paste0("Frequency statistics of ", label)
@@ -50,9 +50,9 @@ nice_frequencies <- function(data,
   names(out)[1] <- "Frequency"
   
  
-  
+  out <- cbind(Value = rownames(out), out)
   rownames(out) <- NULL
-  out$Percent = round(out[[1]]/sum(out[[1]], na.rm = TRUE)*100)
+  out$Percent = round(out[[2]]/sum(out[[2]], na.rm = TRUE)*100)
   
   out <- set_wmisc_attributes(out, 
     title = title,
