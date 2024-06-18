@@ -2,6 +2,7 @@
 #'
 #' @param data A data frame
 #' @param label Set label for the variable name.
+#' @param show_missing If TRUE, adds a row for the number of missing values.
 #' @param auto_labels If TRUE, variable names are taken from a label attribute.
 #' @param title Table title.
 #' @param footnote Table footnote.
@@ -13,6 +14,7 @@
 #' @export
 nice_frequencies <- function(data,
                              label = NULL,
+                             show_missing = TRUE,
                              auto_labels = TRUE,
                              title = NULL,
                              footnote = NULL,
@@ -23,7 +25,7 @@ nice_frequencies <- function(data,
   if (auto_labels && is.null(label)) label <- attr(data, "label") 
   if (is.null(label)) label <- deparse(substitute(data))
   if (is.null(title)) {
-    title <- paste0("Frequency statistics of ", label)
+    title <- paste0("Frequency statistics of '", label, "'")
   }
   
   #if (is.null(footnote)) 
@@ -44,14 +46,17 @@ nice_frequencies <- function(data,
   
   #if (auto_labels) data <- rename_from_labels(data) 
   
-  tab <- table(data)
+  tab <- if (show_missing) table(data, useNA = "always") else table(data)
   class(tab) <- NULL
   out <- as.data.frame(tab)
   names(out)[1] <- "Frequency"
   
- 
-  out <- cbind(Value = rownames(out), out)
+  rn <- rownames(out)
+  if (length(which(is.na(rn))) > 0) rn[which(is.na(rn))] <- "Missing"
+  
   rownames(out) <- NULL
+  out <- cbind(Value = rn, out)
+  
   out$Percent = round(out[[2]]/sum(out[[2]], na.rm = TRUE)*100)
   
   out <- set_wmisc_attributes(out, 

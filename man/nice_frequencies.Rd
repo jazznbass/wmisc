@@ -7,6 +7,7 @@
 nice_frequencies(
   data,
   label = NULL,
+  show_missing = TRUE,
   auto_labels = TRUE,
   title = NULL,
   footnote = NULL,
@@ -18,6 +19,8 @@ nice_frequencies(
 \item{data}{A data frame}
 
 \item{label}{Set label for the variable name.}
+
+\item{show_missing}{If TRUE, adds a row for the number of missing values.}
 
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 
