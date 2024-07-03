@@ -6,8 +6,11 @@
 \usage{
 nice_frequencies(
   data,
+  grouping = NULL,
   label = NULL,
+  label_grouping = NULL,
   show_missing = TRUE,
+  show_percent = TRUE,
   auto_labels = TRUE,
   title = NULL,
   footnote = NULL,
@@ -16,11 +19,15 @@ nice_frequencies(
 )
 }
 \arguments{
-\item{data}{A data frame}
+\item{data}{Vector.}
+
+\item{grouping}{A grouping variable as a vector.}
 
 \item{label}{Set label for the variable name.}
 
 \item{show_missing}{If TRUE, adds a row for the number of missing values.}
+
+\item{show_percent}{If TRUE, adds a column for percentages.}
 
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 
@@ -40,4 +47,9 @@ Table with frequency statistics
 }
 \examples{
 nice_frequencies(mtcars[[11]])
+nice_frequencies(
+  mtcars$cyl, mtcars$am, 
+  label = "Cylinders", 
+  label_grouping = "Automatic"
+)
 }

@@ -1,5 +1,11 @@
 
-# wmisc 0.2.23.999
+# wmisc 0.2.25
+
+## Changes
+
+- `nice_frequencies()`: Now has a grouping argument. This allows to create contingency tables (e.g. `nice_frequencies(mtcars$cyl, mtcars$am)`).
+
+# wmisc 0.2.24
 
 ## New Functions
 
