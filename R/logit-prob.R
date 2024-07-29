@@ -14,10 +14,11 @@
 #' @export
 
 logit2prob <- function(logit){
-  if (logit == -Inf) return(0)
-  if (logit == Inf) return(1)
   odds <- exp(logit)
   prob <- odds / (1 + odds)
+  id <- which(logit == Inf)
+  if (length(id) > 0) prob[id] <- 1
+
   prob
 }
 
