@@ -14,6 +14,8 @@
 #' @export
 
 logit2prob <- function(logit){
+  if (logit == -Inf) return(0)
+  if (logit == Inf) return(1)
   odds <- exp(logit)
   prob <- odds / (1 + odds)
   prob
