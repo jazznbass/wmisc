@@ -11,7 +11,7 @@
 #'   automatically created based on the title.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
-#' @param spanner List with informatioon on grouping columns. E.g. `spanner =
+#' @param spanner List with information on grouping columns. E.g. `spanner =
 #'   list("M" = 2:3, "SD" = 4:6)`.
 #' @param row_group List with information on grouping rows `row_group =
 #'   list("Start" = 1:2, "That is the second" = 3:5)`
@@ -68,9 +68,11 @@ nice_table <- function(x,
     return(FALSE)
   }
   
-  # handle deprecated arguments ----
-  deprecated <- list(...)
   engine <- getOption("wmisc.nice.table.engine")
+  
+  # handle deprecated arguments ----
+  
+  deprecated <- list(...)
   if (!is.null(deprecated$header)) spanner <- deprecated$header
   if (!is.null(deprecated$pack)) row_group <- deprecated$pack
   
