@@ -20,6 +20,7 @@
 #' @param round Number of digits to which numbers should be rounded.
 #' @param rownames Logical. If TRUE, rownames are shown.
 #' @param label_na = Label for replacing missing values.
+#' @param markdown If TRUE, interprets cell content as markdown.
 #' @param gt Additional arguments passed to `gt::gt()`
 #' @param ... Various arguments for backward compatibility.
 #' @return A gt table object.
@@ -51,6 +52,7 @@ nice_table <- function(x,
                        decimals = NULL,
                        round = NULL,
                        label_na = NULL,
+                       markdown = FALSE,
                        gt = NULL,
                        ...) {
   
@@ -161,6 +163,9 @@ nice_table <- function(x,
   }
   if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
   if (!is.null(label_na)) out <- gt::sub_missing(out, missing_text = label_na)
+  
+  if (markdown) out <- gt::fmt_markdown(out)
+  
   
   if (!is.null(file)) gt::gtsave(out, file)
     

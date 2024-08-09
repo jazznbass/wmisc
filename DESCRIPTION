@@ -3,9 +3,9 @@ Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
 Version: 0.2.25
-Date: 2024-07-03
-Author: Juergen Wilbert
-Maintainer: Juergen Wilbert <jwilbert@uni-potsdam.de>
+Date: 2024-08-09
+Author: Jürgen Wilbert
+Maintainer: Juergen Wilbert <jazznbass98@gmail.com>
 Imports: 
   stats, 
   nlme, 

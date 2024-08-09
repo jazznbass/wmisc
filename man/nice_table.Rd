@@ -17,6 +17,7 @@ nice_table(
   decimals = NULL,
   round = NULL,
   label_na = NULL,
+  markdown = FALSE,
   gt = NULL,
   ...
 )
@@ -48,6 +49,8 @@ new_name).}
 \item{round}{Number of digits to which numbers should be rounded.}
 
 \item{label_na}{= Label for replacing missing values.}
+
+\item{markdown}{If TRUE, interprets cell content as markdown.}
 
 \item{gt}{Additional arguments passed to \code{gt::gt()}}
 
