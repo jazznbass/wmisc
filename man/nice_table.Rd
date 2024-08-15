@@ -29,7 +29,7 @@ nice_table(
 
 \item{footnote}{Add footnote}
 
-\item{spanner}{List with informatioon on grouping columns. E.g. \code{spanner = list("M" = 2:3, "SD" = 4:6)}.}
+\item{spanner}{List with information on grouping columns. E.g. \code{spanner = list("M" = 2:3, "SD" = 4:6)}.}
 
 \item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}}
 

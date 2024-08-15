@@ -5,10 +5,10 @@
 #' @param model1 The first model.
 #' @param model2 The second model.
 #' @param n Optional vector of group sizes for level 2.
-#' @return A list with the following components: \item{R2.L1}{The R squared
-#'   value for level 1.} \item{R2.L2}{The R squared value for level 2.}
-#'   \item{R2.L1.2}{The combined R squared value for levels 1 and 2.}
-#'   \item{R2.L2.2}{The adjusted R squared value for levels 1 and 2 (with
+#' @return A list with the following components: \item{r2_l1}{The R squared
+#'   value for level 1.} \item{r2_l2}{The R squared value for level 2.}
+#'   \item{r2_l1_2}{The combined R squared value for levels 1 and 2.}
+#'   \item{r2_l2_2}{The adjusted R squared value for levels 1 and 2 (with
 #'   optional group sizes).} \item{n}{The harmonic mean of the group sizes (if
 #'   provided).}
 #' @references Snijders, T. A. B., & Bosker, R. J. (1994). Modeled Variance in
@@ -16,30 +16,37 @@
 #'
 #' @examples
 #' data(sleepstudy, package = "lme4")
-#' model1 <- lme(Reaction ~ 1, data = sleepstudy, random =~ 1|Subject)
-#' model2 <- lme(Reaction ~ Days, data = sleepstudy, random =~ 1|Subject)
-#' multilevel_R2(model1, model2, table(sleepstudy$Subject))
-multilevel_R2 <- function(model1, model2, n = NULL) {
+#' model1 <- nlme::lme(Reaction ~ 1, data = sleepstudy, random =~ 1|Subject)
+#' model2 <- nlme::lme(Reaction ~ Days, data = sleepstudy, random =~ 1|Subject)
+#' multilevel_r2(model1, model2, table(sleepstudy$Subject))
+#' @export
+multilevel_r2 <- function(model1, model2, n = table(model1$groups)) {
   v1 <- VarCorr(model1)
-  v1.L1 <- as.numeric(v1[[2]][1])
-  v1.L2 <- as.numeric(v1[[1]][1])
+  v1_l1 <- as.numeric(v1[[2]][1])
+  v1_l2 <- as.numeric(v1[[1]][1])
   v2 <- VarCorr(model2)
-  v2.L1 <- as.numeric(v2[[2]][1])
-  v2.L2 <- as.numeric(v2[[1]][1])
-  R2.L1 <- 1 - (v2.L1 / v1.L1)
-  R2.L2 <- 1 - (v2.L2 / v1.L2)
-  R2.L1.2 <- 1 - ((v2.L1 + v2.L2) / (v1.L1 + v1.L2))
-  R2.L2.2 <- NA
-  n.harmonic <- NA
+  v2_l1 <- as.numeric(v2[[2]][1])
+  v2_l2 <- as.numeric(v2[[1]][1])
+  r2_l1 <- 1 - (v2_l1 / v1_l1)
+  r2_l2 <- 1 - (v2_l2 / v1_l2)
+  r2_l1_2 <- 1 - ((v2_l1 + v2_l2) / (v1_l1 + v1_l2))
+  r2_l2_2 <- NA
+  n_harmonic <- NA
   if (!is.null(n)) {
     N <- length(as.numeric(n))
-    n.harmonic <- (1 / N * sum(1 / n))^-1
-    R2.L2.2 <- 1 - ((v2.L1 / n.harmonic + v2.L2) / (v1.L1 / n.harmonic + v1.L2))
+    n_harmonic <- (1 / N * sum(1 / n))^-1
+    r2_l2_2 <- 1 - ((v2_l1 / n_harmonic + v2_l2) / (v1_l1 / n_harmonic + v1_l2))
   }
   cat("Multilevel R sqauered for two-level models \n")
-  cat("Level 1:", R2.L1.2, "\n")
-  cat("Level 2:", R2.L2.2, "\n")
+  cat("Level 1:", round(r2_l1_2, 3), "\n")
+  cat("Level 2:", round(r2_l2_2, 3), "\n")
   
-  invisible(c(R2.L1 = R2.L1, R2.L2 = R2.L2, R2.L1.2 = R2.L1.2, R2.L2.2 = R2.L2.2, n = n.harmonic))
+  invisible(list(
+      r2_l1 = r2_l1, 
+      r2_l2 = r2_l2, 
+      r2_l1_2 = r2_l1_2, 
+      r2_l2_2 = r2_l2_2, 
+      n = n_harmonic
+  ))
 }
 

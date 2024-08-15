@@ -14,7 +14,9 @@ nice_regression_table(
   auto_col_names = TRUE,
   file = NULL,
   or = FALSE,
-  nice_p = TRUE
+  nice_p = TRUE,
+  title = "Regression model",
+  footnote = NULL
 )
 }
 \arguments{
