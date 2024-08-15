@@ -29,7 +29,9 @@ nice_regression_table <- function(
     auto_col_names = TRUE,
     file = NULL,
     or = FALSE,
-    nice_p = TRUE
+    nice_p = TRUE,
+    title = "Regression model",
+    footnote = NULL
 ) {
   
   models <- list(...)
@@ -183,7 +185,8 @@ nice_regression_table <- function(
     row_group = row_group,
     row_group_order = c(NA, "Model"),
     label_na = "",
-    title = "Regression model"
+    title = title,
+    footnote = footnote
   )
   nice_table(out, file = file) 
   
