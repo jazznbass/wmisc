@@ -3,6 +3,8 @@
 #' From a data.frame object it gives a correlation matrix formatted for overview
 #'
 #' @param cr A data frame
+#' @param group a vector with a grouping variable or a character with a variable
+#'   name. If included, calculates multilevel correlations.
 #' @param upper TRUE if upper triangle should be included.
 #' @param lower TRUE if lower triangle should be included.
 #' @param digits Round to given digit position.
@@ -31,16 +33,18 @@
 #' @return A data-frame or a html table object
 #' @examples
 #' nice_corrmatrix(mtcars)
-#' nice_corrmatrix(mtcars, 
-#'   show_p = TRUE, 
-#'   show_ci = TRUE, 
-#'   show_stars = FALSE, 
+#' nice_corrmatrix(mtcars,
+#'   show_p = TRUE,
+#'   show_ci = TRUE,
+#'   show_stars = FALSE,
 #'   show_descriptives = FALSE,
 #'   conf.level = 0.99
 #' )
+#' nice_corrmatrix(mtcars, group = "cyl")
 #' @export
 
 nice_corrmatrix <- function(cr, 
+                            group = NULL,
                             upper = FALSE, 
                             lower = TRUE,
                             digits = 2, 
@@ -58,7 +62,7 @@ nice_corrmatrix <- function(cr,
                             char_NA = "", 
                             string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
                             string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
-                            caption = "Correlation matrix",
+                            caption = NULL,
                             drop_zero = TRUE,
                             type = "html", 
                             file = NULL,
@@ -76,10 +80,34 @@ nice_corrmatrix <- function(cr,
       )    
     }
     
-    .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
-    .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
-    .n <- apply(cr, 2, function(x) sum(!is.na(x)))
-    cr <- corrmatrix(cr, ...)
+    
+    if (is.null(group)) {
+      .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
+      .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
+      .n <- apply(cr, 2, function(x) sum(!is.na(x)))
+      cr <- corrmatrix(cr, ...)
+      if (is.null(caption)) caption <- "Correlation matrix"
+      footnote <- NULL
+    } else {
+      if (is.null(caption)) {
+        caption <- paste0(
+          "Multilevel correlation matrix with ", 
+          deparse(substitute(group)), " as the grouping variable"
+        )
+  
+      }
+      if (identical(length(group), 1L)) {
+        group2 <- cr[[group]]
+        cr <- cr[,-which(names(cr) == group)]
+        group <- group2
+      }
+      
+      .means <- sapply(cr, \(x) tapply(x, group, \(x) mean(x, na.rm = TRUE)) |> mean(na.rm = TRUE))
+      .sds <- sapply(cr, \(x) tapply(x, group, \(x) mean(x, na.rm = TRUE)) |> sd(na.rm = TRUE))
+      .n <- sapply(cr, \(x) unique(group[which(!is.na(x))]) |> length())
+      cr <- multilevel_corrmatrix(cr, group = group)
+      footnote <- "n is the number of groups, M is the mean of the means of each group, SD is the between group standard deviation"
+    }
   }
   
   r <- cr$r
@@ -157,8 +185,10 @@ nice_corrmatrix <- function(cr,
     title = caption, 
     note = if (show_stars) {paste0(
       char_p10, 
-      "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001"
-    )} else NULL
+      "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001",
+      ". ",
+      footnote
+    )} else footnote
   )
   
   if (type == "df") {
@@ -197,13 +227,17 @@ corrmatrix <- function(x, digits = 2, p = TRUE, ci = FALSE, ...) {
         next
       }  
       if (p) {
-        res <- cor.test(x[[i]], x[[j]], ...)  
+        res <- cor.test(x[[i]], x[[j]])#, ...)  
         out_r[i, j] <- res$estimate
         out_p[i, j] <- res$p.value
         out_t[i, j] <- res$statistic
         out_df[i, j] <- res$parameter
-        out_lower[i, j] <- res$conf.int[1]
-        out_upper[i, j] <- res$conf.int[2]
+        conf_int <- res$conf.int
+        if (!is.null(conf_int)) {
+          out_lower[i, j] <- conf_int[1]
+          out_upper[i, j] <- conf_int[2]
+        }
+        
       } else {
         out_r[i, j] <- cor(x[[i]], x[[j]]) 
       }
@@ -221,3 +255,55 @@ corrmatrix <- function(x, digits = 2, p = TRUE, ci = FALSE, ...) {
   )  
 }
 
+multilevel_corrmatrix <- function(x, group, ci = 0.95) {
+  
+  n_vars <- ncol(x)
+  out_r <- matrix(rep(NA, n_vars * n_vars), ncol = n_vars)
+  rownames(out_r) <- names(x)
+  colnames(out_r) <- names(x)
+  
+  out_p <- out_t <- out_df <- out_upper <- out_lower <- out_r
+  
+  for(i in 1:n_vars) {
+    for(j in 1:n_vars) {
+      if(j == i) {
+        out_r[i, j] <- 1
+        next
+      }  
+      
+      model_a <- lme4::lmer(x[[i]] ~  (1 | group))
+      model_b <- lme4::lmer(x[[j]] ~  (1 | group))
+      res <- cor.test(residuals(model_a), residuals(model_b))
+      out_r[i, j] <- res$estimate
+      out_p[i, j] <- res$p.value
+      out_t[i, j] <- res$statistic
+      out_df[i, j] <- res$parameter
+      out_lower[i, j] <- res$conf.int[1]
+      out_upper[i, j] <- res$conf.int[2]
+      
+      #out_r[i, j] <- res$tTable["v2", "Value"]
+      #out_p[i, j] <- res$tTable["v2", "p-value"]
+      #out_t[i, j] <- res$tTable["v2", "t-value"]
+      #out_df[i, j] <- res$tTable["v2", "DF"]
+      
+      #if(is.numeric(ci)) {
+      #  se <- qnorm((1 - ci) / 2, lower.tail = FALSE)
+      #  se <- se * res$tTable["v2", "Std.Error"]
+      #  out_lower[i, j] <- 
+      #    inv_fisher_z(fisher_z(out_r[i, j]) - se)
+      #  out_upper[i, j] <- 
+      #    inv_fisher_z(fisher_z(out_r[i, j]) + se)
+      #}
+      
+    }
+  }
+  
+  diag(out_p) <- 1
+  list(
+    r = out_r,
+    p = out_p,
+    df = out_df,
+    ci = list(lower = out_lower, upper = out_upper),
+    t = out_t
+  )  
+}

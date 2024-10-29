@@ -18,7 +18,7 @@ table using the gt packages."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.25</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.26</span>
       </span>
     </div>
 
@@ -62,6 +62,7 @@ table using the <code>gt</code> packages.</p>
 <span>  decimals <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  round <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  label_na <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  markdown <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  gt <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -82,7 +83,7 @@ table using the <code>gt</code> packages.</p>
 
 
 <dt>spanner</dt>
-<dd><p>List with informatioon on grouping columns. E.g. <code>spanner = list("M" = 2:3, "SD" = 4:6)</code>.</p></dd>
+<dd><p>List with information on grouping columns. E.g. <code>spanner = list("M" = 2:3, "SD" = 4:6)</code>.</p></dd>
 
 
 <dt>row_group</dt>
@@ -120,6 +121,10 @@ new_name).</p></dd>
 <dd><p>= Label for replacing missing values.</p></dd>
 
 
+<dt>markdown</dt>
+<dd><p>If TRUE, interprets cell content as markdown.</p></dd>
+
+
 <dt>gt</dt>
 <dd><p>Additional arguments passed to <code><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt::gt()</a></code></p></dd>
 
@@ -150,23 +155,23 @@ new_name).</p></dd>
 <span class="r-in"><span>  cols_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"First"</span>, y <span class="op">=</span> <span class="st">"Second"</span>, c <span class="op">=</span> <span class="st">"Third"</span>, d <span class="op">=</span> <span class="st">"Fourth"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  decimals <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div id="piqfybyzcz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;style&gt;#piqfybyzcz table {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div id="zazvltdvnv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;style&gt;#zazvltdvnv table {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -webkit-font-smoothing: antialiased;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -moz-osx-font-smoothing: grayscale;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz thead, #piqfybyzcz tbody, #piqfybyzcz tfoot, #piqfybyzcz tr, #piqfybyzcz td, #piqfybyzcz th {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv thead, #zazvltdvnv tbody, #zazvltdvnv tfoot, #zazvltdvnv tr, #zazvltdvnv td, #zazvltdvnv th {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-style: none;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz p {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv p {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_table {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_table {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   display: table;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-collapse: collapse;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   line-height: normal;</span>
@@ -192,12 +197,12 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_caption {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_caption {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_title {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_title {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
@@ -209,7 +214,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_subtitle {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_subtitle {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 85%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
@@ -221,7 +226,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_heading {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
@@ -233,13 +238,13 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_bottom_border {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_bottom_border {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 3px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_col_headings {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_col_headings {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 3px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #000000;</span>
@@ -254,7 +259,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_col_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_col_heading {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
@@ -274,7 +279,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_column_spanner_outer {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_column_spanner_outer {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
@@ -286,15 +291,15 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 4px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_column_spanner_outer:first-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_column_spanner_outer:first-child {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_column_spanner_outer:last-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_column_spanner_outer:last-child {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_column_spanner {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_column_spanner {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
@@ -306,11 +311,11 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   width: 100%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_spanner_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_spanner_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: hidden;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_group_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_group_heading {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
@@ -336,7 +341,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_empty_group_heading {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_empty_group_heading {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0.5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
@@ -351,15 +356,15 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_from_md &gt; :first-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_from_md &gt; :first-child {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   margin-top: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_from_md &gt; :last-child {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_from_md &gt; :last-child {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   margin-bottom: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
@@ -378,7 +383,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_stub {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_stub {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
@@ -391,7 +396,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_stub_row_group {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_stub_row_group {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
@@ -405,15 +410,15 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: top;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_row_group_first td {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_row_group_first td {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_row_group_first th {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_row_group_first th {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_summary_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
@@ -423,16 +428,16 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_first_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_first_summary_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_first_summary_row.thick {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_first_summary_row.thick {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_last_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_last_summary_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
@@ -442,7 +447,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_grand_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_grand_summary_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
@@ -452,7 +457,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_first_grand_summary_row {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_first_grand_summary_row {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
@@ -462,7 +467,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_last_grand_summary_row_top {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_last_grand_summary_row_top {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
@@ -472,11 +477,11 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_striped {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_striped {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: rgba(128, 128, 128, 0.05);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_table_body {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_table_body {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 3px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #000000;</span>
@@ -485,7 +490,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_footnotes {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_footnotes {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
@@ -499,7 +504,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_footnote {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_footnote {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
@@ -508,7 +513,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_sourcenotes {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_sourcenotes {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
@@ -522,7 +527,7 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_sourcenote {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_sourcenote {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
@@ -530,63 +535,63 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_left {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_left {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_center {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_center {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: center;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_right {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_right {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: right;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-variant-numeric: tabular-nums;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_font_normal {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_font_normal {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_font_bold {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_font_bold {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: bold;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_font_italic {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_font_italic {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-style: italic;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_super {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_super {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 65%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_footnote_marks {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_footnote_marks {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 75%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0.4em;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   position: initial;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_asterisk {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_asterisk {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_indent_1 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_indent_1 {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 5px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_indent_2 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_indent_2 {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 10px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_indent_3 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_indent_3 {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 15px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_indent_4 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_indent_4 {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 20px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #piqfybyzcz .gt_indent_5 {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> #zazvltdvnv .gt_indent_5 {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 25px;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/style&gt;</span>
@@ -616,28 +621,28 @@ new_name).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th colspan="4" class="gt_group_heading" style="text-align: center;" scope="colgroup" id="Start"&gt;Start&lt;/th&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_row_group_first"&gt;&lt;td headers="Start  x" class="gt_row gt_left"&gt;1.0&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  y" class="gt_row gt_center"&gt;−7.7&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  y" class="gt_row gt_center"&gt;16.4&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  c" class="gt_row gt_center"&gt;e&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  d" class="gt_row gt_center"&gt;y&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Start  x" class="gt_row gt_left"&gt;2.0&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  y" class="gt_row gt_center"&gt;0.2&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  y" class="gt_row gt_center"&gt;6.3&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  c" class="gt_row gt_center"&gt;d&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  d" class="gt_row gt_center"&gt;a&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Start  d" class="gt_row gt_center"&gt;b&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_group_heading_row"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th colspan="4" class="gt_group_heading" style="text-align: center;" scope="colgroup" id="That is the second"&gt;That is the second&lt;/th&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_row_group_first"&gt;&lt;td headers="That is the second  x" class="gt_row gt_left"&gt;3.0&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;35.0&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;7.1&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  c" class="gt_row gt_center"&gt;c&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;n&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;c&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="That is the second  x" class="gt_row gt_left"&gt;4.0&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;13.2&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;6.5&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  c" class="gt_row gt_center"&gt;b&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;x&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;h&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="That is the second  x" class="gt_row gt_left"&gt;5.0&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;18.6&lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  y" class="gt_row gt_center"&gt;−3.5&lt;/td&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  c" class="gt_row gt_center"&gt;a&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;b&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="That is the second  d" class="gt_row gt_center"&gt;d&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tbody&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tfoot class="gt_footnotes"&gt;</span>

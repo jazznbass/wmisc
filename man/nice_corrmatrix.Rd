@@ -6,6 +6,7 @@
 \usage{
 nice_corrmatrix(
   cr,
+  group = NULL,
   upper = FALSE,
   lower = TRUE,
   digits = 2,
@@ -23,7 +24,7 @@ nice_corrmatrix(
   char_NA = "",
   string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
   string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
-  caption = "Correlation matrix",
+  caption = NULL,
   drop_zero = TRUE,
   type = "html",
   file = NULL,
@@ -32,6 +33,9 @@ nice_corrmatrix(
 }
 \arguments{
 \item{cr}{A data frame}
+
+\item{group}{a vector with a grouping variable or a character with a variable
+name. If included, calculates multilevel correlations.}
 
 \item{upper}{TRUE if upper triangle should be included.}
 
@@ -86,11 +90,12 @@ From a data.frame object it gives a correlation matrix formatted for overview
 }
 \examples{
 nice_corrmatrix(mtcars)
-nice_corrmatrix(mtcars, 
-  show_p = TRUE, 
-  show_ci = TRUE, 
-  show_stars = FALSE, 
+nice_corrmatrix(mtcars,
+  show_p = TRUE,
+  show_ci = TRUE,
+  show_stars = FALSE,
   show_descriptives = FALSE,
   conf.level = 0.99
 )
+nice_corrmatrix(mtcars, group = "cyl")
 }
