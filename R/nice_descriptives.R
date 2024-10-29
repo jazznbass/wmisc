@@ -21,9 +21,19 @@ nice_descriptives <- function(data,
     footnote <- paste0("MAD is the median average deviation with a ",
                        "consistency adjustment")
   
-  
+
+  .logical <- sapply(data, is.logical)
+  if (any(.logical)) {
+    for (i in seq_along(data)) {
+      if (.logical[i]) data[[i]] <- as.numeric(data[[i]])
+    }
+    add_message(
+      "Some variables were converted from logical to numeric: ",
+      paste0(names(data)[.logical], collapse = ", ")
+    )
+  }
+
   .filter <- sapply(data, is.numeric)
-  
   if (any(!.filter)) {
     add_message(
       "Some variables are not numeric and dropped from the analysis: ",
