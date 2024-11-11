@@ -32,7 +32,7 @@ nice_descriptives <- function(data,
       paste0(names(data)[.logical], collapse = ", ")
     )
   }
-
+  
   .filter <- sapply(data, is.numeric)
   if (any(!.filter)) {
     add_message(

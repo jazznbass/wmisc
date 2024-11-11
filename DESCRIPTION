@@ -2,8 +2,8 @@ Package: wmisc
 Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
-Version: 0.2.26
-Date: 2024-10-29
+Version: 0.2.27
+Date: 2024-11-11
 Author: Jürgen Wilbert
 Maintainer: Juergen Wilbert <jazznbass98@gmail.com>
 Imports: 
