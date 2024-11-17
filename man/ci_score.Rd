@@ -9,13 +9,17 @@ ci_score(x, rtt, m, s, ci)
 \arguments{
 \item{x}{Numeric value representing the observed test score.}
 
-\item{rtt}{Numeric value between 0 and 1 indicating the reliability coefficient of the test (e.g., test-retest reliability).}
+\item{rtt}{Numeric value between 0 and 1 indicating the reliability
+coefficient of the test (e.g., test-retest reliability).}
 
-\item{m}{Numeric value representing the mean of the test scores in the population.}
+\item{m}{Numeric value representing the mean of the test scores in the
+population.}
 
-\item{s}{Numeric value representing the standard deviation of the test scores in the population.}
+\item{s}{Numeric value representing the standard deviation of the test scores
+in the population.}
 
-\item{ci}{Numeric value between 0 and 1 indicating the desired confidence level (e.g., 0.95 for a 95\% confidence interval).}
+\item{ci}{Numeric value between 0 and 1 indicating the desired confidence
+level (e.g., 0.95 for a 95\% confidence interval).}
 }
 \value{
 A list containing the following components:
@@ -52,21 +56,23 @@ A named numeric vector with additional parameters:
 \itemize{
 \item \code{se}: Standard error of measurement adjusted for reliability.
 \item \code{ci}: Confidence level used.
-\item \code{ci_factor}: Z-score multiplier corresponding to the confidence level.
+\item \code{z}: Z-score multiplier corresponding to the confidence level.
 }
 }
 }
 }
 \description{
-Calculates the confidence interval around an observed test score, adjusting for test reliability.
-Returns the confidence interval in raw score units, z-scores, and percentiles.
+Calculates the confidence interval around an observed test
+score, adjusting for test reliability. Returns the confidence interval in raw
+score units, z-scores, and percentiles.
 }
 \details{
 The standard error (\code{se}) is calculated using the formula:
-\deqn{se = s \times \sqrt{1 - rtt}}
-where \code{s} is the standard deviation and \code{rtt} is the reliability coefficient.
+\deqn{se = s \times \sqrt{1 - rtt}} where \code{s} is the standard deviation
+and \code{rtt} is the reliability coefficient.
 
-The confidence interval is computed using the normal distribution quantile corresponding to the specified confidence level.
+The confidence interval is computed using the normal distribution quantile
+corresponding to the specified confidence level.
 }
 \examples{
 # Calculate a 95\% confidence interval for an observed score of 100

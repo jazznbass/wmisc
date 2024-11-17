@@ -1,21 +1,25 @@
 #' Compute Confidence Intervals for Test Scores Adjusted for Reliability
 #'
-#' @description
-#' Calculates the confidence interval around an observed test score, adjusting for test reliability.
-#' Returns the confidence interval in raw score units, z-scores, and percentiles.
+#' @description Calculates the confidence interval around an observed test
+#' score, adjusting for test reliability. Returns the confidence interval in raw
+#' score units, z-scores, and percentiles.
 #'
 #' @param x Numeric value representing the observed test score.
-#' @param rtt Numeric value between 0 and 1 indicating the reliability coefficient of the test (e.g., test-retest reliability).
-#' @param m Numeric value representing the mean of the test scores in the population.
-#' @param s Numeric value representing the standard deviation of the test scores in the population.
-#' @param ci Numeric value between 0 and 1 indicating the desired confidence level (e.g., 0.95 for a 95% confidence interval).
+#' @param rtt Numeric value between 0 and 1 indicating the reliability
+#'   coefficient of the test (e.g., test-retest reliability).
+#' @param m Numeric value representing the mean of the test scores in the
+#'   population.
+#' @param s Numeric value representing the standard deviation of the test scores
+#'   in the population.
+#' @param ci Numeric value between 0 and 1 indicating the desired confidence
+#'   level (e.g., 0.95 for a 95% confidence interval).
 #'
-#' @details
-#' The standard error (\code{se}) is calculated using the formula:
-#' \deqn{se = s \times \sqrt{1 - rtt}}
-#' where \code{s} is the standard deviation and \code{rtt} is the reliability coefficient.
+#' @details The standard error (\code{se}) is calculated using the formula:
+#' \deqn{se = s \times \sqrt{1 - rtt}} where \code{s} is the standard deviation
+#' and \code{rtt} is the reliability coefficient.
 #'
-#' The confidence interval is computed using the normal distribution quantile corresponding to the specified confidence level.
+#' The confidence interval is computed using the normal distribution quantile
+#' corresponding to the specified confidence level.
 #'
 #' @return A list containing the following components:
 #' \describe{
@@ -51,7 +55,7 @@
 #'     \itemize{
 #'       \item \code{se}: Standard error of measurement adjusted for reliability.
 #'       \item \code{ci}: Confidence level used.
-#'       \item \code{ci_factor}: Z-score multiplier corresponding to the confidence level.
+#'       \item \code{z}: Z-score multiplier corresponding to the confidence level.
 #'     }
 #'   }
 #' }
@@ -63,19 +67,19 @@
 #' @export
 ci_score <- function(x, rtt, m, s, ci) {
   se <- s * sqrt(1 - rtt)
-  mul <- qnorm((1 - ci)/2,lower.tail = FALSE)
-  #cat(paste0("ci"))
+  z <- qnorm((1 + ci) / 2)
+  
   out <- list()
   out$scale <- c(
-    lower = x - mul * se, x = x,
-    upper = x + mul * se,
-    range = (x + mul * se) - (x - mul * se)
+    lower = x - z * se, x = x,
+    upper = x + z * se,
+    range = (x + z * se) - (x - z * se)
   ) |> round(2)
   out$z = c(
-    lower = ((x - mul * se) - m) / s,
+    lower = ((x - z * se) - m) / s,
     x = (x - m) / s,
-    upper = ((x + mul * se) - m) / s,
-    range = (mul*se)/s*2
+    upper = ((x + z * se) - m) / s,
+    range = (z*se)/s*2
   ) |> round(3)
   out$percentile <- pnorm(out$z[1:3]) * 100
   out$percentile[4] <- out$percentile[3]- out$percentile[1]
@@ -85,7 +89,7 @@ ci_score <- function(x, rtt, m, s, ci) {
   out$parameters <- c(
     se = se,
     ci = ci,
-    ci_factor = mul
+    z = z
   ) |> round(3)
   out
 }
