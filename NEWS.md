@@ -5,8 +5,9 @@
 
 - `nice_frequencies()`: Now has a grouping argument. This allows to create contingency tables (e.g. `nice_frequencies(mtcars$cyl, mtcars$am)`).
 - `nice_table()`: New argument `markdown`. If TRUE, interprets cell content as markdown.
-- `ci_score()`: Returns confidence intervalls for testscores.
+- `ci_score()`: Returns confidence intervals for test scores.
 - `critical_difference()`
+- `nice_regression_table()`: Support for `gls` models.
 
 # wmisc 0.2.24
 

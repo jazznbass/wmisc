@@ -390,3 +390,31 @@ extract_model_param.lmerMod <- function(model, ...) {
   extract_model_param(lmerTest::as_lmerModLmerTest(model))
 }
 
+
+#' @export
+extract_model_param.gls <- function(model, or = FALSE, ...) {
+  
+  model_summary <- summary(model)
+  
+  out <- list()
+  
+  out$auto_labels <- get_labels(model$model)
+  out$labels_models <- model$terms[[2]] |> as.character()
+  
+  out$add_param$Observations <- model$dims$N
+  out$add_param[["R\u00b2"]] <- performance::r2(model)$R2
+  #out$add_param[["R\u00b2 adjusted"]] <- model_summary$adj.r.squared
+  out$add_param[["Residual"]] <- model_summary$sigma^2
+  out$add_param[["AIC"]] <- model_summary$AIC
+  out$add_param[["BIC"]] <- model_summary$BIC
+  #if (inherits(model, "glm")) out$add_param$"R\u00b2 Tjur" <-  performance::r2_tjur(model)
+  
+  out$estimates$fixed <- as.data.frame(coef(model_summary))
+  out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
+  
+  if (or) {
+    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
+  }  
+  
+  out
+}
