@@ -41,7 +41,7 @@ nice_agreement_table <- function(data,
                                  grouping, 
                                  rv, 
                                  crit = 0.7, 
-                                 min_group_size = NULL,
+                                 min_group_size = 0,
                                  auto_labels = TRUE,
                                  labels = NULL, 
                                  n_sim = 10000) {
@@ -56,7 +56,7 @@ agreement_analysis <- function(data,
                                grouping, 
                                rv, 
                                crit = 0.7, 
-                               min_group_size = NULL,
+                               min_group_size = 0,
                                auto_labels = TRUE,
                                labels = NULL, 
                                n_sim = 10000) {
@@ -93,7 +93,7 @@ agreement_analysis <- function(data,
   }
 
   for (i in 1:length(vars)) {
-    
+   
     x <- data.frame(
       x = data[[vars[i]]],
       group = group_total
