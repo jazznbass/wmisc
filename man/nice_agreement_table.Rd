@@ -10,7 +10,7 @@ nice_agreement_table(
   grouping,
   rv,
   crit = 0.7,
-  min_group_size = NULL,
+  min_group_size = 0,
   auto_labels = TRUE,
   labels = NULL,
   n_sim = 10000

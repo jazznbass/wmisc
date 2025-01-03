@@ -1,12 +1,18 @@
 
-# wmisc 0.2.25
+# wmisc 0.2.28
+
+## New Functions
+
+- `ci_score()`: Returns confidence intervals for test scores.
+- `critical_difference()`: Returns critical difference for test scores.
+- `nice_contingency_table()`: Creates a nicely formatted contingency table with one or more summary functions.
 
 ## Changes
 
 - `nice_frequencies()`: Now has a grouping argument. This allows to create contingency tables (e.g. `nice_frequencies(mtcars$cyl, mtcars$am)`).
 - `nice_table()`: New argument `markdown`. If TRUE, interprets cell content as markdown.
-- `ci_score()`: Returns confidence intervals for test scores.
-- `critical_difference()`
+- `nice_table()`: Now a generic function with methods to `nice_regression_table`, `nice_efa`, and a default method for data.frame.
+- `nice_table()`: `rownames = NULL` will now automatically show row names when they are not `as.character(1:nrow(x))`.
 - `nice_regression_table()`: Support for `gls` models.
 
 # wmisc 0.2.24

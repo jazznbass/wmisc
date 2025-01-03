@@ -3,7 +3,8 @@
 \name{wmisc_data}
 \alias{wmisc_data}
 \alias{ex_itrf,}
-\alias{ex_itrf_scales}
+\alias{ex_itrf_scales,}
+\alias{mtcars_labeled}
 \title{Wmisc example data}
 \description{
 Wmisc example data
