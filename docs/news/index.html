@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-news">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.27</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.28</span>
       </span>
     </div>
 
@@ -32,25 +32,38 @@
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      
+
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.25" id="wmisc-0225">wmisc 0.2.25<a class="anchor" aria-label="anchor" href="#wmisc-0225"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.28" id="wmisc-0228">wmisc 0.2.28<a class="anchor" aria-label="anchor" href="#wmisc-0228"></a></h2>
 <div class="section level3">
-<h3 id="changes-0-2-25">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-25"></a></h3>
+<h3 id="new-functions-0-2-28">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-28"></a></h3>
+<ul><li>
+<code><a href="../reference/ci_score.html">ci_score()</a></code>: Returns confidence intervals for test scores.</li>
+<li>
+<code><a href="../reference/critical_difference.html">critical_difference()</a></code>: Returns critical difference for test scores.</li>
+<li>
+<code><a href="../reference/nice_contingency_table.html">nice_contingency_table()</a></code>: Creates a nicely formatted contingency table with one or more summary functions.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-0-2-28">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-28"></a></h3>
 <ul><li>
 <code><a href="../reference/nice_frequencies.html">nice_frequencies()</a></code>: Now has a grouping argument. This allows to create contingency tables (e.g. <code>nice_frequencies(mtcars$cyl, mtcars$am)</code>).</li>
 <li>
-<code><a href="../reference/nice_table.html">nice_table()</a></code>: New argument <code>markdown</code>. If TRUE, interprets cell content as markdown.</li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: New argument <code>markdown</code>. If TRUE, interprets cell content as markdown.</li>
 <li>
-<code><a href="../reference/ci_score.html">ci_score()</a></code>: Returns confidence intervalls for testscores.</li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: Now a generic function with methods to <code>nice_regression_table</code>, <code>nice_efa</code>, and a default method for data.frame.</li>
+<li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: <code>rownames = NULL</code> will now automatically show row names when they are not <code>as.character(1:nrow(x))</code>.</li>
+<li>
+<code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>: Support for <code>gls</code> models.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -156,15 +169,15 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

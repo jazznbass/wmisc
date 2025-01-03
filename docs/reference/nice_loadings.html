@@ -3,8 +3,8 @@
 psych::fa function"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+<![endif]--><!-- dependencies from examples --></head><body data-spy="scroll" data-target="#toc">
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -18,7 +18,7 @@ psych::fa function"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.27</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.28</span>
       </span>
     </div>
 
@@ -33,13 +33,13 @@ psych::fa function"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Creates table of loadings of exploratory factor analysis based on the psych::fa function</h1>
-    
+
     <div class="hidden name"><code>nice_loadings.Rd</code></div>
     </div>
 
@@ -65,595 +65,118 @@ psych::fa function</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>x</dt>
+
+
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>Object returned from the psych::fa function.</p></dd>
 
 
-<dt>factor_names</dt>
+<dt id="arg-factor-names">factor_names<a class="anchor" aria-label="anchor" href="#arg-factor-names"></a></dt>
 <dd><p>A character vector with names for the resulting factors.
 If not provided, default names are chosen.</p></dd>
 
 
-<dt>sort</dt>
+<dt id="arg-sort">sort<a class="anchor" aria-label="anchor" href="#arg-sort"></a></dt>
 <dd><p>If TRUE, loadings are sorted.</p></dd>
 
 
-<dt>cut</dt>
+<dt id="arg-cut">cut<a class="anchor" aria-label="anchor" href="#arg-cut"></a></dt>
 <dd><p>Loadings below cut will be omitted in the resulting data frame.</p></dd>
 
 
-<dt>round</dt>
+<dt id="arg-round">round<a class="anchor" aria-label="anchor" href="#arg-round"></a></dt>
 <dd><p>Number of digits to round loadings (based on the base::round
 function)</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A data.frame</p>
+    <p>A data.frame</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu">psych</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/psych/man/fa.html" class="external-link">fa</a></span><span class="op">(</span>nfactors <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">nice_efa</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: GPArotation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div id="ljjbjgwtlm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;style&gt;#ljjbjgwtlm table {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -webkit-font-smoothing: antialiased;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -moz-osx-font-smoothing: grayscale;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm thead, #ljjbjgwtlm tbody, #ljjbjgwtlm tfoot, #ljjbjgwtlm tr, #ljjbjgwtlm td, #ljjbjgwtlm th {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm p {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_table {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   display: table;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-collapse: collapse;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   line-height: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-left: auto;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-right: auto;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 16px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-style: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   width: auto;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_caption {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_title {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_subtitle {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 85%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 3px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_heading {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_bottom_border {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 3px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_col_headings {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 3px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_col_heading {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: bottom;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 6px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_column_spanner_outer {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_column_spanner_outer:first-child {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_column_spanner_outer:last-child {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_column_spanner {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: bottom;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   display: inline-block;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   width: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_spanner_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: hidden;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_group_heading {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_empty_group_heading {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding: 0.5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_from_md &gt; :first-child {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-top: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_from_md &gt; :last-child {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin-bottom: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 10px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 0px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 1px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: middle;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   overflow-x: hidden;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_stub {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_stub_row_group {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: top;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_row_group_first td {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_row_group_first th {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_summary_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_first_summary_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_first_summary_row.thick {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_last_summary_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_grand_summary_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-transform: inherit;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_first_grand_summary_row {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: double;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 6px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_last_grand_summary_row_top {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 8px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: double;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 6px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_striped {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: rgba(128, 128, 128, 0.05);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_table_body {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-width: 3px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-top-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: solid;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 3px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #000000;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_footnotes {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_footnote {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   margin: 0px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_sourcenotes {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   color: #333333;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   background-color: #FFFFFF;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-bottom-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-left-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-style: none;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-width: 2px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   border-right-color: #D3D3D3;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_sourcenote {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 90%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-top: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-bottom: 4px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-left: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   padding-right: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_left {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: left;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_center {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: center;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_right {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-align: right;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-variant-numeric: tabular-nums;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_font_normal {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: normal;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_font_bold {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-weight: bold;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_font_italic {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-style: italic;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_super {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 65%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_footnote_marks {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 75%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0.4em;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   position: initial;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_asterisk {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   font-size: 100%;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertical-align: 0;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_indent_1 {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 5px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_indent_2 {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 10px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_indent_3 {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 15px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_indent_4 {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 20px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> #ljjbjgwtlm .gt_indent_5 {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   text-indent: 25px;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/style&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;thead&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_heading"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style&gt;&lt;strong&gt;Table&lt;/strong&gt;&lt;br&gt;  &lt;em&gt;Loading matrix&lt;/em&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_col_headings gt_spanner_row"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="Variables"&gt;Variables&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Factors"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;span class="gt_column_spanner"&gt;Factors&lt;/span&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="Communalities"&gt;Communalities&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="Complexity"&gt;Complexity&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_col_headings"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="MR1"&gt;MR1&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="MR2"&gt;MR2&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/thead&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tbody class="gt_table_body"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_group_heading_row"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th colspan="5" class="gt_group_heading" style="text-align: center;" scope="colgroup" id="Loadings"&gt;Loadings&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_row_group_first"&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;qsec&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;-0.92&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;-0.35&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.78&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.29&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;hp&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.89&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.88&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.04&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;carb&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.85&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;0.24&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.66&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.16&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;vs&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;-0.8&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.71&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.05&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;cyl&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.71&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;-0.48&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.94&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.75&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;mpg&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;-0.61&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;0.54&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.85&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.98&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;am&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;0.93&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.82&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.04&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;gear&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.22&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;0.93&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.8&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.11&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;drat&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;0.78&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.71&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.1&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;wt&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.42&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;-0.7&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.82&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;1.64&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Loadings  Variables" class="gt_row gt_left"&gt;disp&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR1" class="gt_row gt_center"&gt;0.58&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  MR2" class="gt_row gt_center"&gt;-0.6&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Communalities" class="gt_row gt_center"&gt;0.9&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Loadings  Complexity" class="gt_row gt_center"&gt;2&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_group_heading_row"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;th colspan="5" class="gt_group_heading" style="text-align: center;" scope="colgroup" id="Variances"&gt;Variances&lt;/th&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr class="gt_row_group_first"&gt;&lt;td headers="Variances  Variables" class="gt_row gt_left"&gt;Eigenvalues&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR1" class="gt_row gt_center"&gt;4.71&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR2" class="gt_row gt_center"&gt;4.15&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Communalities" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Complexity" class="gt_row gt_center"&gt;&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Variances  Variables" class="gt_row gt_left"&gt;Explained variance&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR1" class="gt_row gt_center"&gt;0.43&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR2" class="gt_row gt_center"&gt;0.38&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Communalities" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Complexity" class="gt_row gt_center"&gt;&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Variances  Variables" class="gt_row gt_left"&gt;Cumulative explained variance&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR1" class="gt_row gt_center"&gt;0.43&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR2" class="gt_row gt_center"&gt;0.81&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Communalities" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Complexity" class="gt_row gt_center"&gt;&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Variances  Variables" class="gt_row gt_left"&gt;Proportion explained variance&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR1" class="gt_row gt_center"&gt;0.53&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR2" class="gt_row gt_center"&gt;0.47&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Communalities" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Complexity" class="gt_row gt_center"&gt;&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;&lt;td headers="Variances  Variables" class="gt_row gt_left"&gt;Cumulative proportion explained variance&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR1" class="gt_row gt_center"&gt;0.53&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  MR2" class="gt_row gt_center"&gt;1&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Communalities" class="gt_row gt_center"&gt;&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;td headers="Variances  Complexity" class="gt_row gt_center"&gt;&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tbody&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tfoot class="gt_footnotes"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;td class="gt_footnote" colspan="5"&gt; &lt;em&gt;Note.&lt;/em&gt; Extraction method is minres. Rotation method is oblimin. RMSEA is 0.178 CI90% [0.121, 0.245]. Loadings below |0.2| are not displayed.&lt;/td&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/tr&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tfoot&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/div&gt;</span>
-<span class="r-in"><span></span></span>
+<div class="gt-table"><div id="mhyejnicqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+
+  <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #FFFFFF; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF"><thead style="border-style: none;"><tr class="gt_heading" style="border-style: none; background-color: #FFFFFF; text-align: left; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;" bgcolor="#FFFFFF" align="left"><td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="border-style: none; color: #333333; font-size: 100%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; background-color: #FFFFFF; text-align: left; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #000000; font-weight: normal;" bgcolor="#FFFFFF" align="left"><span class="gt_from_md"><strong style="margin-top: 0;">Table</strong><br><em style="margin-bottom: 0;">Loading matrix</em></span></td>
+    </tr><tr class="gt_col_headings gt_spanner_row" style="border-style: none; border-top-style: solid; border-top-width: 3px; border-top-color: #000000; border-bottom-width: 2px; border-bottom-color: #000000; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; border-bottom-style: hidden;"><th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="Variables" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">Variables</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Factors" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; text-align: center;" bgcolor="#FFFFFF" align="center">
+        <div class="gt_column_spanner" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #000000; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%;">Factors</div>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="Communalities" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Communalities</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="Complexity" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Complexity</th>
+    </tr><tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 3px; border-top-color: #000000; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #000000; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;"><th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="MR1" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">MR1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="MR2" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">MR2</th>
+    </tr></thead><tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 3px; border-top-color: #000000; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #000000;"><tr class="gt_group_heading_row" style="border-style: none;"><th colspan="5" class="gt_group_heading" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: center;" scope="colgroup" id="Loadings" align="center" bgcolor="#FFFFFF" valign="middle">Loadings</th>
+    </tr><tr class="gt_row_group_first" style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left; border-top-width: 2px;" valign="middle" align="left">qsec</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">-0.92</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">-0.35</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">0.78</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">1.29</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">hp</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.89</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.88</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.04</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">carb</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.85</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.24</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.66</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.16</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">vs</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">-0.8</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.71</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.05</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">cyl</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.71</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">-0.48</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.94</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.75</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">mpg</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">-0.61</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.54</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.85</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.98</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">am</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.93</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.82</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.04</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">gear</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.22</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.93</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.8</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.11</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">drat</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.78</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.71</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.1</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">wt</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.42</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">-0.7</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.82</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1.64</td></tr><tr style="border-style: none;"><td headers="Loadings  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">disp</td>
+<td headers="Loadings  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.58</td>
+<td headers="Loadings  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">-0.6</td>
+<td headers="Loadings  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.9</td>
+<td headers="Loadings  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">2</td></tr><tr class="gt_group_heading_row" style="border-style: none;"><th colspan="5" class="gt_group_heading" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: center;" scope="colgroup" id="Variances" align="center" bgcolor="#FFFFFF" valign="middle">Variances</th>
+    </tr><tr class="gt_row_group_first" style="border-style: none;"><td headers="Variances  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left; border-top-width: 2px;" valign="middle" align="left">Eigenvalues</td>
+<td headers="Variances  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">4.71</td>
+<td headers="Variances  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center">4.15</td>
+<td headers="Variances  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center"></td>
+<td headers="Variances  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; border-top-width: 2px;" valign="middle" align="center"></td></tr><tr style="border-style: none;"><td headers="Variances  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Explained variance</td>
+<td headers="Variances  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.43</td>
+<td headers="Variances  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.38</td>
+<td headers="Variances  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Variances  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td></tr><tr style="border-style: none;"><td headers="Variances  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Cumulative explained variance</td>
+<td headers="Variances  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.43</td>
+<td headers="Variances  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.81</td>
+<td headers="Variances  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Variances  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td></tr><tr style="border-style: none;"><td headers="Variances  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Proportion explained variance</td>
+<td headers="Variances  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.53</td>
+<td headers="Variances  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.47</td>
+<td headers="Variances  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Variances  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td></tr><tr style="border-style: none;"><td headers="Variances  Variables" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Cumulative proportion explained variance</td>
+<td headers="Variances  MR1" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">0.53</td>
+<td headers="Variances  MR2" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">1</td>
+<td headers="Variances  Communalities" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td>
+<td headers="Variances  Complexity" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"></td></tr></tbody><tfoot class="gt_footnotes" style="border-style: none; color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3;" bgcolor="#FFFFFF"><tr style="border-style: none;"><td class="gt_footnote" colspan="5" style="border-style: none; margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px;"> <span class="gt_from_md"><em style="margin-top: 0; margin-bottom: 0;">Note.</em> Extraction method is minres. Rotation method is oblimin. RMSEA is 0.178 CI90% [0.121, 0.245]. Loadings below |0.2| are not displayed.</span></td>
+    </tr></tfoot></table></div></div><span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -668,15 +191,15 @@ function)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
