@@ -83,7 +83,8 @@ nice_frequencies <- function(data,
       Frequency = 2:(group_levels + 1), 
       Percent = (group_levels + 2):(2 * group_levels + 1)
     )
-    names(spanner)[1] <- label_grouping#paste0("Frequency '", label_grouping, "'")
+    names(spanner)[1] <- paste0(label_grouping, " (n)")
+    names(spanner)[2] <- paste0(label_grouping, " (%)")
   }
   
   if (length(which(is.na(rn))) > 0) rn[which(is.na(rn))] <- "Missing"
