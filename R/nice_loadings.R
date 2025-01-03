@@ -23,6 +23,9 @@ nice_loadings <- function(x,
                           footnote = NULL,
                           auto_labels = TRUE){
   
+  if (!inherits(x, "psych")) 
+    stop("Object must be derived from the factor analyses of the psych package.")
+  
   object <- x
   var_exp <- object$Vaccounted
   if(sort) x <- psych::fa.sort(x)
