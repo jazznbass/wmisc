@@ -32,16 +32,18 @@
 #'   c("gender", "glasses"), "sen", data = dat, 
 #'   ref_levels = c("male", "no")
 #' )
-nice_chi_test_table  <- function(dv, iv, data, conditions = levels(factor(iv))[1:2], 
-                         ref_levels = 2,
-                         labels = NULL, 
-                         nice_p = TRUE, 
-                         digits = 2, 
-                         order = "12", 
-                         label_attr = TRUE, 
-                         type = "html",
-                         ...) {
-
+nice_chi_test_table  <- function(dv, 
+                                 iv, 
+                                 data, 
+                                 conditions = levels(factor(iv))[1:2], 
+                                 ref_levels = 2,
+                                 labels = NULL, 
+                                 nice_p = TRUE, 
+                                 digits = 2, 
+                                 order = "12", 
+                                 label_attr = TRUE, 
+                                 type = "html",
+                                 ...) {
   if (!missing(data)) {
     dv <- data[, dv, drop = FALSE]
     iv <- data[[iv]]
