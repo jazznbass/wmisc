@@ -10,7 +10,10 @@
 #'   function)
 #' @return A data.frame
 #' @examples
-#' mtcars |> psych::fa(nfactors = 2) |> nice_efa()
+#' wmisc:::mtcars_labeled |> 
+#'   rename_from_labels() |>
+#'   psych::fa(nfactors = 2) |> 
+#'   nice_efa()
 #' 
 #' @export
 

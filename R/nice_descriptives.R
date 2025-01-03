@@ -7,13 +7,16 @@
 #' @return A data frame with descriptive statistics
 #' @examples
 #' nice_descriptives(mtcars)
+#' 
+#' nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
 #' @export
 nice_descriptives <- function(data, 
                               round = NULL, 
                               auto_labels = FALSE,
                               title = "Descriptive statistics",
                               footnote = NULL,
-                              file = NULL) {
+                              file = NULL,
+                              ...) {
   
   on.exit(print_messages())
   
@@ -70,5 +73,5 @@ nice_descriptives <- function(data,
     file = file
   )
   
-  nice_table(out)
+  nice_table(out, ...)
 }

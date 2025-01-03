@@ -10,7 +10,8 @@ nice_descriptives(
   auto_labels = FALSE,
   title = "Descriptive statistics",
   footnote = NULL,
-  file = NULL
+  file = NULL,
+  ...
 )
 }
 \arguments{
@@ -28,4 +29,6 @@ Table with descriptive statistics
 }
 \examples{
 nice_descriptives(mtcars)
+
+nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
 }

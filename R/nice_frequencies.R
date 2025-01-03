@@ -12,11 +12,10 @@
 #' @param ... Further arguments passed to [nice_table()].
 #' @return An html table with frequencies
 #' @examples
-#' nice_frequencies(mtcars[[11]])
+#' nice_frequencies(wmisc:::mtcars_labeled[[11]])
 #' nice_frequencies(
-#'   mtcars$cyl, mtcars$am, 
-#'   label = "Cylinders", 
-#'   label_grouping = "Automatic"
+#'   wmisc:::mtcars_labeled$cyl, 
+#'   wmisc:::mtcars_labeled$am
 #' )
 #' @export
 nice_frequencies <- function(data,

@@ -40,6 +40,9 @@ Creates table of loadings of exploratory factor analysis based on the
 psych::fa function
 }
 \examples{
-mtcars |> psych::fa(nfactors = 2) |> nice_efa()
+wmisc:::mtcars_labeled |> 
+  rename_from_labels() |>
+  psych::fa(nfactors = 2) |> 
+  nice_efa()
 
 }
