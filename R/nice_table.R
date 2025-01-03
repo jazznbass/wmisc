@@ -3,6 +3,7 @@
 #' This function takes a data frame and formats it into a nicely formatted HTML
 #' table using the `gt` packages.
 #'
+#' @aliases nice_table nice_table.default
 #' @param x The data frame to be formatted into a table
 #' @param title Title string.
 #' @param footnote Add footnote
@@ -18,7 +19,9 @@
 #' @param row_group_order List with information on grouping order.
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
-#' @param rownames Logical. If TRUE, rownames are shown.
+#' @param rownames Logical or `NULL`. If TRUE, rownames are shown. If `NULL`,
+#'   rownames are shown when they are not identical to
+#'   `as.character(1:nrow(x))`.
 #' @param label_na = Label for replacing missing values.
 #' @param markdown If TRUE, interprets cell content as markdown.
 #' @param gt Additional arguments passed to `gt::gt()`
@@ -40,13 +43,13 @@
 #' )
 #'
 #' @export
-nice_table <- function(x, 
+nice_table.default <- function(x, 
                        title = NULL, 
                        footnote = NULL, 
                        spanner = NULL,
                        row_group = NULL,
                        row_group_order = NULL,
-                       rownames = FALSE,
+                       rownames = NULL,
                        file = NULL,
                        cols_label = NULL,
                        decimals = NULL,
@@ -58,14 +61,18 @@ nice_table <- function(x,
   
   on.exit(print_messages())
   
-  if (inherits(x, "matrix")) {
-    x <- as.data.frame(x, optional = TRUE)
-    rownames = TRUE
-  }
-  
   if (!inherits(x, "data.frame")) {
     add_message("Object is no data.frame")
     return(FALSE)
+  }
+  
+  
+  if (is.null(rownames)) {
+    if (identical(rownames(x), as.character(1:nrow(x)))) {
+      rownames <- FALSE
+    } else {
+      rownames <- TRUE
+    }
   }
   
   engine <- getOption("wmisc.nice.table.engine")

@@ -15,7 +15,12 @@
 #' @export
 #' @examples
 #' # Create a sample data frame
-#' df <- data.frame(Car = c("BMW", "Volvo", "Honda"), Cost = (1:3)*10000, Speed = c(140, 160, 180), Colour = c("Red", "Blue", "Brown"))
+#' df <- data.frame(
+#'   Car = c("BMW", "Volvo", "Honda"), 
+#'   Cost = (1:3)*10000, 
+#'   Speed = c(140, 160, 180), 
+#'   Colour = c("Red", "Blue", "Brown")
+#' )
 #' 
 #' # Flip the data frame
 #' flip(df)
