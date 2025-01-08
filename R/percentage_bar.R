@@ -1,7 +1,8 @@
 #' Create a Percentage Bar Chart
 #'
-#' This function creates a percentage bar chart using ggplot2, where the user can specify
-#' the percentage to be represented as a bar along with an optional label.
+#' This function creates a percentage bar chart using ggplot2, where the user
+#' can specify the percentage to be represented as a bar along with an optional
+#' label.
 #'
 #' @param perc The percentage value to be represented as a bar in the chart.
 #' @param label An optional label to be displayed along with the percentage bar.

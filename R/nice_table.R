@@ -44,20 +44,20 @@
 #'
 #' @export
 nice_table.default <- function(x, 
-                       title = NULL, 
-                       footnote = NULL, 
-                       spanner = NULL,
-                       row_group = NULL,
-                       row_group_order = NULL,
-                       rownames = NULL,
-                       file = NULL,
-                       cols_label = NULL,
-                       decimals = NULL,
-                       round = NULL,
-                       label_na = NULL,
-                       markdown = FALSE,
-                       gt = NULL,
-                       ...) {
+                               title = NULL, 
+                               footnote = NULL, 
+                               spanner = NULL,
+                               row_group = NULL,
+                               row_group_order = NULL,
+                               rownames = NULL,
+                               file = NULL,
+                               cols_label = NULL,
+                               decimals = NULL,
+                               round = NULL,
+                               label_na = NULL,
+                               markdown = FALSE,
+                               gt = NULL,
+                               ...) {
   
   on.exit(print_messages())
   
@@ -65,8 +65,7 @@ nice_table.default <- function(x,
     add_message("Object is no data.frame")
     return(FALSE)
   }
-  
-  
+
   if (is.null(rownames)) {
     if (identical(rownames(x), as.character(1:nrow(x)))) {
       rownames <- FALSE
@@ -175,10 +174,8 @@ nice_table.default <- function(x,
   
   if (markdown) out <- gt::fmt_markdown(out)
   
-  
   if (!is.null(file)) gt::gtsave(out, file)
     
-  
   out
 }
 
@@ -219,24 +216,28 @@ gt_apa_style <- function(gt_tbl) {
     gt::cols_align(align = "left", columns = 1)
 }
 
-.nice_table_kable <- function(x, title, row_group, spanner, footnote) {
+.nice_table_kable <- function(x, 
+                              title, 
+                              row_group, 
+                              spanner, 
+                              footnote) {
 
-    args <- c(
-      list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
-      depecated$kable
-    )
-    x <- do.call(knitr::kable, args)
-    out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
-    
-    if (!is.null(row_group)) {
-      out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
-    }
-    
-    if (!is.null(spanner)) {
-      out <- kableExtra::add_header_above(out, spanner)
-    }
-    
-    if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
-    
-    out
+  args <- c(
+    list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
+    depecated$kable
+  )
+  x <- do.call(knitr::kable, args)
+  out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
+  
+  if (!is.null(row_group)) {
+    out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
+  }
+  
+  if (!is.null(spanner)) {
+    out <- kableExtra::add_header_above(out, spanner)
+  }
+  
+  if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
+  
+  out
 }

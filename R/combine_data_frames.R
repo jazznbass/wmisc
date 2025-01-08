@@ -1,13 +1,15 @@
 #' Combine multiple data frames into a single data frame
-#' 
-#' This function takes in multiple data frames and combines them into a single data frame. Missing columns and rows between data frames are filled with `NA` values. 
+#'
+#' This function takes in multiple data frames and combines them into a single
+#' data frame. Missing columns and rows between data frames are filled with `NA`
+#' values.
 #'
 #' @param ... The data frames to combine
 #'
 #' @return A combined data frame
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' a <- data.frame(id = 1:3, name = c("Alice", "Bob", "Charlie"))
 #' b <- data.frame(id = 4:6, age = c(25, 30, 35))

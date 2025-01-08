@@ -1,5 +1,5 @@
 
-# wmisc 0.2.28
+# wmisc 0.3.0
 
 ## New Functions
 

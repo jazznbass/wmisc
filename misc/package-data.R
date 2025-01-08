@@ -2,9 +2,10 @@
 load(file.path("misc", "ex.rds"))
 
 ex_itrf <- scaledic::ex_itrf
-ex_itrf_scales <- scaledic::get_scales(ex_itrf,
-           Int = scale == "ITRF" & subscale == "Int",
-           Ext = scale == "ITRF" & subscale == "Ext"
+ex_itrf_scales <- scaledic::get_scales(
+  ex_itrf,
+  Int = scale == "ITRF" & subscale == "Int",
+  Ext = scale == "ITRF" & subscale == "Ext"
 )
 
 

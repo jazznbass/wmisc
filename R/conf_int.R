@@ -4,7 +4,7 @@
 #'
 #' @param x A sample mean
 #' @param ci Numeric, confidence level (default = 0.95)
-#' @param r Numeric, correlation coefficient (default = NA)
+#' @param r Numeric, reliability coefficient (default = NA)
 #' @param s Numeric, standard deviation of population (default = NA)
 #' @param se Numeric, standard error of the sample mean (default = s * sqrt(1 -
 #'   r))
