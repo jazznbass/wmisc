@@ -11,7 +11,7 @@ conf_int(x, ci = 0.95, r = NA, s = NA, se = NA, n = NA)
 
 \item{ci}{Numeric, confidence level (default = 0.95)}
 
-\item{r}{Numeric, correlation coefficient (default = NA)}
+\item{r}{Numeric, reliability coefficient (default = NA)}
 
 \item{s}{Numeric, standard deviation of population (default = NA)}
 

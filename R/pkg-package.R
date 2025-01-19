@@ -8,6 +8,7 @@
 #' @keywords package
 #' @import dplyr
 #' @import graphics
+#' @import ggplot2
 #' @importFrom gt gt html opt_table_lines tab_options opt_table_font
 #' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na

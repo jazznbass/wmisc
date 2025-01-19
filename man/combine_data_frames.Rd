@@ -13,7 +13,9 @@ combine_data_frames(...)
 A combined data frame
 }
 \description{
-This function takes in multiple data frames and combines them into a single data frame. Missing columns and rows between data frames are filled with \code{NA} values.
+This function takes in multiple data frames and combines them into a single
+data frame. Missing columns and rows between data frames are filled with \code{NA}
+values.
 }
 \examples{
 a <- data.frame(id = 1:3, name = c("Alice", "Bob", "Charlie"))

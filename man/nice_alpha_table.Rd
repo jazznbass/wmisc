@@ -14,7 +14,7 @@ nice_alpha_table(
   conf_level = 0.95,
   check_key = TRUE,
   keys = NULL,
-  keys_from_weights = TRUE,
+  keys_from_weights = FALSE,
   RMSEA = FALSE,
   difficulty = FALSE,
   values = NULL,
@@ -30,7 +30,7 @@ alpha_table(
   conf_level = 0.95,
   check_key = TRUE,
   keys = NULL,
-  keys_from_weights = TRUE,
+  keys_from_weights = FALSE,
   RMSEA = FALSE,
   difficulty = FALSE,
   values = NULL,
@@ -64,7 +64,7 @@ element defines one scale. Named list elements are used as labels.}
 \item{difficulty}{If TRUE, the difficulty of the item is calculated.}
 
 \item{values}{Sets maximum and minimum valid values necessary to calculate
-item difficulty}
+item difficulty.}
 
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
@@ -81,8 +81,17 @@ nice_alpha_table(
   data = wmisc:::ex_itrf, 
   scales = wmisc:::ex_itrf_scales, 
   labels = c("Inernalizing", "Externalizing"),
+  keys_from_weights = TRUE,
   difficulty = TRUE, 
   values = list(c(0, 3)), 
   RMSEA = TRUE
 )
+
+nice_alpha_table(
+  wmisc:::data_emo, 
+  wmisc:::data_emo_scales, 
+  check_key = TRUE, 
+  difficulty = TRUE, 
+  value = list(c(0,4))
+  )
 }

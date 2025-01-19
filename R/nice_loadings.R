@@ -15,6 +15,14 @@
 #'   psych::fa(nfactors = 2) |> 
 #'   nice_efa()
 #' 
+#' nice_efa(
+#'   wmisc:::data_emo_fa,
+#'   factor_names = c(
+#'     "Emotionserkennung", "Resilienz", 
+#'     "Aufmerksamkeit", "Erklärung für Emotionen"
+#'   )
+#' )
+
 #' @export
 
 nice_loadings <- function(x,
@@ -35,14 +43,18 @@ nice_loadings <- function(x,
   object <- loadings(x)
   object <- unclass(object)
   
-  complexity <- x$complexity#[object$order]
-  communalities <- 1-x$uniquenesses#[object$order]
-  object <- cbind(object, Communalities = communalities, Complexity = complexity)
+  complexity <- x$complexity
+  communalities <- 1 - x$uniquenesses
+  object <- cbind(
+    object, 
+    Communalities = communalities, 
+    Complexity = complexity
+  )
   
   object <- round(object, round)
   object[abs(object) < cut] <- ""
   object <- as.data.frame(object)
-  if (!is.null(factor_names)) names(object) <- factor_names[1:ncol(names)]
+  
   var_exp <- round(var_exp, round)
   var_exp <- cbind(var_exp, Communalities = "", Complexity = "")
   object <- rbind(object, var_exp)
@@ -63,6 +75,8 @@ nice_loadings <- function(x,
       )
     )
   }
+  if (!is.null(factor_names)) 
+    names(object)[2:(1 + length(factor_names))] <- factor_names
   
   object <- set_wmisc_attributes(
     object, 

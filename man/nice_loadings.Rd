@@ -45,4 +45,11 @@ wmisc:::mtcars_labeled |>
   psych::fa(nfactors = 2) |> 
   nice_efa()
 
+nice_efa(
+  wmisc:::data_emo_fa,
+  factor_names = c(
+    "Emotionserkennung", "Resilienz", 
+    "Aufmerksamkeit", "Erklärung für Emotionen"
+  )
+)
 }

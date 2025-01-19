@@ -32,15 +32,15 @@
 #'
 #' @return A data-frame or a html table object
 #' @examples
-#' nice_corrmatrix(mtcars)
-#' nice_corrmatrix(mtcars,
-#'   show_p = TRUE,
-#'   show_ci = TRUE,
-#'   show_stars = FALSE,
-#'   show_descriptives = FALSE,
-#'   conf.level = 0.99
-#' )
-#' nice_corrmatrix(mtcars, group = "cyl")
+#' #nice_corrmatrix(mtcars)
+#' #nice_corrmatrix(mtcars,
+# '#   show_p = TRUE,
+# '#   show_ci = TRUE,
+# '#   show_stars = FALSE,
+# '#   show_descriptives = FALSE,
+# '#   conf.level = 0.99
+#' #)
+#' #nice_corrmatrix(mtcars, group = "cyl")
 #' @export
 
 nice_corrmatrix <- function(cr, 

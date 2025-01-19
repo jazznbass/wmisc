@@ -1,10 +1,39 @@
-#' Analyse missing values
+#' Analyse Missing Values in Scales
 #'
-#' @param dat A data-frame
-#' @param scale A list with character vectors. Each list element containing the
-#'   variable names of a scale
+#' This function analyzes missing values for specified scales within a data frame.
 #'
-#' @return A data-frame
+#' @param dat A data frame containing the dataset to be analyzed.
+#' @param scale A list of character vectors, where each list element contains the
+#'   variable names corresponding to a scale within the dataset.
+#'
+#' @return A data frame summarizing the missing value analysis for each scale. The output includes:
+#' - `missing`: The total number of missing values for each scale.
+#' - `total`: The total number of observations expected for each scale.
+#' - `p`: The proportion of missing values for each scale (`missing / total`).
+#' - `n cases`: The number of cases with at least one missing value within the scale.
+#' - `p cases`: The proportion of cases with at least one missing value (`n cases / total cases`).
+#' - `n all cases`: The number of cases where all variables in the scale are missing.
+#' - `p all cases`: The proportion of cases where all variables in the scale are missing (`n all cases / total cases`).
+#'
+#' @examples
+#' # Example dataset
+#' dat <- data.frame(
+#'   scale1_var1 = c(1, 2, NA, 4),
+#'   scale1_var2 = c(NA, 2, 3, 4),
+#'   scale2_var1 = c(1, NA, 3, 4),
+#'   scale2_var2 = c(NA, NA, NA, 4)
+#' )
+#'
+#' # Define scales
+#' scales <- list(
+#'   scale1 = c("scale1_var1", "scale1_var2"),
+#'   scale2 = c("scale2_var1", "scale2_var2")
+#' )
+#'
+#' # Analyze missing values
+#' analysis_missing(dat, scales)
+#'
+#' @seealso [is.na()], [apply()]
 #' @export
 analysis_missing <- function(dat, scale) {
   N <- length(scale)

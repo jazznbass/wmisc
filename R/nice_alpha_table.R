@@ -17,7 +17,7 @@
 #' @param RMSEA If TRUE RMSEA is calculated.
 #' @param difficulty If TRUE, the difficulty of the item is calculated.
 #' @param values Sets maximum and minimum valid values necessary to calculate
-#'   item difficulty
+#'   item difficulty.
 #' @param fa If TRUE, a one factor exploratory factor analyses is calculated and
 #'   loadings are reported.
 #' @return A data frame with concise scale indices.
@@ -27,10 +27,19 @@
 #'   data = wmisc:::ex_itrf, 
 #'   scales = wmisc:::ex_itrf_scales, 
 #'   labels = c("Inernalizing", "Externalizing"),
+#'   keys_from_weights = TRUE,
 #'   difficulty = TRUE, 
 #'   values = list(c(0, 3)), 
 #'   RMSEA = TRUE
 #' )
+#' 
+#' nice_alpha_table(
+#'   wmisc:::data_emo, 
+#'   wmisc:::data_emo_scales, 
+#'   check_key = TRUE, 
+#'   difficulty = TRUE, 
+#'   value = list(c(0,4))
+#'   )
 #' @export
 nice_alpha_table <- function(data,
                              scales,
@@ -40,7 +49,7 @@ nice_alpha_table <- function(data,
                              conf_level = 0.95,
                              check_key = TRUE,
                              keys = NULL,
-                             keys_from_weights = TRUE,
+                             keys_from_weights = FALSE,
                              RMSEA = FALSE,
                              difficulty = FALSE,
                              values = NULL,
@@ -59,7 +68,7 @@ alpha_table <- function(data,
                         conf_level = 0.95,
                         check_key = TRUE,
                         keys = NULL,
-                        keys_from_weights = TRUE,
+                        keys_from_weights = FALSE,
                         RMSEA = FALSE,
                         difficulty = FALSE,
                         values = NULL,
@@ -80,7 +89,7 @@ alpha_table <- function(data,
   }
   
   if (difficulty && is.null(values)) {
-    add_message("Can not calculate item difficulty without min and max scale values.")
+    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
     difficulty <- FALSE
   }
   
@@ -132,26 +141,30 @@ alpha_table <- function(data,
         ) |> 
           unlist() |> 
           sign()
-        check_key <- FALSE
+        if (identical(length(keys), 0L)) {
+          add_message("Weights from scaledic attributes are missing.")
+          keys_from_weights <- FALSE
+        }
       } else {
         keys <- NULL
         add_message("Scaledic is not installed, keys can not be extracted automatically.")
       }
+  
     }
-    
+
     if (!is.null(values)) {
       min <- values[[i]][1]
       max <- values[[i]][2]
     }
-    
-    a <- invisible(
+  
+    a <- invisible(suppressWarnings(
       psych::alpha(
         data_scale, 
-        check.key = check_key, 
+        check.keys = check_key, 
         keys = keys, 
         use = "pairwise"
       )
-    )
+    ))
     
     if (fa) f <- invisible(psych::fa(data_scale))
     alpha <- a$total$raw_alpha

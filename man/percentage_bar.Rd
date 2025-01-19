@@ -15,8 +15,9 @@ percentage_bar(perc, label)
 A ggplot2 bar chart representing the given percentage value.
 }
 \description{
-This function creates a percentage bar chart using ggplot2, where the user can specify
-the percentage to be represented as a bar along with an optional label.
+This function creates a percentage bar chart using ggplot2, where the user
+can specify the percentage to be represented as a bar along with an optional
+label.
 }
 \examples{
 # Create a percentage bar chart with 30\% labeled as "Completed"

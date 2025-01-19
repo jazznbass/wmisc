@@ -30,7 +30,17 @@ mtcars_labeled <- add_label(mtcars, list(
   carb="Number of carburetors"
 ))
 
+data_emo <- readRDS(file.path("misc", "emotional_style.rds"))
+data_emo_scales <- readRDS(file.path("misc", "data_emo_scales.rds"))
+
+data_emo_fa <- readRDS(file.path("misc", "data_emo_fa.rds"))
+
+ex_agreement <- readRDS(file.path("misc", "agreement.rds"))
+
 save(
+  data_emo,
+  data_emo_scales,
+  data_emo_fa,
   mtcars_labeled,
   model_lmer_1, 
   model_lmer_2,
