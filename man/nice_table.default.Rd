@@ -20,6 +20,8 @@
   label_na = NULL,
   markdown = FALSE,
   gt = NULL,
+  sort = NULL,
+  sort_decreasing = FALSE,
   ...
 )
 }

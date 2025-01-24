@@ -1,5 +1,5 @@
 
-# wmisc 0.3.0
+# wmisc 0.3.1
 
 ## New Functions
 
@@ -13,6 +13,7 @@
 - `nice_table()`: New argument `markdown`. If TRUE, interprets cell content as markdown.
 - `nice_table()`: Now a generic function with methods to `nice_regression_table`, `nice_efa`, and a default method for data.frame.
 - `nice_table()`: `rownames = NULL` will now automatically show row names when they are not `as.character(1:nrow(x))`.
+- `nice_table()`: Argument `sort` sorts data frame by the provided character vector.
 - `nice_regression_table()`: Support for `gls` models.
 
 # wmisc 0.2.24

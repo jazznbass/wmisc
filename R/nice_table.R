@@ -57,6 +57,8 @@ nice_table.default <- function(x,
                                label_na = NULL,
                                markdown = FALSE,
                                gt = NULL,
+                               sort = NULL,
+                               sort_decreasing = FALSE,
                                ...) {
   
   on.exit(print_messages())
@@ -128,6 +130,13 @@ nice_table.default <- function(x,
     cols_label <- cols_label[which(!duplicated(names(cols_label)))]
   }
   
+  # sort -----
+  
+  if(!is.null(sort)) {
+    x <- x[do.call(order, c(x[sort], decreasing = sort_decreasing)), ]
+  }
+  
+  # create html -----
   
   if (engine == "extra") 
     return(.nice_table_kable(x, title, row_group, spanner, footnote))
