@@ -66,7 +66,10 @@ create_data_description <- function(dat, readme = FALSE, tab = "   ", max_char =
   
   out <- paste0(names, tab, cl, tab, info, sep = "")
   
-  if (readme) sink("README.md", append = TRUE)
+  if (readme) {
+    fn <- paste0("README-", filename, ".md")
+    sink(fn, append = FALSE)
+  }
   
   cat("# Discription of datafile `", filename, "`", sep = "")
   cat("\n\n")
