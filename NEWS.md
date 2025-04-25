@@ -1,11 +1,12 @@
 
-# wmisc 0.3.1
+# wmisc 0.3.2
 
 ## New Functions
 
 - `ci_score()`: Returns confidence intervals for test scores.
 - `critical_difference()`: Returns critical difference for test scores.
 - `nice_contingency_table()`: Creates a nicely formatted contingency table with one or more summary functions.
+- `create_data_description()`: creates a README.md file with a data description
 
 ## Changes
 
