@@ -13,6 +13,9 @@
 #'   columns (default: c('', '.mean'))
 #' @param agg_func The function used in aggregation (default: function(x)
 #'   mean(x, na.rm = TRUE))
+#' @examples
+#' merge_multilevel(mtcars, var_agg = c("mpg", "disp"), id = "cyl")
+#' 
 #' @return Returns a merged data frame
 #'
 #' @export

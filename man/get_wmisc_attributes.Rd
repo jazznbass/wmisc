@@ -2,41 +2,36 @@
 % Please edit documentation in R/add_attribute.R
 \name{get_wmisc_attributes}
 \alias{get_wmisc_attributes}
-\title{Get or Set "wmisc" Attributes}
+\alias{set_wmisc_attributes}
+\title{Access or Modify "wmisc" Attributes}
 \usage{
 get_wmisc_attributes(x)
+
+set_wmisc_attributes(x, ...)
 }
 \arguments{
-\item{x}{An object, typically a list or data structure, where the "wmisc" attribute is to be accessed or modified.}
+\item{x}{An R object (usually a list) from or to which the \code{"wmisc"} attribute is accessed or modified.}
 
-\item{...}{Additional named arguments to set or update as part of the "wmisc" attribute.}
+\item{...}{Named values to add or update in the \code{"wmisc"} attribute.}
 }
 \value{
-\itemize{
-\item For \code{get_wmisc_attributes()}: Returns the "wmisc" attribute of the object \code{x}.
-\item For \code{set_wmisc_attributes()}: Returns the object \code{x} with the updated "wmisc" attribute.
-}
+\code{get_wmisc_attributes()} returns the \code{"wmisc"} attribute of \code{x}, or \code{NULL} if none is present.
+\code{set_wmisc_attributes()} returns \code{x} with the updated \code{"wmisc"} attribute.
 }
 \description{
-Functions to retrieve or modify the "wmisc" attributes of an object.
+These functions access or modify the \code{"wmisc"} attribute of an R object.
+The attribute is typically used to store metadata in \code{wmisc}-compatible structures.
 }
 \details{
 \itemize{
-\item \code{get_wmisc_attributes()}: Extracts and returns the "wmisc" attribute of the given object. If the attribute does not exist, it returns \code{NULL}.
-\item \code{set_wmisc_attributes()}: Updates the "wmisc" attribute of the given object with the provided named arguments. Duplicate names are removed, with the most recently provided value taking precedence.
+\item \code{get_wmisc_attributes()} extracts and returns the \code{"wmisc"} attribute. Returns \code{NULL} if it does not exist.
+\item \code{set_wmisc_attributes()} adds or updates entries in the \code{"wmisc"} attribute. If a name occurs multiple times, the last value is retained.
 }
 }
 \examples{
-# Example object
 obj <- list(a = 1, b = 2)
-
-# Set "wmisc" attributes
 obj <- set_wmisc_attributes(obj, key1 = "value1", key2 = "value2")
-
-# Get "wmisc" attributes
 get_wmisc_attributes(obj)
-
-# Update "wmisc" attributes
 obj <- set_wmisc_attributes(obj, key1 = "new_value1", key3 = "value3")
 get_wmisc_attributes(obj)
 

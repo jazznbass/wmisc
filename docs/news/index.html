@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3</span>
       </span>
     </div>
 
@@ -42,119 +42,154 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.0" id="wmisc-030">wmisc 0.3.0<a class="anchor" aria-label="anchor" href="#wmisc-030"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.2" id="wmisc-032">wmisc 0.3.2<a class="anchor" aria-label="anchor" href="#wmisc-032"></a></h2>
 <div class="section level3">
-<h3 id="new-functions-0-3-0">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-3-0"></a></h3>
+<h3 id="new-functions-0-3-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-3-2"></a></h3>
 <ul><li>
 <code><a href="../reference/ci_score.html">ci_score()</a></code>: Returns confidence intervals for test scores.</li>
 <li>
 <code><a href="../reference/critical_difference.html">critical_difference()</a></code>: Returns critical difference for test scores.</li>
 <li>
 <code><a href="../reference/nice_contingency_table.html">nice_contingency_table()</a></code>: Creates a nicely formatted contingency table with one or more summary functions.</li>
+<li>
+<code><a href="../reference/create_data_description.html">create_data_description()</a></code>: Creates a <code>README.md</code> file with a data description.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="changes-0-3-0">Changes<a class="anchor" aria-label="anchor" href="#changes-0-3-0"></a></h3>
+<h3 id="changes-0-3-2">Changes<a class="anchor" aria-label="anchor" href="#changes-0-3-2"></a></h3>
 <ul><li>
-<code><a href="../reference/nice_frequencies.html">nice_frequencies()</a></code>: Now has a grouping argument. This allows to create contingency tables (e.g. <code>nice_frequencies(mtcars$cyl, mtcars$am)</code>).</li>
+<code><a href="../reference/nice_frequencies.html">nice_frequencies()</a></code>: Now has a <code>grouping</code> argument. This allows creating contingency tables (e.g. <code>nice_frequencies(mtcars$cyl, mtcars$am)</code>).</li>
 <li>
-<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: New argument <code>markdown</code>. If TRUE, interprets cell content as markdown.</li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>:
+<ul><li>New argument <code>markdown</code>. If <code>TRUE</code>, interprets cell content as markdown.</li>
+<li>Now a generic function with methods for <code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>, <code><a href="../reference/nice_loadings.html">nice_efa()</a></code>, and a default method for <code>data.frame</code> objects.</li>
 <li>
-<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: Now a generic function with methods to <code>nice_regression_table</code>, <code>nice_efa</code>, and a default method for data.frame.</li>
+<code>rownames = NULL</code> now automatically shows row names unless they are <code>as.character(1:nrow(x))</code>.</li>
+<li>New argument <code>sort</code> allows sorting by a character vector.</li>
+</ul></li>
 <li>
-<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: <code>rownames = NULL</code> will now automatically show row names when they are not <code>as.character(1:nrow(x))</code>.</li>
-<li>
-<code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>: Support for <code>gls</code> models.</li>
+<code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>: Now supports <code>gls</code> models.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.24" id="wmisc-0224">wmisc 0.2.24<a class="anchor" aria-label="anchor" href="#wmisc-0224"></a></h2>
 <div class="section level3">
-<h3 id="new-functions-0-2-24">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-24"></a></h3>
+<h3 id="new-functions-0-2-24">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-24"></a></h3>
 <ul><li>
-<code><a href="../reference/nice_frequencies.html">nice_frequencies()</a></code>: Provides html and word tables for the frequency distribution of a variable.</li>
+<code><a href="../reference/nice_frequencies.html">nice_frequencies()</a></code>: Provides HTML and Word tables for the frequency distribution of a variable.</li>
 <li>
-<code><a href="../reference/nice_sem.html">nice_sem()</a></code>: Provides html and word tables for lavaan sem objects.</li>
+<code><a href="../reference/nice_sem.html">nice_sem()</a></code>: Provides HTML and Word tables for <code>lavaan</code> SEM objects.</li>
 <li>
-<code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>: Provides html and word tables for one or multiple <code>lm</code>, <code>lme</code>, <code>lmerTest</code>, or <code>glmer</code> objects.</li>
+<code><a href="../reference/nice_regression_table.html">nice_regression_table()</a></code>: Provides HTML and Word tables for <code>lm</code>, <code>lme</code>, <code>lmerTest</code>, or <code>glmer</code> models.</li>
 <li>
-<code><a href="../reference/round_numeric.html">round_numeric()</a></code>: This function rounds numeric columns in a data frame to a specified number of digits.</li>
+<code><a href="../reference/round_numeric.html">round_numeric()</a></code>: Rounds numeric columns in a data frame to a specified number of digits.</li>
 <li>
-<code><a href="../reference/logit2prob.html">logit2prob()</a></code>/ <code><a href="../reference/logit2prob.html">prob2logit()</a></code>: Convert Logit to probability and vice versa</li>
+<code><a href="../reference/logit2prob.html">logit2prob()</a></code> / <code><a href="../reference/logit2prob.html">prob2logit()</a></code>: Convert between logit and probability.</li>
 <li>
-<code><a href="../reference/rename_from_labels.html">add_label()</a></code>: Adds haven labels. With a list option: <code>mtcars &lt;- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))</code>
-</li>
+<code><a href="../reference/rename_from_labels.html">add_label()</a></code>: Adds haven labels. Accepts a list input, e.g., <code>mtcars &lt;- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))</code>.</li>
 <li>
-<code><a href="../reference/rename_from_labels.html">get_labels()</a></code>: Adds haven labels. With a list option: <code>mtcars &lt;- add_label(mtcars, list(cyl = "cylind", mpg = "Miles"))</code>
-</li>
+<code><a href="../reference/rename_from_labels.html">get_labels()</a></code>: Retrieves haven labels.</li>
 <li>
-<code><a href="../reference/nice_loadings.html">nice_loadings()</a></code> extract loadings from psych::fa object</li>
+<code><a href="../reference/nice_loadings.html">nice_loadings()</a></code>: Extracts loadings from a <code><a href="https://rdrr.io/pkg/psych/man/fa.html" class="external-link">psych::fa</a></code> object.</li>
 <li>
-<code><a href="../reference/nice_loadings.html">nice_efa()</a></code> Returns a nice table from an psych::fa object.</li>
+<code><a href="../reference/nice_loadings.html">nice_efa()</a></code>: Returns a formatted table from a <code><a href="https://rdrr.io/pkg/psych/man/fa.html" class="external-link">psych::fa</a></code> object.</li>
 <li>
-<code><a href="../reference/nice_agreement_table.html">nice_agreement_table()</a></code> Returns a nice table for agreement_analyses.</li>
+<code><a href="../reference/nice_agreement_table.html">nice_agreement_table()</a></code>: Returns a formatted table for agreement analyses.</li>
 <li>
-<code><a href="../reference/flip.html">flip()</a></code>: flip a data.frame or matrix: <code>flip(mtcars, rownames = TRUE)</code>
-</li>
+<code><a href="../reference/flip.html">flip()</a></code>: Flips a data frame or matrix, e.g., <code>flip(mtcars, rownames = TRUE)</code>.</li>
 <li>
-<code><a href="../reference/change_values.html">change_values()</a></code> recode values: <code>change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")</code>
-</li>
+<code><a href="../reference/change_values.html">change_values()</a></code>: Recodes values using formula syntax, e.g., <code>change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")</code>.</li>
 <li>
-<code><a href="../reference/percentage_bar.html">percentage_bar()</a></code> creates ggplot percentage bar: <code>percentage_bar(20, "test")</code>
-</li>
+<code><a href="../reference/percentage_bar.html">percentage_bar()</a></code>: Creates a ggplot percentage bar, e.g., <code>percentage_bar(20, "test")</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="changes-0-2-24">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-24"></a></h3>
-<ul><li>added gt table support for nice table and set to default. Retiring “kable”.</li>
+<ul><li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: Now defaults to <code>gt</code> tables; the older <code>kable</code> output is being retired.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.18" id="wmisc-0218">wmisc 0.2.18<a class="anchor" aria-label="anchor" href="#wmisc-0218"></a></h2>
-<ul><li>new functions: <code><a href="../reference/auto_corr.html">auto_corr()</a></code>
-</li>
-<li>new functions: <code><a href="../reference/nice_statnum.html">nice_statnum()</a></code>
-</li>
-<li>new functions: <code><a href="../reference/nice_descriptives.html">nice_descriptives()</a></code>
-</li>
+<div class="section level3">
+<h3 id="new-functions-0-2-18">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-18"></a></h3>
+<ul><li><code><a href="../reference/auto_corr.html">auto_corr()</a></code></li>
+<li><code><a href="../reference/nice_statnum.html">nice_statnum()</a></code></li>
+<li><code><a href="../reference/nice_descriptives.html">nice_descriptives()</a></code></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.13" id="wmisc-0213">wmisc 0.2.13<a class="anchor" aria-label="anchor" href="#wmisc-0213"></a></h2>
-<ul><li>reworked <code>agreement_analysis()</code>
+<div class="section level3">
+<h3 id="changes-0-2-13">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-13"></a></h3>
+<ul><li>Reworked <code>agreement_analysis()</code>
 </li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.11" id="wmisc-0211">wmisc 0.2.11<a class="anchor" aria-label="anchor" href="#wmisc-0211"></a></h2>
-<ul><li>new functions: <code>check(), start_check(). end_check(), check_within(), check_in(), check_not()</code>
+<div class="section level3">
+<h3 id="new-functions-0-2-11">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-11"></a></h3>
+<ul><li>
+<code>check()</code>, <code>start_check()</code>, <code>end_check()</code>, <code>check_within()</code>, <code>check_in()</code>, <code>check_not()</code>
 </li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.10" id="wmisc-0210">wmisc 0.2.10<a class="anchor" aria-label="anchor" href="#wmisc-0210"></a></h2>
-<ul><li>new function: <code>progress_feedback.R()</code>
-</li>
+<div class="section level3">
+<h3 id="new-function-0-2-10">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-10"></a></h3>
+<ul><li><code>progress_feedback()</code></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.9" id="wmisc-029">wmisc 0.2.9<a class="anchor" aria-label="anchor" href="#wmisc-029"></a></h2>
-<ul><li>new function: <code><a href="../reference/fill_missing_l2.html">fill_missing_l2()</a></code>: Fills in missing data for cases in a multilevel/ repeated measurement long format data frame. This is useful when you have a variable on level 2 (e.g., gender) but this variable only has a valid value for one measurement time (the others are na). This function will fill in the nas with this one valid value.</li>
+<div class="section level3">
+<h3 id="new-function-0-2-9">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-9"></a></h3>
+<ul><li>
+<code><a href="../reference/fill_missing_l2.html">fill_missing_l2()</a></code>: Fills in missing values in multilevel/repeated measurement long format data. Useful for level-2 variables like gender that may only appear in one measurement occasion.</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.8" id="wmisc-028">wmisc 0.2.8<a class="anchor" aria-label="anchor" href="#wmisc-028"></a></h2>
-<p>New function to extend Rmarkdown pages:<br><code>create_blogsite()</code>: Helps to create a blog-like site for Rmarkdown webpages <code>new_blog_entry()</code>: Sets up a new blog entry markdown page</p>
+<div class="section level3">
+<h3 id="new-functions-0-2-8">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-8"></a></h3>
+<ul><li>
+<code>create_blogsite()</code>: Helps create a blog-like site for R Markdown pages.</li>
+<li>
+<code>new_blog_entry()</code>: Sets up a new blog entry markdown page.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.5" id="wmisc-025">wmisc 0.2.5<a class="anchor" aria-label="anchor" href="#wmisc-025"></a></h2>
-<ul><li>new function: <code><a href="../reference/nice_chi_test_table.html">chi_test_table()</a></code>: Compares the proportions of a dichotomos variable in two groups for multiple variables and puts the results into a table. Like t_test_table() put für dichtomous variables.</li>
+<div class="section level3">
+<h3 id="new-function-0-2-5">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-5"></a></h3>
+<ul><li>
+<code><a href="../reference/nice_chi_test_table.html">chi_test_table()</a></code>: Compares the proportions of a dichotomous variable across two groups for multiple variables. Similar to <code><a href="../reference/nice_t_test_table.html">t_test_table()</a></code> but for categorical variables.</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.4" id="wmisc-024">wmisc 0.2.4<a class="anchor" aria-label="anchor" href="#wmisc-024"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-2-4">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-4"></a></h3>
 <ul><li>
-<code><a href="../reference/nice_t_test_table.html">t_test_table()</a></code>: new arguments: caption, bootstrap_options, and full_width</li>
+<code><a href="../reference/nice_t_test_table.html">t_test_table()</a></code>: Added arguments <code>caption</code>, <code>bootstrap_options</code>, and <code>full_width</code>.</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.3" id="wmisc-023">wmisc 0.2.3<a class="anchor" aria-label="anchor" href="#wmisc-023"></a></h2>
-<ul><li>New <code><a href="../reference/reference_package_version.html">reference_package_version()</a></code>
-</li>
-<li>
-<code><a href="../reference/nice_alpha_table.html">alpha_table()</a></code>: argument <code>VAR</code> changed to <code>scales</code>. New arguements <code>difficulty</code>: if TRUE reports item difficulties. <code>values</code> min and max value for each scale as a vector needed for calculating item difficulty.</li>
+<div class="section level3">
+<h3 id="new-function-0-2-3">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-3"></a></h3>
+<ul><li><code><a href="../reference/reference_package_version.html">reference_package_version()</a></code></li>
 </ul></div>
+<div class="section level3">
+<h3 id="changes-0-2-3">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-3"></a></h3>
+<ul><li>
+<code><a href="../reference/nice_alpha_table.html">alpha_table()</a></code>:
+<ul><li>Argument <code>VAR</code> renamed to <code>scales</code>.</li>
+<li>New argument <code>difficulty</code>: If <code>TRUE</code>, reports item difficulties.</li>
+<li>New argument <code>values</code>: Required for calculating item difficulty; specify min and max values for each scale.</li>
+</ul></li>
+</ul></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -2,33 +2,34 @@
 % Please edit documentation in R/round_numeric.R
 \name{round_numeric}
 \alias{round_numeric}
-\title{This function rounds numeric columns in a data frame to a specified number of digits.}
+\title{Round Numeric Columns in a Data Frame}
 \usage{
 round_numeric(x, digits)
 }
 \arguments{
 \item{x}{A data frame.}
 
-\item{digits}{Number of digits to round to. Defaults to 0.}
+\item{digits}{Integer. Number of digits to round to. Defaults to 0.}
 }
 \value{
-A modified data frame with rounded numeric columns.
+A data frame with all numeric columns rounded to the specified number of digits.
 }
 \description{
-This function rounds numeric columns in a data frame to a specified number of digits.
+Rounds all numeric columns of a data frame to a specified number of digits.
+Non-numeric columns and attributes are preserved.
 }
 \examples{
-# Create a sample data frame
 data <- data.frame(
   numeric_col1 = c(1.234, 2.345, 3.456),
   numeric_col2 = c(4.567, 5.678, 6.789),
   non_numeric_col = c("A", "B", "C")
 )
-attr(data, "my") <- "It keeps all the attributes!"
-# Round numeric columns in the data frame
-round_numeric(data, digits = 2)
-attr(data, "my") 
+attr(data, "note") <- "It keeps all the attributes!"
+rounded <- round_numeric(data, digits = 2)
+rounded
+attr(rounded, "note")
+
 }
 \seealso{
-\code{\link{round}}
+\code{\link[=round]{round()}}
 }

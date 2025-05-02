@@ -12,6 +12,7 @@
 #' @export
 #' @examples
 #' center(c(1:10, NA, NaN))
+#' center(mtcars$mpg, grouping = mtcars$cyl)
 center <- function(x, min_valid, max_na, grouping) {
   if (!missing(min_valid)) {
     if (min_valid < 1 && min_valid > 0) min_valid <- trunc(min_valid * length(x))

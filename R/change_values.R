@@ -1,34 +1,33 @@
-#' Change Values
+#' Recode Values in a Vector
 #'
-#' Replace specific values in a vector with new values.
+#' Replaces specific values in a vector with new values, using formula-style syntax.
 #'
-#' @param x A vector in which values will be replaced.
-#' @param ... An ellipsis of pairs of values to be replaced. Each pair consists
-#'   of the original value and the corresponding replacement value.
-#' @param .default The default value to be used for elements not specified in
-#'   the replacement pairs. If not provided, elements not specified will remain
-#'   unchanged.
+#' @param x A vector whose values will be recoded.
+#' @param ... One or more replacement rules in the form `old ~ new`. Each rule specifies a value in `x` to be replaced.
+#' @param .default Optional. A default value assigned to all elements not explicitly matched in the replacement rules. If `NULL` (default), unmatched values remain unchanged.
 #'
-#' @return A modified vector with replaced values.
+#' @return A vector with values replaced according to the specified rules. If `x` is numeric and at least one replacement is a character string, the result will be coerced to character.
 #'
 #' @examples
-#' ## Retains NAs
+#' # Basic recoding
 #' change_values(c(1, 2, 3, NA), 2 ~ "two", 3 ~ "three")
-#' 
-#' ## Set a specific default value
+#'
+#' # Assign a default value to unmatched entries
 #' change_values(c(1, 2, 3), 2 ~ "two", .default = "default")
-#' 
-#' ## No error message when no value to convert is found
+#'
+#' # Unmatched values remain unchanged (no warning or error)
 #' change_values(c(1, 2, 3), 4 ~ "four")
-#' 
-#' ## Recode NAs and implicit conversion from numeric to character
+#'
+#' # Recode missing values (NA)
 #' change_values(c(NA, 1, NA, 2), NA ~ "This is a missing value")
-#' 
+#'
+#' @seealso [recode()], [ifelse()], [case_when()]
 #' @export
 change_values <- function(x, ..., .default = NULL) {
   recodes <- lapply(list(...), \(.) list(.[[2]], .[[3]]))
   out <- x
   if (!is.null(.default)) out[] <- rep(.default, length.out = length(x))
+
   for(i in seq_along(recodes)) {
     out[which(x %in% eval(recodes[[i]][[1]]))] <- eval(recodes[[i]][[2]])
   }

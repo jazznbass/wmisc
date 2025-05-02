@@ -41,18 +41,20 @@ create_data_description <- function(dat, readme = FALSE, tab = "   ", max_char =
   if (is.character(dat)) {
     filename <- dat
     ext <- tools::file_ext(filename)
-    if (ext == "rds") dat <- readRDS(dat)
+    if (ext %in% c("rds", "RDS")) dat <- readRDS(dat)
     
   }
-  
+
   info <- sapply(dat, \(.) {
-    out <- NA
+    out <- "-"
     if (is.character(.)) . <- as.factor(.)
     if (is.factor(.))
       out <- paste0(levels(.), collapse = ", ")
     if (is.numeric(.))
       out <- paste0(round(min(., na.rm = TRUE), 2), " to ", round(max(., na.rm = TRUE), 2))
-    if (nchar(out) > max_char) out <- paste0(substr(out, 1, max_char - 6), " [...]")
+    
+    if (nchar(out) > max_char) out <- paste0(substr(out, 1, max_char), " [...]")
+    
     out
   })
   

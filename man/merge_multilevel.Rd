@@ -39,3 +39,7 @@ Returns a merged data frame
 \description{
 Merges two data frames with different levels to create a single data frame
 }
+\examples{
+merge_multilevel(mtcars, var_agg = c("mpg", "disp"), id = "cyl")
+
+}

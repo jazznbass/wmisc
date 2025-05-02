@@ -20,7 +20,10 @@ nice_regression_table(
 )
 }
 \arguments{
-\item{remove_cols}{Either column number or column names to be removed.}
+\item{remove_cols}{Either column number or column names to be removed}
+
+\item{or}{If TRUE, the estimators are assumed to be logits and are
+exponentiated to yield odds ratios}
 }
 \description{
 Create a nice table from one or more regression models

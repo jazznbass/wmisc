@@ -2,36 +2,47 @@
 % Please edit documentation in R/plotalphabeta.R
 \name{plotalphabeta}
 \alias{plotalphabeta}
-\title{Plot Alpha / Beta graph
-Generates a graphic for visualizing alpha and beta error}
+\title{Plot Alpha and Beta Error Regions}
 \usage{
 plotalphabeta(
   m = 0,
-  sd = 1,
+  sd0 = 1,
+  sd1 = 1,
   d = 2,
   alpha = 0.05,
   fill = TRUE,
-  col_fill = c("pink", "lightblue")
+  col_fill = c("pink", "lightblue"),
+  show_text = TRUE,
+  show_labels = TRUE
 )
 }
 \arguments{
-\item{m}{Mean}
+\item{m}{Mean under H0.}
 
-\item{sd}{Standard Deviation}
+\item{sd0}{Standard deviation under H0.}
 
-\item{d}{Effect size}
+\item{sd1}{Standard deviation under H1.}
 
-\item{alpha}{Alpha Level}
+\item{d}{Effect size (Cohen's d): H₁ mean is \code{m + d * sd0}.}
 
-\item{fill}{If TRUE, intersections are filled out in grey}
+\item{alpha}{Significance level.}
 
-\item{col_fill}{Vector of length two with color names to fill area below curve}
+\item{fill}{Logical. Whether to shade alpha and beta areas.}
+
+\item{col_fill}{Character vector of length 2: colors for alpha and beta shading.}
+
+\item{show_text}{Logical. If TRUE, prints α, β, and power in the plot.}
+
+\item{show_labels}{Logical. If TRUE, adds labels for H0, H1, and effect size d.}
+}
+\value{
+A ggplot object.
 }
 \description{
-Plot Alpha / Beta graph
-Generates a graphic for visualizing alpha and beta error
+Generates a plot of two normal distributions with Type I (alpha) and Type II (beta)
+error areas shaded. Legend and effect size annotation are embedded in the plot.
 }
 \examples{
-plotalphabeta()
+plotalphabeta(m = 0, sd0 = 1, sd1 = 1.5, d = 1.5, alpha = 0.01)
 
 }

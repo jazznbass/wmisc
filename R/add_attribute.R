@@ -1,29 +1,23 @@
-#' Get or Set "wmisc" Attributes
+#' Access or Modify "wmisc" Attributes
 #'
-#' Functions to retrieve or modify the "wmisc" attributes of an object.
+#' These functions access or modify the `"wmisc"` attribute of an R object.
+#' The attribute is typically used to store metadata in `wmisc`-compatible structures.
 #'
-#' @param x An object, typically a list or data structure, where the "wmisc" attribute is to be accessed or modified.
-#' @param ... Additional named arguments to set or update as part of the "wmisc" attribute.
+#' @param x An R object (usually a list) from or to which the `"wmisc"` attribute is accessed or modified.
+#' @param ... Named values to add or update in the `"wmisc"` attribute.
 #'
-#' @return 
-#' - For `get_wmisc_attributes()`: Returns the "wmisc" attribute of the object `x`.
-#' - For `set_wmisc_attributes()`: Returns the object `x` with the updated "wmisc" attribute.
+#' @return
+#' `get_wmisc_attributes()` returns the `"wmisc"` attribute of `x`, or `NULL` if none is present.  
+#' `set_wmisc_attributes()` returns `x` with the updated `"wmisc"` attribute.
 #'
 #' @details
-#' - `get_wmisc_attributes()`: Extracts and returns the "wmisc" attribute of the given object. If the attribute does not exist, it returns `NULL`.
-#' - `set_wmisc_attributes()`: Updates the "wmisc" attribute of the given object with the provided named arguments. Duplicate names are removed, with the most recently provided value taking precedence.
+#' - `get_wmisc_attributes()` extracts and returns the `"wmisc"` attribute. Returns `NULL` if it does not exist.  
+#' - `set_wmisc_attributes()` adds or updates entries in the `"wmisc"` attribute. If a name occurs multiple times, the last value is retained.
 #'
 #' @examples
-#' # Example object
 #' obj <- list(a = 1, b = 2)
-#'
-#' # Set "wmisc" attributes
 #' obj <- set_wmisc_attributes(obj, key1 = "value1", key2 = "value2")
-#'
-#' # Get "wmisc" attributes
 #' get_wmisc_attributes(obj)
-#'
-#' # Update "wmisc" attributes
 #' obj <- set_wmisc_attributes(obj, key1 = "new_value1", key3 = "value3")
 #' get_wmisc_attributes(obj)
 #'
@@ -33,7 +27,7 @@ get_wmisc_attributes <- function(x) {
   attr(x, "wmisc")
 }
 
-
+#' @rdname get_wmisc_attributes
 #' @export
 set_wmisc_attributes <- function(x, ...) {
   args <- attr(x, "wmisc")

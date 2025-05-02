@@ -25,4 +25,5 @@ Mean center a variable
 }
 \examples{
 center(c(1:10, NA, NaN))
+center(mtcars$mpg, grouping = mtcars$cyl)
 }

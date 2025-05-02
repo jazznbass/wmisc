@@ -1,6 +1,8 @@
 #' Create a nice table from one or more regression models
 #' 
-#' @param remove_cols Either column number or column names to be removed. 
+#' @param remove_cols Either column number or column names to be removed
+#' @param or If TRUE, the estimators are assumed to be logits and are
+#'   exponentiated to yield odds ratios
 #' @examples
 #' lm(mpg ~ am + disp + hp, data = mtcars) |> 
 #'   nice_regression_table()

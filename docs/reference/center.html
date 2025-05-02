@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3</span>
       </span>
     </div>
 
@@ -80,6 +80,13 @@ centers.</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">center</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="cn">NA</span>, <span class="cn">NaN</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -4.5 -3.5 -2.5 -1.5 -0.5  0.5  1.5  2.5  3.5  4.5   NA  NaN</span>
+<span class="r-in"><span><span class="fu">center</span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, grouping <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1.25714286  1.25714286 -3.86363636  1.65714286  3.60000000 -1.64285714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.80000000 -2.26363636 -3.86363636 -0.54285714 -1.94285714  1.30000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  2.20000000  0.10000000 -4.70000000 -4.70000000 -0.40000000  5.73636364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19]  3.73636364  7.23636364 -5.16363636  0.40000000  0.10000000 -1.80000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25]  4.10000000  0.63636364 -0.66363636  3.73636364  0.70000000 -0.04285714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] -0.10000000 -5.26363636</span>
 </code></pre></div>
     </div>
   </div>
