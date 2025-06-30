@@ -69,8 +69,9 @@ nice_chi_test_table  <- function(dv,
   if (is.null(labels)) labels <- names(dv)
   
   for (i in 1:ncol(dv)) {
-    if (label_attr && !is.null(attr(dv[[i]], "label"))) 
-      labels[i] <- attr(dv[[i]], "label")
+    label <- get_label(dv[[i]])
+    if (label_attr && !is.null(label)) 
+      labels[i] <- label
     l <- ref_levels[i]
     if (is.numeric(l)) l <- levels(dv[[i]])[l]
     if (!l %in% levels(dv[[i]])) stop("Wrong levels.")

@@ -95,8 +95,8 @@ nice_t_test_table <- function(dv,
     vars <- aggregate(dv[[i]], by = list(iv), var, na.rm = TRUE)[,2]
     ns <- aggregate(dv[[i]], by = list(iv), function(x) sum(!is.na(x)))[,2]
  
-    if (label_attr && !is.null(attr(dv[[i]], "label"))) 
-      labels[i] <- attr(dv[[i]], "label")
+    label <- get_label(dv[[i]])
+    if (label_attr && !is.null(label)) labels[i] <- label
     out[i, "SD1"] <- sds[1]
     out[i, "SD2"] <- sds[2]
     out[i, "p"] <- res$p.value

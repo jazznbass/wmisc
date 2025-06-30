@@ -16,7 +16,7 @@ nice_corrmatrix(
   show_ci = FALSE,
   numbered_columns = TRUE,
   show_descriptives = TRUE,
-  labels = NULL,
+  labels = "auto",
   nsig_p = 0.1,
   char_nsig,
   char_autocor = "－",

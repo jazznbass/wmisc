@@ -54,7 +54,7 @@ nice_corrmatrix <- function(cr,
                             show_ci = FALSE, 
                             numbered_columns = TRUE,
                             show_descriptives = TRUE,
-                            labels = NULL,
+                            labels = "auto",
                             nsig_p = .10, 
                             char_nsig, 
                             char_autocor = "\uFF0D",
@@ -71,13 +71,14 @@ nice_corrmatrix <- function(cr,
   if (inherits(cr, "data.frame")) {
     
     if (identical(labels, "auto")) {
-      labels <- map2_chr(
-        cr, 
-        names(cr), 
-        function(.x, .y) { 
-          if(!is.null(attr(.x, "label"))) attr(.x, "label") else .y
-        }
-      )    
+      labels <- mapply(
+        FUN = function(.x, .y) { 
+          label <- get_label(.x)
+          if(!is.null(label)) label else .y
+        },
+        .x = cr, 
+        .y = names(cr)
+      )  
     }
     
     
@@ -280,21 +281,6 @@ multilevel_corrmatrix <- function(x, group, ci = 0.95) {
       out_df[i, j] <- res$parameter
       out_lower[i, j] <- res$conf.int[1]
       out_upper[i, j] <- res$conf.int[2]
-      
-      #out_r[i, j] <- res$tTable["v2", "Value"]
-      #out_p[i, j] <- res$tTable["v2", "p-value"]
-      #out_t[i, j] <- res$tTable["v2", "t-value"]
-      #out_df[i, j] <- res$tTable["v2", "DF"]
-      
-      #if(is.numeric(ci)) {
-      #  se <- qnorm((1 - ci) / 2, lower.tail = FALSE)
-      #  se <- se * res$tTable["v2", "Std.Error"]
-      #  out_lower[i, j] <- 
-      #    inv_fisher_z(fisher_z(out_r[i, j]) - se)
-      #  out_upper[i, j] <- 
-      #    inv_fisher_z(fisher_z(out_r[i, j]) + se)
-      #}
-      
     }
   }
   

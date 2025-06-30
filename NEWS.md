@@ -17,6 +17,9 @@
   * New argument `sort` allows sorting by a character vector.
 * `nice_regression_table()`: Now supports `gls` models.
 
+### Corrections
+
+* `nice_efa()`: now works for one factor solutions.
 
 ## wmisc 0.2.24
 

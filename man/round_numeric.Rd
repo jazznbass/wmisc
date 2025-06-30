@@ -9,7 +9,7 @@ round_numeric(x, digits)
 \arguments{
 \item{x}{A data frame.}
 
-\item{digits}{Integer. Number of digits to round to. Defaults to 0.}
+\item{digits}{Integer. Number of digits to round to.}
 }
 \value{
 A data frame with all numeric columns rounded to the specified number of digits.

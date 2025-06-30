@@ -12,8 +12,9 @@
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
 #' @param check_key Check_key for the psych::alpha function.
 #' @param keys Optional key argument for the psych::alpha function.
-#' @param keys_from_weights If TRUE, tries to define keys from scaledics
-#'   "weights" parameter.
+#' @param keys_from_weights If TRUE, tries to define keys from the weights
+#'   dictionary attribute. These are only available when you defined them with 
+#'   the scaledic package.
 #' @param RMSEA If TRUE RMSEA is calculated.
 #' @param difficulty If TRUE, the difficulty of the item is calculated.
 #' @param values Sets maximum and minimum valid values necessary to calculate
@@ -24,20 +25,20 @@
 #' @examples
 #' ## Example needs packages scaledic and purrr installed and active
 #' nice_alpha_table(
-#'   data = wmisc:::ex_itrf, 
-#'   scales = wmisc:::ex_itrf_scales, 
+#'   data = wmisc:::ex_itrf,
+#'   scales = wmisc:::ex_itrf_scales,
 #'   labels = c("Inernalizing", "Externalizing"),
 #'   keys_from_weights = TRUE,
-#'   difficulty = TRUE, 
-#'   values = list(c(0, 3)), 
+#'   difficulty = TRUE,
+#'   values = list(c(0, 3)),
 #'   RMSEA = TRUE
 #' )
-#' 
+#'
 #' nice_alpha_table(
-#'   wmisc:::data_emo, 
-#'   wmisc:::data_emo_scales, 
-#'   check_key = TRUE, 
-#'   difficulty = TRUE, 
+#'   wmisc:::data_emo,
+#'   wmisc:::data_emo_scales,
+#'   check_key = TRUE,
+#'   difficulty = TRUE,
 #'   value = list(c(0,4))
 #'   )
 #' @export
@@ -137,7 +138,7 @@ alpha_table <- function(data,
       if (requireNamespace("scaledic", quietly = TRUE)) {
         keys <- lapply(
           data_scale, 
-          \(.) as.numeric(scaledic::dic_attr(., "weight"))
+          function(.) as.numeric(scaledic::dic_attr(., "weight"))
         ) |> 
           unlist() |> 
           sign()
@@ -177,7 +178,7 @@ alpha_table <- function(data,
     if (!ci) df$Alpha[i] <- nice_statnum(alpha, 2)
     
     if (ci) {
-      alpha_ci <- .alpha_CI(
+      alpha_ci <- .alpha_ci(
         alpha, nrow(data_scale), length(scales[[i]]), conf_level
       )
       df$Raw[i] <- glue(
@@ -192,7 +193,7 @@ alpha_table <- function(data,
     }
     
     if (ci) {
-      alpha_std_ci <- .alpha_CI(
+      alpha_std_ci <- .alpha_ci(
         alpha.std, nrow(data_scale), length(scales[[i]]), conf_level
       )
       df$"Standardized"[i] <- glue(
@@ -254,7 +255,7 @@ alpha_table <- function(data,
 
 
 
-.alpha_CI <- function(alpha, n, items, ci) {
+.alpha_ci <- function(alpha, n, items, ci) {
   f <- qf(c(1 - (1 - ci) / 2, (1 - ci) / 2), n - 1, (n - 1) * (items - 1))
   out <- 1 - (1 - alpha) * f
   out

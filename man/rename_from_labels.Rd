@@ -48,3 +48,6 @@ These functions work with an attribute \code{label}. Which has been
 introduced by other packages (e.g. \code{haven}) and is implemented into the
 R-Studiio environment.
 }
+\examples{
+wmisc:::mtcars_labeled |> get_labels()
+}

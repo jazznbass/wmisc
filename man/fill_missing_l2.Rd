@@ -2,31 +2,32 @@
 % Please edit documentation in R/fill_l2_data.R
 \name{fill_missing_l2}
 \alias{fill_missing_l2}
-\title{Fills in missing level 2 data}
+\title{Fill Missing Level-2 Variables in Long Format Data}
 \usage{
 fill_missing_l2(data, id, vars)
 }
 \arguments{
-\item{data}{A data frame}
+\item{data}{A data frame in long format.}
 
-\item{id}{Character string with L2 variable}
+\item{id}{Character string. Name of the grouping (L2) variable, e.g., "id".}
 
-\item{vars}{Vector of strings with variable names}
+\item{vars}{Character vector of variable names (L2 variables) whose missing
+values should be filled within groups.}
 }
 \value{
-A data frame with added values. It also reports if l2 values
-conflict.
+A data frame with filled-in L2 values. If conflicting non-missing
+values exist within a group, a message is printed and values are not imputed.
 }
 \description{
-For cases where you have a long format data set and it contains level 2 data
-but some of the level 2 data are missing although the necessary information
-in available in other data rows of the same grouping value.
+In long-format datasets, level-2 (L2) variables may be partially missing
+within groups (e.g., subject ID). This function fills in missing L2 values
+using available information from other rows in the same group.
 }
 \examples{
 x <- data.frame(
   id = rep(1:5, each = 3),
   gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA, NA, NA, NA, 1, 0, NA)
 )
-x
 fill_missing_l2(x, "id", "gender")
+
 }

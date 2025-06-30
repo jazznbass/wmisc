@@ -124,7 +124,7 @@ nice_table.default <- function(x,
   x <- round_numeric(x, round)
   
   if (FALSE) {
-    new_cols_label <- lapply(x, \(x) attr(x, "label")) 
+    new_cols_label <- lapply(x, \(x) get_label(x)) 
     new_cols_label <- new_cols_label[which(!is.null(new_cols_label))]
     cols_label <- c(cols_label, new_cols_label)
     cols_label <- cols_label[which(!duplicated(names(cols_label)))]

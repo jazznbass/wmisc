@@ -47,10 +47,11 @@ rename_from_labels <- function(data,
                                max_char = NULL) {
   ne <- new.env(parent = globalenv())
   for(i in seq_along(data)) {
-    if (!is.null(attr(data[[i]], "label"))) {
-      if (!keep) names(data)[i] <- attr(data[[i]], "label")
+    label <- get_label(data[[i]])
+    if (!is.null(label)) {
+      if (!keep) names(data)[i] <- label
       if (keep) {
-        ne$label <- attr(data[[i]], 'label')
+        ne$label <- label
         ne$name <- names(data)[i]
         new_name <- glue::glue(pattern, .envir = ne) 
         if (!is.null(max_char)) new_name <- substr(new_name, 1, max_char)
@@ -65,11 +66,13 @@ rename_from_labels <- function(data,
 #' @rdname rename_from_labels
 #' @return For `get_labels`: A names character vector with labels (and columnnames
 #'   as names).
+#' @examples
+#' wmisc:::mtcars_labeled |> get_labels()
 get_labels <- function(data,
                        keep = FALSE,
                        pattern = "{name}: {label}",
                        max_char = NULL) {
-  out <- lapply(data, \(.) attr(., "label")) |> unlist()
+  out <- lapply(data, \(.) get_label(.)) |> unlist()
 
   if (keep) {
     ne <- new.env(parent = globalenv())
@@ -81,3 +84,13 @@ get_labels <- function(data,
   }
   out
 }
+
+get_label <- function(x) {
+  label <- attr(x, "label")
+  if (getOption("wmisc.dic.labels") && is.null(label)) {
+    label <- attr(x, "dic")$item_label
+  }
+  label
+}
+
+

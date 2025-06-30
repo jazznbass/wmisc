@@ -92,19 +92,26 @@ nice_loadings <- function(x,
 nice_efa <- function(..., file = NULL) {
   out <- nice_loadings(...)
   rows <- nrow(out)
-  out[(rows - 4):rows, 1] <- c(
-    "Eigenvalues", "Explained variance", 
-    "Cumulative explained variance",
-    "Proportion explained variance",
-    "Cumulative proportion explained variance"
-  )
+  
+  rn <- c("SS loadings" = "Eigenvalues", "Proportion Var" = "Explained variance",
+          "Cumulative Var" = "Cumulative explained variance",
+          "Proportion Explained" = "Proportion explained variance",
+          "Cumulative Proportion" = "Cumulative proportion explained variance")
+  counter <- 0
+  for (i in seq_along(rn)) {
+    id <- which(out[[1]] == names(rn)[i])
+    if (length(id) > 0)  {
+      out[id, 1] <- rn[i]
+      counter <- counter + 1
+    }
+  }
   
   out <- set_wmisc_attributes(
     out, 
     spanner = list("Factors" = 2:(ncol(out) - 2)),
     row_group = list(
-      "Loadings" = 1:(rows - 5), 
-      "Variances" = (rows - 4):rows
+      "Loadings" = 1:(rows - counter), 
+      "Variances" = (rows - counter + 1):rows
     ),
     file = file
   )

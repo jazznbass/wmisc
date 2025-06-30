@@ -1,54 +1,51 @@
-#' Fills in missing level 2 data
+#' Fill Missing Level-2 Variables in Long Format Data
 #'
-#' For cases where you have a long format data set and it contains level 2 data
-#' but some of the level 2 data are missing although the necessary information
-#' in available in other data rows of the same grouping value.
+#' In long-format datasets, level-2 (L2) variables may be partially missing
+#' within groups (e.g., subject ID). This function fills in missing L2 values
+#' using available information from other rows in the same group.
 #'
-#' @param data A data frame
-#' @param id Character string with L2 variable
-#' @param vars Vector of strings with variable names
+#' @param data A data frame in long format.
+#' @param id Character string. Name of the grouping (L2) variable, e.g., "id".
+#' @param vars Character vector of variable names (L2 variables) whose missing
+#'   values should be filled within groups.
 #'
-#' @return A data frame with added values. It also reports if l2 values
-#'   conflict.
-#' @export
+#' @return A data frame with filled-in L2 values. If conflicting non-missing
+#'   values exist within a group, a message is printed and values are not imputed.
 #'
 #' @examples
 #' x <- data.frame(
 #'   id = rep(1:5, each = 3),
 #'   gender = c(1, 1, NA, 0, 0, 0, 1, NA, NA, NA, NA, NA, 1, 0, NA)
 #' )
-#' x
 #' fill_missing_l2(x, "id", "gender")
+#'
+#' @export
 fill_missing_l2 <- function(data, id, vars) {
   
   units <- unique(data[[id]])
   
   out_string <- "Complemented at id: "
   
-  for(i in seq_along(vars)) {
+  for(column in vars) {
     
-    for(k in seq_along(units)) {
+    for(unit in units) {
       
-      cases <- which(data[[id]] == units[k])
-      nas <- which(data[[id]] == units[k] & is.na(data[[vars[i]]]))
-      not_nas <- which(data[[id]] == units[k] & !is.na(data[[vars[i]]]))
-      values <- unique(data[[vars[i]]][not_nas])
+      cases <- which(data[[id]] == unit)
+      nas <- which(data[[id]] == unit & is.na(data[[column]]))
+      not_nas <- which(data[[id]] == unit & !is.na(data[[column]]))
+      values <- unique(data[[column]][not_nas])
       if (length(values) > 1) {
-        
         cat(
-          "Conflicting values in id", units[k], ", cases ", 
+          "Conflicting values in id", unit, ", cases ", 
           paste0(not_nas, collapse = ", "), "\n"
         )
+        next
       }
       if (length(values) == 1 && length(nas) > 0) {
-        
-        data[[vars[i]]][nas] <- values 
-        #data[nas, vars[i]] <- values
-        out_string <- c(out_string, as.character(units[k]))
+        data[[column]][nas] <- values 
+        out_string <- c(out_string, as.character(unit))
       } 
-      
     }
-    
     if (length(out_string) > 1) cat(paste(out_string, collapse = " "), "\n")
   }
   

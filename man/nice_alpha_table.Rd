@@ -56,8 +56,9 @@ element defines one scale. Named list elements are used as labels.}
 
 \item{keys}{Optional key argument for the psych::alpha function.}
 
-\item{keys_from_weights}{If TRUE, tries to define keys from scaledics
-"weights" parameter.}
+\item{keys_from_weights}{If TRUE, tries to define keys from the weights
+dictionary attribute. These are only available when you defined them with
+the scaledic package.}
 
 \item{RMSEA}{If TRUE RMSEA is calculated.}
 
@@ -78,20 +79,20 @@ Returns a data.frame with item analyses for the provided scales.
 \examples{
 ## Example needs packages scaledic and purrr installed and active
 nice_alpha_table(
-  data = wmisc:::ex_itrf, 
-  scales = wmisc:::ex_itrf_scales, 
+  data = wmisc:::ex_itrf,
+  scales = wmisc:::ex_itrf_scales,
   labels = c("Inernalizing", "Externalizing"),
   keys_from_weights = TRUE,
-  difficulty = TRUE, 
-  values = list(c(0, 3)), 
+  difficulty = TRUE,
+  values = list(c(0, 3)),
   RMSEA = TRUE
 )
 
 nice_alpha_table(
-  wmisc:::data_emo, 
-  wmisc:::data_emo_scales, 
-  check_key = TRUE, 
-  difficulty = TRUE, 
+  wmisc:::data_emo,
+  wmisc:::data_emo_scales,
+  check_key = TRUE,
+  difficulty = TRUE,
   value = list(c(0,4))
   )
 }

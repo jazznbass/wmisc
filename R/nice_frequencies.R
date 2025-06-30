@@ -35,9 +35,9 @@ nice_frequencies <- function(data,
   useNA <- if (show_missing) "always" else "no"
   
   if (auto_labels && is.null(label)) 
-    label <- attr(data, "label")
+    label <- get_label(data)
   if (auto_labels && is.null(label_grouping)) 
-    label_grouping <- attr(grouping, "label")
+    label_grouping <- get_label(grouping)
   if (is.null(label)) 
     label <- deparse(substitute(data))
   if (is.null(label_grouping)) 

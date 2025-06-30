@@ -49,7 +49,7 @@ alpha_table_old <- function(data, scales, labels = NULL, round = 2, CI = TRUE,
     if (!CI) df$Alpha[i] <- substring(round(alpha, round), 2)
     
     if (CI) {
-      a.CI <- alpha_CI(alpha, nrow(data[, scales[[i]]]), length(scales[[i]]), conf_level)
+      a.CI <- alpha_ci(alpha, nrow(data[, scales[[i]]]), length(scales[[i]]), conf_level)
       df$Alpha[i] <- paste0(substring(round(alpha, round), 2), " (", substring(round(a.CI[1], round), 2), "-", substring(round(a.CI[2], round), 2), ")")
     }
     
@@ -59,7 +59,7 @@ alpha_table_old <- function(data, scales, labels = NULL, round = 2, CI = TRUE,
     }
     
     if (CI) {
-      a.std.CI <- alpha_CI(alpha.std, nrow(data[, scales[[i]]]), length(scales[[i]]), conf_level)
+      a.std.CI <- alpha_ci(alpha.std, nrow(data[, scales[[i]]]), length(scales[[i]]), conf_level)
       df$"Std.Alpha"[i] <- paste0(
           substring(round(alpha.std, round), 2), 
           " (", 

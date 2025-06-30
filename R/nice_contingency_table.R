@@ -106,14 +106,14 @@ nice_contingency_table <- function(rows,
   }
   
   if (auto_labels && is.null(var_label)) 
-    var_label <- attr(var, "label")
+    var_label <- get_label(var)
   
   
   if (auto_labels && is.null(columns_label)) 
-    columns_label <- attr(columns, "label")
+    columns_label <- get_label(columns)
   
   if (auto_labels && is.null(rows_label)) 
-    rows_label <- attr(rows, "label")
+    rows_label <- get_label(rows)
   
   
   if (is.null(var_label)) 
