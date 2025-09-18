@@ -1,9 +1,0 @@
-Name: Create blogsite
-Description: Creates a blog site for Rmarkdown pages
-Binding: create_blogsite
-Interactive: false
-
-Name: New blog entry
-Description: Creates a new blog entry
-Binding: new_blog_entry
-Interactive: false

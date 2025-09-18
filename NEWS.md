@@ -1,4 +1,4 @@
-## wmisc 0.3.2
+## wmisc 0.3.4
 
 ### New functions
 
