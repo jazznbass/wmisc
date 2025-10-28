@@ -19,6 +19,6 @@ split_at_median <- function(x,
                             explicit_na = NA) {
   
   split_at_percentile(
-    x, 0.5, lab = labels, type = type, explicit_na = explicit_na
+    x, 0.5, labels = labels, type = type, explicit_na = explicit_na
   )
 }

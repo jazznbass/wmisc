@@ -2,26 +2,23 @@ Package: wmisc
 Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
-Version: 0.3.4
-Date: 2025-06-30
+Version: 0.3.6
+Date: 2025-10-28
 Author: Jürgen Wilbert
 Maintainer: Juergen Wilbert <juergen.wilbert@uni-muenster.de>
+Depends: 
+  R (>= 4.1.0)
 Imports: 
   stats, 
   nlme, 
   utils, 
-  methods, 
   graphics,
-  eRm,
   psych,
-  knitr,
-  kableExtra,
-  readxl,
   openxlsx,
   dplyr,
   multilevel,
   forcats,
-  magrittr,
+  remotes,
   lavaan,
   gt,
   glue,
@@ -34,3 +31,6 @@ LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

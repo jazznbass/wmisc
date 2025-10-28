@@ -93,7 +93,7 @@ nice_chi_test_table  <- function(dv,
     format(round(x, digits=digits), nsmall = digits) 
   }
   
-  out <- out %>%
+  out <- out  |> 
     mutate_at(c(3:6), round_, digits = digits)
   
   if (order == "21") {

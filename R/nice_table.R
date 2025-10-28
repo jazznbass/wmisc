@@ -105,6 +105,10 @@ nice_table.default <- function(x,
       footnote <- args$footnote
     if (!is.null(args$label_na) && is.null(label_na)) 
       label_na <- args$label_na
+    if (!is.null(args$decimals) && is.null(decimals)) 
+      decimals <- args$decimals
+    if (!is.null(args$round) && is.null(round)) 
+      round <- args$round
     if (!is.null(args$row_group_order) && is.null(row_group_order)) 
       row_group_order <- args$row_group_order
   }
@@ -138,8 +142,9 @@ nice_table.default <- function(x,
   
   # create html -----
   
-  if (engine == "extra") 
-    return(.nice_table_kable(x, title, row_group, spanner, footnote))
+  # delete:
+  #if (engine == "extra") 
+  #  return(.nice_table_kable(x, title, row_group, spanner, footnote))
 
   if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
   
@@ -225,28 +230,29 @@ gt_apa_style <- function(gt_tbl) {
     gt::cols_align(align = "left", columns = 1)
 }
 
-.nice_table_kable <- function(x, 
-                              title, 
-                              row_group, 
-                              spanner, 
-                              footnote) {
-
-  args <- c(
-    list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
-    depecated$kable
-  )
-  x <- do.call(knitr::kable, args)
-  out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
-  
-  if (!is.null(row_group)) {
-    out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
-  }
-  
-  if (!is.null(spanner)) {
-    out <- kableExtra::add_header_above(out, spanner)
-  }
-  
-  if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
-  
-  out
-}
+# delete:
+# .nice_table_kable <- function(x, 
+#                               title, 
+#                               row_group, 
+#                               spanner, 
+#                               footnote) {
+# 
+#   args <- c(
+#     list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
+#     depecated$kable
+#   )
+#   x <- do.call(knitr::kable, args)
+#   out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
+#   
+#   if (!is.null(row_group)) {
+#     out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
+#   }
+#   
+#   if (!is.null(spanner)) {
+#     out <- kableExtra::add_header_above(out, spanner)
+#   }
+#   
+#   if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
+#   
+#   out
+# }

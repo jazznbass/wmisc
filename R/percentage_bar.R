@@ -19,25 +19,29 @@ percentage_bar <- function(perc, label) {
     Proportion = c(100-perc,perc))
   label <- c("", paste0(perc, "%  ", label))
   data <- data %>% mutate(Year = "")
-  ggplot(data, aes(x = Year, y = Proportion, fill = Group)) +
-    geom_col() +
-    geom_text(aes(label = label), size = 10,
+  ggplot2::ggplot(data, ggplot2::aes(x = Year, y = Proportion, fill = Group)) +
+    ggplot2::geom_col() +
+    ggplot2::geom_text(ggplot2::aes(label = label), size = 10,
               position = position_stack(vjust = 0), hjust = 0) +
-    scale_fill_brewer(palette = "Set4") +
-    theme_minimal(base_size = 18) +
-    ylab("Percentage") +
-    xlab(NULL) + ylab(NULL) +
-    theme(axis.line=element_blank(),axis.text.x=element_blank(),
-          axis.text.y=element_blank(),axis.ticks=element_blank(),
-          axis.title.x=element_blank(),
-          axis.title.y=element_blank(),legend.position="none",
-          panel.background=element_blank(),
-          panel.border=element_blank(),
-          panel.grid.major=element_blank(),
-          panel.grid.minor=element_blank(),
-          plot.background=element_blank()
+    ggplot2::scale_fill_brewer(palette = "Set4") +
+    ggplot2::theme_minimal(base_size = 18) +
+    ggplot2::xlab(NULL) + 
+    ggplot2::ylab(NULL) +
+    ggplot2::theme(
+      axis.line=ggplot2::element_blank(),
+      axis.text.x=ggplot2::element_blank(),
+      axis.text.y=ggplot2::element_blank(),
+      axis.ticks=ggplot2::element_blank(),
+      axis.title.x=ggplot2::element_blank(),
+      axis.title.y=element_blank(),
+      legend.position="none",
+      panel.background=ggplot2::element_blank(),
+      panel.border=ggplot2::element_blank(),
+      panel.grid.major=ggplot2::element_blank(),
+      panel.grid.minor=ggplot2::element_blank(),
+      plot.background=ggplot2::element_blank()
     ) +
-    coord_flip() 
+    ggplot2::coord_flip() 
 }
 
 

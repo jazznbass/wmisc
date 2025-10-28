@@ -3,7 +3,7 @@
 #' Generates a concise textual description of a dataset, summarizing each column's type, 
 #' number of missing values, and a short overview of its content (e.g., range or levels). 
 #' Optionally, this description can be written to a `README.md` file.
-#' [this helpfile was generated with AI]
+#' Note: this helpfile was generated with AI
 #'
 #' @param dat A data.frame or a character string pointing to an `.rds` file to load. 
 #'   If a character string is provided and ends with `.rds`, the file will be loaded using `readRDS()`.

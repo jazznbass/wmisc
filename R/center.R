@@ -30,7 +30,7 @@ center <- function(x, min_valid, max_na, grouping) {
   
   if (!missing(grouping)) {
     m_g <- tapply(x, grouping, mean, na.rm = TRUE)
-    m_g <- sapply(grouping, function(x) m_g[names(m_g) == x]) %>% unname()
+    m_g <- sapply(grouping, function(x) m_g[names(m_g) == x])  |>  unname()
   } else {
     m_g <- mean(x, na.rm = TRUE)
   }

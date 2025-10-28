@@ -45,7 +45,6 @@ auto_corr <- function(x, lag, alpha = 0.05) {
   # Bartletts Formel für MA(l)
   for(l in 1:lag) se[l] <- sqrt((1 + 2 * sum(ar[1 - l]^2)) / (t))
   z <- ar / se
-  
   p <- pnorm(abs(z), lower.tail = FALSE) * 2
   p_t <- pt(abs(z), df = 2, lower.tail = FALSE) * 2
   

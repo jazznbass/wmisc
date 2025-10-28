@@ -25,7 +25,7 @@ nice_sem <- function(x,
   
   if (standardized) {
     out <- lavaan::standardizedsolution(x) |> as.data.frame()
-    char_estimate <- "ß"
+    char_estimate <- "Beta"
   } else {
     out <- lavaan::parameterestimates(x) |> as.data.frame()
     char_estimate <- "b"

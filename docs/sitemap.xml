@@ -38,6 +38,7 @@
 <url><loc>/reference/nice_corrmatrix.html</loc></url>
 <url><loc>/reference/nice_descriptives.html</loc></url>
 <url><loc>/reference/nice_frequencies.html</loc></url>
+<url><loc>/reference/nice_item_analysis.html</loc></url>
 <url><loc>/reference/nice_loadings.html</loc></url>
 <url><loc>/reference/nice_p.html</loc></url>
 <url><loc>/reference/nice_regression_table.html</loc></url>
@@ -55,6 +56,7 @@
 <url><loc>/reference/split_at_median.html</loc></url>
 <url><loc>/reference/split_at_percentile.html</loc></url>
 <url><loc>/reference/standardise.html</loc></url>
+<url><loc>/reference/update_self.html</loc></url>
 <url><loc>/reference/wmisc-package.html</loc></url>
 <url><loc>/reference/wmisc_data.html</loc></url>
 <url><loc>/reference/x_names.html</loc></url>

@@ -1,3 +1,11 @@
+
+## wmisc 0.3.6
+
+### New functions
+
+* `update_self()`: Checks for a wmisc update and installs it. 
+* `nice_intem_analysis()`: Returns a nice table for item analysis of single scales
+
 ## wmisc 0.3.4
 
 ### New functions

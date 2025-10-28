@@ -134,10 +134,10 @@ nice_t_test_table <- function(dv,
 
   out[i, "p"] <- round(out$p[i], digits)
   
-  out <- out %>%
-    mutate_at(c(4:7), round_, digits = digits) %>%
-    mutate_at("d", round_, digits = digits) %>%
-    mutate_at("df", round_, 1) %>%
+  out <- out  |> 
+    mutate_at(c(4:7), round_, digits = digits)  |> 
+    mutate_at("d", round_, digits = digits) |> 
+    mutate_at("df", round_, 1)  |> 
     mutate_at("t", round_, 2)
   
 
@@ -152,7 +152,7 @@ nice_t_test_table <- function(dv,
       nA = out[[2]],
       nb = out[[3]],
       MS_A, MS_B
-    ) %>%
+    ) |> 
         bind_cols(out[c(8:ncol(out))])
     colnames(out)[4:5] <- paste0("M (SD) ", conditions)
   }
@@ -162,11 +162,10 @@ nice_t_test_table <- function(dv,
   note <- paste0("Method for estimating standard deviation: ", method)
   
   if (manova) {
-    res <- lm(as.matrix(dv) ~ iv) %>%
-      manova() %>%
-      summary() %>%
-      .$"stats"
-    
+    res <- lm(as.matrix(dv) ~ iv)  |> 
+      manova()  |> 
+      summary()
+    res <- res$"stats"
     note <- paste0(note, "; ", sprintf(
       "Manova: Pillai = %.2f; F(%d, %d) = %.2f; p = %.3f", 
       res[1, 2], res[1, 4], res[1, 5], res[1, 3], res[1, 6]

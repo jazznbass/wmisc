@@ -148,7 +148,7 @@ nice_regression_table <- function(
 
   # round and rename cols and predictor labels ----
   
-  out <- round_numeric(out, digit = round)
+  out <- round_numeric(out, digits = round)
   
   names(out)[1] <- labels$predictor
   

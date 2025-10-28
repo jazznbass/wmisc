@@ -23,7 +23,7 @@ plotalphabeta(
 
 \item{sd1}{Standard deviation under H1.}
 
-\item{d}{Effect size (Cohen's d): H₁ mean is \code{m + d * sd0}.}
+\item{d}{Effect size (Cohen's d): H1 mean is \code{m + d * sd0}.}
 
 \item{alpha}{Significance level.}
 
@@ -31,7 +31,7 @@ plotalphabeta(
 
 \item{col_fill}{Character vector of length 2: colors for alpha and beta shading.}
 
-\item{show_text}{Logical. If TRUE, prints α, β, and power in the plot.}
+\item{show_text}{Logical. If TRUE, prints alpha, beta, and power in the plot.}
 
 \item{show_labels}{Logical. If TRUE, adds labels for H0, H1, and effect size d.}
 }

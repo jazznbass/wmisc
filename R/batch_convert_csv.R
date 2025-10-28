@@ -27,7 +27,7 @@ batch_convert_csv <- function(folder,
   if (missing(folder)) folder <- getwd()
   dir_working <- getwd()
   setwd(folder)
-  filenames <- dir(patter = "*.csv")
+  filenames <- dir(pattern = "*.csv")
   
   if (move_csv != "")  dir.create(move_csv)
   

@@ -18,7 +18,7 @@ error areas shaded. Legend and effect size annotation are embedded in the plot."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.6</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@ error areas shaded. Legend and effect size annotation are embedded in the plot.<
 
 
 <dt id="arg-d">d<a class="anchor" aria-label="anchor" href="#arg-d"></a></dt>
-<dd><p>Effect size (Cohen's d): H₁ mean is <code>m + d * sd0</code>.</p></dd>
+<dd><p>Effect size (Cohen's d): H1 mean is <code>m + d * sd0</code>.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
@@ -95,7 +95,7 @@ error areas shaded. Legend and effect size annotation are embedded in the plot.<
 
 
 <dt id="arg-show-text">show_text<a class="anchor" aria-label="anchor" href="#arg-show-text"></a></dt>
-<dd><p>Logical. If TRUE, prints α, β, and power in the plot.</p></dd>
+<dd><p>Logical. If TRUE, prints alpha, beta, and power in the plot.</p></dd>
 
 
 <dt id="arg-show-labels">show_labels<a class="anchor" aria-label="anchor" href="#arg-show-labels"></a></dt>
@@ -110,10 +110,7 @@ error areas shaded. Legend and effect size annotation are embedded in the plot.<
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">plotalphabeta</span><span class="op">(</span>m <span class="op">=</span> <span class="fl">0</span>, sd0 <span class="op">=</span> <span class="fl">1</span>, sd1 <span class="op">=</span> <span class="fl">1.5</span>, d <span class="op">=</span> <span class="fl">1.5</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All aesthetics have length 1, but the data has 2000 rows.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please consider using `annotate()` or provide this layer with data containing</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   a single row.</span>
-<span class="r-plt img"><img src="plotalphabeta-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in labs(x = "x", y = "Density"):</span> could not find function "labs"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

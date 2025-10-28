@@ -25,7 +25,7 @@ Side effect: prints the description to the console, and optionally to a README f
 Generates a concise textual description of a dataset, summarizing each column's type,
 number of missing values, and a short overview of its content (e.g., range or levels).
 Optionally, this description can be written to a \code{README.md} file.
-\link{this helpfile was generated with AI}
+Note: this helpfile was generated with AI
 }
 \details{
 For each column in the dataset, the function provides:

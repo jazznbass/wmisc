@@ -110,7 +110,7 @@ alpha_table <- function(data,
       data_scale <- data_scale[-.id, ]
     }
     
-    .var <- apply(data_scale, 2, var, na.rm = TRUE)
+    .var <- apply(data_scale, 2, function(x) var(x, na.rm = TRUE))
     
     if (any(.var == 0, na.rm = TRUE)) {
       filter_names <- names(data_scale)[which(.var == 0)]
