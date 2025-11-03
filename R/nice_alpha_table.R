@@ -54,9 +54,10 @@ nice_alpha_table <- function(data,
                              RMSEA = FALSE,
                              difficulty = FALSE,
                              values = NULL,
-                             fa = TRUE) {
+                             fa = TRUE,
+                             ...) {
   out <- do.call(alpha_table, as.list(environment()))
-  nice_table(out)
+  nice_table(out, ...)
 }
 
 #' @export

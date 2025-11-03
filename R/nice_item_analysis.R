@@ -28,7 +28,7 @@
 #' )
 #' @export
 nice_item_analysis <- function(data,
-                       scale,
+                       scales,
                        labels = NULL,
                        round = 2,
                        ci = TRUE,
@@ -39,9 +39,11 @@ nice_item_analysis <- function(data,
                        RMSEA = FALSE,
                        difficulty = FALSE,
                        values = NULL,
-                       fa = TRUE) {
-  out <- do.call(item_analysis, as.list(environment()))
-  nice_table(out)
+                       fa = TRUE,
+                       ...) {
+  args <- as.list(environment())
+  out <- do.call(item_analysis, args)
+  nice_table(out, ...)
 }
 
 #' @export

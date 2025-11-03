@@ -91,10 +91,10 @@ nice_sem <- function(x,
   
   out <- round_numeric(out, round)
   
-  if (is.null(footnote)) {
-    if(standardized) footnote <- "Effect estimates are standardized"
-    if(!standardized) footnote <- "Effect estimates are not standardized"
-  }
+  #if (is.null(footnote)) {
+  #  if(standardized) footnote <- "Effect estimates are standardized"
+  #  if(!standardized) footnote <- "Effect estimates are not standardized"
+  #}
   
   if (is.null(args_nice_table$title)) args_nice_table$title <- "Structure equation model"
 

@@ -19,7 +19,8 @@ nice_alpha_table(
   RMSEA = FALSE,
   difficulty = FALSE,
   values = NULL,
-  fa = TRUE
+  fa = TRUE,
+  ...
 )
 
 alpha_table(
