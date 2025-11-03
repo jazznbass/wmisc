@@ -28,7 +28,7 @@
 #' )
 #' @export
 nice_item_analysis <- function(data,
-                       scales,
+                       scale,
                        labels = NULL,
                        round = 2,
                        ci = TRUE,

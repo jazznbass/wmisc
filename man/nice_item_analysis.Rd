@@ -6,7 +6,7 @@
 \usage{
 nice_item_analysis(
   data,
-  scales,
+  scale,
   labels = NULL,
   round = 2,
   ci = TRUE,
@@ -23,6 +23,8 @@ nice_item_analysis(
 }
 \arguments{
 \item{data}{A data Frame}
+
+\item{scale}{A vector with variable names that define the scale.}
 
 \item{round}{Rounds values to given decimal position.}
 
@@ -47,8 +49,6 @@ item difficulty.}
 
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
-
-\item{scale}{A vector with variable names that define the scale.}
 }
 \value{
 A data frame with concise scale indices.
