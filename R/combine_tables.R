@@ -25,6 +25,7 @@ combine_tables <- function(tables, rownames_to_column = TRUE) {
   lsum <- cumsum(l)
   row_group <- mapply(function(start, stop) start:stop, start = lsum - l + 1, stop = lsum)
   out <- set_wmisc_attributes(out, row_group = row_group)
+  rownames(out) <- NULL
   out
   
 }

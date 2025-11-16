@@ -27,7 +27,7 @@
 #' nice_alpha_table(
 #'   data = wmisc:::ex_itrf,
 #'   scales = wmisc:::ex_itrf_scales,
-#'   labels = c("Inernalizing", "Externalizing"),
+#'   labels = c("Internalizing", "Externalizing"),
 #'   keys_from_weights = TRUE,
 #'   difficulty = TRUE,
 #'   values = list(c(0, 3)),

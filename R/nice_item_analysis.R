@@ -41,13 +41,43 @@ nice_item_analysis <- function(data,
                        values = NULL,
                        fa = TRUE,
                        ...) {
+  on.exit(print_messages())
   args <- as.list(environment())
-  out <- do.call(item_analysis, args)
+  
+  
+  if (!inherits(data, "data.frame")) 
+    add_message("Provided data must be of class data.frame")
+  
+  if (!inherits(scale, "list")) {
+    scale <- list(scale = scale) 
+    add_message("Scales must be provided in a list. Turned values into list.")
+  } 
+    
+  if (!is.null(keys)) {
+    check_key <- FALSE
+    keys_from_weights <- FALSE
+  }
+  
+  if (difficulty && is.null(values)) {
+    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
+    difficulty <- FALSE
+  }
+  
+  if (!is.null(values) && (length(values) != length(scale)))
+    values <- rep(values, length(scale))
+  
+  out <- lapply(scale, function(x) {
+    new_args <- args
+    new_args$scale <- x
+    do.call(item_analysis, new_args)
+  })
+
+  header <- lapply(out, function(x) get_wmisc_attributes(x)$header) |> unlist()
+  names(out) <- paste0(names(out), "\n(", header, ")")
+  out <- combine_tables(out, rownames_to_column = FALSE)
   nice_table(out, ...)
 }
 
-#' @export
-#' @rdname nice_alpha_table
 item_analysis <- function(data,
                         scale,
                         labels,
@@ -62,31 +92,8 @@ item_analysis <- function(data,
                         values = NULL,
                         fa = TRUE) {
   
-  
-  on.exit(print_messages())
-  
-  if (!inherits(data, "data.frame")) 
-    add_message("Provided data must be of class data.frame")
-  
-  #if (!inherits(scales, "list")) 
-  #  add_message("Scales must be provided in a list")
-  
-  if (!is.null(keys)) {
-    check_key <- FALSE
-    keys_from_weights <- FALSE
-  }
-  
-  if (difficulty && is.null(values)) {
-    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
-    difficulty <- FALSE
-  }
-  
-  if (!is.null(values) && (length(values) != length(scale)))
-    values <- rep(values, length(scale))
-  
-  
-                                       
   data_scale <- data[, scale]
+  header <- c()
     
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
@@ -149,8 +156,8 @@ item_analysis <- function(data,
   ))
 
   
-  df <- a$item.stats[, c("n", "r.drop", "mean", "sd")]
-  
+  df <- a$item.stats[, c("r.drop", "mean", "sd")]
+  header <- c(header, paste0("n = ", a$item.stats$n[1]))
   if (fa) f <- invisible(psych::fa(data_scale))
   df$loadings <- as.numeric(loadings(f))
 
@@ -168,7 +175,7 @@ item_analysis <- function(data,
       "{nice_statnum(alpha_ci[2], 2)}]"
     )
   }
- 
+  header <- c(header, paste0("Alpha = ", alpha))
   alpha.std <- a$total$std.alpha
   if (!ci) {
     alpha.std <- nice_statnum(alpha.std, 2)
@@ -184,17 +191,24 @@ item_analysis <- function(data,
     )
   }
  
+  header <- c(header, paste0("Std. alpha = ", alpha.std))
+  
   if (difficulty) {
     df$Difficulty <- (df$mean - values[1]) / (values[2] - values[1])
   }
-  #df$"Homogeneity" <- nice_statnum(a$total$average_r, 2)
-  if (RMSEA) rmsea <- nice_statnum(f$RMSEA[1], 3) else rmsea <- NA
+  
+  header <- c(header, paste0("Homogeneity = ", nice_statnum(a$total$average_r, 2)))
+
+  if (RMSEA) {
+    header <- c(header, paste0("RMSEA = ", nice_statnum(f$RMSEA[1], 3)))
+  }
+  
   
   df$Labels <- if (is.null(labels)) labels <- row.names(df) else labels
   
   rownames(df) <- NULL
   
-  ord <- c("Labels", "n", "mean", "sd", "r.drop")
+  ord <- c("Labels", "mean", "sd", "r.drop")
   
   df <- df[, c(ord, names(df)[!names(df) %in% ord])]
   
@@ -206,12 +220,14 @@ item_analysis <- function(data,
     "loadings" = "Loadings"
   )
   
+  header <- paste0(header, collapse = "; ")
+  
   df <- set_wmisc_attributes(df, 
                              note = c(),
                              title = "Item analysis",
                              cols_label = cols_label,
-                             round = round
-                             #spanner = list(N = 2:3, "Alpha [95% CI]" = 4:5)
+                             round = round,
+                             header = header
   )
   
   df
