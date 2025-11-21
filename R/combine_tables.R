@@ -20,10 +20,9 @@ combine_tables <- function(tables, rownames_to_column = TRUE) {
   if (rownames_to_column) rownames(out) <- NULL
   spanner <- vector("list", length(tables))
   names(spanner) <- names(tables)
-  
   l <- lapply(tables, nrow) |> unlist()
   lsum <- cumsum(l)
-  row_group <- mapply(function(start, stop) start:stop, start = lsum - l + 1, stop = lsum)
+  row_group <- mapply(function(start, stop) start:stop, start = lsum - l + 1, stop = lsum, SIMPLIFY = FALSE)
   out <- set_wmisc_attributes(out, row_group = row_group)
   rownames(out) <- NULL
   out
