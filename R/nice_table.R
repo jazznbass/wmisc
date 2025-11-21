@@ -156,7 +156,7 @@ nice_table.default <- function(x,
   if (!is.null(row_group)) {
     for(i in length(row_group):1)
       out <- gt::tab_row_group(
-        out, label = names(row_group)[i], rows = row_group[[i]]
+        out, label = gt::md(names(row_group)[i]), rows = row_group[[i]]
       )
     out <- gt::tab_style(
       out, style = gt::cell_text(align = "center"),

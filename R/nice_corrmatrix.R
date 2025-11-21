@@ -80,7 +80,7 @@ nice_corrmatrix <- function(cr,
         .y = names(cr)
       )  
     }
-    
+    #browser()
     
     if (is.null(group)) {
       .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))

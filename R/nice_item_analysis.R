@@ -3,7 +3,7 @@
 #' Returns a data.frame with detailed item analyses for the provided scale.
 #'
 #' @param data A data Frame
-#' @param scale A vector with variable names that define the scale.
+#' @param scales A list with vectors with variable names that define each scale.
 #' @param round Rounds values to given decimal position.
 #' @param ci If TRUE confidence intervals are calculated.
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
@@ -22,16 +22,16 @@
 #' @examples
 #' nice_item_analysis(
 #'   wmisc:::data_emo, 
-#'   scale = wmisc:::data_emo_scales[[1]], 
+#'   scale = wmisc:::data_emo_scales, 
 #'   difficulty = TRUE, 
 #'   values = c(1,5)
 #' )
 #' @export
 nice_item_analysis <- function(data,
-                       scale,
+                       scales,
                        labels = NULL,
                        round = 2,
-                       ci = TRUE,
+                       ci = FALSE,
                        conf_level = 0.95,
                        check_key = TRUE,
                        keys = NULL,
@@ -48,8 +48,8 @@ nice_item_analysis <- function(data,
   if (!inherits(data, "data.frame")) 
     add_message("Provided data must be of class data.frame")
   
-  if (!inherits(scale, "list")) {
-    scale <- list(scale = scale) 
+  if (!inherits(scales, "list")) {
+    scales <- list(scale = scales) 
     add_message("Scales must be provided in a list. Turned values into list.")
   } 
     
@@ -66,14 +66,15 @@ nice_item_analysis <- function(data,
   if (!is.null(values) && (length(values) != length(scale)))
     values <- rep(values, length(scale))
   
-  out <- lapply(scale, function(x) {
+  out <- lapply(scales, function(x) {
     new_args <- args
     new_args$scale <- x
+    new_args$scales <- NULL
     do.call(item_analysis, new_args)
   })
 
   header <- lapply(out, function(x) get_wmisc_attributes(x)$header) |> unlist()
-  names(out) <- paste0(names(out), "\n(", header, ")")
+  names(out) <- paste0("**", names(out), "**  \n*", header, "*")
   out <- combine_tables(out, rownames_to_column = FALSE)
   nice_table(out, ...)
 }
@@ -214,9 +215,9 @@ item_analysis <- function(data,
   
   
   cols_label <- list(
-    "mean" = "M",
-    "sd" = "SD",
-    r.drop = "Discrimination",
+    "mean" = gt::md("*M*"),
+    "sd" = gt::md("*SD*"),
+    r.drop = gt::html("<i>r<sub>it</sub></i>"),
     "loadings" = "Loadings"
   )
   

@@ -1,22 +1,3 @@
-
-
-#################### -----
-
-library(wmisc)
-nice_item_analysis(
-  wmisc:::data_emo, 
-  scales = wmisc:::data_emo_scales[[1]], 
-  difficulty = TRUE, 
-  values = c(1,5)
-)
-
-
-
-
-
-
-
-
 library(tidyverse)
 library(wmisc)
 library(nlme)

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7</span>
       </span>
     </div>
 
@@ -60,29 +60,14 @@
 <span>  RMSEA <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  difficulty <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  values <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fa <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  fa <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">alpha_table</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">scales</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  round <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  ci <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  check_key <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  keys <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  keys_from_weights <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  RMSEA <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  difficulty <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  values <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fa <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">item_analysis</span><span class="op">(</span></span>
-<span>  <span class="va">data</span>,</span>
-<span>  <span class="va">scale</span>,</span>
-<span>  <span class="va">labels</span>,</span>
 <span>  round <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
@@ -169,7 +154,7 @@ loadings are reported.</p></dd>
 <span class="r-in"><span><span class="fu">nice_alpha_table</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="fu">wmisc</span><span class="fu">:::</span><span class="va">ex_itrf</span>,</span></span>
 <span class="r-in"><span>  scales <span class="op">=</span> <span class="fu">wmisc</span><span class="fu">:::</span><span class="va">ex_itrf_scales</span>,</span></span>
-<span class="r-in"><span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Inernalizing"</span>, <span class="st">"Externalizing"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Internalizing"</span>, <span class="st">"Externalizing"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  keys_from_weights <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  difficulty <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>

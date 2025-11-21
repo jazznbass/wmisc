@@ -6,10 +6,10 @@
 \usage{
 nice_item_analysis(
   data,
-  scale,
+  scales,
   labels = NULL,
   round = 2,
-  ci = TRUE,
+  ci = FALSE,
   conf_level = 0.95,
   check_key = TRUE,
   keys = NULL,
@@ -24,7 +24,7 @@ nice_item_analysis(
 \arguments{
 \item{data}{A data Frame}
 
-\item{scale}{A vector with variable names that define the scale.}
+\item{scales}{A list with vectors with variable names that define each scale.}
 
 \item{round}{Rounds values to given decimal position.}
 
@@ -59,7 +59,7 @@ Returns a data.frame with detailed item analyses for the provided scale.
 \examples{
 nice_item_analysis(
   wmisc:::data_emo, 
-  scale = wmisc:::data_emo_scales[[1]], 
+  scale = wmisc:::data_emo_scales, 
   difficulty = TRUE, 
   values = c(1,5)
 )
