@@ -8,7 +8,7 @@
 create_data_description(
   dat,
   readme = FALSE,
-  tab = "   ",
+  tab = " | ",
   max_char = 60,
   overwrite = TRUE
 )

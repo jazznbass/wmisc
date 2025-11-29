@@ -35,7 +35,7 @@
 #'
 #' @export
 create_data_description <- function(
-    dat, readme = FALSE, tab = "   ", max_char = 60, overwrite = TRUE) {
+    dat, readme = FALSE, tab = " | ", max_char = 60, overwrite = TRUE) {
   
   filename <- as.character(match.call()[2])
   file_info <- NULL
@@ -71,27 +71,49 @@ create_data_description <- function(
   })
   
   names <- names(dat) |> iconv(from = "", to = "UTF-8", sub = "byte")
-  names <- sprintf(paste0("%-", max(nchar(names)), "s"), names)
+  max_chars_names <- max(nchar(names))
+  names <- sprintf(paste0("%-", max_chars_names, "s"), names)
   
-  cl <- sapply(dat, \(.) paste0(class(.), collapse = "|"))
-  cl <- paste0("(", cl, ", ", sapply(dat, \(.) sum(is.na(.))), " NA):", sep = "")
-  cl <- sprintf(paste0("%-", max(nchar(cl)), "s"), cl)
+  cl <- sapply(dat, \(.) paste0(class(.), collapse = "/"))
+  cl <- paste0("(", cl, ", ", sapply(dat, \(.) sum(is.na(.))), " NA) ", sep = "")
   
+  max_chars_cl <- max(nchar(cl))
+  cl <- sprintf(paste0("%-", max_chars_cl, "s"), cl)
   
-  out <- paste0(names, tab, cl, tab, info, sep = "")
+  max_chars_info <- max(nchar(info))
+  out <- paste0("| ", names, tab, cl, tab, info, "|", sep = "")
   
   if (readme) {
     fn <- file.path(dirname(filename), paste0("README-", basename(filename), ".md"))
-    if (!overwrite) 
-      if (file.exists(fn)) return(FALSE)
+    if (!overwrite) if (file.exists(fn)) return(FALSE)
     sink(fn, append = FALSE)
   }
   
   cat("# Discription of datafile `", basename(filename), "`", sep = "")
   cat("\n\n")
-  if (!is.null(file_info)) cat("Datafile from:", as.character(file_info$mtime), "\n")
-  cat("Columns: ", ncol(dat), " | Rows: ", nrow(dat), sep = "")
-  cat("\n\n")
+  if (!is.null(file_info)) cat("Datafile from:", as.character(file_info$mtime), "  \n")
+  cat("Columns: ", ncol(dat), " / Rows: ", nrow(dat), sep = "")
+  cat("  \n\n")
+  
+  header2 <- paste0(
+    "|", strrep("-", max_chars_names + 2), "|",
+    strrep("-", max_chars_cl + 2), "|",
+    strrep("-", max_chars_info + 1), "|",
+    collapse = ""
+  )
+  
+  header1 <- paste0(
+    "| var", strrep(" ", max_chars_names - 2), "| class",
+    strrep(" ", max_chars_cl - 4), "| info",
+    strrep(" ", max_chars_info - 4), "|",
+    collapse = ""
+  )
+  
+  cat(header1)
+  cat("\n")
+  
+  cat(header2)
+  cat("\n")
   cat(out, sep = "\n")
   
   if (readme) sink()
