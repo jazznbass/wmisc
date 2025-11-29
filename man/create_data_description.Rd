@@ -2,9 +2,18 @@
 % Please edit documentation in R/create_data.description.R
 \name{create_data_description}
 \alias{create_data_description}
+\alias{batch_create_data_description}
 \title{Create a description of a dataset}
 \usage{
-create_data_description(dat, readme = FALSE, tab = "   ", max_char = 60)
+create_data_description(
+  dat,
+  readme = FALSE,
+  tab = "   ",
+  max_char = 60,
+  overwrite = TRUE
+)
+
+batch_create_data_description(recursive = FALSE, overwrite = FALSE)
 }
 \arguments{
 \item{dat}{A data.frame or a character string pointing to an \code{.rds} file to load.
@@ -14,6 +23,8 @@ If a character string is provided and ends with \code{.rds}, the file will be lo
 
 \item{max_char}{Integer. Maximum number of characters to show per variable summary.
 Longer content will be truncated. Default is \code{60}.}
+
+\item{recursive}{If TRUE includes subdirectories}
 
 \item{tabs}{Integer. Number of tab characters (\verb{\\\\t}) to use for formatting. Default is \code{1}.}
 }
@@ -41,6 +52,11 @@ For each column in the dataset, the function provides:
 }
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{batch_create_data_description()}: Automatically create data description files for all .rds files in a directory
+
+}}
 \examples{
 df <- data.frame(
   id = 1:10,

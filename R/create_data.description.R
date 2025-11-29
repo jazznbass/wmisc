@@ -34,31 +34,43 @@
 #' create_data_description(df)
 #'
 #' @export
-create_data_description <- function(dat, readme = FALSE, tab = "   ", max_char = 60) {
+create_data_description <- function(
+    dat, readme = FALSE, tab = "   ", max_char = 60, overwrite = TRUE) {
   
   filename <- as.character(match.call()[2])
-  
+  file_info <- NULL
   if (is.character(dat)) {
     filename <- dat
     ext <- tools::file_ext(filename)
-    if (ext %in% c("rds", "RDS")) dat <- readRDS(dat)
+    if (ext %in% c("rds", "RDS")) dat <- readRDS(filename)
+    file_info <- file.info(filename)
     
+    if (!inherits(dat, "data.frame")) {
+      warning(filename, "is not a data frame")
+      return(FALSE)
+    }
   }
+ 
 
   info <- sapply(dat, \(.) {
     out <- "-"
     if (is.character(.)) . <- as.factor(.)
     if (is.factor(.))
       out <- paste0(levels(.), collapse = ", ")
-    if (is.numeric(.))
-      out <- paste0(round(min(., na.rm = TRUE), 2), " to ", round(max(., na.rm = TRUE), 2))
-    
+    if (is.numeric(.)) {
+      tryCatch(
+        out <- paste0(round(min(., na.rm = TRUE), 2), " to ", round(max(., na.rm = TRUE), 2)), 
+        error = function(e) NULL
+      )
+    }
+      
+    out <- iconv(out, from = "", to = "UTF-8", sub = "byte")
     if (nchar(out) > max_char) out <- paste0(substr(out, 1, max_char), " [...]")
     
     out
   })
   
-  names <- names(dat)
+  names <- names(dat) |> iconv(from = "", to = "UTF-8", sub = "byte")
   names <- sprintf(paste0("%-", max(nchar(names)), "s"), names)
   
   cl <- sapply(dat, \(.) paste0(class(.), collapse = "|"))
@@ -69,12 +81,15 @@ create_data_description <- function(dat, readme = FALSE, tab = "   ", max_char =
   out <- paste0(names, tab, cl, tab, info, sep = "")
   
   if (readme) {
-    fn <- paste0("README-", filename, ".md")
+    fn <- file.path(dirname(filename), paste0("README-", basename(filename), ".md"))
+    if (!overwrite) 
+      if (file.exists(fn)) return(FALSE)
     sink(fn, append = FALSE)
   }
   
-  cat("# Discription of datafile `", filename, "`", sep = "")
+  cat("# Discription of datafile `", basename(filename), "`", sep = "")
   cat("\n\n")
+  if (!is.null(file_info)) cat("Datafile from:", as.character(file_info$mtime), "\n")
   cat("Columns: ", ncol(dat), " | Rows: ", nrow(dat), sep = "")
   cat("\n\n")
   cat(out, sep = "\n")
@@ -82,3 +97,21 @@ create_data_description <- function(dat, readme = FALSE, tab = "   ", max_char =
   if (readme) sink()
   
 }
+
+#' @export
+#' @param recursive If TRUE includes subdirectories
+#' @describeIn create_data_description Automatically create data description files for all .rds files in a directory
+batch_create_data_description <- function(recursive = FALSE, overwrite = FALSE) {
+  x <- sapply(
+    list.files(pattern = "\\.rds$", recursive = recursive, full.names = TRUE), 
+    function(x) {
+      cat(x, "\n")
+      create_data_description(x, readme = TRUE, overwrite = overwrite)
+    }
+  )
+ 
+  cat("Wrote", sapply(x, function(x) !isFALSE(x)) |> sum(), "files\n")
+  cat("Skipped", sapply(x, isFALSE) |> sum(), "files\n")
+  
+}
+

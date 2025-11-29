@@ -12,6 +12,7 @@
 #'   automatically created based on the title.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
+#' @param cols_align List with align align information. E.g., `list(left = c(2,3), right = 1)`.
 #' @param spanner List with information on grouping columns. E.g. `spanner =
 #'   list("M" = 2:3, "SD" = 4:6)`.
 #' @param row_group List with information on grouping rows `row_group =
@@ -52,6 +53,7 @@ nice_table.default <- function(x,
                                rownames = NULL,
                                file = NULL,
                                cols_label = NULL,
+                               cols_align = NULL,
                                decimals = NULL,
                                round = NULL,
                                label_na = NULL,
@@ -151,6 +153,15 @@ nice_table.default <- function(x,
   args <- c(list(data = x), gt)
   
   out <- do.call(gt::gt, args)|> gt_apa_style()
+  
+  if (!is.null(cols_align)) {
+    for(i_align in seq_along(cols_align)) {
+      cols <- cols_align[[i_align]]
+      if (is.character(cols)) 
+        cols <- which(names(x) %in% cols)
+      out <- gt::cols_align(out, align = names(cols_align)[i_align], columns = cols)
+    }
+  }
 
   if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
   if (!is.null(row_group)) {

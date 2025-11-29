@@ -15,6 +15,7 @@
   rownames = NULL,
   file = NULL,
   cols_label = NULL,
+  cols_align = NULL,
   decimals = NULL,
   round = NULL,
   label_na = NULL,
@@ -48,6 +49,8 @@ automatically created based on the title.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
 new_name).}
+
+\item{cols_align}{List with align align information. E.g., \code{list(left = c(2,3), right = 1)}.}
 
 \item{decimals}{Number of decimals that will be printed.}
 

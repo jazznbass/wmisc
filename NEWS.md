@@ -1,3 +1,12 @@
+## wmisc 0.3.8
+
+## New functions
+
+* `batch_create_data_description()`: Creates automatic data description README files.
+
+## New arguents
+
+* `nice_table()`: `cols_align` takes a list which element names can be left, right, or center and which values indicate either the col number or the col names. e.g. `nice_table(mtcars, cols_align = list(right = c("am", "gearl"), left = 1:3))`
 
 ## wmisc 0.3.7
 

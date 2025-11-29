@@ -111,7 +111,7 @@ nice_sem <- function(x,
       if (identical(x@Options$missing, "ml")) 
         "Missing data were addressed using the Full Information Maximum Likelihood (FIML) approach",
       paste0("The analysis was performed with the lavaan package in R (",
-              cit$author, ", ", cit$year, ")")
+              paste0(cit$author, collapse = ", "), ", ", cit$year, ")")
       
       
     )
