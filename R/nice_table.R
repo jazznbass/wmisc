@@ -52,6 +52,7 @@ nice_table.default <- function(x,
                                row_group_order = NULL,
                                rownames = NULL,
                                file = NULL,
+                               use_col_labels = FALSE,
                                cols_label = NULL,
                                cols_align = NULL,
                                decimals = NULL,
@@ -129,6 +130,12 @@ nice_table.default <- function(x,
   
   x <- round_numeric(x, round)
   
+  if (!use_col_labels) {
+    for (i in seq_along(x)) {
+      attr(x[[i]], "label") <- NULL
+    }
+  }
+  
   if (FALSE) {
     new_cols_label <- lapply(x, \(x) get_label(x)) 
     new_cols_label <- new_cols_label[which(!is.null(new_cols_label))]
@@ -143,10 +150,6 @@ nice_table.default <- function(x,
   }
   
   # create html -----
-  
-  # delete:
-  #if (engine == "extra") 
-  #  return(.nice_table_kable(x, title, row_group, spanner, footnote))
 
   if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
   
@@ -157,6 +160,7 @@ nice_table.default <- function(x,
   if (!is.null(cols_align)) {
     for(i_align in seq_along(cols_align)) {
       cols <- cols_align[[i_align]]
+      if (identical(cols, "all")) cols <- 1:ncol(x)
       if (is.character(cols)) 
         cols <- which(names(x) %in% cols)
       out <- gt::cols_align(out, align = names(cols_align)[i_align], columns = cols)
@@ -240,30 +244,3 @@ gt_apa_style <- function(gt_tbl) {
     gt::cols_align(align = "center") |> 
     gt::cols_align(align = "left", columns = 1)
 }
-
-# delete:
-# .nice_table_kable <- function(x, 
-#                               title, 
-#                               row_group, 
-#                               spanner, 
-#                               footnote) {
-# 
-#   args <- c(
-#     list(x = x, caption = title, align = c("l", rep("c", ncol(x) - 1))), 
-#     depecated$kable
-#   )
-#   x <- do.call(knitr::kable, args)
-#   out <- do.call(kableExtra::kable_classic, c(list(x), depecated$extra)) 
-#   
-#   if (!is.null(row_group)) {
-#     out <- kableExtra::pack_rows(out, index = row_group, bold = FALSE)
-#   }
-#   
-#   if (!is.null(spanner)) {
-#     out <- kableExtra::add_header_above(out, spanner)
-#   }
-#   
-#   if (!is.null(footnote)) out <- kableExtra::footnote(out, footnote)
-#   
-#   out
-# }

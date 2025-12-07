@@ -6,7 +6,6 @@
 \usage{
 nice_descriptives(
   data,
-  round = NULL,
   auto_labels = FALSE,
   title = "Descriptive statistics",
   footnote = NULL,
@@ -17,9 +16,9 @@ nice_descriptives(
 \arguments{
 \item{data}{A data frame}
 
-\item{round}{Digits for round function}
-
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
+
+\item{round}{Digits for round function}
 }
 \value{
 A data frame with descriptive statistics

@@ -11,7 +11,7 @@
 #' nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
 #' @export
 nice_descriptives <- function(data, 
-                              round = NULL, 
+                              #round = NULL, 
                               auto_labels = FALSE,
                               title = "Descriptive statistics",
                               footnote = NULL,
@@ -62,7 +62,7 @@ nice_descriptives <- function(data,
     ))
   
   out <- t(out)
-  if (!is.null(round)) out <- round(out, round)
+  #if (!is.null(round)) out <- round_numeric(out, round)
   out <- data.frame(out)
   out <- cbind(Variable = rownames(out), out)
   rownames(out) <- NULL

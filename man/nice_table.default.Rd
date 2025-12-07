@@ -14,6 +14,7 @@
   row_group_order = NULL,
   rownames = NULL,
   file = NULL,
+  use_col_labels = FALSE,
   cols_label = NULL,
   cols_align = NULL,
   decimals = NULL,

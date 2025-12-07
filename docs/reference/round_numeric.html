@@ -18,7 +18,7 @@ Non-numeric columns and attributes are preserved."><!-- mathjax --><script src="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.9</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ Non-numeric columns and attributes are preserved.</p>
 
 
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
-<dd><p>Integer. Number of digits to round to.</p></dd>
+<dd><p>Integer. Number of digits to round to. Or a vector with variable names and digits to round.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -76,19 +76,20 @@ Non-numeric columns and attributes are preserved.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  numeric_col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.234</span>, <span class="fl">2.345</span>, <span class="fl">3.456</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  numeric_col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.567</span>, <span class="fl">5.678</span>, <span class="fl">6.789</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.234</span>, <span class="fl">2.345</span>, <span class="fl">3.456</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.567</span>, <span class="fl">5.678</span>, <span class="fl">6.789</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  non_numeric_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"note"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"It keeps all the attributes!"</span></span></span>
-<span class="r-in"><span><span class="va">rounded</span> <span class="op">&lt;-</span> <span class="fu">round_numeric</span><span class="op">(</span><span class="va">data</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">rounded</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   numeric_col1 numeric_col2 non_numeric_col</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         1.23         4.57               A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2.35         5.68               B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         3.46         6.79               C</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">rounded</span>, <span class="st">"note"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "It keeps all the attributes!"</span>
+<span class="r-in"><span><span class="fu">round_numeric</span><span class="op">(</span><span class="va">data</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   col1 col2 non_numeric_col</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.23 4.57               A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.35 5.68               B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.46 6.79               C</span>
+<span class="r-in"><span><span class="fu">round_numeric</span><span class="op">(</span><span class="va">data</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fl">1</span>, col2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   col1 col2 non_numeric_col</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.2 4.57               A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.3 5.68               B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3.5 6.79               C</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

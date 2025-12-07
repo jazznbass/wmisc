@@ -20,7 +20,7 @@ Note: this helpfile was generated with AI"><!-- mathjax --><script src="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.9</span>
       </span>
     </div>
 
@@ -53,7 +53,15 @@ Note: this helpfile was generated with AI</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_data_description</span><span class="op">(</span><span class="va">dat</span>, readme <span class="op">=</span> <span class="cn">FALSE</span>, tab <span class="op">=</span> <span class="st">"   "</span>, max_char <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_data_description</span><span class="op">(</span></span>
+<span>  <span class="va">dat</span>,</span>
+<span>  readme <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tab <span class="op">=</span> <span class="st">" | "</span>,</span>
+<span>  max_char <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">batch_create_data_description</span><span class="op">(</span>recursive <span class="op">=</span> <span class="cn">FALSE</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,6 +80,10 @@ If a character string is provided and ends with <code>.rds</code>, the file will
 <dt id="arg-max-char">max_char<a class="anchor" aria-label="anchor" href="#arg-max-char"></a></dt>
 <dd><p>Integer. Maximum number of characters to show per variable summary.
 Longer content will be truncated. Default is <code>60</code>.</p></dd>
+
+
+<dt id="arg-recursive">recursive<a class="anchor" aria-label="anchor" href="#arg-recursive"></a></dt>
+<dd><p>If TRUE includes subdirectories</p></dd>
 
 
 <dt id="arg-tabs">tabs<a class="anchor" aria-label="anchor" href="#arg-tabs"></a></dt>
@@ -93,6 +105,11 @@ Side effect: prints the description to the console, and optionally to a README f
 <li><p>For character variables: coerced to factor and listed as above</p></li>
 </ul></li>
 </ul></div>
+    <div id="functions">
+    <h2>Functions</h2>
+
+<ul><li><p><code>batch_create_data_description()</code>: Automatically create data description files for all .rds files in a directory</p></li>
+</ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -104,11 +121,13 @@ Side effect: prints the description to the console, and optionally to a README f
 <span class="r-in"><span><span class="fu">create_data_description</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Discription of datafile `df`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 3 | Rows: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 3 / Rows: 10  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> id      (integer, 0 NA):   1 to 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> group   (factor, 0 NA):    A, B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> score   (integer, 1 NA):   2 to 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | var   | class            | info   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |-------|------------------|--------|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | id    | (integer, 0 NA)  | 1 to 10|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | group | (factor, 0 NA)   | A, B|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | score | (integer, 1 NA)  | 2 to 10|</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
