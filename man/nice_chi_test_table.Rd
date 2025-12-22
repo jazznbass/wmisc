@@ -54,12 +54,13 @@ group one or vice versa.}
 \item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}}
 }
 \value{
-A tibble or an html table
+A data.frame or an html table
 }
 \description{
 Creates a chi.squared test table for multiple dependent variables
 }
 \examples{
+set.seed(123)
 dat <- data.frame(
   gender = factor(rbinom(100, 1, 0.3), labels = c("male", "female")),
   glasses = factor(rbinom(100, 1, 0.3), labels = c("no", "yes")),

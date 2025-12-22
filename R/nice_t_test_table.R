@@ -1,16 +1,17 @@
-#' Creates a t.test table for multiple dependent variables
+#' Creates a t-test table for multiple dependent variables
 #'
 #' @param dv A data frame with the dependent variables or a character vector
 #'   with variable names when data is defined.
 #' @param iv A data frame or vector with the independent variable or a character
 #'   if data is defined.
 #' @param data A data frame.
-#' @param method Either "cohen", "glass, or "hedges".
+#' @param method Either `"cohen"`, `"glass"`, or `"hedges"`.
 #' @param conditions A character vector of length two with the names of the two
 #'   conditions. Defaults to the first two levels of the independent variable
-#'   'iv' if applicable.
+#'   `'iv'` if applicable.
 #' @param labels A character vector of length two with labels for the dependent
 #'   variables.
+#' @param labels_conditions Vector of length 2 which resets condition labels.
 #' @param concise A more concise table with mean and SD in one column.
 #' @param nice_p If TRUE, p values are printed in a nice format.
 #' @param digits Number of digits for rounding mean and SD values
@@ -18,7 +19,7 @@
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param caption Table caption is type = "html"
 #'
-#' @return A tibble or an html table
+#' @return A data.frame or an html table
 #' @export
 #'
 #' @examples
@@ -42,21 +43,22 @@
 #' )
 
 nice_t_test_table <- function(dv, 
-                         iv, 
-                         data, 
-                         method = "cohen",
-                         conditions = NULL, 
-                         labels = NULL, 
-                         concise = TRUE, 
-                         nice_p = TRUE, 
-                         digits = 1, 
-                         var_equal = FALSE, 
-                         label_attr = TRUE,
-                         manova = TRUE, 
-                         type = "html",
-                         caption = "T-test table",
-                         alternative = "two.sided",
-                         file = NULL) {
+                              iv, 
+                              data, 
+                              method = "cohen",
+                              conditions = NULL, 
+                              labels = NULL,
+                              labels_conditions = NULL,
+                              concise = TRUE, 
+                              nice_p = TRUE, 
+                              digits = 1, 
+                              var_equal = FALSE, 
+                              label_attr = TRUE,
+                              manova = TRUE, 
+                              type = "html",
+                              caption = NULL,
+                              alternative = "two.sided",
+                              file = NULL) {
 
   on.exit(print_messages())
   
@@ -69,12 +71,19 @@ nice_t_test_table <- function(dv,
   }
   
   if (is.null(conditions)) conditions <- levels(factor(iv))
+  if (is.null(labels_conditions)) labels_conditions <- conditions
   
   dv <- dv[iv %in% conditions, , drop = FALSE]
   iv <- iv[iv %in% conditions]
-  iv <- factor(iv, levels = conditions, labels = conditions)
+  iv <- factor(iv, levels = conditions, labels = labels_conditions)
   
-  out <- tibble(
+  if (is.null(caption)) {
+    caption <- paste0("T-test table comparing conditions ", 
+                      paste0(labels_conditions, collapse = " vs. "),
+                      " in variable ", as.character(match.call()[3]))
+  }
+  
+  out <- data.frame(
     Scale = character(), 
     n1 = numeric(), n2 = numeric(),
     M1 = numeric(), M2 = numeric(), 
@@ -128,38 +137,26 @@ nice_t_test_table <- function(dv,
     out[i, "n2"] <- ns[2]
   }
   
-  round_ <- function(x, digits) {
-    format(round(x, digits = digits), nsmall = digits) 
-  }
-
-  out[i, "p"] <- round(out$p[i], digits)
-  
-  out <- out  |> 
-    mutate_at(c(4:7), round_, digits = digits)  |> 
-    mutate_at("d", round_, digits = digits) |> 
-    mutate_at("df", round_, 1)  |> 
-    mutate_at("t", round_, 2)
-  
-
-  colnames(out)[4:5] <- paste0("M ", conditions)
-  colnames(out)[6:7] <- paste0("SD ", conditions)
-  colnames(out)[2:3] <- paste0("n ", conditions)
+  colnames(out)[4:5] <- paste0("M ", labels_conditions)
+  colnames(out)[6:7] <- paste0("SD ", labels_conditions)
+  colnames(out)[2:3] <- paste0("n ", labels_conditions)
   if (concise) {
+    out[, 4:7] <- round(out[, 4:7], digits)
     MS_A <- paste0(out[[4]], " (", out[[6]], ")")
     MS_B <- paste0(out[[5]], " (", out[[7]], ")")
-    out <- tibble(
+    
+    out <- data.frame(
       Scale = out[[1]],
       nA = out[[2]],
       nb = out[[3]],
       MS_A, MS_B
-    ) |> 
-        bind_cols(out[c(8:ncol(out))])
-    colnames(out)[4:5] <- paste0("M (SD) ", conditions)
+    ) |> dplyr::bind_cols(out[c(8:ncol(out))])
+    colnames(out)[4:5] <- paste0("M (SD) ", labels_conditions)
   }
 
   if (nice_p) out$p <- nice_p(out$p, digits = 2)
 
-  note <- paste0("Method for estimating standard deviation: ", method)
+  note <- paste0("Method for estimating d: ", method)
   
   if (manova) {
     res <- lm(as.matrix(dv) ~ iv)  |> 
@@ -178,14 +175,14 @@ nice_t_test_table <- function(dv,
   )
   
   if(type == "html") {
-    names(out)[4:5] <- conditions
-    names(out)[2:3] <- paste0(" ", conditions, " ")
+    names(out)[4:5] <- labels_conditions
+    names(out)[2:3] <- paste0(" ", labels_conditions, " ")
 
     out <- set_wmisc_attributes(out,
       spanner = list("M (SD)" = 4:5, "N" = 2:3),
       file = file
     )
-    out <- nice_table(out)
+    out <- nice_table(out, digits = digits, round = digits)
   }
     
   

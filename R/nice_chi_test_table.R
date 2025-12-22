@@ -19,10 +19,11 @@
 #'   group one or vice versa.
 #' @param type Either "df" for data frame or "html" for html table.
 #' @param ... Further arguments passed to [nice_table()]
-#' @return A tibble or an html table
+#' @return A data.frame or an html table
 #' @export
 #'
 #' @examples
+#' set.seed(123)
 #' dat <- data.frame(
 #'   gender = factor(rbinom(100, 1, 0.3), labels = c("male", "female")),
 #'   glasses = factor(rbinom(100, 1, 0.3), labels = c("no", "yes")),
@@ -53,7 +54,7 @@ nice_chi_test_table  <- function(dv,
   iv <- factor(iv)
   lev <- levels(iv)
   ref_levels <- rep_len(ref_levels, ncol(dv))
-  out <- tibble(
+  out <- data.frame(
     Variable = character(), 
     Level = character(), 
     P1 = numeric(), 
@@ -93,8 +94,7 @@ nice_chi_test_table  <- function(dv,
     format(round(x, digits=digits), nsmall = digits) 
   }
   
-  out <- out  |> 
-    mutate_at(c(3:6), round_, digits = digits)
+  out <- round_numeric(out, digits)
   
   if (order == "21") {
     out$t <- out$X * -1

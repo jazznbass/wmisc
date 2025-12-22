@@ -34,9 +34,9 @@ standardise <- function(x, grouping, min_valid, max_na, m = 0, sd = 1) {
   
   if (!missing(grouping)) {
     m_g <- tapply(x, grouping, mean, na.rm = TRUE)
-    m_g <- sapply(grouping, function(x) m_g[names(m_g) == x]) %>% unname()
+    m_g <- sapply(grouping, function(x) m_g[names(m_g) == x]) |>  unname()
     s_g <- tapply(x, grouping, sd, na.rm = TRUE)
-    s_g <- sapply(grouping, function(x) s_g[names(s_g) == x]) %>% unname()
+    s_g <- sapply(grouping, function(x) s_g[names(s_g) == x]) |>  unname()
   } else {
     m_g <- mean(x, na.rm = TRUE)
     s_g <- sd(x, na.rm = TRUE)

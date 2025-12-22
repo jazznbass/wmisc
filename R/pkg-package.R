@@ -6,7 +6,6 @@
 #' @aliases wmisc-package wmisc
 #' @author Juergen Wilbert \[aut, cre\]
 #' @keywords package
-#' @import dplyr
 #' @import graphics
 #' @importFrom utils read.csv citation packageVersion
 #' @importFrom ggplot2 ggplot geom_col geom_text aes scale_fill_brewer position_stack unit

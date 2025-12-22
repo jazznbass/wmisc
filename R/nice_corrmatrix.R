@@ -8,8 +8,7 @@
 #' @param upper TRUE if upper triangle should be included.
 #' @param lower TRUE if lower triangle should be included.
 #' @param digits Round to given digit position.
-#' @param labels Character string. If "auto" labels are taken from a label
-#'   attribute.
+#' @param labels Deprecated. Does not do anything. Please use `rename_by_label()`.
 #' @param show_ci If TRUE, confidence intervals are added.
 #' @param nsig_p p level below which correlations are considered not
 #'   significant.
@@ -54,7 +53,6 @@ nice_corrmatrix <- function(cr,
                             show_ci = FALSE, 
                             numbered_columns = TRUE,
                             show_descriptives = TRUE,
-                            labels = "auto",
                             nsig_p = .10, 
                             char_nsig, 
                             char_autocor = "\uFF0D",
@@ -69,19 +67,7 @@ nice_corrmatrix <- function(cr,
                             ...) {
   
   if (inherits(cr, "data.frame")) {
-    
-    if (identical(labels, "auto")) {
-      labels <- mapply(
-        FUN = function(.x, .y) { 
-          label <- get_label(.x)
-          if(!is.null(label)) label else .y
-        },
-        .x = cr, 
-        .y = names(cr)
-      )  
-    }
-    #browser()
-    
+    if (is.numeric(group)) group <- names(cr)[group]
     if (is.null(group)) {
       .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
       .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
@@ -160,8 +146,6 @@ nice_corrmatrix <- function(cr,
   if (drop_zero) r <- gsub("0\\.", ".", r)
   
   r <- as.data.frame(r)
-  
-  if (!is.null(labels)) rownames(r) <- labels
   
   if (numbered_columns) {
     rownames(r) <- paste0(1:nrow(r), ". ", rownames(r))

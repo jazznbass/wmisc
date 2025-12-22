@@ -16,7 +16,6 @@ nice_corrmatrix(
   show_ci = FALSE,
   numbered_columns = TRUE,
   show_descriptives = TRUE,
-  labels = "auto",
   nsig_p = 0.1,
   char_nsig,
   char_autocor = "－",
@@ -51,9 +50,6 @@ name. If included, calculates multilevel correlations.}
 
 \item{show_ci}{If TRUE, confidence intervals are added.}
 
-\item{labels}{Character string. If "auto" labels are taken from a label
-attribute.}
-
 \item{nsig_p}{p level below which correlations are considered not
 significant.}
 
@@ -79,6 +75,8 @@ significant.}
 defined by file ending eith html or docx).}
 
 \item{...}{Further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
+
+\item{labels}{Deprecated. Does not do anything. Please use \code{rename_by_label()}.}
 
 \item{show_discriptives}{If TRUE, mean and sd columns are added.}
 }

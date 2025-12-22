@@ -3,7 +3,7 @@
 \name{nice_t_test_table}
 \alias{nice_t_test_table}
 \alias{t_test_table}
-\title{Creates a t.test table for multiple dependent variables}
+\title{Creates a t-test table for multiple dependent variables}
 \usage{
 nice_t_test_table(
   dv,
@@ -12,6 +12,7 @@ nice_t_test_table(
   method = "cohen",
   conditions = NULL,
   labels = NULL,
+  labels_conditions = NULL,
   concise = TRUE,
   nice_p = TRUE,
   digits = 1,
@@ -19,7 +20,7 @@ nice_t_test_table(
   label_attr = TRUE,
   manova = TRUE,
   type = "html",
-  caption = "T-test table",
+  caption = NULL,
   alternative = "two.sided",
   file = NULL
 )
@@ -35,14 +36,16 @@ if data is defined.}
 
 \item{data}{A data frame.}
 
-\item{method}{Either "cohen", "glass, or "hedges".}
+\item{method}{Either \code{"cohen"}, \code{"glass"}, or \code{"hedges"}.}
 
 \item{conditions}{A character vector of length two with the names of the two
 conditions. Defaults to the first two levels of the independent variable
-'iv' if applicable.}
+\code{'iv'} if applicable.}
 
 \item{labels}{A character vector of length two with labels for the dependent
 variables.}
+
+\item{labels_conditions}{Vector of length 2 which resets condition labels.}
 
 \item{concise}{A more concise table with mean and SD in one column.}
 
@@ -57,10 +60,10 @@ variables.}
 \item{caption}{Table caption is type = "html"}
 }
 \value{
-A tibble or an html table
+A data.frame or an html table
 }
 \description{
-Creates a t.test table for multiple dependent variables
+Creates a t-test table for multiple dependent variables
 }
 \examples{
 nice_t_test_table(
