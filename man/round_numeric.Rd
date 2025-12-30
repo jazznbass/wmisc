@@ -9,10 +9,13 @@ round_numeric(x, digits)
 \arguments{
 \item{x}{A data frame.}
 
-\item{digits}{Integer. Number of digits to round to. Or a vector with variable names and digits to round.}
+\item{digits}{Integer. Number of digits to round to. Or a named vector with
+variable names and digits to round. The name \code{".default"} sets the digits
+value for all numeric variables that are not named in the vector.}
 }
 \value{
-A data frame with all numeric columns rounded to the specified number of digits.
+A data frame with all numeric columns rounded to the specified number
+of digits.
 }
 \description{
 Rounds all numeric columns of a data frame to a specified number of digits.
@@ -22,10 +25,18 @@ Non-numeric columns and attributes are preserved.
 data <- data.frame(
   col1 = c(1.234, 2.345, 3.456),
   col2 = c(4.567, 5.678, 6.789),
+  col3 = c(2.537, 4.658, 4.739),
   non_numeric_col = c("A", "B", "C")
 )
+
+## round all numeric variables to two digits
 round_numeric(data, digits = 2)
+
+## round col1 to one digit and col2 to two digits
 round_numeric(data, digits = c(col1 = 1, col2 = 2))
+
+## round col1 to one digit and all other numeric variables to two digits.
+round_numeric(data, digits = c(col1 = 1, .default = 2))
 
 }
 \seealso{
