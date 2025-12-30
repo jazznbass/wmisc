@@ -4,9 +4,21 @@
 #' @param remove_cols Either column number or column names to be removed. 
 #' @param show_fitmeasures A named vector with fit measures.
 #' @param show_ci If TRUE, adds columns with 95% confidence intervals.
+#' @param standardized If TRUE, standardized estimates are shown.
+#' @param round Number of digits to round numeric values.
 #' @param ... Further arguments passed to the `nice_table()` function.
 #' @examples
-#' nice_sem(wmisc::lavaan_fit)
+#' nice_sem(wmisc:::lavaan_fit)
+#' nice_sem(wmisc:::lavaan_fit, standardized = FALSE, show_ci = FALSE)
+#' nice_sem(
+#'  wmisc:::lavaan_fit,
+#'  show_fitmeasures = c(
+#'   FI = "cfi", TLI = "tli", RMSEA = "rmsea",
+#'   "SRMR" = "srmr"
+#'  ),
+#'  remove_cols = c("se", "z")
+#' )
+#'  
 #' @export
 nice_sem <- function(x, 
                      standardized = TRUE, 

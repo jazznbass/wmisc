@@ -51,6 +51,7 @@ nice_agreement_table <- function(data,
 }
 
 #' @export
+#' @rdname nice_agreement_table
 agreement_analysis <- function(data, 
                                vars = names(data), 
                                grouping, 
@@ -185,6 +186,7 @@ agreement_analysis <- function(data,
             min_group_size, 
            " cases were removed from the analysis")
   )  
+  rownames(out) <- NULL
   out <- set_wmisc_attributes(
     out, 
     spanner = list("N" = 2:3, "Class size" = 4:5, "Rwg" = 6:11, "ICC(1)" = 12:14),

@@ -1,26 +1,30 @@
 #' Add subgroup aggregates to a data frame
 #'
-#' Computes summary statistics for selected variables within subgroups defined by
-#' the *combination* of one or more grouping variables (e.g., `age` within `sex`)
-#' and merges the aggregated values back into the original data.
+#' Computes summary statistics for selected variables within subgroups defined
+#' by the *combination* of one or more grouping variables (e.g., `age` within
+#' `sex`) and merges the aggregated values back into the original data.
 #'
-#' @param dat A data.frame containing the columns listed in `grouping` and `vars`.
+#' @param dat A data.frame containing the columns listed in `grouping` and
+#'   `vars`.
 #' @param grouping A character vector of one or more column names in `dat` that
-#'   define the subgroups (their joint combinations). For example,
-#'   `c("sex", "age")` yields aggregates for each `sex`-by-`age` subgroup.
+#'   define the subgroups (their joint combinations). For example, `c("sex",
+#'   "age")` yields aggregates for each `sex`-by-`age` subgroup.
 #' @param vars A character vector of column names in `dat` to be aggregated.
-#' @param func A list with named functions applied to each variable in `vars` within each subgroup.
-#'   Must accept a vector and return a length-1 value. Default computes the mean with
-#'   missing values removed.
+#' @param func A list with named functions applied to each variable in `vars`
+#'   within each subgroup. Default computes the mean with missing values
+#'   removed.
 #'
-#' @details
-#' Aggregation is performed using [stats::aggregate()] with `by = dat[, grouping]`,
-#' so each unique combination of the `grouping` variables defines a subgroup.
-#' Results are joined back to `dat` using [base::merge()] by all `grouping` columns.
+#' @details Aggregation is performed using [stats::aggregate()] with `by = dat[,
+#' grouping]`, so each unique combination of the `grouping` variables defines a
+#' subgroup. Results are joined back to `dat` using [base::merge()] by all
+#' `grouping` columns. If multiple functions are provided in `func`, the
+#' resulting columns are suffixed with the names of the functions in `func`. If
+#' `func` is an unnamed list, suffixes "stat1", "stat2", etc. are used.
 #'
-#' @return A data.frame with the same observations as `dat`, plus additional columns containing subgroup-level
-#'   aggregated values for each variable in `vars`.
-#'
+#' @return A data.frame with the same observations as `dat`, plus additional
+#'   columns containing subgroup-level aggregated values for each variable in
+#'   `vars`.
+#' @seealso [stats::aggregate()], [base::merge()]
 #' @examples
 #' dat <- data.frame(
 #'   sex = c("f", "f", "m", "m", "m"),
@@ -38,7 +42,7 @@
 #'   grouping = c("sex", "age"),
 #'   vars = c("score", "other"),
 #'   func = list(
-#'     max = function(x) max(x, na.rm = TRUE), 
+#'     max = function(x) max(x, na.rm = TRUE),
 #'     median = function(x) median(x, na.rm = TRUE)
 #'    )
 #' )

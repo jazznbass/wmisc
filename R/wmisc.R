@@ -9,9 +9,9 @@
 }
 
 .onLoad <- function(lib, pkg, ...) {
-  options(list(
+  options(
     wmisc.nice.table.engine = "gt",
     wmisc.dic.labels = TRUE
-  ))
+  )
 }
 

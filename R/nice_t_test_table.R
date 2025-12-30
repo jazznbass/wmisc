@@ -16,9 +16,16 @@
 #' @param nice_p If TRUE, p values are printed in a nice format.
 #' @param digits Number of digits for rounding mean and SD values
 #' @param var_equal If FALSE, a t-test for unequal variances is calculated.
-#' @param type Either "df" for data frame or "html" for html table.
+#' @param label_attr If TRUE, variable labels are used if available.
+#' @param manova If TRUE, a MANOVA is calculated and its results are added
+#'  to the note.
 #' @param caption Table caption is type = "html"
-#'
+#' @param alternative A character string specifying the alternative hypothesis.
+#'  Must be one of "two.sided" (default), "greater" or "less".
+#' @param file Character string with filename. If set, an additional file is
+#'   exported (html format is possible). If set `TRUE`, a filename is
+#'   automatically created based on the title.
+#' @param ... Additional arguments passed to `nice_table()`.
 #' @return A data.frame or an html table
 #' @export
 #'
@@ -55,10 +62,10 @@ nice_t_test_table <- function(dv,
                               var_equal = FALSE, 
                               label_attr = TRUE,
                               manova = TRUE, 
-                              type = "html",
                               caption = NULL,
                               alternative = "two.sided",
-                              file = NULL) {
+                              file = NULL,
+                              ...) {
 
   on.exit(print_messages())
   
@@ -174,24 +181,15 @@ nice_t_test_table <- function(dv,
     note = note
   )
   
-  if(type == "html") {
-    names(out)[4:5] <- labels_conditions
-    names(out)[2:3] <- paste0(" ", labels_conditions, " ")
+  names(out)[4:5] <- labels_conditions
+  names(out)[2:3] <- paste0(" ", labels_conditions, " ")
 
-    out <- set_wmisc_attributes(out,
-      spanner = list("M (SD)" = 4:5, "N" = 2:3),
-      file = file
-    )
-    out <- nice_table(out, digits = digits, round = digits)
-  }
-    
-  
-  
+  out <- set_wmisc_attributes(out,
+    spanner = list("M (SD)" = 4:5, "N" = 2:3),
+    file = file
+  )
+  out <- nice_table(out, digits = digits, round = digits, ...)
   out
 }
-
-#' @export
-#' @rdname nice_t_test_table
-t_test_table <- function(...) nice_t_test_table(...)
 
   

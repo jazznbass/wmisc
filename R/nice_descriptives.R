@@ -1,9 +1,11 @@
 #' Table with descriptive statistics
 #'
 #' @param data A data frame
-#' @param round Digits for round function
 #' @param auto_labels If TRUE, variable names are taken from a label attribute.
-#'
+#' @param title Title for the table.
+#' @param footnote Footnote for the table.
+#' @param file If a file name is provided, the table is saved to this file.
+#' @param ... Further arguments passed to [nice_table()].
 #' @return A data frame with descriptive statistics
 #' @examples
 #' nice_descriptives(mtcars)
@@ -11,7 +13,6 @@
 #' nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
 #' @export
 nice_descriptives <- function(data, 
-                              #round = NULL, 
                               auto_labels = FALSE,
                               title = "Descriptive statistics",
                               footnote = NULL,

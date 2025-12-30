@@ -87,7 +87,7 @@ get_labels <- function(data,
 
 get_label <- function(x) {
   label <- attr(x, "label")
-  if (getOption("wmisc.dic.labels") && is.null(label)) {
+  if (isTRUE(getOption("wmisc.dic.labels")) && is.null(label)) {
     label <- attr(x, "dic")$item_label
   }
   label

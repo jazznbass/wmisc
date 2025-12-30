@@ -4,6 +4,7 @@
 #'
 #' @param data A data Frame
 #' @param scales A list with vectors with variable names that define each scale.
+#' @param labels Optional labels for the items in the scale.
 #' @param round Rounds values to given decimal position.
 #' @param ci If TRUE confidence intervals are calculated.
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
@@ -18,6 +19,8 @@
 #'   item difficulty.
 #' @param fa If TRUE, a one factor exploratory factor analyses is calculated and
 #'   loadings are reported.
+#' @param ... Further arguments passed to the `nice_table()` function.
+#'   
 #' @return A data frame with concise scale indices.
 #' @examples
 #' nice_item_analysis(
@@ -99,7 +102,7 @@ item_analysis <- function(data,
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
     add_message(
-      "Removed ", length(id), " rows because all items were missing."
+      "Removed ", length(.id), " rows because all items were missing."
     )
     data_scale <- data_scale[-.id, ]
   }

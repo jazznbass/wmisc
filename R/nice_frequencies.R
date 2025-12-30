@@ -3,6 +3,7 @@
 #' @param data Vector.
 #' @param grouping A grouping variable as a vector.
 #' @param label Set label for the variable name.
+#' @param label_grouping Set label for the grouping variable name.
 #' @param show_missing If TRUE, adds a row for the number of missing values.
 #' @param show_percent If TRUE, adds a column for percentages.
 #' @param auto_labels If TRUE, variable names are taken from a label attribute.
@@ -16,6 +17,19 @@
 #' nice_frequencies(
 #'   wmisc:::mtcars_labeled$cyl, 
 #'   wmisc:::mtcars_labeled$am
+#' )
+#' nice_frequencies(
+#'  wmisc:::mtcars_labeled$cyl,
+#'  wmisc:::mtcars_labeled$am,
+#'  show_missing = FALSE,
+#'  show_percent = FALSE
+#' )
+#' nice_frequencies(
+#'   wmisc:::mtcars_labeled$cyl,
+#'   wmisc:::mtcars_labeled$am,
+#'   label = "Cylinders",
+#'   label_grouping = "Transmission",
+#'   title = "Cylinders by Transmission Type"
 #' )
 #' @export
 nice_frequencies <- function(data,
@@ -58,8 +72,9 @@ nice_frequencies <- function(data,
     class(tab) <- NULL
     out <- as.data.frame(tab)
     names(out)[1] <- "Frequency"
-    if (show_percent)
+    if (show_percent) {
       out$Percent = round(out[[1]]/sum(out[[1]], na.rm = TRUE)*100)
+    }
     spanner <- NULL
     rn <- rownames(out)
   } else {
@@ -78,12 +93,12 @@ nice_frequencies <- function(data,
       out <- cbind(out, perc)
       
     }
-    spanner <- list(
-      Frequency = 2:(group_levels + 1), 
-      Percent = (group_levels + 2):(2 * group_levels + 1)
-    )
+    spanner <- list(Frequency = 2:(group_levels + 1))
     names(spanner)[1] <- paste0(label_grouping, " (n)")
-    names(spanner)[2] <- paste0(label_grouping, " (%)")
+    if (show_percent) {
+      spanner$Percent <- (group_levels + 2):(2 * group_levels + 1)
+      names(spanner)[2] <- paste0(label_grouping, " (%)")
+    }
   }
   
   if (length(which(is.na(rn))) > 0) rn[which(is.na(rn))] <- "Missing"

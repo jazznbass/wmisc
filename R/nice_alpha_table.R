@@ -21,9 +21,18 @@
 #'   item difficulty.
 #' @param fa If TRUE, a one factor exploratory factor analyses is calculated and
 #'   loadings are reported.
+#' @param ... Further arguments passed to nice_table().
 #' @return A data frame with concise scale indices.
 #' @examples
-#' ## Example needs packages scaledic and purrr installed and active
+#' nice_alpha_table(
+#'   wmisc:::data_emo,
+#'   wmisc:::data_emo_scales,
+#'   check_key = TRUE,
+#'   difficulty = TRUE,
+#'   value = list(c(0,4))
+#' )
+#' 
+#' ## Example needs packages scaledic installed and active
 #' nice_alpha_table(
 #'   data = wmisc:::ex_itrf,
 #'   scales = wmisc:::ex_itrf_scales,
@@ -34,13 +43,6 @@
 #'   RMSEA = TRUE
 #' )
 #'
-#' nice_alpha_table(
-#'   wmisc:::data_emo,
-#'   wmisc:::data_emo_scales,
-#'   check_key = TRUE,
-#'   difficulty = TRUE,
-#'   value = list(c(0,4))
-#'   )
 #' @export
 nice_alpha_table <- function(data,
                              scales,
@@ -146,6 +148,7 @@ alpha_table <- function(data,
         if (identical(length(keys), 0L)) {
           add_message("Weights from scaledic attributes are missing.")
           keys_from_weights <- FALSE
+          keys <- NULL
         }
       } else {
         keys <- NULL

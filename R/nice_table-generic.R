@@ -1,5 +1,5 @@
 #' @export
-nice_table <- function(object, ...) {
+nice_table <- function(x, ...) {
   UseMethod("nice_table")
 }
 
@@ -31,9 +31,9 @@ nice_table.fa <- nice_efa
 nice_table.lavaan <- nice_sem
 
 #' @export
-nice_table.matrix <- function(object, ...) {
-    object <- as.data.frame(object, optional = TRUE)
-    nice_table(object, rownames = TRUE, ...)
+nice_table.matrix <- function(x, ...) {
+    x <- as.data.frame(x, optional = TRUE)
+    nice_table(x, rownames = TRUE, ...)
 }
 
 

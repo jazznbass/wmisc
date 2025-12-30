@@ -10,6 +10,8 @@
 #' @param file Character string with filename. If set, an additional file is
 #'   exported (html or docx format is possible). If set `TRUE`, a filename is
 #'   automatically created based on the title.
+#' @param use_col_labels Logical. If TRUE, variable labels are used for column
+#'   names.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name).
 #' @param cols_align List with align align information. E.g., `list(left = c(2,3), right = 1)`.
@@ -25,7 +27,11 @@
 #'   `as.character(1:nrow(x))`.
 #' @param label_na = Label for replacing missing values.
 #' @param markdown If TRUE, interprets cell content as markdown.
-#' @param gt Additional arguments passed to `gt::gt()`
+#' @param gt Additional arguments passed to `gt::gt()`.
+#' @param sort Character vector with column names according to which the table
+#'   should be sorted.
+#' @param sort_decreasing Logical. If TRUE, sorting is done in decreasing order.
+#' 
 #' @param ... Various arguments for backward compatibility.
 #' @return A gt table object.
 #' @examples
@@ -208,7 +214,6 @@ nice_table.default <- function(x,
   out
 }
 
-#' @export
 gt_apa_style <- function(gt_tbl) {
   gt_tbl  |> 
     tab_options(

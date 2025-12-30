@@ -1,7 +1,7 @@
 #' Dichotomize vector values at their median
 #'
 #' @param x A vector
-#' @param lab Vector with two factor labels.
+#' @param labels Vector with two factor labels.
 #' @param type "higher" will split group at above median (vs. equal and below)
 #'   and "lower" will split group below median (vs. equal and above)
 #' @param explicit_na If not NA, NAs will be recoded as a factor level of the

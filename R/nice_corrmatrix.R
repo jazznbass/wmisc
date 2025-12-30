@@ -8,8 +8,8 @@
 #' @param upper TRUE if upper triangle should be included.
 #' @param lower TRUE if lower triangle should be included.
 #' @param digits Round to given digit position.
-#' @param labels Deprecated. Does not do anything. Please use `rename_by_label()`.
 #' @param show_ci If TRUE, confidence intervals are added.
+#' @param numbered_columns If TRUE, columns are numbered.
 #' @param nsig_p p level below which correlations are considered not
 #'   significant.
 #' @param char_nsig Character indexing non-significant values.
@@ -21,7 +21,7 @@
 #' @param show_r TRUE if r-values should be included.
 #' @param show_p TRUE if r-values should be included.
 #' @param show_stars TRUE if stars should be included.
-#' @param show_discriptives If TRUE, mean and sd columns are added.
+#' @param show_descriptives If TRUE, mean and sd columns are added.
 #' @param drop_zero If TRUE, leadning zeros are dropped.
 #' @param caption Caption for an html table.
 #' @param file If TRUE or a filename is provided, a file is exportet (format is

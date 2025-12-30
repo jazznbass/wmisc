@@ -8,6 +8,20 @@
 #' @param cut Loadings below cut will be omitted in the resulting data frame.
 #' @param round Number of digits to round loadings (based on the base::round
 #'   function)
+#' @param title Title for the resulting table.
+#' @param footnote A character vector with footnotes for the resulting table.
+#'  If NULL, default footnotes are created.
+#' @param auto_labels If TRUE, automatic variable labels are used if available.
+#' @details
+#' The resulting data frame contains the loadings, communalities, and
+#' complexities for each variable, as well as the variance accounted for by
+#' each factor. Loadings below the specified cut-off are omitted for better
+#' readability.
+#' The resulting data frame is decorated with attributes for use with the
+#' \code{wmisc::nice_table()} function.
+#' This function is also called by \code{nice_efa()}, which adds additional
+#' formatting for exploratory factor analyses.
+#'
 #' @return A data.frame
 #' @examples
 #' wmisc:::mtcars_labeled |> 
@@ -32,7 +46,7 @@ nice_loadings <- function(x,
                           round = 2,
                           title = "Loading matrix",
                           footnote = NULL,
-                          auto_labels = TRUE){
+                          auto_labels = TRUE) {
   
   if (!inherits(x, "psych")) 
     stop("Object must be derived from the factor analyses of the psych package.")
@@ -88,6 +102,14 @@ nice_loadings <- function(x,
 }
 
 #' @rdname nice_loadings
+#' @param ... Arguments passed to \code{nice_loadings()}.
+#' @param file If provided, the resulting table is also written to the specified
+#'  file (e.g., an Excel file).
+#' @details
+#'  This function wraps \code{nice_loadings()} and adds additional formatting
+#'  for exploratory factor analyses, such as row groups and spanners.
+#' @return A nicely formatted table of loadings for exploratory factor analyses.
+#'  
 #' @export
 nice_efa <- function(..., file = NULL) {
   out <- nice_loadings(...)

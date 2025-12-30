@@ -13,6 +13,7 @@
 #'   number dependent variables.
 #' @param labels A character vector of length two with labels for the dependent
 #'   variables.
+#' @param label_attr If TRUE, variable names are taken from a label attribute.
 #' @param nice_p If TRUE, p values are printed in a nice format.
 #' @param digits Number of digits for rounding mean and sd values
 #' @param order Either "12" or "21" depicting whether group two is compared to

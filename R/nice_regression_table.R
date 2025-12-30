@@ -1,25 +1,41 @@
 #' Create a nice table from one or more regression models
-#' 
+#'
 #' @param remove_cols Either column number or column names to be removed
 #' @param or If TRUE, the estimators are assumed to be logits and are
 #'   exponentiated to yield odds ratios
+#' @param nice_p If TRUE, p values are formatted nicely
+#' @param ... One or more model objects (e.g., objects of class `lm`, `glm`,
+#'   `lme`, `lmerModLmerTest`, `glmerMod`).
+#' @param round Number of decimal places to round numeric values.
+#' @param labels_models Character vector with labels for each model. If NULL,
+#'   the model formula is used.
+#' @param rename_labels A named list to rename predictor labels.
+#' @param rename_cols A named list to rename column names.
+#' @param auto_col_names If TRUE, common column names are automatically renamed
+#'   (e.g., "Std. Error" to "SE", "Pr (>|t|)" to "p", etc.).
+#' @param file If provided, the resulting table is also written to the specified
+#'   file (e.g., an Excel file).
+#' @param title Title of the table.
+#' @param footnote Footnote of the table.
+#'
 #' @examples
-#' lm(mpg ~ am + disp + hp, data = mtcars) |> 
+#' lm(mpg ~ am + disp + hp, data = mtcars) |>
 #'   nice_regression_table()
-#'   
+#'
 #' nice_regression_table(
 #'   nlme::lme(mpg~disp, data = mtcars, random = ~1|am),
 #'   nlme::lme(mpg~disp + hp, data = mtcars, random = ~1|am)
-#' )   
-#'   
+#' )
+#'
 #' nice_regression_table(
 #'   wmisc:::model_lmer_1, wmisc:::model_lmer_2,
 #'   rename_labels = list(
-#'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
+#'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post",
 #'     "ConditionTraining" = "Training", "id_subject" = "Subject"),
 #'   rename_cols = list("Estimate" = "B", "SE" = "se"),
-#'   labels_models = c("Only pretest", "Pre- and posttest") 
+#'   labels_models = c("Only pretest", "Pre- and posttest")
 #' )
+#' 
 #' @export
 nice_regression_table <- function(
     ..., 
@@ -194,12 +210,16 @@ nice_regression_table <- function(
   
 }
 
-#' @export
+# #' @export
+# #' @param model A model object
 extract_model_param <- function (model, ...) {
   UseMethod("extract_model_param", model)
 }
 
-#' @export
+# #' @export
+# #' @param or If TRUE, the estimators are assumed to be logits and are
+# #'   exponentiated to yield odds ratios
+#' @exportS3Method
 extract_model_param.lm <- function(model, or = FALSE, ...) {
   
   model_summary <- summary(model)
@@ -225,7 +245,7 @@ extract_model_param.lm <- function(model, or = FALSE, ...) {
   out
 }
 
-#' @export
+#' @exportS3Method
 extract_model_param.lme <- function(model, ...) {
   
   model_summary <- summary(model)
@@ -268,7 +288,7 @@ extract_model_param.lme <- function(model, ...) {
   out
 }
 
-#' @export
+#' @exportS3Method
 extract_model_param.lmerModLmerTest <- function(model, ...) {
   tmp <- c(...)
   model_summary <- summary(model)
@@ -322,8 +342,8 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   out
 }
 
-#' @export
-extract_model_param.glmerMod <- function(model, or = FALSE) {
+#' @exportS3Method
+extract_model_param.glmerMod <- function(model, or = FALSE, ...) {
   model_summary <- summary(model)
   out <- list()
   
@@ -386,14 +406,14 @@ extract_model_param.glmerMod <- function(model, or = FALSE) {
   out
 }
 
-#' @export
+#' @exportS3Method
 extract_model_param.lmerMod <- function(model, ...) {
   message("Converted lmerMod object to lmerModLmerTest.")
   extract_model_param(lmerTest::as_lmerModLmerTest(model))
 }
 
 
-#' @export
+#' @exportS3Method
 extract_model_param.gls <- function(model, or = FALSE, ...) {
   
   model_summary <- summary(model)
