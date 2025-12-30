@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
       </span>
     </div>
 
@@ -42,7 +42,24 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.8" id="wmisc-038">wmisc 0.3.8<a class="anchor" aria-label="anchor" href="#wmisc-038"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.0" id="wmisc-040">wmisc 0.4.0<a class="anchor" aria-label="anchor" href="#wmisc-040"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-4-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-4-0"></a></h3>
+<ul><li>Added <code>batch_create_data_description()</code>. Creates automatic data description in README files.</li>
+<li>Added <code>add_aggregate()</code> to compute subgroup-level summary statistics for one or more grouping variables (e.g., <code>sex</code> × <code>age</code>) and merge the aggregated values back into the original data.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-arguents-0-4-0">New arguents<a class="anchor" aria-label="anchor" href="#new-arguents-0-4-0"></a></h3>
+<ul><li>
+<code><a href="../reference/nice_table.default.html">nice_table()</a></code>: <code>cols_align</code> takes a list which element names can be left, right, or center and which values indicate either the col number or the col names. e.g. <code>nice_table(mtcars, cols_align = list(right = c("am", "gearl"), left = 1:3))</code>
+</li>
+<li>
+<code><a href="../reference/round_numeric.html">round_numeric()</a></code>: argument digits takes a named vector to specify which cols to round to which number of digits allowing to set a default number of digits for all variables with a “.default” named value.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="removed-some-deprecated-functions-0-4-0">Removed some deprecated functions:<a class="anchor" aria-label="anchor" href="#removed-some-deprecated-functions-0-4-0"></a></h3>
+<p><code>check_scale()</code>, <code>ci_score()</code>, <code>fill_missing_l2()</code>, <code>batch_convert_csv()</code>, <code>flip()</code>, <code>reference_package_version()</code></p>
+</div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.7" id="wmisc-037">wmisc 0.3.7<a class="anchor" aria-label="anchor" href="#wmisc-037"></a></h2>
@@ -59,9 +76,9 @@
 <div class="section level3">
 <h3 id="new-functions-0-3-4">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-3-4"></a></h3>
 <ul><li>
-<code><a href="../reference/ci_score.html">ci_score()</a></code>: Returns confidence intervals for test scores.</li>
+<code>ci_score()</code>: Returns confidence intervals for test scores.</li>
 <li>
-<code><a href="../reference/critical_difference.html">critical_difference()</a></code>: Returns critical difference for test scores.</li>
+<code>critical_difference()</code>: Returns critical difference for test scores.</li>
 <li>
 <code><a href="../reference/nice_contingency_table.html">nice_contingency_table()</a></code>: Creates a nicely formatted contingency table with one or more summary functions.</li>
 <li>
@@ -113,7 +130,7 @@
 <li>
 <code><a href="../reference/nice_agreement_table.html">nice_agreement_table()</a></code>: Returns a formatted table for agreement analyses.</li>
 <li>
-<code><a href="../reference/flip.html">flip()</a></code>: Flips a data frame or matrix, e.g., <code>flip(mtcars, rownames = TRUE)</code>.</li>
+<code>flip()</code>: Flips a data frame or matrix, e.g., <code>flip(mtcars, rownames = TRUE)</code>.</li>
 <li>
 <code><a href="../reference/change_values.html">change_values()</a></code>: Recodes values using formula syntax, e.g., <code>change_values(c(1, 2, 3), 2 ~ "two", 3 ~ "three")</code>.</li>
 <li>
@@ -138,7 +155,7 @@
 <h2 class="page-header" data-toc-text="0.2.13" id="wmisc-0213">wmisc 0.2.13<a class="anchor" aria-label="anchor" href="#wmisc-0213"></a></h2>
 <div class="section level3">
 <h3 id="changes-0-2-13">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-13"></a></h3>
-<ul><li>Reworked <code>agreement_analysis()</code>
+<ul><li>Reworked <code><a href="../reference/nice_agreement_table.html">agreement_analysis()</a></code>
 </li>
 </ul></div>
 </div>
@@ -163,7 +180,7 @@
 <div class="section level3">
 <h3 id="new-function-0-2-9">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-9"></a></h3>
 <ul><li>
-<code><a href="../reference/fill_missing_l2.html">fill_missing_l2()</a></code>: Fills in missing values in multilevel/repeated measurement long format data. Useful for level-2 variables like gender that may only appear in one measurement occasion.</li>
+<code>fill_missing_l2()</code>: Fills in missing values in multilevel/repeated measurement long format data. Useful for level-2 variables like gender that may only appear in one measurement occasion.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -181,7 +198,7 @@
 <div class="section level3">
 <h3 id="new-function-0-2-5">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-5"></a></h3>
 <ul><li>
-<code><a href="../reference/nice_chi_test_table.html">chi_test_table()</a></code>: Compares the proportions of a dichotomous variable across two groups for multiple variables. Similar to <code><a href="../reference/nice_t_test_table.html">t_test_table()</a></code> but for categorical variables.</li>
+<code><a href="../reference/nice_chi_test_table.html">chi_test_table()</a></code>: Compares the proportions of a dichotomous variable across two groups for multiple variables. Similar to <code>t_test_table()</code> but for categorical variables.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -189,14 +206,14 @@
 <div class="section level3">
 <h3 id="changes-0-2-4">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-4"></a></h3>
 <ul><li>
-<code><a href="../reference/nice_t_test_table.html">t_test_table()</a></code>: Added arguments <code>caption</code>, <code>bootstrap_options</code>, and <code>full_width</code>.</li>
+<code>t_test_table()</code>: Added arguments <code>caption</code>, <code>bootstrap_options</code>, and <code>full_width</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.3" id="wmisc-023">wmisc 0.2.3<a class="anchor" aria-label="anchor" href="#wmisc-023"></a></h2>
 <div class="section level3">
 <h3 id="new-function-0-2-3">New function<a class="anchor" aria-label="anchor" href="#new-function-0-2-3"></a></h3>
-<ul><li><code><a href="../reference/reference_package_version.html">reference_package_version()</a></code></li>
+<ul><li><code>reference_package_version()</code></li>
 </ul></div>
 <div class="section level3">
 <h3 id="changes-0-2-3">Changes<a class="anchor" aria-label="anchor" href="#changes-0-2-3"></a></h3>

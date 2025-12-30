@@ -18,11 +18,15 @@ nice_sem(
 \arguments{
 \item{x}{An object returned from the lavaan sem or cfa function.}
 
+\item{standardized}{If TRUE, standardized estimates are shown.}
+
 \item{show_fitmeasures}{A named vector with fit measures.}
 
 \item{remove_cols}{Either column number or column names to be removed.}
 
 \item{show_ci}{If TRUE, adds columns with 95\% confidence intervals.}
+
+\item{round}{Number of digits to round numeric values.}
 
 \item{...}{Further arguments passed to the \code{nice_table()} function.}
 }
@@ -30,5 +34,15 @@ nice_sem(
 Nice html table for lavaan structure equation model fitted objects
 }
 \examples{
-nice_sem(wmisc::lavaan_fit)
+nice_sem(wmisc:::lavaan_fit)
+nice_sem(wmisc:::lavaan_fit, standardized = FALSE, show_ci = FALSE)
+nice_sem(
+ wmisc:::lavaan_fit,
+ show_fitmeasures = c(
+  FI = "cfi", TLI = "tli", RMSEA = "rmsea",
+  "SRMR" = "srmr"
+ ),
+ remove_cols = c("se", "z")
+)
+ 
 }

@@ -20,29 +20,54 @@ nice_regression_table(
 )
 }
 \arguments{
+\item{...}{One or more model objects (e.g., objects of class \code{lm}, \code{glm},
+\code{lme}, \code{lmerModLmerTest}, \code{glmerMod}).}
+
+\item{round}{Number of decimal places to round numeric values.}
+
+\item{labels_models}{Character vector with labels for each model. If NULL,
+the model formula is used.}
+
+\item{rename_labels}{A named list to rename predictor labels.}
+
+\item{rename_cols}{A named list to rename column names.}
+
 \item{remove_cols}{Either column number or column names to be removed}
+
+\item{auto_col_names}{If TRUE, common column names are automatically renamed
+(e.g., "Std. Error" to "SE", "Pr (>|t|)" to "p", etc.).}
+
+\item{file}{If provided, the resulting table is also written to the specified
+file (e.g., an Excel file).}
 
 \item{or}{If TRUE, the estimators are assumed to be logits and are
 exponentiated to yield odds ratios}
+
+\item{nice_p}{If TRUE, p values are formatted nicely}
+
+\item{title}{Title of the table.}
+
+\item{footnote}{Footnote of the table.}
 }
 \description{
 Create a nice table from one or more regression models
 }
 \examples{
-lm(mpg ~ am + disp + hp, data = mtcars) |> 
+lm(mpg ~ am + disp + hp, data = mtcars) |>
   nice_regression_table()
-  
+
 nice_regression_table(
   nlme::lme(mpg~disp, data = mtcars, random = ~1|am),
   nlme::lme(mpg~disp + hp, data = mtcars, random = ~1|am)
-)   
-  
+)
+
 nice_regression_table(
   wmisc:::model_lmer_1, wmisc:::model_lmer_2,
   rename_labels = list(
-    "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post", 
+    "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post",
     "ConditionTraining" = "Training", "id_subject" = "Subject"),
   rename_cols = list("Estimate" = "B", "SE" = "se"),
-  labels_models = c("Only pretest", "Pre- and posttest") 
+  labels_models = c("Only pretest", "Pre- and posttest")
 )
+
 }

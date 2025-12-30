@@ -14,13 +14,13 @@ split_at_median(
 \arguments{
 \item{x}{A vector}
 
+\item{labels}{Vector with two factor labels.}
+
 \item{type}{"higher" will split group at above median (vs. equal and below)
 and "lower" will split group below median (vs. equal and above)}
 
 \item{explicit_na}{If not NA, NAs will be recoded as a factor level of the
 provided name. If TRUE, the name will default to '(Missing)'.}
-
-\item{lab}{Vector with two factor labels.}
 }
 \value{
 A vector of type factor with two levels.

@@ -12,31 +12,34 @@ add_group_aggregate(
 )
 }
 \arguments{
-\item{dat}{A data.frame containing the columns listed in \code{grouping} and \code{vars}.}
+\item{dat}{A data.frame containing the columns listed in \code{grouping} and
+\code{vars}.}
 
 \item{grouping}{A character vector of one or more column names in \code{dat} that
-define the subgroups (their joint combinations). For example,
-\code{c("sex", "age")} yields aggregates for each \code{sex}-by-\code{age} subgroup.}
+define the subgroups (their joint combinations). For example, \code{c("sex", "age")} yields aggregates for each \code{sex}-by-\code{age} subgroup.}
 
 \item{vars}{A character vector of column names in \code{dat} to be aggregated.}
 
-\item{func}{A list with named functions applied to each variable in \code{vars} within each subgroup.
-Must accept a vector and return a length-1 value. Default computes the mean with
-missing values removed.}
+\item{func}{A list with named functions applied to each variable in \code{vars}
+within each subgroup. Default computes the mean with missing values
+removed.}
 }
 \value{
-A data.frame with the same observations as \code{dat}, plus additional columns containing subgroup-level
-aggregated values for each variable in \code{vars}.
+A data.frame with the same observations as \code{dat}, plus additional
+columns containing subgroup-level aggregated values for each variable in
+\code{vars}.
 }
 \description{
-Computes summary statistics for selected variables within subgroups defined by
-the \emph{combination} of one or more grouping variables (e.g., \code{age} within \code{sex})
-and merges the aggregated values back into the original data.
+Computes summary statistics for selected variables within subgroups defined
+by the \emph{combination} of one or more grouping variables (e.g., \code{age} within
+\code{sex}) and merges the aggregated values back into the original data.
 }
 \details{
-Aggregation is performed using \code{\link[stats:aggregate]{stats::aggregate()}} with \code{by = dat[, grouping]},
-so each unique combination of the \code{grouping} variables defines a subgroup.
-Results are joined back to \code{dat} using \code{\link[base:merge]{base::merge()}} by all \code{grouping} columns.
+Aggregation is performed using \code{\link[stats:aggregate]{stats::aggregate()}} with \code{by = dat[, grouping]}, so each unique combination of the \code{grouping} variables defines a
+subgroup. Results are joined back to \code{dat} using \code{\link[base:merge]{base::merge()}} by all
+\code{grouping} columns. If multiple functions are provided in \code{func}, the
+resulting columns are suffixed with the names of the functions in \code{func}. If
+\code{func} is an unnamed list, suffixes "stat1", "stat2", etc. are used.
 }
 \examples{
 dat <- data.frame(
@@ -55,9 +58,12 @@ add_group_aggregate(
   grouping = c("sex", "age"),
   vars = c("score", "other"),
   func = list(
-    max = function(x) max(x, na.rm = TRUE), 
+    max = function(x) max(x, na.rm = TRUE),
     median = function(x) median(x, na.rm = TRUE)
    )
 )
 
+}
+\seealso{
+\code{\link[stats:aggregate]{stats::aggregate()}}, \code{\link[base:merge]{base::merge()}}
 }

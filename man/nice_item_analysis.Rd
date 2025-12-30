@@ -26,6 +26,8 @@ nice_item_analysis(
 
 \item{scales}{A list with vectors with variable names that define each scale.}
 
+\item{labels}{Optional labels for the items in the scale.}
+
 \item{round}{Rounds values to given decimal position.}
 
 \item{ci}{If TRUE confidence intervals are calculated.}
@@ -49,6 +51,8 @@ item difficulty.}
 
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
+
+\item{...}{Further arguments passed to the \code{nice_table()} function.}
 }
 \value{
 A data frame with concise scale indices.

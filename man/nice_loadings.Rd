@@ -31,13 +31,40 @@ If not provided, default names are chosen.}
 
 \item{round}{Number of digits to round loadings (based on the base::round
 function)}
+
+\item{title}{Title for the resulting table.}
+
+\item{footnote}{A character vector with footnotes for the resulting table.
+If NULL, default footnotes are created.}
+
+\item{auto_labels}{If TRUE, automatic variable labels are used if available.}
+
+\item{...}{Arguments passed to \code{nice_loadings()}.}
+
+\item{file}{If provided, the resulting table is also written to the specified
+file (e.g., an Excel file).}
 }
 \value{
 A data.frame
+
+A nicely formatted table of loadings for exploratory factor analyses.
 }
 \description{
 Creates table of loadings of exploratory factor analysis based on the
 psych::fa function
+}
+\details{
+The resulting data frame contains the loadings, communalities, and
+complexities for each variable, as well as the variance accounted for by
+each factor. Loadings below the specified cut-off are omitted for better
+readability.
+The resulting data frame is decorated with attributes for use with the
+\code{wmisc::nice_table()} function.
+This function is also called by \code{nice_efa()}, which adds additional
+formatting for exploratory factor analyses.
+
+This function wraps \code{nice_loadings()} and adds additional formatting
+for exploratory factor analyses, such as row groups and spanners.
 }
 \examples{
 wmisc:::mtcars_labeled |> 

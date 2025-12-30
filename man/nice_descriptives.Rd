@@ -18,7 +18,13 @@ nice_descriptives(
 
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 
-\item{round}{Digits for round function}
+\item{title}{Title for the table.}
+
+\item{footnote}{Footnote for the table.}
+
+\item{file}{If a file name is provided, the table is saved to this file.}
+
+\item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}.}
 }
 \value{
 A data frame with descriptive statistics

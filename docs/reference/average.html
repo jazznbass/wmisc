@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
       </span>
     </div>
 
@@ -47,7 +47,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">average</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_valid</span>, <span class="va">max_na</span>, func <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">average</span><span class="op">(</span><span class="va">x</span>, <span class="va">min_valid</span>, <span class="va">max_na</span>, func <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,8 +71,7 @@ percent NAs are allowed).</p></dd>
 
 
 <dt id="arg-func">func<a class="anchor" aria-label="anchor" href="#arg-func"></a></dt>
-<dd><p>Function without the header <code>function(.)</code> for calculating the
-average.</p></dd>
+<dd><p>A function for calculating the average.</p></dd>
 
 </dl></div>
 
@@ -87,7 +86,7 @@ average.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-in"><span><span class="fu">average</span><span class="op">(</span><span class="va">dat</span>, max_na <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-in"><span><span class="fu">average</span><span class="op">(</span><span class="va">dat</span>, min_valid <span class="op">=</span> <span class="fl">0.5</span>, func <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">average</span><span class="op">(</span><span class="va">dat</span>, min_valid <span class="op">=</span> <span class="fl">0.5</span>, func <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-in"><span><span class="fu">average</span><span class="op">(</span><span class="va">dat</span>, min_valid <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>

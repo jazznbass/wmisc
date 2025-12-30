@@ -2,9 +2,22 @@
 % Please edit documentation in R/nice_agreement_analysis.R
 \name{nice_agreement_table}
 \alias{nice_agreement_table}
+\alias{agreement_analysis}
 \title{Perform within agreement analysis}
 \usage{
 nice_agreement_table(
+  data,
+  vars = names(data),
+  grouping,
+  rv,
+  crit = 0.7,
+  min_group_size = 0,
+  auto_labels = TRUE,
+  labels = NULL,
+  n_sim = 10000
+)
+
+agreement_analysis(
   data,
   vars = names(data),
   grouping,

@@ -2,8 +2,8 @@ Package: wmisc
 Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
-Version: 0.3.10
-Date: 2025-12-21
+Version: 0.4.0
+Date: 2025-12-30
 Author: Jürgen Wilbert
 Maintainer: Juergen Wilbert <juergen.wilbert@uni-muenster.de>
 Depends: 
@@ -25,12 +25,14 @@ Imports:
   lme4,
   lmerTest,
   ggplot2,
-  performance
+  performance,
+  insight
 License: GPL (>= 3)
 LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    scaledic
 Config/testthat/edition: 3

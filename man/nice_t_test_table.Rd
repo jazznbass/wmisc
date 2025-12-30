@@ -2,7 +2,6 @@
 % Please edit documentation in R/nice_t_test_table.R
 \name{nice_t_test_table}
 \alias{nice_t_test_table}
-\alias{t_test_table}
 \title{Creates a t-test table for multiple dependent variables}
 \usage{
 nice_t_test_table(
@@ -19,13 +18,11 @@ nice_t_test_table(
   var_equal = FALSE,
   label_attr = TRUE,
   manova = TRUE,
-  type = "html",
   caption = NULL,
   alternative = "two.sided",
-  file = NULL
+  file = NULL,
+  ...
 )
-
-t_test_table(...)
 }
 \arguments{
 \item{dv}{A data frame with the dependent variables or a character vector
@@ -55,9 +52,21 @@ variables.}
 
 \item{var_equal}{If FALSE, a t-test for unequal variances is calculated.}
 
-\item{type}{Either "df" for data frame or "html" for html table.}
+\item{label_attr}{If TRUE, variable labels are used if available.}
+
+\item{manova}{If TRUE, a MANOVA is calculated and its results are added
+to the note.}
 
 \item{caption}{Table caption is type = "html"}
+
+\item{alternative}{A character string specifying the alternative hypothesis.
+Must be one of "two.sided" (default), "greater" or "less".}
+
+\item{file}{Character string with filename. If set, an additional file is
+exported (html format is possible). If set \code{TRUE}, a filename is
+automatically created based on the title.}
+
+\item{...}{Additional arguments passed to \code{nice_table()}.}
 }
 \value{
 A data.frame or an html table

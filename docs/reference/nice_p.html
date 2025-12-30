@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
       </span>
     </div>
 
@@ -61,6 +61,14 @@
 <dt id="arg-equal-sign">equal_sign<a class="anchor" aria-label="anchor" href="#arg-equal-sign"></a></dt>
 <dd><p>If TRUE an equal sign is set before p values.</p></dd>
 
+
+<dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
+<dd><p>Number of digits to show for p values &gt;= 0.05.</p></dd>
+
+
+<dt id="arg-stars">stars<a class="anchor" aria-label="anchor" href="#arg-stars"></a></dt>
+<dd><p>If TRUE, significance stars are added for p values &lt; 0.05.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -74,6 +82,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "&lt;.05"  ".900"  ".100"  "&lt;.01"  "1.000" NA     </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fu">nice_p</span><span class="op">(</span><span class="va">p</span>, equal_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "p&lt;.05"   "p=.900"  "p=.100"  "p&lt;.01"   "p=1.000" "pNA"    </span>
+<span class="r-in"><span><span class="fu">nice_p</span><span class="op">(</span><span class="va">p</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ".040*"  ".900"   ".100"   ".001**" "1.000"  NA      </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fu">nice_p</span><span class="op">(</span><span class="va">p</span>, equal_sign <span class="op">=</span> <span class="cn">TRUE</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "p=.040*"  "p=.900"   "p=.100"   "p=.001**" "p=1.000"  "pNA"     </span>
+<span class="r-in"><span><span class="fu">nice_p</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0004</span>, <span class="fl">0.005</span>, <span class="fl">0.03</span>, <span class="fl">0.2</span><span class="op">)</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "&lt;.001***" ".005**"   ".030*"    ".200"    </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="fu">nice_p</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0004</span>, <span class="fl">0.005</span>, <span class="fl">0.03</span>, <span class="fl">0.2</span><span class="op">)</span>, equal_sign <span class="op">=</span> <span class="cn">TRUE</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "p&lt;.001***" "p=.005**"  "p=.030*"   "p=.200"   </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

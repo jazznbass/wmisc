@@ -50,6 +50,10 @@ name. If included, calculates multilevel correlations.}
 
 \item{show_ci}{If TRUE, confidence intervals are added.}
 
+\item{numbered_columns}{If TRUE, columns are numbered.}
+
+\item{show_descriptives}{If TRUE, mean and sd columns are added.}
+
 \item{nsig_p}{p level below which correlations are considered not
 significant.}
 
@@ -75,10 +79,6 @@ significant.}
 defined by file ending eith html or docx).}
 
 \item{...}{Further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
-
-\item{labels}{Deprecated. Does not do anything. Please use \code{rename_by_label()}.}
-
-\item{show_discriptives}{If TRUE, mean and sd columns are added.}
 }
 \value{
 A data-frame or a html table object

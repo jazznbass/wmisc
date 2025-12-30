@@ -70,6 +70,8 @@ item difficulty.}
 
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
+
+\item{...}{Further arguments passed to nice_table().}
 }
 \value{
 A data frame with concise scale indices.
@@ -78,7 +80,15 @@ A data frame with concise scale indices.
 Returns a data.frame with item analyses for the provided scales.
 }
 \examples{
-## Example needs packages scaledic and purrr installed and active
+nice_alpha_table(
+  wmisc:::data_emo,
+  wmisc:::data_emo_scales,
+  check_key = TRUE,
+  difficulty = TRUE,
+  value = list(c(0,4))
+)
+
+## Example needs packages scaledic installed and active
 nice_alpha_table(
   data = wmisc:::ex_itrf,
   scales = wmisc:::ex_itrf_scales,
@@ -89,11 +99,4 @@ nice_alpha_table(
   RMSEA = TRUE
 )
 
-nice_alpha_table(
-  wmisc:::data_emo,
-  wmisc:::data_emo_scales,
-  check_key = TRUE,
-  difficulty = TRUE,
-  value = list(c(0,4))
-  )
 }

@@ -49,6 +49,8 @@ variables.}
 \item{order}{Either "12" or "21" depicting whether group two is compared to
 group one or vice versa.}
 
+\item{label_attr}{If TRUE, variable names are taken from a label attribute.}
+
 \item{type}{Either "df" for data frame or "html" for html table.}
 
 \item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}}

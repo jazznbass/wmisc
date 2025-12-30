@@ -25,6 +25,8 @@ nice_frequencies(
 
 \item{label}{Set label for the variable name.}
 
+\item{label_grouping}{Set label for the grouping variable name.}
+
 \item{show_missing}{If TRUE, adds a row for the number of missing values.}
 
 \item{show_percent}{If TRUE, adds a column for percentages.}
@@ -50,5 +52,18 @@ nice_frequencies(wmisc:::mtcars_labeled[[11]])
 nice_frequencies(
   wmisc:::mtcars_labeled$cyl, 
   wmisc:::mtcars_labeled$am
+)
+nice_frequencies(
+ wmisc:::mtcars_labeled$cyl,
+ wmisc:::mtcars_labeled$am,
+ show_missing = FALSE,
+ show_percent = FALSE
+)
+nice_frequencies(
+  wmisc:::mtcars_labeled$cyl,
+  wmisc:::mtcars_labeled$am,
+  label = "Cylinders",
+  label_grouping = "Transmission",
+  title = "Cylinders by Transmission Type"
 )
 }

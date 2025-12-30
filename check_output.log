@@ -1,3055 +1,0 @@
-══ Documenting ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-
-══ Building ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-Setting env vars:
-• CFLAGS    : -Wall -pedantic
-• CXXFLAGS  : -Wall -pedantic
-• CXX11FLAGS: -Wall -pedantic
-• CXX14FLAGS: -Wall -pedantic
-• CXX17FLAGS: -Wall -pedantic
-• CXX20FLAGS: -Wall -pedantic
-── R CMD build ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-     checking for file ‘/Users/wilbert/Documents/GitHub/wmisc/DESCRIPTION’ ...  ✔  checking for file ‘/Users/wilbert/Documents/GitHub/wmisc/DESCRIPTION’
-  ─  preparing ‘wmisc’:
-     checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
-  ─  checking for LF line-endings in source and make files and shell scripts
-  ─  checking for empty or unneeded directories
-   Removed empty directory ‘wmisc/docs/articles’
-     Removed empty directory ‘wmisc/docs/tutorials’
-       NB: this package now depends on R (>= 3.5.0)
-       WARNING: Added dependency on R >= 3.5.0 because serialized objects in
-     serialize/load version 3 cannot be read in older versions of R.
-     File(s) containing such objects:
-       ‘wmisc/R/sysdata.rda’ ‘wmisc/data/tmp.rda’ ‘wmisc/misc/agreement.rds’
-       ‘wmisc/misc/data_emo_fa.rds’ ‘wmisc/misc/data_emo_scales.rds’
-       ‘wmisc/misc/emotional_style.rds’
-  ─  building ‘wmisc_0.3.1.tar.gz’
-     
-══ Checking ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-Setting env vars:
-• _R_CHECK_CRAN_INCOMING_REMOTE_               : FALSE
-• _R_CHECK_CRAN_INCOMING_                      : FALSE
-• _R_CHECK_FORCE_SUGGESTS_                     : FALSE
-• _R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_: FALSE
-• NOT_CRAN                                     : true
-── R CMD check ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  ─  using log directory ‘/private/var/folders/wr/xr5y9dnj2j11ytcyjpgh6c2h0000gn/T/RtmpiA2s9k/file1235bb2840/wmisc.Rcheck’
-─  using R version 4.4.2 (2024-10-31)
--  ─  using platform: aarch64-apple-darwin20
-─  R was compiled by
-       Apple clang version 14.0.0 (clang-1400.0.29.202)
-       GNU Fortran (GCC) 12.2.0
-─  running under: macOS Sequoia 15.1.1
-─  using session charset: UTF-8
-\  ─  using options ‘--no-manual --as-cran’
-|  ✔  checking for file ‘wmisc/DESCRIPTION’
-─  checking extension type ... Package
-─  this is package ‘wmisc’ version ‘0.3.1’
-─  package encoding: UTF-8
-   checking package namespace information .../  ✔  checking package namespace information
-   checking package dependencies ...-\|  ✔  checking package dependencies (555ms)
-   checking if this is a source package .../  ✔  checking if this is a source package
-✔  checking if there is a namespace
--     checking for executable files ...\|  ✔  checking for executable files (342ms)
-/  ✔  checking for hidden files and directories
-✔  checking for portable file names
-   checking for sufficient/correct file permissions ...-  ✔  checking for sufficient/correct file permissions
-   checking whether package ‘wmisc’ can be installed ...\|/-\|/-\|/-\|/-\|  ✔  checking whether package ‘wmisc’ can be installed (3.5s)
-/     checking installed package size ...-  ✔  checking installed package size
-\     checking package directory ...|  ✔  checking package directory
-   checking for future file timestamps .../-  N  checking for future file timestamps (371ms)
-   unable to verify current time
-\     checking DESCRIPTION meta-information ...|  ✔  checking DESCRIPTION meta-information
-   checking top-level files .../  N  checking top-level files
-   Non-standard files/directories found at top level:
-     ‘_config.yml’ ‘check_output.log’ ‘docs’ ‘misc’
-✔  checking for left-over files
-✔  checking index information
-   checking package subdirectories ...-  ✔  checking package subdirectories
-   checking code files for non-ASCII characters ...\  W  checking code files for non-ASCII characters
-|     Found the following file with non-ASCII characters:
-     R/nice_sem.R
-   Portable packages must use only ASCII characters in their R code and
-   NAMESPACE directives, except perhaps in comments.
-   Use \uxxxx escapes for other characters.
-   Function ‘tools::showNonASCIIfile’ can help in finding non-ASCII
-   characters in files.
-   checking R files for syntax errors .../  ✔  checking R files for syntax errors
-   checking whether the package can be loaded ...-\  ✔  checking whether the package can be loaded (384ms)
-   checking whether the package can be loaded with stated dependencies ...|/  ✔  checking whether the package can be loaded with stated dependencies (346ms)
-   checking whether the package can be unloaded cleanly ...-\  ✔  checking whether the package can be unloaded cleanly (335ms)
-   checking whether the namespace can be loaded with stated dependencies ...|/  ✔  checking whether the namespace can be loaded with stated dependencies
-   checking whether the namespace can be unloaded cleanly ...-\  ✔  checking whether the namespace can be unloaded cleanly (372ms)
-|/     checking whether startup messages can be suppressed ...-\  ✔  checking whether startup messages can be suppressed (751ms)
-   checking dependencies in R code ...|/-\  W  checking dependencies in R code (770ms)
-   '::' or ':::' imports not declared from:
-     ‘insight’ ‘lme4’ ‘lmerTest’ ‘scaledic’
-   'loadNamespace' or 'requireNamespace' call not declared from: ‘scaledic’
-   Namespaces in Imports field not imported from:
-     ‘eRm’ ‘methods’ ‘readxl’
-     All declared Imports should be used.
-   checking S3 generic/method consistency ...|/-\  W  checking S3 generic/method consistency (775ms)
-   extract_model_param:
-     function(model, ...)
-   extract_model_param.glmerMod:
-     function(model, or)
-   
-   nice_table:
-     function(object, ...)
-   nice_table.default:
-     function(x, title, footnote, spanner, row_group, row_group_order,
-              rownames, file, cols_label, decimals, round, label_na,
-              markdown, gt, ...)
-   
-   nice_table:
-     function(object, ...)
-   nice_table.lavaan:
-     function(x, standardized, show_fitmeasures, remove_cols, show_ci,
-              round, ...)
-|     See section ‘Generic functions and methods’ in the ‘Writing R
-   Extensions’ manual.
-   checking replacement functions .../-  ✔  checking replacement functions (343ms)
-   checking foreign function calls ...\|/-  ✔  checking foreign function calls (798ms)
-   checking R code for possible problems ...\|/-\|/-\|/-\|/-\|/-\|/-\|/-  N  checking R code for possible problems (5.5s)
-   batch_convert_csv: warning in dir(patter = "*.csv"): partial argument
-     match of 'patter' to 'pattern'
-   nice_regression_table: warning in round_numeric(out, digit = round):
-     partial argument match of 'digit' to 'digits'
-   nice_table.glmerMod: warning in round_numeric(out, digit = round):
-     partial argument match of 'digit' to 'digits'
-   nice_table.gls: warning in round_numeric(out, digit = round): partial
-     argument match of 'digit' to 'digits'
-   nice_table.lm: warning in round_numeric(out, digit = round): partial
-     argument match of 'digit' to 'digits'
-   nice_table.lme: warning in round_numeric(out, digit = round): partial
-     argument match of 'digit' to 'digits'
-   nice_table.lmer: warning in round_numeric(out, digit = round): partial
-     argument match of 'digit' to 'digits'
-   nice_table.lmerMod: warning in round_numeric(out, digit = round):
-     partial argument match of 'digit' to 'digits'
-   nice_table.lmerModLmerTest: warning in round_numeric(out, digit =
-     round): partial argument match of 'digit' to 'digits'
-   split_at_median: warning in split_at_percentile(x, 0.5, lab = labels,
-     type = type, explicit_na = explicit_na): partial argument match of
-     'lab' to 'labels'
-   .nice_table_kable: no visible binding for global variable ‘depecated’
-   alpha_table: no visible binding for global variable ‘var’
-   auto_corr: no visible global function definition for ‘pnorm’
-   auto_corr: no visible global function definition for ‘pt’
-   average: no visible binding for global variable ‘.’
-   batch_convert_csv: no visible global function definition for ‘read.csv’
-   ci_score: no visible global function definition for ‘pnorm’
-   ci_score: no visible global function definition for ‘setNames’
-   corrmatrix: no visible global function definition for ‘cor.test’
-   corrmatrix: no visible global function definition for ‘cor’
-   extract_model_param.glmerMod: no visible global function definition for
-     ‘coef’
-   extract_model_param.gls: no visible global function definition for
-     ‘coef’
-extract_model_param.lm: no visible global functi\     extract_model_param.lm: no visible global function definition for
-     ‘coef’
-   extract_model_param.lme: no visible global function definition for
-     ‘coef’
-   extract_model_param.lmerModLmerTest: no visible global function
-     definition for ‘coef’
-   flip: no visible global function definition for ‘setNames’
-   get_labels: no visible global function definition for ‘setNames’
-   multilevel_corrmatrix: no visible global function definition for
-     ‘cor.test’
-   multilevel_corrmatrix: no visible global function definition for
-     ‘residuals’
-   nice_chi_test_table: no visible global function definition for
-     ‘relevel’
-   nice_chi_test_table: no visible global function definition for
-     ‘chisq.test’
-   nice_corrmatrix: no visible global function definition for ‘map2_chr’
-   nice_descriptives : <anonymous>: no visible global function definition
-     for ‘mad’
-   nice_loadings: no visible global function definition for ‘loadings’
-   nice_sem: no visible global function definition for ‘citation’
-   nice_t_test_table: no visible binding for global variable ‘var’
-   nice_t_test_table: no visible binding for global variable ‘.’
-   nice_table.lavaan: no visible global function definition for ‘citation’
-   percentage_bar: no visible global function definition for ‘ggplot’
-   percentage_bar: no visible global function definition for ‘aes’
-   percentage_bar: no visible binding for global variable ‘Year’
-   percentage_bar: no visible binding for global variable ‘Proportion’
-   percentage_bar: no visible binding for global variable ‘Group’
-   percentage_bar: no visible global function definition for ‘geom_col’
-   percentage_bar: no visible global function definition for ‘geom_text’
-   percentage_bar: no visible global function definition for
-     ‘position_stack’
-   percentage_bar: no visible global function definition for
-     ‘scale_fill_brewer’
-   percentage_bar: no visible global function definition for
-     ‘theme_minimal’
-   percentage_bar: no visible global function definition for ‘ylab’
-   percentage_bar: no visible global function definition for ‘xlab’
-   percentage_bar: no visible global function definition for ‘theme’
-p|     percentage_bar: no visible global function definition for
-     ‘element_blank’
-   percentage_bar: no visible global function definition for ‘coord_flip’
-   reference_package_version : <anonymous>: no visible global function
-     definition for ‘packageVersion’
-   split_at_percentile: no visible global function definition for
-     ‘quantile’
-   Undefined global functions or variables:
-     . Group Proportion Year aes chisq.test citation coef coord_flip cor
-     cor.test depecated element_blank geom_col geom_text ggplot loadings
-     mad map2_chr packageVersion pnorm position_stack pt quantile read.csv
-     relevel residuals scale_fill_brewer setNames theme theme_minimal var
-     xlab ylab
-   Consider adding
-     importFrom("stats", "chisq.test", "coef", "cor", "cor.test",
-                "loadings", "mad", "pnorm", "pt", "quantile", "relevel",
-                "residuals", "setNames", "var")
-     importFrom("utils", "citation", "packageVersion", "read.csv")
-   to your NAMESPACE file.
-/     checking Rd files ...-  ✔  checking Rd files
-   checking Rd metadata ...\  ✔  checking Rd metadata
-   checking Rd line widths ...|  ✔  checking Rd line widths
-   checking Rd cross-references .../  W  checking Rd cross-references
-   Missing link or links in Rd file 'wmisc-package.Rd':
-     ‘aut, cre’
-   
-   See section 'Cross-references' in the 'Writing R Extensions' manual.
-   checking for missing documentation entries ...-\  W  checking for missing documentation entries (381ms)
-   Undocumented code objects:
-     ‘agreement_analysis’ ‘extract_model_param’ ‘gt_apa_style’
-     ‘lavaan_data’ ‘lavaan_fit’ ‘lavaan_model’ ‘set_wmisc_attributes’
-   Undocumented data sets:
-     ‘lavaan_data’ ‘lavaan_fit’ ‘lavaan_model’
-|     All user-level objects in a package should have documentation entries.
-   See chapter ‘Writing R documentation files’ in the ‘Writing R
-   Extensions’ manual.
-   checking for code/documentation mismatches .../-\|/-\|  ✔  checking for code/documentation mismatches (1.4s)
-/     checking Rd \usage sections ...-  W  checking Rd \usage sections
-   Documented arguments not in \usage in Rd file 'get_wmisc_attributes.Rd':
-     ‘...’
-   
-   Undocumented arguments in Rd file 'nice_chi_test_table.Rd'
-     ‘label_attr’
-   
-   Undocumented arguments in Rd file 'nice_corrmatrix.Rd'
-     ‘numbered_columns’ ‘show_descriptives’
-   Documented arguments not in \usage in Rd file 'nice_corrmatrix.Rd':
-     ‘show_discriptives’
-   
-   Undocumented arguments in Rd file 'nice_descriptives.Rd'
-     ‘title’ ‘footnote’ ‘file’ ‘...’
-   
-   Undocumented arguments in Rd file 'nice_frequencies.Rd'
-     ‘label_grouping’
-   
-   Undocumented arguments in Rd file 'nice_loadings.Rd'
-     ‘title’ ‘footnote’ ‘auto_labels’ ‘...’ ‘file’
-   
-   Undocumented arguments in Rd file 'nice_p.Rd'
-     ‘digits’ ‘stars’
-   
-   Undocumented arguments in Rd file 'nice_regression_table.Rd'
-     ‘...’ ‘round’ ‘labels_models’ ‘rename_labels’ ‘rename_cols’
-     ‘auto_col_names’ ‘file’ ‘or’ ‘nice_p’ ‘title’ ‘footnote’
-   
-   Undocumented arguments in Rd file 'nice_sem.Rd'
-     ‘standardized’ ‘round’
-   
-   Undocumented arguments in Rd file 'nice_t_test_table.Rd'
-     ‘label_attr’ ‘manova’ ‘alternative’ ‘file’ ‘...’
-   
-   Undocumented arguments in Rd file 'split_at_median.Rd'
-     ‘labels’
-   Documented arguments not in \usage in Rd file 'split_at_median.Rd':
-     ‘lab’
-   
-\     Functions with \usage entries need to have the appropriate \alias
-   entries, and all their arguments documented.
-   The \usage entries must correspond to syntactically valid R code.
-   See chapter ‘Writing R documentation files’ in the ‘Writing R
-   Extensions’ manual.
-|/-\     checking Rd contents ...|  ✔  checking Rd contents (882ms)
-   checking for unstated dependencies in examples .../  W  checking for unstated dependencies in examples
-   'data(package=)' call not declared from: ‘lme4’
--     checking contents of ‘data’ directory ...\  ✔  checking contents of ‘data’ directory
-   checking data for non-ASCII characters ...|  ✔  checking data for non-ASCII characters
-/  ✔  checking LazyData
-   checking data for ASCII and uncompressed saves ...-  ✔  checking data for ASCII and uncompressed saves
-   checking R/sysdata.rda ...\  ✔  checking R/sysdata.rda
-|     checking examples .../-\|/-\|/-\|  E  checking examples (2.3s)
-   Running examples in ‘wmisc-Ex.R’ failed
-/     The error most likely occurred in:
-   
-   > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-   > ### Name: nice_corrmatrix
-   > ### Title: Nice correlation matrix
-   > ### Aliases: nice_corrmatrix
-   > 
-   > ### ** Examples
-   > 
-   > nice_corrmatrix(mtcars)
-   <div id="ydgabwknrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-     <style>#ydgabwknrs table {
-     font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-   }
-   
-   #ydgabwknrs thead, #ydgabwknrs tbody, #ydgabwknrs tfoot, #ydgabwknrs tr, #ydgabwknrs td, #ydgabwknrs th {
-     border-style: none;
-   }
-   
-   #ydgabwknrs p {
-     margin: 0;
-     padding: 0;
-   }
-   
-   #ydgabwknrs .gt_table {
-     display: table;
-     border-collapse: collapse;
-     line-height: normal;
-     margin-left: auto;
-     margin-right: auto;
-     color: #333333;
-     font-size: 16px;
-     font-weight: normal;
-     font-style: normal;
-     background-color: #FFFFFF;
-     width: auto;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #FFFFFF;
-     border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_caption {
-     padding-top: 4px;
-     padding-bottom: 4px;
-   }
-   
-   #ydgabwknrs .gt_title {
-     color: #333333;
-     font-size: 100%;
-     font-weight: initial;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-color: #FFFFFF;
-     border-bottom-width: 0;
-   }
-   
-   #ydgabwknrs .gt_subtitle {
-     color: #333333;
-     font-size: 85%;
-     font-weight: initial;
-     padding-top: 3px;
-     padding-bottom: 5px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-top-color: #FFFFFF;
-     border-top-width: 0;
-   }
-   
-#ydgabwknrs .gt_h-     #ydgabwknrs .gt_heading {
-     background-color: #FFFFFF;
-     text-align: left;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_bottom_border {
-     border-bottom-style: solid;
-     border-bottom-width: 3px;
-     border-bottom-color: #000000;
-   }
-   
-   #ydgabwknrs .gt_col_headings {
-     border-top-style: solid;
-     border-top-width: 3px;
-     border-top-color: #000000;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #000000;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_col_heading {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: normal;
-     text-transform: inherit;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-     vertical-align: bottom;
-     padding-top: 5px;
-     padding-bottom: 6px;
-     padding-left: 5px;
-     padding-right: 5px;
-     overflow-x: hidden;
-   }
-   
-   #ydgabwknrs .gt_column_spanner_outer {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: normal;
-     text-transform: inherit;
-     padding-top: 0;
-     padding-bottom: 0;
-     padding-left: 4px;
-     padding-right: 4px;
-   }
-   
-   #ydgabwknrs .gt_column_spanner_outer:first-child {
-     padding-left: 0;
-   }
-   
-   #ydgabwknrs .gt_column_spanner_outer:last-child {
-     padding-right: 0;
-   }
-   
-   #ydgabwknrs .gt_column_spanner {
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #000000;
-     vertical-align: bottom;
-     padding-top: 5px;
-     padding-bottom: 5px;
-     overflow-x: hidden;
-     display: inline-block;
-     width: 100%;
-   }
-   
-   #ydgabwknrs .gt_spanner_row {
-     border-bottom-style: hidden;
-   }
-   
-   #ydgabwknrs .gt_group_heading {
-     padding-top: 8px;
-     padding-bottom: 8px;
-   pad\       padding-left: 5px;
-     padding-right: 5px;
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-     vertical-align: middle;
-     text-align: left;
-   }
-   
-   #ydgabwknrs .gt_empty_group_heading {
-     padding: 0.5px;
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     vertical-align: middle;
-   }
-   
-   #ydgabwknrs .gt_from_md > :first-child {
-     margin-top: 0;
-   }
-   
-   #ydgabwknrs .gt_from_md > :last-child {
-     margin-bottom: 0;
-   }
-   
-   #ydgabwknrs .gt_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     margin: 10px;
-     border-top-style: solid;
-     border-top-width: 0px;
-     border-top-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-     vertical-align: middle;
-     overflow-x: hidden;
-   }
-   
-   #ydgabwknrs .gt_stub {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-right-style: solid;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #ydgabwknrs .gt_stub_row_group {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-right-style: solid;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     padding-left: 5px;
-     padding-right: 5px;
-   vertic|       vertical-align: top;
-   }
-   
-   #ydgabwknrs .gt_row_group_first td {
-     border-top-width: 2px;
-   }
-   
-   #ydgabwknrs .gt_row_group_first th {
-     border-top-width: 2px;
-   }
-   
-   #ydgabwknrs .gt_summary_row {
-     color: #333333;
-     background-color: #FFFFFF;
-     text-transform: inherit;
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #ydgabwknrs .gt_first_summary_row {
-     border-top-style: solid;
-     border-top-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_first_summary_row.thick {
-     border-top-width: 2px;
-   }
-   
-   #ydgabwknrs .gt_last_summary_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_grand_summary_row {
-     color: #333333;
-     background-color: #FFFFFF;
-     text-transform: inherit;
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #ydgabwknrs .gt_first_grand_summary_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-top-style: double;
-     border-top-width: 6px;
-     border-top-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_last_grand_summary_row_top {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-style: double;
-     border-bottom-width: 6px;
-     border-bottom-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_striped {
-     background-color: rgba(128, 128, 128, 0.05);
-   }
-   
-   #ydgabwknrs .gt_table_body {
-     border-top-style: solid;
-     border-top-width: 3px;
-     border-top-color: #000000;
-     border-bottom-style: solid;
-     border-bottom-width: 3px;
-     border-bottom-color: #000000;
-   }
-   
-   #ydgabwknrs .gt_footnotes {
-     color: #333333;
-     background-color: #FFFFFF;
-     border-bottom-style: none;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_footnote {
-  /       margin: 0px;
-     font-size: 90%;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #ydgabwknrs .gt_sourcenotes {
-     color: #333333;
-   background-color: #FF-       background-color: #FFFFFF;
-     border-bottom-style: none;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #ydgabwknrs .gt_sourcenote {
-     font-size: 90%;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #ydgabwknrs .gt_left {
-     text-align: left;
-   }
-   
-   #ydgabwknrs .gt_center {
-     text-align: center;
-   }
-   
-   #ydgabwknrs .gt_right {
-     text-align: right;
-     font-variant-numeric: tabular-nums;
-   }
-   
-   #ydgabwknrs .gt_font_normal {
-     font-weight: normal;
-   }
-   
-   #ydgabwknrs .gt_font_bold {
-     font-weight: bold;
-   }
-   
-   #ydgabwknrs .gt_font_italic {
-     font-style: italic;
-   }
-   
-   #ydgabwknrs .gt_super {
-     font-size: 65%;
-   }
-   
-   #ydgabwknrs .gt_footnote_marks {
-     font-size: 75%;
-     vertical-align: 0.4em;
-     position: initial;
-   }
-   
-   #ydgabwknrs .gt_asterisk {
-     font-size: 100%;
-     vertical-align: 0;
-   }
-   
-   #ydgabwknrs .gt_indent_1 {
-     text-indent: 5px;
-   }
-   
-   #ydgabwknrs .gt_indent_2 {
-     text-indent: 10px;
-   }
-   
-   #ydgabwknrs .gt_indent_3 {
-     text-indent: 15px;
-   }
-   
-   #ydgabwknrs .gt_indent_4 {
-     text-indent: 20px;
-   }
-   
-   #ydgabwknrs .gt_indent_5 {
-     text-indent: 25px;
-   }
-   
-   #ydgabwknrs .katex-display {
-     display: inline-flex !important;
-     margin-bottom: 0.75em !important;
-   }
-   
-   #ydgabwknrs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-     height: 0px !important;
-   }
-   </style>
-     <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-     <thead>
-       <tr class="gt_heading">
-         <td colspan="15" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class='gt_from_md'><strong>Table</strong><br>  <em>Correlation matrix</em></span></td>
-       </tr>
-       
-       <tr class="gt_col_headings">
-         <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
-       <th class="gt_col_heading gt_c\           <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="n">n</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="M">M</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1">1</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2">2</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3">3</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a4">4</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a5">5</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a6">6</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a7">7</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a8">8</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a9">9</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a10">10</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a11">11</th>
-       </tr>
-     </thead>
-     <tbody class="gt_table_body">
-       <tr><td headers="Variable" class="gt_row gt_left">1. mpg  </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center"> 20.09</td>
-   <td headers="SD" class="gt_row gt_center">  6.03</td>
-   <td headers="1" class="gt_row gt_center">－      </td>
-<td headers="2" class="gt_row gt_cen|     <td headers="2" class="gt_row gt_center">        </td>
-   <td headers="3" class="gt_row gt_center">        </td>
-   <td headers="4" class="gt_row gt_center">        </td>
-   <td headers="5" class="gt_row gt_center">        </td>
-   <td headers="6" class="gt_row gt_center">        </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">2. cyl  </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  6.19</td>
-   <td headers="SD" class="gt_row gt_center">  1.79</td>
-   <td headers="1" class="gt_row gt_center">-.85*** </td>
-   <td headers="2" class="gt_row gt_center">－      </td>
-   <td headers="3" class="gt_row gt_center">        </td>
-   <td headers="4" class="gt_row gt_center">        </td>
-   <td headers="5" class="gt_row gt_center">        </td>
-   <td headers="6" class="gt_row gt_center">        </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">3. disp </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">230.72</td>
-   <td headers="SD" class="gt_row gt_center">123.94</td>
-   <td headers="1" class="gt_row gt_center">-.85*** </td>
-   <td headers="2" class="gt_row gt_center">  .90***</td>
-   <td headers="3" class="gt_row gt_center">－      </td>
-   <td headers="4" class="gt_row gt_center">        </td>
-   <td headers="5" class="gt_row gt_center">        </td>
-   <td headers="6" class="gt_row gt_center">        </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-<td headers="8" class="gt_row gt_center">       /     <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">4. hp   </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">146.69</td>
-   <td headers="SD" class="gt_row gt_center"> 68.56</td>
-   <td headers="1" class="gt_row gt_center">-.78*** </td>
-   <td headers="2" class="gt_row gt_center">  .83***</td>
-   <td headers="3" class="gt_row gt_center">  .79***</td>
-   <td headers="4" class="gt_row gt_center">－      </td>
-   <td headers="5" class="gt_row gt_center">        </td>
-   <td headers="6" class="gt_row gt_center">        </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">5. drat </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  3.60</td>
-   <td headers="SD" class="gt_row gt_center">  0.53</td>
-   <td headers="1" class="gt_row gt_center">  .68***</td>
-   <td headers="2" class="gt_row gt_center">-.70*** </td>
-   <td headers="3" class="gt_row gt_center">-.71*** </td>
-   <td headers="4" class="gt_row gt_center">-.45**  </td>
-   <td headers="5" class="gt_row gt_center">－      </td>
-   <td headers="6" class="gt_row gt_center">        </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">6. wt   </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-<td headers="M" class="gt_row gt_center">  3.22</td>-     <td headers="M" class="gt_row gt_center">  3.22</td>
-   <td headers="SD" class="gt_row gt_center">  0.98</td>
-   <td headers="1" class="gt_row gt_center">-.87*** </td>
-   <td headers="2" class="gt_row gt_center">  .78***</td>
-<td headers="3" c\     <td headers="3" class="gt_row gt_center">  .89***</td>
-   <td headers="4" class="gt_row gt_center">  .66***</td>
-   <td headers="5" class="gt_row gt_center">-.71*** </td>
-   <td headers="6" class="gt_row gt_center">－      </td>
-   <td headers="7" class="gt_row gt_center">        </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">7. qsec </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center"> 17.85</td>
-   <td headers="SD" class="gt_row gt_center">  1.79</td>
-   <td headers="1" class="gt_row gt_center">  .42*  </td>
-   <td headers="2" class="gt_row gt_center">-.59*** </td>
-   <td headers="3" class="gt_row gt_center">-.43*   </td>
-   <td headers="4" class="gt_row gt_center">-.71*** </td>
-   <td headers="5" class="gt_row gt_center">  .09   </td>
-   <td headers="6" class="gt_row gt_center">-.17    </td>
-   <td headers="7" class="gt_row gt_center">－      </td>
-   <td headers="8" class="gt_row gt_center">        </td>
-   <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">8. vs   </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  0.44</td>
-   <td headers="SD" class="gt_row gt_center">  0.50</td>
-   <td headers="1" class="gt_row gt_center">  .66***</td>
-   <td headers="2" class="gt_row gt_center">-.81*** </td>
-   <td headers="3" class="gt_row gt_center">-.71*** </td>
-   <td headers="4" class="gt_row gt_center">-.72*** </td>
-   <td headers="5" class="gt_row gt_center">  .44*  </td>
-   <td headers="6" class="gt_row gt_center">-.55*** </td>
-   <td headers="7" class="gt_row gt_center">  .74***</td>
-   <td headers="8" class="gt_row gt_center">－      </td>
-<td headers="9" class="gt_row |     <td headers="9" class="gt_row gt_center">        </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">9. am   </td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  0.41</td>
-   <td headers="SD" class="gt_row gt_center">  0.50</td>
-   <td headers="1" class="gt_row gt_center">  .60***</td>
-   <td headers="2" class="gt_row gt_center">-.52**  </td>
-   <td headers="3" class="gt_row gt_center">-.59*** </td>
-   <td headers="4" class="gt_row gt_center">-.24    </td>
-   <td headers="5" class="gt_row gt_center">  .71***</td>
-   <td headers="6" class="gt_row gt_center">-.69*** </td>
-   <td headers="7" class="gt_row gt_center">-.23    </td>
-   <td headers="8" class="gt_row gt_center">  .17   </td>
-   <td headers="9" class="gt_row gt_center">－      </td>
-   <td headers="10" class="gt_row gt_center">        </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">10. gear</td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  3.69</td>
-   <td headers="SD" class="gt_row gt_center">  0.74</td>
-   <td headers="1" class="gt_row gt_center">  .48** </td>
-   <td headers="2" class="gt_row gt_center">-.49**  </td>
-   <td headers="3" class="gt_row gt_center">-.56*** </td>
-   <td headers="4" class="gt_row gt_center">-.13    </td>
-   <td headers="5" class="gt_row gt_center">  .70***</td>
-   <td headers="6" class="gt_row gt_center">-.58*** </td>
-   <td headers="7" class="gt_row gt_center">-.21    </td>
-   <td headers="8" class="gt_row gt_center">  .21   </td>
-   <td headers="9" class="gt_row gt_center">  .79***</td>
-   <td headers="10" class="gt_row gt_center">－      </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">11. carb</td>
-   <td headers="n" class="gt_row gt_center">32</td>
-   <td headers="M" class="gt_row gt_center">  2.81</td>
-<td headers="SD" class="gt_row gt_ce/     <td headers="SD" class="gt_row gt_center">  1.62</td>
-   <td headers="1" class="gt_row gt_center">-.55**  </td>
-   <td headers="2" class="gt_row gt_center">  .53** </td>
-   <td headers="3" class="gt_row gt_center">  .39*  </td>
-   <td headers="4" class="gt_row gt_center">  .75***</td>
-   <td headers="5" class="gt_row gt_center">-.09    </td>
-   <td headers="6" class="gt_row gt_center">  .43*  </td>
-   <td headers="7" class="gt_row gt_center">-.66*** </td>
-   <td headers="8" class="gt_row gt_center">-.57*** </td>
-   <td headers="9" class="gt_row gt_center">  .06   </td>
-   <td headers="10" class="gt_row gt_center">  .27   </td>
-   <td headers="11" class="gt_row gt_center">－</td></tr>
-     </tbody>
-     
-     <tfoot class="gt_footnotes">
-       <tr>
-         <td class="gt_footnote" colspan="15"> <span class='gt_from_md'><em>Note.</em> ✞<em>p</em> &lt; .10; *<em>p</em> &lt; .05; **<em>p</em> &lt; .01; ***<em>p</em> &lt; .001. .</span></td>
-       </tr>
-     </tfoot>
-   </table>
-   </div>
-   > nice_corrmatrix(mtcars,
-   +   show_p = TRUE,
-   +   show_ci = TRUE,
-   +   show_stars = FALSE,
-   +   show_descriptives = FALSE,
-   +   conf.level = 0.99
-   + )
-   <div id="iyneebjylo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-     <style>#iyneebjylo table {
-     font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-   }
-   
-   #iyneebjylo thead, #iyneebjylo tbody, #iyneebjylo tfoot, #iyneebjylo tr, #iyneebjylo td, #iyneebjylo th {
-     border-style: none;
-   }
-   
-   #iyneebjylo p {
-     margin: 0;
-     padding: 0;
-   }
-   
-   #iyneebjylo .gt_table {
-     display: table;
-     border-collapse: collapse;
-     line-height: normal;
-     margin-left: auto;
-     margin-right: auto;
-     color: #333333;
-     font-size: 16px;
-     font-weight: normal;
-     font-style: normal;
-     background-color: #FFFFFF;
-     width: auto;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #FFFFFF;
-  -       border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_caption {
-     padding-top: 4px;
-     padding-bottom: 4px;
-   }
-   
-   #iyneebjylo .gt_title {
-     color: #333333;
-     font-size: 100%;
-     font-weight: initial;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-color: #FFFFFF;
-     border-bottom-width: 0;
-   }
-   
-   #iyneebjylo .gt_subtitle {
-     color: #333333;
-     font-size: 85%;
-     font-weight: initial;
-     padding-top: 3px;
-     padding-bottom: 5px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-top-color: #FFFFFF;
-     border-top-width: 0;
-   }
-   
-   #iyneebjylo .gt_heading {
-     background-color: #FFFFFF;
-     text-align: left;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_bottom_border {
-     border-bottom-style: solid;
-     border-bottom-width: 3px;
-     border-bottom-color: #000000;
-   }
-   
-   #iyneebjylo .gt_col_headings {
-     border-top-style: solid;
-     border-top-width: 3px;
-     border-top-color: #000000;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #000000;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_col_heading {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: normal;
-     text-transform: inherit;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-     vertical-align: bottom;
-     padding-top: 5px;
-     padding-bottom: 6px;
-     padding-left: 5px;
-     padding-right: 5px;
-   \       overflow-x: hidden;
-   }
-   
-   #iyneebjylo .gt_column_spanner_outer {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: normal;
-     text-transform: inherit;
-|       padding-top: 0;
-     padding-bottom: 0;
-     padding-left: 4px;
-     padding-right: 4px;
-   }
-   
-   #iyneebjylo .gt_column_spanner_outer:first-child {
-     padding-left: 0;
-   }
-   
-   #iyneebjylo .gt_column_spanner_outer:last-child {
-     padding-right: 0;
-   }
-   
-   #iyneebjylo .gt_column_spanner {
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #000000;
-     vertical-align: bottom;
-     padding-top: 5px;
-     padding-bottom: 5px;
-     overflow-x: hidden;
-     display: inline-block;
-     width: 100%;
-   }
-   
-   #iyneebjylo .gt_spanner_row {
-     border-bottom-style: hidden;
-   }
-   
-   #iyneebjylo .gt_group_heading {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-     border-right-color: #D3D3D3;
-     vertical-align: middle;
-     text-align: left;
-   }
-   
-   #iyneebjylo .gt_empty_group_heading {
-     padding: 0.5px;
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     border-top-style: solid;
-     border-top-width: 2px;
-     border-top-color: #D3D3D3;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #FFFFFF;
-     vertical-align: middle;
-   }
-   
-   #iyneebjylo .gt_from_md > :first-child {
-     margin-top: 0;
-   }
-   
-   #iyneebjylo .gt_from_md > :last-child {
-     margin-bottom: 0;
-   }
-   
-   #iyneebjylo .gt_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     margin: 10px;
-     border-top-style: solid;
-     border-top-width: 0px;
-     border-top-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 1px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 1px;
-   border-ri/       border-right-color: #D3D3D3;
-     vertical-align: middle;
-     overflow-x: hidden;
-   }
-   
-   #iyneebjylo .gt_stub {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-right-style: solid;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #iyneebjylo .gt_stub_row_group {
-     color: #333333;
-     background-color: #FFFFFF;
-     font-size: 100%;
-     font-weight: initial;
-     text-transform: inherit;
-     border-right-style: solid;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-     padding-left: 5px;
-     padding-right: 5px;
-     vertical-align: top;
-   }
-   
-   #iyneebjylo .gt_row_group_first td {
-     border-top-width: 2px;
-   }
-   
-   #iyneebjylo .gt_row_group_first th {
-     border-top-width: 2px;
-   }
-   
-   #iyneebjylo .gt_summary_row {
-     color: #333333;
-     background-color: #FFFFFF;
-     text-transform: inherit;
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #iyneebjylo .gt_first_summary_row {
-     border-top-style: solid;
-     border-top-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_first_summary_row.thick {
-     border-top-width: 2px;
-   }
-   
-   #iyneebjylo .gt_last_summary_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-style: solid;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_grand_summary_row {
-     color: #333333;
-     background-color: #FFFFFF;
-     text-transform: inherit;
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #iyneebjylo .gt_first_grand_summary_row {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-top-style: double;
-     border-top-width: 6px;
-     border-top-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_last_grand_summary_row_top {
-     padding-top: 8px;
-     padding-bottom: 8px;
-     padding-left: 5px;
-     padding-right: 5px;
-     border-bottom-style: double;
-     border-bottom-width: 6px;
-     border-bottom-color: #D3D3D3;
-   }
-   
-#iyneebjylo-     #iyneebjylo .gt_striped {
-     background-color: rgba(128, 128, 128, 0.05);
-   }
-   
-   #iyneebjylo .gt_table_body {
-     border-top-style: solid;
-     border-top-width: 3px;
-     border-top-color: #000000;
-     border-bottom-style: solid;
-     border-bottom-width: 3px;
-     border-bottom-color: #000000;
-   }
-   
-   #iyneebjylo .gt_footnotes {
-     color: #333333;
-     background-color: #FFFFFF;
-     border-bottom-style: none;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_footnote {
-     margin: 0px;
-     font-size: 90%;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #iyneebjylo .gt_sourcenotes {
-     color: #333333;
-     background-color: #FFFFFF;
-     border-bottom-style: none;
-     border-bottom-width: 2px;
-     border-bottom-color: #D3D3D3;
-     border-left-style: none;
-     border-left-width: 2px;
-     border-left-color: #D3D3D3;
-     border-right-style: none;
-     border-right-width: 2px;
-     border-right-color: #D3D3D3;
-   }
-   
-   #iyneebjylo .gt_sourcenote {
-     font-size: 90%;
-     padding-top: 4px;
-     padding-bottom: 4px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-   
-   #iyneebjylo .gt_left {
-     text-align: left;
-   }
-   
-   #iyneebjylo .gt_center {
-     text-align: center;
-   }
-   
-   #iyneebjylo .gt_right {
-     text-align: right;
-     font-variant-numeric: tabular-nums;
-   }
-   
-   #iyneebjylo .gt_font_normal {
-     font-weight: normal;
-   }
-   
-   #iyneebjylo .gt_font_bold {
-     font-weight: bold;
-   }
-   
-   #iyneebjylo .gt_font_italic {
-     font-style: italic;
-   }
-   
-   #iyneebjylo .gt_super {
-     font-size: 65%;
-   }
-   
-   #iyneebjylo .gt_footnote_marks {
-     font-size: 75%;
-     vertical-align: 0.4em;
-     position: initial;
-   }
-   
-   #iyneebjylo .gt_asterisk {
-     font-size: 100%;
-     vertical-align: 0;
-   }
-   
-   #iyneebjylo .gt_indent_1 {
-     text-indent: 5px;
-   }
-   
-   #iyneebjylo .gt_indent_2 {
-     text-indent: 10px;
-   }
-   
-   #iyneebjylo .gt_indent_3 {
-     text-indent: 15px;
-   }
-   
-   #iyneebjylo .gt_indent_4 {
-     text-indent: 20px;
-   }
-   
-#iyneebjyl\     #iyneebjylo .gt_indent_5 {
-     text-indent: 25px;
-   }
-   
-   #iyneebjylo .katex-display {
-     display: inline-flex !important;
-     margin-bottom: 0.75em !important;
-   }
-   
-   #iyneebjylo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-     height: 0px !important;
-   }
-   </style>
-     <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-     <thead>
-       <tr class="gt_heading">
-         <td colspan="12" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class='gt_from_md'><strong>Table</strong><br>  <em>Correlation matrix</em></span></td>
-       </tr>
-       
-       <tr class="gt_col_headings">
-         <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1">1</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2">2</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3">3</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a4">4</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a5">5</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a6">6</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a7">7</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a8">8</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a9">9</th>
-         <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a10">10</th>
-       <th class="gt_|           <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a11">11</th>
-       </tr>
-     </thead>
-     <tbody class="gt_table_body">
-     <tr><td headers="Variable" class="/         <tr><td headers="Variable" class="gt_row gt_left">1. mpg  </td>
-   <td headers="1" class="gt_row gt_center">－                                </td>
-   <td headers="2" class="gt_row gt_center">                                  </td>
-   <td headers="3" class="gt_row gt_center">                                  </td>
-   <td headers="4" class="gt_row gt_center">                                  </td>
-   <td headers="5" class="gt_row gt_center">                                  </td>
-   <td headers="6" class="gt_row gt_center">                                  </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">2. cyl  </td>
-   <td headers="1" class="gt_row gt_center">-.85 <br>[-.93,-.72] <br>(p <.001)</td>
-   <td headers="2" class="gt_row gt_center">－                                </td>
-   <td headers="3" class="gt_row gt_center">                                  </td>
-   <td headers="4" class="gt_row gt_center">                                  </td>
-   <td headers="5" class="gt_row gt_center">                                  </td>
-   <td headers="6" class="gt_row gt_center">                                  </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">3. disp </td>
-   <td headers="1" class="gt_row gt_center">-.85 <br>[-.92,-.71] <br>(p <.001)</td>
-<td headers="2" class="-     <td headers="2" class="gt_row gt_center">  .90 <br>[.81,.95] <br>(p <.001) </td>
-   <td headers="3" class="gt_row gt_center">－                                </td>
-   <td headers="4" class="gt_row gt_center">                                  </td>
-   <td headers="5" class="gt_row gt_center">                                  </td>
-   <td headers="6" class="gt_row gt_center">                                  </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">4. hp   </td>
-   <td headers="1" class="gt_row gt_center">-.78 <br>[-.89,-.59] <br>(p <.001)</td>
-   <td headers="2" class="gt_row gt_center">  .83 <br>[.68,.92] <br>(p <.001) </td>
-   <td headers="3" class="gt_row gt_center">  .79 <br>[.61,.89] <br>(p <.001) </td>
-   <td headers="4" class="gt_row gt_center">－                                </td>
-   <td headers="5" class="gt_row gt_center">                                  </td>
-   <td headers="6" class="gt_row gt_center">                                  </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">5. drat </td>
-   <td headers="1" class="gt_row gt_center">  .68 <br>[.44,.83] <br>(p <.001) </td>
-   <td headers="2" class="gt_row gt_center">-.70 <br>[-.84,-.46] <br>(p <.001)</td>
-<td headers="3" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)<\     <td headers="3" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-   <td headers="4" class="gt_row gt_center">-.45 <br>[-.69,-.12] <br>(p <.01) </td>
-   <td headers="5" class="gt_row gt_center">－                                </td>
-   <td headers="6" class="gt_row gt_center">                                  </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">6. wt   </td>
-   <td headers="1" class="gt_row gt_center">-.87 <br>[-.93,-.74] <br>(p <.001)</td>
-   <td headers="2" class="gt_row gt_center">  .78 <br>[.60,.89] <br>(p <.001) </td>
-   <td headers="3" class="gt_row gt_center">  .89 <br>[.78,.94] <br>(p <.001) </td>
-   <td headers="4" class="gt_row gt_center">  .66 <br>[.40,.82] <br>(p <.001) </td>
-   <td headers="5" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-   <td headers="6" class="gt_row gt_center">－                                </td>
-   <td headers="7" class="gt_row gt_center">                                  </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">7. qsec </td>
-   <td headers="1" class="gt_row gt_center">  .42 <br>[.08,.67] <br>(p <.05)  </td>
-   <td headers="2" class="gt_row gt_center">-.59 <br>[-.78,-.31] <br>(p <.001)</td>
-   <td headers="3" class="gt_row gt_center">-.43 <br>[-.68,-.10] <br>(p <.05) </td>
-   <td headers="4" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-<td headers="5" class="gt_row gt_center">  .09 <|     <td headers="5" class="gt_row gt_center">  .09 <br>[-.27,.43] <br>(p =.620)</td>
-   <td headers="6" class="gt_row gt_center">-.17 <br>[-.49,.19] <br>(p =.339) </td>
-   <td headers="7" class="gt_row gt_center">－                                </td>
-   <td headers="8" class="gt_row gt_center">                                  </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">8. vs   </td>
-   <td headers="1" class="gt_row gt_center">  .66 <br>[.41,.82] <br>(p <.001) </td>
-   <td headers="2" class="gt_row gt_center">-.81 <br>[-.90,-.64] <br>(p <.001)</td>
-   <td headers="3" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-   <td headers="4" class="gt_row gt_center">-.72 <br>[-.86,-.50] <br>(p <.001)</td>
-   <td headers="5" class="gt_row gt_center">  .44 <br>[.11,.68] <br>(p <.05)  </td>
-   <td headers="6" class="gt_row gt_center">-.55 <br>[-.76,-.26] <br>(p <.001)</td>
-   <td headers="7" class="gt_row gt_center">  .74 <br>[.53,.87] <br>(p <.001) </td>
-   <td headers="8" class="gt_row gt_center">－                                </td>
-   <td headers="9" class="gt_row gt_center">                                  </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">9. am   </td>
-   <td headers="1" class="gt_row gt_center">  .60 <br>[.32,.78] <br>(p <.001) </td>
-   <td headers="2" class="gt_row gt_center">-.52 <br>[-.74,-.21] <br>(p <.01) </td>
-   <td headers="3" class="gt_row gt_center">-.59 <br>[-.78,-.31] <br>(p <.001)</td>
-   <td headers="4" class="gt_row gt_center">-.24 <br>[-.55,.12] <br>(p =.180) </td>
-   <td headers="5" class="gt_row gt_center">  .71 <br>[.48,.85] <br>(p <.001) </td>
-   <td headers="6" class="gt_row gt_center">-.69 <br>[-.84,-.45] <br>(p <.001)</td>
-<td headers="7" clas/     <td headers="7" class="gt_row gt_center">-.23 <br>[-.54,.13] <br>(p =.206) </td>
-   <td headers="8" class="gt_row gt_center">  .17 <br>[-.19,.49] <br>(p =.357)</td>
-<td headers="9" class="gt_row gt_c-     <td headers="9" class="gt_row gt_center">－                                </td>
-   <td headers="10" class="gt_row gt_center">                                  </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">10. gear</td>
-   <td headers="1" class="gt_row gt_center">  .48 <br>[.16,.71] <br>(p <.01)  </td>
-   <td headers="2" class="gt_row gt_center">-.49 <br>[-.72,-.17] <br>(p <.01) </td>
-   <td headers="3" class="gt_row gt_center">-.56 <br>[-.76,-.26] <br>(p <.001)</td>
-   <td headers="4" class="gt_row gt_center">-.13 <br>[-.45,.23] <br>(p =.493) </td>
-   <td headers="5" class="gt_row gt_center">  .70 <br>[.46,.84] <br>(p <.001) </td>
-   <td headers="6" class="gt_row gt_center">-.58 <br>[-.77,-.29] <br>(p <.001)</td>
-   <td headers="7" class="gt_row gt_center">-.21 <br>[-.52,.15] <br>(p =.243) </td>
-   <td headers="8" class="gt_row gt_center">  .21 <br>[-.15,.52] <br>(p =.258)</td>
-   <td headers="9" class="gt_row gt_center">  .79 <br>[.62,.89] <br>(p <.001) </td>
-   <td headers="10" class="gt_row gt_center">－                                </td>
-   <td headers="11" class="gt_row gt_center">  </td></tr>
-       <tr><td headers="Variable" class="gt_row gt_left">11. carb</td>
-   <td headers="1" class="gt_row gt_center">-.55 <br>[-.75,-.25] <br>(p <.01) </td>
-   <td headers="2" class="gt_row gt_center">  .53 <br>[.22,.74] <br>(p <.01)  </td>
-   <td headers="3" class="gt_row gt_center">  .39 <br>[.05,.65] <br>(p <.05)  </td>
-   <td headers="4" class="gt_row gt_center">  .75 <br>[.54,.87] <br>(p <.001) </td>
-   <td headers="5" class="gt_row gt_center">-.09 <br>[-.43,.27] <br>(p =.621) </td>
-   <td headers="6" class="gt_row gt_center">  .43 <br>[.09,.68] <br>(p <.05)  </td>
-   <td headers="7" class="gt_row gt_center">-.66 <br>[-.82,-.40] <br>(p <.001)</td>
-   <td headers="8" class="gt_row gt_center">-.57 <br>[-.77,-.28] <br>(p <.001)</td>
-   <td headers="9" class="gt_row gt_center">  .06 <br>[-.30,.40] <br>(p =.754)</td>
-   <td headers="10" class="gt_row gt_center">  .27 <br>[-.08,.57] <br>(p =.129)</td>
-<td h\     <td headers="11" class="gt_row gt_center">－</td></tr>
-     </tbody>
-     
-     
-   </table>
-   </div>
-   > nice_corrmatrix(mtcars, group = "cyl")
-   Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-     there is no package called ‘boot’
-   Calls: nice_corrmatrix ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-   Execution halted
-✔  checking for non-standard things in the check directory
-✔  checking for detritus in the temp directory
-   
-   See
-     ‘/private/var/folders/wr/xr5y9dnj2j11ytcyjpgh6c2h0000gn/T/RtmpiA2s9k/file1235bb2840/wmisc.Rcheck/00check.log’
-   for details.
-   
-|/      
-── R CMD check results ────────────────────────────────────────────────────────── wmisc 0.3.1 ────
-Duration: 22.3s
-
-❯ checking examples ... ERROR
-  Running examples in ‘wmisc-Ex.R’ failed
-  The error most likely occurred in:
-  
-  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-  > ### Name: nice_corrmatrix
-  > ### Title: Nice correlation matrix
-  > ### Aliases: nice_corrmatrix
-  > 
-  > ### ** Examples
-  > 
-  > nice_corrmatrix(mtcars)
-  <div id="ydgabwknrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-    <style>#ydgabwknrs table {
-    font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  #ydgabwknrs thead, #ydgabwknrs tbody, #ydgabwknrs tfoot, #ydgabwknrs tr, #ydgabwknrs td, #ydgabwknrs th {
-    border-style: none;
-  }
-  
-  #ydgabwknrs p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #ydgabwknrs .gt_table {
-    display: table;
-    border-collapse: collapse;
-    line-height: normal;
-    margin-left: auto;
-    margin-right: auto;
-    color: #333333;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    background-color: #FFFFFF;
-    width: auto;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #FFFFFF;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_caption {
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-  
-  #ydgabwknrs .gt_title {
-    color: #333333;
-    font-size: 100%;
-    font-weight: initial;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-color: #FFFFFF;
-    border-bottom-width: 0;
-  }
-  
-  #ydgabwknrs .gt_subtitle {
-    color: #333333;
-    font-size: 85%;
-    font-weight: initial;
-    padding-top: 3px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top-color: #FFFFFF;
-    border-top-width: 0;
-  }
-  
-  #ydgabwknrs .gt_heading {
-    background-color: #FFFFFF;
-    text-align: left;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_bottom_border {
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: #000000;
-  }
-  
-  #ydgabwknrs .gt_col_headings {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: #000000;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #000000;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_col_heading {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: normal;
-    text-transform: inherit;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: bottom;
-    padding-top: 5px;
-    padding-bottom: 6px;
-    padding-left: 5px;
-    padding-right: 5px;
-    overflow-x: hidden;
-  }
-  
-  #ydgabwknrs .gt_column_spanner_outer {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: normal;
-    text-transform: inherit;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  
-  #ydgabwknrs .gt_column_spanner_outer:first-child {
-    padding-left: 0;
-  }
-  
-  #ydgabwknrs .gt_column_spanner_outer:last-child {
-    padding-right: 0;
-  }
-  
-  #ydgabwknrs .gt_column_spanner {
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #000000;
-    vertical-align: bottom;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    overflow-x: hidden;
-    display: inline-block;
-    width: 100%;
-  }
-  
-  #ydgabwknrs .gt_spanner_row {
-    border-bottom-style: hidden;
-  }
-  
-  #ydgabwknrs .gt_group_heading {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: middle;
-    text-align: left;
-  }
-  
-  #ydgabwknrs .gt_empty_group_heading {
-    padding: 0.5px;
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    vertical-align: middle;
-  }
-  
-  #ydgabwknrs .gt_from_md > :first-child {
-    margin-top: 0;
-  }
-  
-  #ydgabwknrs .gt_from_md > :last-child {
-    margin-bottom: 0;
-  }
-  
-  #ydgabwknrs .gt_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin: 10px;
-    border-top-style: solid;
-    border-top-width: 0px;
-    border-top-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: middle;
-    overflow-x: hidden;
-  }
-  
-  #ydgabwknrs .gt_stub {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #ydgabwknrs .gt_stub_row_group {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: top;
-  }
-  
-  #ydgabwknrs .gt_row_group_first td {
-    border-top-width: 2px;
-  }
-  
-  #ydgabwknrs .gt_row_group_first th {
-    border-top-width: 2px;
-  }
-  
-  #ydgabwknrs .gt_summary_row {
-    color: #333333;
-    background-color: #FFFFFF;
-    text-transform: inherit;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #ydgabwknrs .gt_first_summary_row {
-    border-top-style: solid;
-    border-top-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_first_summary_row.thick {
-    border-top-width: 2px;
-  }
-  
-  #ydgabwknrs .gt_last_summary_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_grand_summary_row {
-    color: #333333;
-    background-color: #FFFFFF;
-    text-transform: inherit;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #ydgabwknrs .gt_first_grand_summary_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top-style: double;
-    border-top-width: 6px;
-    border-top-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_last_grand_summary_row_top {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-style: double;
-    border-bottom-width: 6px;
-    border-bottom-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_striped {
-    background-color: rgba(128, 128, 128, 0.05);
-  }
-  
-  #ydgabwknrs .gt_table_body {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: #000000;
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: #000000;
-  }
-  
-  #ydgabwknrs .gt_footnotes {
-    color: #333333;
-    background-color: #FFFFFF;
-    border-bottom-style: none;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_footnote {
-    margin: 0px;
-    font-size: 90%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #ydgabwknrs .gt_sourcenotes {
-    color: #333333;
-    background-color: #FFFFFF;
-    border-bottom-style: none;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #ydgabwknrs .gt_sourcenote {
-    font-size: 90%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #ydgabwknrs .gt_left {
-    text-align: left;
-  }
-  
-  #ydgabwknrs .gt_center {
-    text-align: center;
-  }
-  
-  #ydgabwknrs .gt_right {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-  }
-  
-  #ydgabwknrs .gt_font_normal {
-    font-weight: normal;
-  }
-  
-  #ydgabwknrs .gt_font_bold {
-    font-weight: bold;
-  }
-  
-  #ydgabwknrs .gt_font_italic {
-    font-style: italic;
-  }
-  
-  #ydgabwknrs .gt_super {
-    font-size: 65%;
-  }
-  
-  #ydgabwknrs .gt_footnote_marks {
-    font-size: 75%;
-    vertical-align: 0.4em;
-    position: initial;
-  }
-  
-  #ydgabwknrs .gt_asterisk {
-    font-size: 100%;
-    vertical-align: 0;
-  }
-  
-  #ydgabwknrs .gt_indent_1 {
-    text-indent: 5px;
-  }
-  
-  #ydgabwknrs .gt_indent_2 {
-    text-indent: 10px;
-  }
-  
-  #ydgabwknrs .gt_indent_3 {
-    text-indent: 15px;
-  }
-  
-  #ydgabwknrs .gt_indent_4 {
-    text-indent: 20px;
-  }
-  
-  #ydgabwknrs .gt_indent_5 {
-    text-indent: 25px;
-  }
-  
-  #ydgabwknrs .katex-display {
-    display: inline-flex !important;
-    margin-bottom: 0.75em !important;
-  }
-  
-  #ydgabwknrs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-    height: 0px !important;
-  }
-  </style>
-    <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-    <thead>
-      <tr class="gt_heading">
-        <td colspan="15" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class='gt_from_md'><strong>Table</strong><br>  <em>Correlation matrix</em></span></td>
-      </tr>
-      
-      <tr class="gt_col_headings">
-        <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="n">n</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="M">M</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1">1</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2">2</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3">3</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a4">4</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a5">5</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a6">6</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a7">7</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a8">8</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a9">9</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a10">10</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a11">11</th>
-      </tr>
-    </thead>
-    <tbody class="gt_table_body">
-      <tr><td headers="Variable" class="gt_row gt_left">1. mpg  </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center"> 20.09</td>
-  <td headers="SD" class="gt_row gt_center">  6.03</td>
-  <td headers="1" class="gt_row gt_center">－      </td>
-  <td headers="2" class="gt_row gt_center">        </td>
-  <td headers="3" class="gt_row gt_center">        </td>
-  <td headers="4" class="gt_row gt_center">        </td>
-  <td headers="5" class="gt_row gt_center">        </td>
-  <td headers="6" class="gt_row gt_center">        </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">2. cyl  </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  6.19</td>
-  <td headers="SD" class="gt_row gt_center">  1.79</td>
-  <td headers="1" class="gt_row gt_center">-.85*** </td>
-  <td headers="2" class="gt_row gt_center">－      </td>
-  <td headers="3" class="gt_row gt_center">        </td>
-  <td headers="4" class="gt_row gt_center">        </td>
-  <td headers="5" class="gt_row gt_center">        </td>
-  <td headers="6" class="gt_row gt_center">        </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">3. disp </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">230.72</td>
-  <td headers="SD" class="gt_row gt_center">123.94</td>
-  <td headers="1" class="gt_row gt_center">-.85*** </td>
-  <td headers="2" class="gt_row gt_center">  .90***</td>
-  <td headers="3" class="gt_row gt_center">－      </td>
-  <td headers="4" class="gt_row gt_center">        </td>
-  <td headers="5" class="gt_row gt_center">        </td>
-  <td headers="6" class="gt_row gt_center">        </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">4. hp   </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">146.69</td>
-  <td headers="SD" class="gt_row gt_center"> 68.56</td>
-  <td headers="1" class="gt_row gt_center">-.78*** </td>
-  <td headers="2" class="gt_row gt_center">  .83***</td>
-  <td headers="3" class="gt_row gt_center">  .79***</td>
-  <td headers="4" class="gt_row gt_center">－      </td>
-  <td headers="5" class="gt_row gt_center">        </td>
-  <td headers="6" class="gt_row gt_center">        </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">5. drat </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  3.60</td>
-  <td headers="SD" class="gt_row gt_center">  0.53</td>
-  <td headers="1" class="gt_row gt_center">  .68***</td>
-  <td headers="2" class="gt_row gt_center">-.70*** </td>
-  <td headers="3" class="gt_row gt_center">-.71*** </td>
-  <td headers="4" class="gt_row gt_center">-.45**  </td>
-  <td headers="5" class="gt_row gt_center">－      </td>
-  <td headers="6" class="gt_row gt_center">        </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">6. wt   </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  3.22</td>
-  <td headers="SD" class="gt_row gt_center">  0.98</td>
-  <td headers="1" class="gt_row gt_center">-.87*** </td>
-  <td headers="2" class="gt_row gt_center">  .78***</td>
-  <td headers="3" class="gt_row gt_center">  .89***</td>
-  <td headers="4" class="gt_row gt_center">  .66***</td>
-  <td headers="5" class="gt_row gt_center">-.71*** </td>
-  <td headers="6" class="gt_row gt_center">－      </td>
-  <td headers="7" class="gt_row gt_center">        </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">7. qsec </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center"> 17.85</td>
-  <td headers="SD" class="gt_row gt_center">  1.79</td>
-  <td headers="1" class="gt_row gt_center">  .42*  </td>
-  <td headers="2" class="gt_row gt_center">-.59*** </td>
-  <td headers="3" class="gt_row gt_center">-.43*   </td>
-  <td headers="4" class="gt_row gt_center">-.71*** </td>
-  <td headers="5" class="gt_row gt_center">  .09   </td>
-  <td headers="6" class="gt_row gt_center">-.17    </td>
-  <td headers="7" class="gt_row gt_center">－      </td>
-  <td headers="8" class="gt_row gt_center">        </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">8. vs   </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  0.44</td>
-  <td headers="SD" class="gt_row gt_center">  0.50</td>
-  <td headers="1" class="gt_row gt_center">  .66***</td>
-  <td headers="2" class="gt_row gt_center">-.81*** </td>
-  <td headers="3" class="gt_row gt_center">-.71*** </td>
-  <td headers="4" class="gt_row gt_center">-.72*** </td>
-  <td headers="5" class="gt_row gt_center">  .44*  </td>
-  <td headers="6" class="gt_row gt_center">-.55*** </td>
-  <td headers="7" class="gt_row gt_center">  .74***</td>
-  <td headers="8" class="gt_row gt_center">－      </td>
-  <td headers="9" class="gt_row gt_center">        </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">9. am   </td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  0.41</td>
-  <td headers="SD" class="gt_row gt_center">  0.50</td>
-  <td headers="1" class="gt_row gt_center">  .60***</td>
-  <td headers="2" class="gt_row gt_center">-.52**  </td>
-  <td headers="3" class="gt_row gt_center">-.59*** </td>
-  <td headers="4" class="gt_row gt_center">-.24    </td>
-  <td headers="5" class="gt_row gt_center">  .71***</td>
-  <td headers="6" class="gt_row gt_center">-.69*** </td>
-  <td headers="7" class="gt_row gt_center">-.23    </td>
-  <td headers="8" class="gt_row gt_center">  .17   </td>
-  <td headers="9" class="gt_row gt_center">－      </td>
-  <td headers="10" class="gt_row gt_center">        </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">10. gear</td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  3.69</td>
-  <td headers="SD" class="gt_row gt_center">  0.74</td>
-  <td headers="1" class="gt_row gt_center">  .48** </td>
-  <td headers="2" class="gt_row gt_center">-.49**  </td>
-  <td headers="3" class="gt_row gt_center">-.56*** </td>
-  <td headers="4" class="gt_row gt_center">-.13    </td>
-  <td headers="5" class="gt_row gt_center">  .70***</td>
-  <td headers="6" class="gt_row gt_center">-.58*** </td>
-  <td headers="7" class="gt_row gt_center">-.21    </td>
-  <td headers="8" class="gt_row gt_center">  .21   </td>
-  <td headers="9" class="gt_row gt_center">  .79***</td>
-  <td headers="10" class="gt_row gt_center">－      </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">11. carb</td>
-  <td headers="n" class="gt_row gt_center">32</td>
-  <td headers="M" class="gt_row gt_center">  2.81</td>
-  <td headers="SD" class="gt_row gt_center">  1.62</td>
-  <td headers="1" class="gt_row gt_center">-.55**  </td>
-  <td headers="2" class="gt_row gt_center">  .53** </td>
-  <td headers="3" class="gt_row gt_center">  .39*  </td>
-  <td headers="4" class="gt_row gt_center">  .75***</td>
-  <td headers="5" class="gt_row gt_center">-.09    </td>
-  <td headers="6" class="gt_row gt_center">  .43*  </td>
-  <td headers="7" class="gt_row gt_center">-.66*** </td>
-  <td headers="8" class="gt_row gt_center">-.57*** </td>
-  <td headers="9" class="gt_row gt_center">  .06   </td>
-  <td headers="10" class="gt_row gt_center">  .27   </td>
-  <td headers="11" class="gt_row gt_center">－</td></tr>
-    </tbody>
-    
-    <tfoot class="gt_footnotes">
-      <tr>
-        <td class="gt_footnote" colspan="15"> <span class='gt_from_md'><em>Note.</em> ✞<em>p</em> &lt; .10; *<em>p</em> &lt; .05; **<em>p</em> &lt; .01; ***<em>p</em> &lt; .001. .</span></td>
-      </tr>
-    </tfoot>
-  </table>
-  </div>
-  > nice_corrmatrix(mtcars,
-  +   show_p = TRUE,
-  +   show_ci = TRUE,
-  +   show_stars = FALSE,
-  +   show_descriptives = FALSE,
-  +   conf.level = 0.99
-  + )
-  <div id="iyneebjylo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-    <style>#iyneebjylo table {
-    font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  #iyneebjylo thead, #iyneebjylo tbody, #iyneebjylo tfoot, #iyneebjylo tr, #iyneebjylo td, #iyneebjylo th {
-    border-style: none;
-  }
-  
-  #iyneebjylo p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  #iyneebjylo .gt_table {
-    display: table;
-    border-collapse: collapse;
-    line-height: normal;
-    margin-left: auto;
-    margin-right: auto;
-    color: #333333;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    background-color: #FFFFFF;
-    width: auto;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #FFFFFF;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_caption {
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-  
-  #iyneebjylo .gt_title {
-    color: #333333;
-    font-size: 100%;
-    font-weight: initial;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-color: #FFFFFF;
-    border-bottom-width: 0;
-  }
-  
-  #iyneebjylo .gt_subtitle {
-    color: #333333;
-    font-size: 85%;
-    font-weight: initial;
-    padding-top: 3px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top-color: #FFFFFF;
-    border-top-width: 0;
-  }
-  
-  #iyneebjylo .gt_heading {
-    background-color: #FFFFFF;
-    text-align: left;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_bottom_border {
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: #000000;
-  }
-  
-  #iyneebjylo .gt_col_headings {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: #000000;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #000000;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_col_heading {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: normal;
-    text-transform: inherit;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: bottom;
-    padding-top: 5px;
-    padding-bottom: 6px;
-    padding-left: 5px;
-    padding-right: 5px;
-    overflow-x: hidden;
-  }
-  
-  #iyneebjylo .gt_column_spanner_outer {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: normal;
-    text-transform: inherit;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  
-  #iyneebjylo .gt_column_spanner_outer:first-child {
-    padding-left: 0;
-  }
-  
-  #iyneebjylo .gt_column_spanner_outer:last-child {
-    padding-right: 0;
-  }
-  
-  #iyneebjylo .gt_column_spanner {
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #000000;
-    vertical-align: bottom;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    overflow-x: hidden;
-    display: inline-block;
-    width: 100%;
-  }
-  
-  #iyneebjylo .gt_spanner_row {
-    border-bottom-style: hidden;
-  }
-  
-  #iyneebjylo .gt_group_heading {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: middle;
-    text-align: left;
-  }
-  
-  #iyneebjylo .gt_empty_group_heading {
-    padding: 0.5px;
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: #D3D3D3;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #FFFFFF;
-    vertical-align: middle;
-  }
-  
-  #iyneebjylo .gt_from_md > :first-child {
-    margin-top: 0;
-  }
-  
-  #iyneebjylo .gt_from_md > :last-child {
-    margin-bottom: 0;
-  }
-  
-  #iyneebjylo .gt_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin: 10px;
-    border-top-style: solid;
-    border-top-width: 0px;
-    border-top-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 1px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 1px;
-    border-right-color: #D3D3D3;
-    vertical-align: middle;
-    overflow-x: hidden;
-  }
-  
-  #iyneebjylo .gt_stub {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #iyneebjylo .gt_stub_row_group {
-    color: #333333;
-    background-color: #FFFFFF;
-    font-size: 100%;
-    font-weight: initial;
-    text-transform: inherit;
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: top;
-  }
-  
-  #iyneebjylo .gt_row_group_first td {
-    border-top-width: 2px;
-  }
-  
-  #iyneebjylo .gt_row_group_first th {
-    border-top-width: 2px;
-  }
-  
-  #iyneebjylo .gt_summary_row {
-    color: #333333;
-    background-color: #FFFFFF;
-    text-transform: inherit;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #iyneebjylo .gt_first_summary_row {
-    border-top-style: solid;
-    border-top-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_first_summary_row.thick {
-    border-top-width: 2px;
-  }
-  
-  #iyneebjylo .gt_last_summary_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_grand_summary_row {
-    color: #333333;
-    background-color: #FFFFFF;
-    text-transform: inherit;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #iyneebjylo .gt_first_grand_summary_row {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top-style: double;
-    border-top-width: 6px;
-    border-top-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_last_grand_summary_row_top {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-bottom-style: double;
-    border-bottom-width: 6px;
-    border-bottom-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_striped {
-    background-color: rgba(128, 128, 128, 0.05);
-  }
-  
-  #iyneebjylo .gt_table_body {
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: #000000;
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: #000000;
-  }
-  
-  #iyneebjylo .gt_footnotes {
-    color: #333333;
-    background-color: #FFFFFF;
-    border-bottom-style: none;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_footnote {
-    margin: 0px;
-    font-size: 90%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #iyneebjylo .gt_sourcenotes {
-    color: #333333;
-    background-color: #FFFFFF;
-    border-bottom-style: none;
-    border-bottom-width: 2px;
-    border-bottom-color: #D3D3D3;
-    border-left-style: none;
-    border-left-width: 2px;
-    border-left-color: #D3D3D3;
-    border-right-style: none;
-    border-right-width: 2px;
-    border-right-color: #D3D3D3;
-  }
-  
-  #iyneebjylo .gt_sourcenote {
-    font-size: 90%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  #iyneebjylo .gt_left {
-    text-align: left;
-  }
-  
-  #iyneebjylo .gt_center {
-    text-align: center;
-  }
-  
-  #iyneebjylo .gt_right {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-  }
-  
-  #iyneebjylo .gt_font_normal {
-    font-weight: normal;
-  }
-  
-  #iyneebjylo .gt_font_bold {
-    font-weight: bold;
-  }
-  
-  #iyneebjylo .gt_font_italic {
-    font-style: italic;
-  }
-  
-  #iyneebjylo .gt_super {
-    font-size: 65%;
-  }
-  
-  #iyneebjylo .gt_footnote_marks {
-    font-size: 75%;
-    vertical-align: 0.4em;
-    position: initial;
-  }
-  
-  #iyneebjylo .gt_asterisk {
-    font-size: 100%;
-    vertical-align: 0;
-  }
-  
-  #iyneebjylo .gt_indent_1 {
-    text-indent: 5px;
-  }
-  
-  #iyneebjylo .gt_indent_2 {
-    text-indent: 10px;
-  }
-  
-  #iyneebjylo .gt_indent_3 {
-    text-indent: 15px;
-  }
-  
-  #iyneebjylo .gt_indent_4 {
-    text-indent: 20px;
-  }
-  
-  #iyneebjylo .gt_indent_5 {
-    text-indent: 25px;
-  }
-  
-  #iyneebjylo .katex-display {
-    display: inline-flex !important;
-    margin-bottom: 0.75em !important;
-  }
-  
-  #iyneebjylo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-    height: 0px !important;
-  }
-  </style>
-    <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-    <thead>
-      <tr class="gt_heading">
-        <td colspan="12" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class='gt_from_md'><strong>Table</strong><br>  <em>Correlation matrix</em></span></td>
-      </tr>
-      
-      <tr class="gt_col_headings">
-        <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1">1</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2">2</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3">3</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a4">4</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a5">5</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a6">6</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a7">7</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a8">8</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a9">9</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a10">10</th>
-        <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a11">11</th>
-      </tr>
-    </thead>
-    <tbody class="gt_table_body">
-      <tr><td headers="Variable" class="gt_row gt_left">1. mpg  </td>
-  <td headers="1" class="gt_row gt_center">－                                </td>
-  <td headers="2" class="gt_row gt_center">                                  </td>
-  <td headers="3" class="gt_row gt_center">                                  </td>
-  <td headers="4" class="gt_row gt_center">                                  </td>
-  <td headers="5" class="gt_row gt_center">                                  </td>
-  <td headers="6" class="gt_row gt_center">                                  </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">2. cyl  </td>
-  <td headers="1" class="gt_row gt_center">-.85 <br>[-.93,-.72] <br>(p <.001)</td>
-  <td headers="2" class="gt_row gt_center">－                                </td>
-  <td headers="3" class="gt_row gt_center">                                  </td>
-  <td headers="4" class="gt_row gt_center">                                  </td>
-  <td headers="5" class="gt_row gt_center">                                  </td>
-  <td headers="6" class="gt_row gt_center">                                  </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">3. disp </td>
-  <td headers="1" class="gt_row gt_center">-.85 <br>[-.92,-.71] <br>(p <.001)</td>
-  <td headers="2" class="gt_row gt_center">  .90 <br>[.81,.95] <br>(p <.001) </td>
-  <td headers="3" class="gt_row gt_center">－                                </td>
-  <td headers="4" class="gt_row gt_center">                                  </td>
-  <td headers="5" class="gt_row gt_center">                                  </td>
-  <td headers="6" class="gt_row gt_center">                                  </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">4. hp   </td>
-  <td headers="1" class="gt_row gt_center">-.78 <br>[-.89,-.59] <br>(p <.001)</td>
-  <td headers="2" class="gt_row gt_center">  .83 <br>[.68,.92] <br>(p <.001) </td>
-  <td headers="3" class="gt_row gt_center">  .79 <br>[.61,.89] <br>(p <.001) </td>
-  <td headers="4" class="gt_row gt_center">－                                </td>
-  <td headers="5" class="gt_row gt_center">                                  </td>
-  <td headers="6" class="gt_row gt_center">                                  </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">5. drat </td>
-  <td headers="1" class="gt_row gt_center">  .68 <br>[.44,.83] <br>(p <.001) </td>
-  <td headers="2" class="gt_row gt_center">-.70 <br>[-.84,-.46] <br>(p <.001)</td>
-  <td headers="3" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-  <td headers="4" class="gt_row gt_center">-.45 <br>[-.69,-.12] <br>(p <.01) </td>
-  <td headers="5" class="gt_row gt_center">－                                </td>
-  <td headers="6" class="gt_row gt_center">                                  </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">6. wt   </td>
-  <td headers="1" class="gt_row gt_center">-.87 <br>[-.93,-.74] <br>(p <.001)</td>
-  <td headers="2" class="gt_row gt_center">  .78 <br>[.60,.89] <br>(p <.001) </td>
-  <td headers="3" class="gt_row gt_center">  .89 <br>[.78,.94] <br>(p <.001) </td>
-  <td headers="4" class="gt_row gt_center">  .66 <br>[.40,.82] <br>(p <.001) </td>
-  <td headers="5" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-  <td headers="6" class="gt_row gt_center">－                                </td>
-  <td headers="7" class="gt_row gt_center">                                  </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">7. qsec </td>
-  <td headers="1" class="gt_row gt_center">  .42 <br>[.08,.67] <br>(p <.05)  </td>
-  <td headers="2" class="gt_row gt_center">-.59 <br>[-.78,-.31] <br>(p <.001)</td>
-  <td headers="3" class="gt_row gt_center">-.43 <br>[-.68,-.10] <br>(p <.05) </td>
-  <td headers="4" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-  <td headers="5" class="gt_row gt_center">  .09 <br>[-.27,.43] <br>(p =.620)</td>
-  <td headers="6" class="gt_row gt_center">-.17 <br>[-.49,.19] <br>(p =.339) </td>
-  <td headers="7" class="gt_row gt_center">－                                </td>
-  <td headers="8" class="gt_row gt_center">                                  </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">8. vs   </td>
-  <td headers="1" class="gt_row gt_center">  .66 <br>[.41,.82] <br>(p <.001) </td>
-  <td headers="2" class="gt_row gt_center">-.81 <br>[-.90,-.64] <br>(p <.001)</td>
-  <td headers="3" class="gt_row gt_center">-.71 <br>[-.85,-.48] <br>(p <.001)</td>
-  <td headers="4" class="gt_row gt_center">-.72 <br>[-.86,-.50] <br>(p <.001)</td>
-  <td headers="5" class="gt_row gt_center">  .44 <br>[.11,.68] <br>(p <.05)  </td>
-  <td headers="6" class="gt_row gt_center">-.55 <br>[-.76,-.26] <br>(p <.001)</td>
-  <td headers="7" class="gt_row gt_center">  .74 <br>[.53,.87] <br>(p <.001) </td>
-  <td headers="8" class="gt_row gt_center">－                                </td>
-  <td headers="9" class="gt_row gt_center">                                  </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">9. am   </td>
-  <td headers="1" class="gt_row gt_center">  .60 <br>[.32,.78] <br>(p <.001) </td>
-  <td headers="2" class="gt_row gt_center">-.52 <br>[-.74,-.21] <br>(p <.01) </td>
-  <td headers="3" class="gt_row gt_center">-.59 <br>[-.78,-.31] <br>(p <.001)</td>
-  <td headers="4" class="gt_row gt_center">-.24 <br>[-.55,.12] <br>(p =.180) </td>
-  <td headers="5" class="gt_row gt_center">  .71 <br>[.48,.85] <br>(p <.001) </td>
-  <td headers="6" class="gt_row gt_center">-.69 <br>[-.84,-.45] <br>(p <.001)</td>
-  <td headers="7" class="gt_row gt_center">-.23 <br>[-.54,.13] <br>(p =.206) </td>
-  <td headers="8" class="gt_row gt_center">  .17 <br>[-.19,.49] <br>(p =.357)</td>
-  <td headers="9" class="gt_row gt_center">－                                </td>
-  <td headers="10" class="gt_row gt_center">                                  </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">10. gear</td>
-  <td headers="1" class="gt_row gt_center">  .48 <br>[.16,.71] <br>(p <.01)  </td>
-  <td headers="2" class="gt_row gt_center">-.49 <br>[-.72,-.17] <br>(p <.01) </td>
-  <td headers="3" class="gt_row gt_center">-.56 <br>[-.76,-.26] <br>(p <.001)</td>
-  <td headers="4" class="gt_row gt_center">-.13 <br>[-.45,.23] <br>(p =.493) </td>
-  <td headers="5" class="gt_row gt_center">  .70 <br>[.46,.84] <br>(p <.001) </td>
-  <td headers="6" class="gt_row gt_center">-.58 <br>[-.77,-.29] <br>(p <.001)</td>
-  <td headers="7" class="gt_row gt_center">-.21 <br>[-.52,.15] <br>(p =.243) </td>
-  <td headers="8" class="gt_row gt_center">  .21 <br>[-.15,.52] <br>(p =.258)</td>
-  <td headers="9" class="gt_row gt_center">  .79 <br>[.62,.89] <br>(p <.001) </td>
-  <td headers="10" class="gt_row gt_center">－                                </td>
-  <td headers="11" class="gt_row gt_center">  </td></tr>
-      <tr><td headers="Variable" class="gt_row gt_left">11. carb</td>
-  <td headers="1" class="gt_row gt_center">-.55 <br>[-.75,-.25] <br>(p <.01) </td>
-  <td headers="2" class="gt_row gt_center">  .53 <br>[.22,.74] <br>(p <.01)  </td>
-  <td headers="3" class="gt_row gt_center">  .39 <br>[.05,.65] <br>(p <.05)  </td>
-  <td headers="4" class="gt_row gt_center">  .75 <br>[.54,.87] <br>(p <.001) </td>
-  <td headers="5" class="gt_row gt_center">-.09 <br>[-.43,.27] <br>(p =.621) </td>
-  <td headers="6" class="gt_row gt_center">  .43 <br>[.09,.68] <br>(p <.05)  </td>
-  <td headers="7" class="gt_row gt_center">-.66 <br>[-.82,-.40] <br>(p <.001)</td>
-  <td headers="8" class="gt_row gt_center">-.57 <br>[-.77,-.28] <br>(p <.001)</td>
-  <td headers="9" class="gt_row gt_center">  .06 <br>[-.30,.40] <br>(p =.754)</td>
-  <td headers="10" class="gt_row gt_center">  .27 <br>[-.08,.57] <br>(p =.129)</td>
-  <td headers="11" class="gt_row gt_center">－</td></tr>
-    </tbody>
-    
-    
-  </table>
-  </div>
-  > nice_corrmatrix(mtcars, group = "cyl")
-  Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-    there is no package called ‘boot’
-  Calls: nice_corrmatrix ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-  Execution halted
-
-❯ checking code files for non-ASCII characters ... WARNING
-  Found the following file with non-ASCII characters:
-    R/nice_sem.R
-  Portable packages must use only ASCII characters in their R code and
-  NAMESPACE directives, except perhaps in comments.
-  Use \uxxxx escapes for other characters.
-  Function ‘tools::showNonASCIIfile’ can help in finding non-ASCII
-  characters in files.
-
-❯ checking dependencies in R code ... WARNING
-  '::' or ':::' imports not declared from:
-    ‘insight’ ‘lme4’ ‘lmerTest’ ‘scaledic’
-  'loadNamespace' or 'requireNamespace' call not declared from: ‘scaledic’
-  Namespaces in Imports field not imported from:
-    ‘eRm’ ‘methods’ ‘readxl’
-    All declared Imports should be used.
-
-❯ checking S3 generic/method consistency ... WARNING
-  extract_model_param:
-    function(model, ...)
-  extract_model_param.glmerMod:
-    function(model, or)
-  
-  nice_table:
-    function(object, ...)
-  nice_table.default:
-    function(x, title, footnote, spanner, row_group, row_group_order,
-             rownames, file, cols_label, decimals, round, label_na,
-             markdown, gt, ...)
-  
-  nice_table:
-    function(object, ...)
-  nice_table.lavaan:
-    function(x, standardized, show_fitmeasures, remove_cols, show_ci,
-             round, ...)
-  See section ‘Generic functions and methods’ in the ‘Writing R
-  Extensions’ manual.
-
-❯ checking Rd cross-references ... WARNING
-  Missing link or links in Rd file 'wmisc-package.Rd':
-    ‘aut, cre’
-  
-  See section 'Cross-references' in the 'Writing R Extensions' manual.
-
-❯ checking for missing documentation entries ... WARNING
-  Undocumented code objects:
-    ‘agreement_analysis’ ‘extract_model_param’ ‘gt_apa_style’
-    ‘lavaan_data’ ‘lavaan_fit’ ‘lavaan_model’ ‘set_wmisc_attributes’
-  Undocumented data sets:
-    ‘lavaan_data’ ‘lavaan_fit’ ‘lavaan_model’
-  All user-level objects in a package should have documentation entries.
-  See chapter ‘Writing R documentation files’ in the ‘Writing R
-  Extensions’ manual.
-
-❯ checking Rd \usage sections ... WARNING
-  Documented arguments not in \usage in Rd file 'get_wmisc_attributes.Rd':
-    ‘...’
-  
-  Undocumented arguments in Rd file 'nice_chi_test_table.Rd'
-    ‘label_attr’
-  
-  Undocumented arguments in Rd file 'nice_corrmatrix.Rd'
-    ‘numbered_columns’ ‘show_descriptives’
-  Documented arguments not in \usage in Rd file 'nice_corrmatrix.Rd':
-    ‘show_discriptives’
-  
-  Undocumented arguments in Rd file 'nice_descriptives.Rd'
-    ‘title’ ‘footnote’ ‘file’ ‘...’
-  
-  Undocumented arguments in Rd file 'nice_frequencies.Rd'
-    ‘label_grouping’
-  
-  Undocumented arguments in Rd file 'nice_loadings.Rd'
-    ‘title’ ‘footnote’ ‘auto_labels’ ‘...’ ‘file’
-  
-  Undocumented arguments in Rd file 'nice_p.Rd'
-    ‘digits’ ‘stars’
-  
-  Undocumented arguments in Rd file 'nice_regression_table.Rd'
-    ‘...’ ‘round’ ‘labels_models’ ‘rename_labels’ ‘rename_cols’
-    ‘auto_col_names’ ‘file’ ‘or’ ‘nice_p’ ‘title’ ‘footnote’
-  
-  Undocumented arguments in Rd file 'nice_sem.Rd'
-    ‘standardized’ ‘round’
-  
-  Undocumented arguments in Rd file 'nice_t_test_table.Rd'
-    ‘label_attr’ ‘manova’ ‘alternative’ ‘file’ ‘...’
-  
-  Undocumented arguments in Rd file 'split_at_median.Rd'
-    ‘labels’
-  Documented arguments not in \usage in Rd file 'split_at_median.Rd':
-    ‘lab’
-  
-  Functions with \usage entries need to have the appropriate \alias
-  entries, and all their arguments documented.
-  The \usage entries must correspond to syntactically valid R code.
-  See chapter ‘Writing R documentation files’ in the ‘Writing R
-  Extensions’ manual.
-
-❯ checking for unstated dependencies in examples ... WARNING
-  'data(package=)' call not declared from: ‘lme4’
-
-❯ checking for future file timestamps ... NOTE
-  unable to verify current time
-
-❯ checking top-level files ... NOTE
-  Non-standard files/directories found at top level:
-    ‘_config.yml’ ‘check_output.log’ ‘docs’ ‘misc’
-
-❯ checking R code for possible problems ... NOTE
-  batch_convert_csv: warning in dir(patter = "*.csv"): partial argument
-    match of 'patter' to 'pattern'
-  nice_regression_table: warning in round_numeric(out, digit = round):
-    partial argument match of 'digit' to 'digits'
-  nice_table.glmerMod: warning in round_numeric(out, digit = round):
-    partial argument match of 'digit' to 'digits'
-  nice_table.gls: warning in round_numeric(out, digit = round): partial
-    argument match of 'digit' to 'digits'
-  nice_table.lm: warning in round_numeric(out, digit = round): partial
-    argument match of 'digit' to 'digits'
-  nice_table.lme: warning in round_numeric(out, digit = round): partial
-    argument match of 'digit' to 'digits'
-  nice_table.lmer: warning in round_numeric(out, digit = round): partial
-    argument match of 'digit' to 'digits'
-  nice_table.lmerMod: warning in round_numeric(out, digit = round):
-    partial argument match of 'digit' to 'digits'
-  nice_table.lmerModLmerTest: warning in round_numeric(out, digit =
-    round): partial argument match of 'digit' to 'digits'
-  split_at_median: warning in split_at_percentile(x, 0.5, lab = labels,
-    type = type, explicit_na = explicit_na): partial argument match of
-    'lab' to 'labels'
-  .nice_table_kable: no visible binding for global variable ‘depecated’
-  alpha_table: no visible binding for global variable ‘var’
-  auto_corr: no visible global function definition for ‘pnorm’
-  auto_corr: no visible global function definition for ‘pt’
-  average: no visible binding for global variable ‘.’
-  batch_convert_csv: no visible global function definition for ‘read.csv’
-  ci_score: no visible global function definition for ‘pnorm’
-  ci_score: no visible global function definition for ‘setNames’
-  corrmatrix: no visible global function definition for ‘cor.test’
-  corrmatrix: no visible global function definition for ‘cor’
-  extract_model_param.glmerMod: no visible global function definition for
-    ‘coef’
-  extract_model_param.gls: no visible global function definition for
-    ‘coef’
-  extract_model_param.lm: no visible global function definition for
-    ‘coef’
-  extract_model_param.lme: no visible global function definition for
-    ‘coef’
-  extract_model_param.lmerModLmerTest: no visible global function
-    definition for ‘coef’
-  flip: no visible global function definition for ‘setNames’
-  get_labels: no visible global function definition for ‘setNames’
-  multilevel_corrmatrix: no visible global function definition for
-    ‘cor.test’
-  multilevel_corrmatrix: no visible global function definition for
-    ‘residuals’
-  nice_chi_test_table: no visible global function definition for
-    ‘relevel’
-  nice_chi_test_table: no visible global function definition for
-    ‘chisq.test’
-  nice_corrmatrix: no visible global function definition for ‘map2_chr’
-  nice_descriptives : <anonymous>: no visible global function definition
-    for ‘mad’
-  nice_loadings: no visible global function definition for ‘loadings’
-  nice_sem: no visible global function definition for ‘citation’
-  nice_t_test_table: no visible binding for global variable ‘var’
-  nice_t_test_table: no visible binding for global variable ‘.’
-  nice_table.lavaan: no visible global function definition for ‘citation’
-  percentage_bar: no visible global function definition for ‘ggplot’
-  percentage_bar: no visible global function definition for ‘aes’
-  percentage_bar: no visible binding for global variable ‘Year’
-  percentage_bar: no visible binding for global variable ‘Proportion’
-  percentage_bar: no visible binding for global variable ‘Group’
-  percentage_bar: no visible global function definition for ‘geom_col’
-  percentage_bar: no visible global function definition for ‘geom_text’
-  percentage_bar: no visible global function definition for
-    ‘position_stack’
-  percentage_bar: no visible global function definition for
-    ‘scale_fill_brewer’
-  percentage_bar: no visible global function definition for
-    ‘theme_minimal’
-  percentage_bar: no visible global function definition for ‘ylab’
-  percentage_bar: no visible global function definition for ‘xlab’
-  percentage_bar: no visible global function definition for ‘theme’
-  percentage_bar: no visible global function definition for
-    ‘element_blank’
-  percentage_bar: no visible global function definition for ‘coord_flip’
-  reference_package_version : <anonymous>: no visible global function
-    definition for ‘packageVersion’
-  split_at_percentile: no visible global function definition for
-    ‘quantile’
-  Undefined global functions or variables:
-    . Group Proportion Year aes chisq.test citation coef coord_flip cor
-    cor.test depecated element_blank geom_col geom_text ggplot loadings
-    mad map2_chr packageVersion pnorm position_stack pt quantile read.csv
-    relevel residuals scale_fill_brewer setNames theme theme_minimal var
-    xlab ylab
-  Consider adding
-    importFrom("stats", "chisq.test", "coef", "cor", "cor.test",
-               "loadings", "mad", "pnorm", "pt", "quantile", "relevel",
-               "residuals", "setNames", "var")
-    importFrom("utils", "citation", "packageVersion", "read.csv")
-  to your NAMESPACE file.
-
-1 error ✖ | 7 warnings ✖ | 3 notes ✖

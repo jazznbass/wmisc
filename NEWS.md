@@ -1,13 +1,18 @@
-## wmisc 0.3.8
+## wmisc 0.4.0
 
-## New functions
+### New functions
 
 * Added `batch_create_data_description()`. Creates automatic data description in README files.
 * Added `add_aggregate()` to compute subgroup-level summary statistics for one or more grouping variables (e.g., `sex` × `age`) and merge the aggregated values back into the original data.
 
-## New arguents
+### New arguents
 
 * `nice_table()`: `cols_align` takes a list which element names can be left, right, or center and which values indicate either the col number or the col names. e.g. `nice_table(mtcars, cols_align = list(right = c("am", "gearl"), left = 1:3))`
+* `round_numeric()`: argument digits takes a named vector to specify which cols to round to which number of digits allowing to set a default number of digits for all variables with a ".default" named value.
+
+### Removed some deprecated functions:
+
+`check_scale()`, `ci_score()`, `fill_missing_l2()`, `batch_convert_csv()`, `flip()`, `reference_package_version()`
 
 ## wmisc 0.3.7
 

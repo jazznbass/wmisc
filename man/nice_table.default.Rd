@@ -48,6 +48,9 @@ rownames are shown when they are not identical to
 exported (html or docx format is possible). If set \code{TRUE}, a filename is
 automatically created based on the title.}
 
+\item{use_col_labels}{Logical. If TRUE, variable labels are used for column
+names.}
+
 \item{cols_label}{List with renaming information for columns (old_name =
 new_name).}
 
@@ -61,7 +64,12 @@ new_name).}
 
 \item{markdown}{If TRUE, interprets cell content as markdown.}
 
-\item{gt}{Additional arguments passed to \code{gt::gt()}}
+\item{gt}{Additional arguments passed to \code{gt::gt()}.}
+
+\item{sort}{Character vector with column names according to which the table
+should be sorted.}
+
+\item{sort_decreasing}{Logical. If TRUE, sorting is done in decreasing order.}
 
 \item{...}{Various arguments for backward compatibility.}
 }

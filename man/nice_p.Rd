@@ -10,6 +10,10 @@ nice_p(p, equal_sign = FALSE, digits = 3, stars = FALSE)
 \item{p}{Vector of p values.}
 
 \item{equal_sign}{If TRUE an equal sign is set before p values.}
+
+\item{digits}{Number of digits to show for p values >= 0.05.}
+
+\item{stars}{If TRUE, significance stars are added for p values < 0.05.}
 }
 \value{
 A character vector with nicely formatted p values
@@ -21,4 +25,9 @@ Format p values
 p <- c(0.04, 0.9, 0.10, 0.001, 1, NA)
 nice_p(p)
 paste0("p", nice_p(p, equal_sign = TRUE))
+nice_p(p, stars = TRUE)
+paste0("p", nice_p(p, equal_sign = TRUE, stars = TRUE))
+nice_p(c(0.0004, 0.005, 0.03, 0.2), stars = TRUE)
+paste0("p", nice_p(c(0.0004, 0.005, 0.03, 0.2), equal_sign = TRUE, stars = TRUE))
+
 }

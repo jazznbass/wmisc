@@ -4,7 +4,7 @@
 \alias{average}
 \title{Average}
 \usage{
-average(x, min_valid, max_na, func = mean(.))
+average(x, min_valid, max_na, func = mean)
 }
 \arguments{
 \item{x}{Vector}
@@ -17,8 +17,7 @@ values (e.g., 0.5 = 50 percent of values have to be valid).}
 value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
 percent NAs are allowed).}
 
-\item{func}{Function without the header \verb{function(.)} for calculating the
-average.}
+\item{func}{A function for calculating the average.}
 }
 \description{
 Computes arithmetic means
@@ -29,6 +28,6 @@ average(dat, min_valid = 5)
 average(dat, min_valid = 6)
 average(dat, max_na = 2)
 average(dat, max_na = 1)
-average(dat, min_valid = 0.5, func = median(.))
+average(dat, min_valid = 0.5, func = median)
 average(dat, min_valid = 0.9)
 }
