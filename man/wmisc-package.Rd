@@ -9,6 +9,6 @@
 A collection of functions and procedures
 }
 \author{
-Juergen Wilbert [aut, cre]
+Jürgen Wilbert [aut, cre]
 }
 \keyword{package}

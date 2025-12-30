@@ -4,7 +4,7 @@
 #'
 #' @name wmisc-package
 #' @aliases wmisc-package wmisc
-#' @author Juergen Wilbert \[aut, cre\]
+#' @author Jürgen Wilbert \[aut, cre\]
 #' @keywords package
 #' @import graphics
 #' @importFrom utils read.csv citation packageVersion
