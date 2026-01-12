@@ -35,9 +35,11 @@ by the \emph{combination} of one or more grouping variables (e.g., \code{age} wi
 \code{sex}) and merges the aggregated values back into the original data.
 }
 \details{
-Aggregation is performed using \code{\link[stats:aggregate]{stats::aggregate()}} with \code{by = dat[, grouping]}, so each unique combination of the \code{grouping} variables defines a
-subgroup. Results are joined back to \code{dat} using \code{\link[base:merge]{base::merge()}} by all
-\code{grouping} columns. If multiple functions are provided in \code{func}, the
+This implementation avoids repeated \code{merge()} calls (which can lead to
+duplicated columns and ordering issues) by computing a stable subgroup key and
+indexing results back to the original rows.
+
+If multiple functions are provided in \code{func}, the
 resulting columns are suffixed with the names of the functions in \code{func}. If
 \code{func} is an unnamed list, suffixes "stat1", "stat2", etc. are used.
 }

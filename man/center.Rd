@@ -26,4 +26,11 @@ Mean center a variable
 \examples{
 center(c(1:10, NA, NaN))
 center(mtcars$mpg, grouping = mtcars$cyl)
+center(c(1:5, NA, NA), min_valid = 4)
+center(c(1:5, NA, NA), max_na = 1)
+center(c(1:5, NA, NA), min_valid = 0.7)
+center(c(1:5, NA, NA), max_na = 0.3)
+center(c(1:5, NA, NA), min_valid = 0.7, max_na = 1)
+center(c(1:5, NA, NA), min_valid = 4, max_na = 0)
+
 }

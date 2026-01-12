@@ -24,4 +24,5 @@ This function takes a logit value and converts it to a probability using the log
 logit2prob(0) # Returns 0.5
 logit2prob(2) # Returns 0.8807971
 prob2logit(0.8807971)
+
 }
