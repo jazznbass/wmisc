@@ -3,7 +3,11 @@
 #' Computes summary statistics for selected variables within subgroups defined
 #' by the *combination* of one or more grouping variables (e.g., `age` within
 #' `sex`) and merges the aggregated values back into the original data.
-#'
+#' 
+#' This implementation avoids repeated `merge()` calls (which can lead to
+#' duplicated columns and ordering issues) by computing a stable subgroup key and
+#' indexing results back to the original rows.
+#' 
 #' @param dat A data.frame containing the columns listed in `grouping` and
 #'   `vars`.
 #' @param grouping A character vector of one or more column names in `dat` that
@@ -14,10 +18,7 @@
 #'   within each subgroup. Default computes the mean with missing values
 #'   removed.
 #'
-#' @details Aggregation is performed using [stats::aggregate()] with `by = dat[,
-#' grouping]`, so each unique combination of the `grouping` variables defines a
-#' subgroup. Results are joined back to `dat` using [base::merge()] by all
-#' `grouping` columns. If multiple functions are provided in `func`, the
+#' @details If multiple functions are provided in `func`, the
 #' resulting columns are suffixed with the names of the functions in `func`. If
 #' `func` is an unnamed list, suffixes "stat1", "stat2", etc. are used.
 #'
@@ -51,36 +52,47 @@
 add_group_aggregate <- function(dat,
                                 grouping,
                                 vars,
-                                func = list(
-                                  mean = function(x) mean(x, na.rm = TRUE))
-                                ) {
-  
-  rid <- "..tmp_variable.."
-  dat[[rid]] <- seq_len(nrow(dat))
+                                func = list(mean = function(x) mean(x, na.rm = TRUE))) {
 
-  if (!is.list(func)) func <- list(func)
-  dat_cols <- dplyr::select(dat, {{ vars }})
-  for(i in 1:length(func)) {
-    dat_aggregates <- aggregate(
-      dat_cols,
-      by = dat[, grouping, drop = FALSE],
-      FUN = func[[i]]
-    )
-    suf <- names(func)[i]
-    if (is.null(suf)) suf <- paste0("stat", i)
-    dat <- merge(
-      dat, 
-      dat_aggregates, 
-      by = grouping, 
-      all.x = TRUE, 
-      sort = FALSE, 
-      suffixes = c("", paste0("_", suf))
-    )
-   
+
+  if (is.function(func)) {
+    func <- list(func)
+  }
+
+  f_names <- names(func)
+  if (is.null(f_names)) f_names <- rep("", length(func))
+  for (i in seq_along(f_names)) {
+    if (is.na(f_names[i]) || !nzchar(f_names[i])) {
+      f_names[i] <- paste0("stat", i)
+    }
   }
   
-  dat <- dat[order(dat[[rid]]), , drop = FALSE]
-  dat[[rid]] <- NULL
+  key <- interaction(dat[grouping], drop = TRUE, lex.order = TRUE, sep = "\r")
+  
+  # If all keys are NA (e.g., all grouping cols NA), just add NA columns
+  if (all(is.na(key))) {
+    for (v in vars) {
+      for (i in seq_along(func)) {
+        dat[[paste0(v, "_", f_names[i])]] <- NA
+      }
+    }
+    return(dat)
+  }
+  
+  for (v in vars) {
+    x <- dat[[v]]
+    
+    for (i in seq_along(func)) {
+      f <- func[[i]]
+
+      stats_vec <- tapply(x, key, f)
+      dat[[paste0(v, "_", f_names[i])]] <- ifelse(
+        is.na(key),
+        NA,
+        unname(stats_vec[as.character(key)])
+      )
+    }
+  }
   
   dat
-}
+}  
