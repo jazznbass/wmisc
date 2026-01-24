@@ -1,4 +1,14 @@
-#' Dichotomize vector values at their median
+#' Dichotomize vector values at their median value
+#' 
+#' Splits a numeric vector into two groups at the median value. Values above
+#' (or below) the median are assigned to one group, values equal to or below
+#' (or above) the median are assigned to the other group. Optionally, missing
+#' values can be assigned to a separate factor level.
+#' 
+#' @details
+#'   This function is a wrapper around \code{split_at_percentile()} with the
+#'   percentile fixed at 0.5 (the median). See
+#'   \code{\link{split_at_percentile()}} for more details.
 #'
 #' @param x A vector
 #' @param labels Vector with two factor labels.
