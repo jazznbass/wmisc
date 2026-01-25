@@ -79,7 +79,7 @@ alpha_table <- function(data,
                         fa = TRUE) {
   
   
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   
   if (!inherits(data, "data.frame")) 
     add_message("Provided data must be of class data.frame")

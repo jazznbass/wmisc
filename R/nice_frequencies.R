@@ -44,7 +44,7 @@ nice_frequencies <- function(data,
                              file = NULL,
                              ...) {
   
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   
   useNA <- if (show_missing) "always" else "no"
   

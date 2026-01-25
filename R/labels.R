@@ -8,7 +8,7 @@
 #'   attribute(s).
 add_label <- function(x, value) {
   
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   if (!inherits(value, "list") && length(value) > 1) value <- as.list(value)
   
   if (inherits(value, "list")) {

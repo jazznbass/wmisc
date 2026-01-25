@@ -19,7 +19,7 @@ nice_descriptives <- function(data,
                               file = NULL,
                               ...) {
   
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   
   if (is.null(footnote)) 
     footnote <- paste0("MAD is the median average deviation with a ",
