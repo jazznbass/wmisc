@@ -7,7 +7,7 @@
 center(x, min_valid, max_na, grouping)
 }
 \arguments{
-\item{x}{A vector}
+\item{x}{A vector of numeric values to be mean centered.}
 
 \item{min_valid}{Minimal number of valid values that is required for
 calculation. A value between 0 and 1 indicates a proportion of values
@@ -20,8 +20,22 @@ percent NAs are allowed).}
 \item{grouping}{A variable with group values for calculating grouped
 centers.}
 }
+\value{
+A vector with mean centered values
+}
 \description{
-Mean center a variable
+This function mean centers a variable, optionally within groups. It also
+allows to set minimal valid values or maximal allowed NAs for the calculation.
+If the conditions are not met, NA values are returned.
+}
+\details{
+If both \code{min_valid} and \code{max_na} are provided, both conditions
+have to be met for the calculation to proceed.
+If \code{grouping} is provided, the mean centering is done
+within the groups defined by \code{grouping}.
+Missing values (NAs) are ignored in the calculation of means.
+If the conditions for \code{min_valid} or \code{max_na} are not met,
+NA values are returned for all elements of \code{x}.
 }
 \examples{
 center(c(1:10, NA, NaN))
@@ -33,4 +47,7 @@ center(c(1:5, NA, NA), max_na = 0.3)
 center(c(1:5, NA, NA), min_valid = 0.7, max_na = 1)
 center(c(1:5, NA, NA), min_valid = 4, max_na = 0)
 
+}
+\author{
+Juergen Wilbert
 }

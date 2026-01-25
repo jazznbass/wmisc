@@ -69,10 +69,14 @@ automatically created based on the title.}
 \item{...}{Additional arguments passed to \code{nice_table()}.}
 }
 \value{
-A data.frame or an html table
+A data.frame or an html table.
 }
 \description{
-Creates a t-test table for multiple dependent variables
+The function performs independent samples t-tests for each dependent
+variable comparing two conditions of an independent variable. It calculates
+means, standard deviations, t-values, degrees of freedom, p-values, and
+effect sizes (Cohen's d, Glass' delta, or Hedges' g).
+The results are presented in a nicely formatted table.
 }
 \examples{
 nice_t_test_table(
@@ -93,4 +97,7 @@ nice_t_test_table(
   conditions = c("Restricted","Special"), 
   labels = c("Motivation", "Achievement")
 )
+}
+\author{
+Juergen Wilbert
 }

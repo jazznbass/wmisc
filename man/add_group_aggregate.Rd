@@ -27,7 +27,9 @@ removed.}
 \value{
 A data.frame with the same observations as \code{dat}, plus additional
 columns containing subgroup-level aggregated values for each variable in
-\code{vars}.
+\code{vars}. The new columns are named using the pattern
+\verb{<var>_<func_name>}, where \verb{<var>} is the original variable name and
+\verb{<func_name>} is the name of the aggregation function.
 }
 \description{
 Computes summary statistics for selected variables within subgroups defined
@@ -39,10 +41,24 @@ This implementation avoids repeated \code{merge()} calls (which can lead to
 duplicated columns and ordering issues) by computing a stable subgroup key and
 indexing results back to the original rows.
 
+If all grouping variables are \code{NA} for a given row, the resulting aggregated
+columns for that row will also be \code{NA}.
+Missing values in the variables to be aggregated are handled by the
+functions provided in \code{func} (e.g., using \code{na.rm = TRUE} within those
+functions).
+
 If multiple functions are provided in \code{func}, the
 resulting columns are suffixed with the names of the functions in \code{func}. If
 \code{func} is an unnamed list, suffixes "stat1", "stat2", etc. are used.
 }
+\section{Warning}{
+
+If the grouping variables contain special characters (e.g., line breaks,
+carriage returns, tabs), the function may not work as intended, since it
+uses \code{interaction()} with a separator to create subgroup keys. Ensure that
+grouping variable values do not contain such characters.
+}
+
 \examples{
 dat <- data.frame(
   sex = c("f", "f", "m", "m", "m"),
@@ -68,4 +84,7 @@ add_group_aggregate(
 }
 \seealso{
 \code{\link[stats:aggregate]{stats::aggregate()}}, \code{\link[base:merge]{base::merge()}}
+}
+\author{
+Juergen Wilbert
 }

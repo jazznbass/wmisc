@@ -22,7 +22,7 @@ nice_item_analysis(
 )
 }
 \arguments{
-\item{data}{A data Frame}
+\item{data}{A data Frame.}
 
 \item{scales}{A list with vectors with variable names that define each scale.}
 
@@ -60,6 +60,13 @@ A data frame with concise scale indices.
 \description{
 Returns a data.frame with detailed item analyses for the provided scale.
 }
+\details{
+This function is a wrapper around the \code{psych::alpha()} function from the
+psych package. It computes item-total correlations, scale mean and standard
+deviation, Cronbach's alpha (with optional confidence intervals), standardized
+alpha, item difficulty, and factor loadings from a one-factor exploratory
+factor analysis.
+}
 \examples{
 nice_item_analysis(
   wmisc:::data_emo, 
@@ -67,4 +74,7 @@ nice_item_analysis(
   difficulty = TRUE, 
   values = c(1,5)
 )
+}
+\author{
+Juergen Wilbert
 }

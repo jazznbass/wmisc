@@ -32,7 +32,8 @@ the model formula is used.}
 
 \item{rename_cols}{A named list to rename column names.}
 
-\item{remove_cols}{Either column number or column names to be removed}
+\item{remove_cols}{Either column number or column names to be removed from the
+output table.}
 
 \item{auto_col_names}{If TRUE, common column names are automatically renamed
 (e.g., "Std. Error" to "SE", "Pr (>|t|)" to "p", etc.).}
@@ -41,16 +42,33 @@ the model formula is used.}
 file (e.g., an Excel file).}
 
 \item{or}{If TRUE, the estimators are assumed to be logits and are
-exponentiated to yield odds ratios}
+exponentiated to yield odds ratios.}
 
-\item{nice_p}{If TRUE, p values are formatted nicely}
+\item{nice_p}{If TRUE, p values are formatted nicely with significance stars.}
 
 \item{title}{Title of the table.}
 
 \item{footnote}{Footnote of the table.}
 }
+\value{
+A data frame with the regression results formatted as a nice table.
+}
 \description{
-Create a nice table from one or more regression models
+This function creates a nicely formatted table comparing the results
+from one or more regression models (e.g., linear models, generalized linear
+models, mixed-effects models). It extracts key statistics such as estimates,
+standard errors, t-values, and p-values, and organizes them into a clear
+tabular format. Additional model parameters (e.g., R-squared, ICC)
+can also be included at the bottom of the table for easy comparison.
+}
+\details{
+The function supports various model types, including \code{lm}, \code{glm},
+\code{lme} (from the \code{nlme} package), and \code{lmerModLmerTest} (from the \code{lmerTest}
+package). It automatically extracts relevant statistics and formats them
+for presentation. Users can customize the output by renaming predictor labels
+and column names, removing specific columns, and adding titles and footnotes.
+The resulting table can be exported to a file (e.g., Excel) for reporting
+purposes.
 }
 \examples{
 lm(mpg ~ am + disp + hp, data = mtcars) |>
@@ -70,4 +88,7 @@ nice_regression_table(
   labels_models = c("Only pretest", "Pre- and posttest")
 )
 
+}
+\author{
+Juergen Wilbert
 }

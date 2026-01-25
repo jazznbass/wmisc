@@ -30,8 +30,19 @@ nice_sem(
 
 \item{...}{Further arguments passed to the \code{nice_table()} function.}
 }
+\value{
+An HTML table summarizing the structure equation model.
+}
 \description{
-Nice html table for lavaan structure equation model fitted objects
+This function takes an object returned from the \code{lavaan} package's \code{sem} or \code{cfa} functions and produces a nicely formatted HTML table summarizing the model parameters and fit measures. It allows customization of displayed columns, inclusion of confidence intervals, and choice between standardized and unstandardized estimates.
+}
+\details{
+The function organizes the output into sections for latent variables, regressions, covariances
+, variances, and intercepts. It also appends key fit measures at the end of the table.
+Users can specify which columns to remove, whether to show confidence intervals, and whether to display standardized estimates.
+It leverages the \code{nice_table()} function for final formatting, allowing further customization through additional arguments.
+
+The resulting table includes a title and footnote that provide context about the estimation method, optimization algorithm, handling of missing data, and citation information for the \code{lavaan} package.
 }
 \examples{
 nice_sem(wmisc:::lavaan_fit)
@@ -45,4 +56,7 @@ nice_sem(
  remove_cols = c("se", "z")
 )
  
+}
+\author{
+Juergen Wilbert
 }

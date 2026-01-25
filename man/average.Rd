@@ -2,12 +2,12 @@
 % Please edit documentation in R/average.R
 \name{average}
 \alias{average}
-\title{Average}
+\title{Average function}
 \usage{
 average(x, min_valid, max_na, func = mean)
 }
 \arguments{
-\item{x}{Vector}
+\item{x}{Vector of numeric values.}
 
 \item{min_valid}{Minimal number of valid values that is required for
 calculating the mean. A value between 0 and 1 indicates a proportion of
@@ -17,10 +17,15 @@ values (e.g., 0.5 = 50 percent of values have to be valid).}
 value between 0 and 1 indicates a proportion of values (e.g., 0.5 = 50
 percent NAs are allowed).}
 
-\item{func}{A function for calculating the average.}
+\item{func}{A function for calculating the average. Default is \code{mean()}.}
 }
 \description{
-Computes arithmetic means
+Computes arithmetic means (or other averages) with minimal requirements
+for valid values or maximum allowed NAs.
+}
+\details{
+If the number of valid values is below \code{min_valid} or the number of NAs is
+above \code{max_na}, the function returns NA.
 }
 \examples{
 dat <- c(1:5, NA, NA)
@@ -30,4 +35,7 @@ average(dat, max_na = 2)
 average(dat, max_na = 1)
 average(dat, min_valid = 0.5, func = median)
 average(dat, min_valid = 0.9)
+}
+\author{
+Juergen Wilbert
 }

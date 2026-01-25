@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_at_median.R
 \name{split_at_median}
 \alias{split_at_median}
-\title{Dichotomize vector values at their median}
+\title{Dichotomize vector values at their median value}
 \usage{
 split_at_median(
   x,
@@ -26,7 +26,15 @@ provided name. If TRUE, the name will default to '(Missing)'.}
 A vector of type factor with two levels.
 }
 \description{
-Dichotomize vector values at their median
+Splits a numeric vector into two groups at the median value. Values above
+(or below) the median are assigned to one group, values equal to or below
+(or above) the median are assigned to the other group. Optionally, missing
+values can be assigned to a separate factor level.
+}
+\details{
+This function is a wrapper around \code{split_at_percentile()} with the
+percentile fixed at 0.5 (the median). See
+\code{\link{split_at_percentile()}} for more details.
 }
 \examples{
 x <- sample(c(1:10, NA), 100, replace = TRUE)
