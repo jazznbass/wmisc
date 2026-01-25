@@ -1,9 +1,25 @@
 #' Create a nice table from one or more regression models
+#' 
+#' This function creates a nicely formatted table comparing the results
+#' from one or more regression models (e.g., linear models, generalized linear
+#' models, mixed-effects models). It extracts key statistics such as estimates,
+#' standard errors, t-values, and p-values, and organizes them into a clear
+#' tabular format. Additional model parameters (e.g., R-squared, ICC)
+#' can also be included at the bottom of the table for easy comparison.
+#' 
+#' @details The function supports various model types, including `lm`, `glm`,
+#' `lme` (from the `nlme` package), and `lmerModLmerTest` (from the `lmerTest`
+#' package). It automatically extracts relevant statistics and formats them
+#' for presentation. Users can customize the output by renaming predictor labels
+#' and column names, removing specific columns, and adding titles and footnotes.
+#' The resulting table can be exported to a file (e.g., Excel) for reporting
+#' purposes.
 #'
-#' @param remove_cols Either column number or column names to be removed
+#' @param remove_cols Either column number or column names to be removed from the
+#'  output table.
 #' @param or If TRUE, the estimators are assumed to be logits and are
-#'   exponentiated to yield odds ratios
-#' @param nice_p If TRUE, p values are formatted nicely
+#'   exponentiated to yield odds ratios.
+#' @param nice_p If TRUE, p values are formatted nicely with significance stars.
 #' @param ... One or more model objects (e.g., objects of class `lm`, `glm`,
 #'   `lme`, `lmerModLmerTest`, `glmerMod`).
 #' @param round Number of decimal places to round numeric values.
@@ -17,7 +33,8 @@
 #'   file (e.g., an Excel file).
 #' @param title Title of the table.
 #' @param footnote Footnote of the table.
-#'
+#' @author Juergen Wilbert
+#' @return A data frame with the regression results formatted as a nice table.
 #' @examples
 #' lm(mpg ~ am + disp + hp, data = mtcars) |>
 #'   nice_regression_table()

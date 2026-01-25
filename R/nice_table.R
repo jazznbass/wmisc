@@ -2,24 +2,30 @@
 #'
 #' This function takes a data frame and formats it into a nicely formatted HTML
 #' table using the `gt` packages.
+#' 
+#' The function allows for various customizations such as adding titles,
+#' footnotes, grouping columns and rows, aligning columns, rounding numeric
+#' values, and more. It also supports exporting the table to HTML or DOCX files.
 #'
 #' @aliases nice_table nice_table.default
-#' @param x The data frame to be formatted into a table
+#' @param x The data frame to be formatted into a table.
 #' @param title Title string.
-#' @param footnote Add footnote
+#' @param footnote Add footnotes to the table.
 #' @param file Character string with filename. If set, an additional file is
 #'   exported (html or docx format is possible). If set `TRUE`, a filename is
 #'   automatically created based on the title.
 #' @param use_col_labels Logical. If TRUE, variable labels are used for column
 #'   names.
 #' @param cols_label List with renaming information for columns (old_name =
-#'   new_name).
-#' @param cols_align List with align align information. E.g., `list(left = c(2,3), right = 1)`.
+#'   new_name). E.g., `cols_label = list(old_name1 = "New Name 1",
+#'   old_name2 = "New Name 2")`.
+#' @param cols_align List with align align information. 
+#'   E.g., `list(left = c(2,3), right = 1)`.
 #' @param spanner List with information on grouping columns. E.g. `spanner =
 #'   list("M" = 2:3, "SD" = 4:6)`.
 #' @param row_group List with information on grouping rows `row_group =
-#'   list("Start" = 1:2, "That is the second" = 3:5)`
-#' @param row_group_order List with information on grouping order.
+#'   list("Start" = 1:2, "That is the second" = 3:5)`.
+#' @param row_group_order List with information on grouping order. 
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
 #' @param rownames Logical or `NULL`. If TRUE, rownames are shown. If `NULL`,
@@ -31,8 +37,8 @@
 #' @param sort Character vector with column names according to which the table
 #'   should be sorted.
 #' @param sort_decreasing Logical. If TRUE, sorting is done in decreasing order.
-#' 
 #' @param ... Various arguments for backward compatibility.
+#' @author Juergen Wilbert
 #' @return A gt table object.
 #' @examples
 #' df <- data.frame(
@@ -70,7 +76,7 @@ nice_table.default <- function(x,
                                sort_decreasing = FALSE,
                                ...) {
   
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   
   if (!inherits(x, "data.frame")) {
     add_message("Object is no data.frame")

@@ -1,7 +1,17 @@
-#' Round Numeric Columns in a Data Frame
+#' Round Numeric Columns in a Data Frame to Specified Digits
 #'
 #' Rounds all numeric columns of a data frame to a specified number of digits.
 #' Non-numeric columns and attributes are preserved.
+#' 
+#' If `digits` is a named vector, only the specified columns are rounded to the
+#' corresponding number of digits. If the name `".default"` is included in the
+#' vector, all numeric columns not explicitly named will be rounded to that
+#' number of digits. 
+#' 
+#' If `digits` is a single integer, all numeric columns are rounded to that
+#' number of digits.
+#' 
+#' If `digits` is `NULL`, the data frame is returned unchanged.
 #'
 #' @param x A data frame.
 #' @param digits Integer. Number of digits to round to. Or a named vector with
@@ -29,7 +39,7 @@
 #' round_numeric(data, digits = c(col1 = 1, .default = 2))
 #' 
 #' @seealso [round()]
-#'
+#' @author Juergen Wilbert
 #' @export
 round_numeric <- function(x, digits) {
   if (is.null(digits)) return(x)

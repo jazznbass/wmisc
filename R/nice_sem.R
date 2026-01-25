@@ -1,5 +1,17 @@
 #' Nice html table for lavaan structure equation model fitted objects
 #' 
+#' This function takes an object returned from the `lavaan` package's `sem` or `cfa` functions and produces a nicely formatted HTML table summarizing the model parameters and fit measures. It allows customization of displayed columns, inclusion of confidence intervals, and choice between standardized and unstandardized estimates.
+#' 
+#' @details
+#' The function organizes the output into sections for latent variables, regressions, covariances
+#' , variances, and intercepts. It also appends key fit measures at the end of the table.
+#' Users can specify which columns to remove, whether to show confidence intervals, and whether to display standardized estimates.
+#' It leverages the `nice_table()` function for final formatting, allowing further customization through additional arguments.
+#' 
+#' The resulting table includes a title and footnote that provide context about the estimation method, optimization algorithm, handling of missing data, and citation information for the `lavaan` package.
+#' 
+#' @return An HTML table summarizing the structure equation model.
+#' @author Juergen Wilbert
 #' @param x An object returned from the lavaan sem or cfa function.
 #' @param remove_cols Either column number or column names to be removed. 
 #' @param show_fitmeasures A named vector with fit measures.
@@ -31,8 +43,6 @@ nice_sem <- function(x,
                      show_ci = TRUE,
                      round = 2,
                      ...) {
-
-  
   args_nice_table <- list(...)
   
   if (standardized) {

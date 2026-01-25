@@ -1,8 +1,14 @@
 #' Table with detailed item statistics for one scale
 #'
 #' Returns a data.frame with detailed item analyses for the provided scale.
+#' 
+#' This function is a wrapper around the `psych::alpha()` function from the
+#' psych package. It computes item-total correlations, scale mean and standard
+#' deviation, Cronbach's alpha (with optional confidence intervals), standardized
+#' alpha, item difficulty, and factor loadings from a one-factor exploratory
+#' factor analysis.
 #'
-#' @param data A data Frame
+#' @param data A data Frame.
 #' @param scales A list with vectors with variable names that define each scale.
 #' @param labels Optional labels for the items in the scale.
 #' @param round Rounds values to given decimal position.
@@ -22,6 +28,7 @@
 #' @param ... Further arguments passed to the `nice_table()` function.
 #'   
 #' @return A data frame with concise scale indices.
+#' @author Juergen Wilbert 
 #' @examples
 #' nice_item_analysis(
 #'   wmisc:::data_emo, 
@@ -44,7 +51,7 @@ nice_item_analysis <- function(data,
                        values = NULL,
                        fa = TRUE,
                        ...) {
-  on.exit(print_messages())
+  init_messages(); on.exit(print_messages())
   args <- as.list(environment())
   
   
@@ -73,7 +80,7 @@ nice_item_analysis <- function(data,
     new_args <- args
     new_args$scale <- x
     new_args$scales <- NULL
-    do.call(item_analysis, new_args)
+    do.call(.item_analysis, new_args)
   })
 
   header <- lapply(out, function(x) get_wmisc_attributes(x)$header) |> unlist()
@@ -82,7 +89,7 @@ nice_item_analysis <- function(data,
   nice_table(out, ...)
 }
 
-item_analysis <- function(data,
+.item_analysis <- function(data,
                         scale,
                         labels,
                         round = 2,
