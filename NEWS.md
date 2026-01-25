@@ -1,3 +1,10 @@
+## wmisc 0.4.1
+
+### Changes
+
+- `split_at_percentile()`: frac arguments now accepts a character with predefined splits like "median", "tertiles", "quartiles", "quintiles", "deciles".
+
+
 ## wmisc 0.4.0
 
 ### New functions

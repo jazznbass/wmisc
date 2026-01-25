@@ -8,6 +8,20 @@
 #' duplicated columns and ordering issues) by computing a stable subgroup key and
 #' indexing results back to the original rows.
 #' 
+#' If all grouping variables are `NA` for a given row, the resulting aggregated
+#' columns for that row will also be `NA`. 
+#' Missing values in the variables to be aggregated are handled by the
+#' functions provided in `func` (e.g., using `na.rm = TRUE` within those
+#' functions).
+#' 
+#' @section Warning:
+#' If the grouping variables contain special characters (e.g., line breaks,
+#' carriage returns, tabs), the function may not work as intended, since it
+#' uses `interaction()` with a separator to create subgroup keys. Ensure that
+#' grouping variable values do not contain such characters.
+#' 
+#' @author Juergen Wilbert
+#' 
 #' @param dat A data.frame containing the columns listed in `grouping` and
 #'   `vars`.
 #' @param grouping A character vector of one or more column names in `dat` that
@@ -24,7 +38,9 @@
 #'
 #' @return A data.frame with the same observations as `dat`, plus additional
 #'   columns containing subgroup-level aggregated values for each variable in
-#'   `vars`.
+#'   `vars`. The new columns are named using the pattern
+#'   `<var>_<func_name>`, where `<var>` is the original variable name and
+#'   `<func_name>` is the name of the aggregation function.
 #' @seealso [stats::aggregate()], [base::merge()]
 #' @examples
 #' dat <- data.frame(
