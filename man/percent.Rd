@@ -4,12 +4,10 @@
 \alias{percent}
 \title{Percent of TRUE values}
 \usage{
-percent(x, round = 2, min_valid, max_na)
+percent(x, min_valid, max_na)
 }
 \arguments{
 \item{x}{A vector}
-
-\item{round}{Demical positions (default = 2).}
 
 \item{min_valid}{Minimal number of valid values that is required for
 calculation. A value between 0 and 1 indicates a proportion of values

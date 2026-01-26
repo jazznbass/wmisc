@@ -2,7 +2,7 @@
 % Please edit documentation in R/average.R
 \name{average}
 \alias{average}
-\title{Average function}
+\title{Average function with minimal valid values or maximum NAs}
 \usage{
 average(x, min_valid, max_na, func = mean)
 }
@@ -19,13 +19,23 @@ percent NAs are allowed).}
 
 \item{func}{A function for calculating the average. Default is \code{mean()}.}
 }
+\value{
+A numeric value representing the average, or NA if the conditions are not met.
+}
 \description{
 Computes arithmetic means (or other averages) with minimal requirements
 for valid values or maximum allowed NAs.
 }
 \details{
 If the number of valid values is below \code{min_valid} or the number of NAs is
-above \code{max_na}, the function returns NA.
+above \code{max_na}, the function returns NA. Otherwise, it computes the average using
+the specified function \code{func}.
+
+If both \code{min_valid} and \code{max_na} are
+provided, both conditions have to be met for the calculation to proceed.
+Missing values (NAs) are ignored in the calculation of the average.
+If the conditions for \code{min_valid} or \code{max_na} are not met,
+NA is returned.
 }
 \examples{
 dat <- c(1:5, NA, NA)
