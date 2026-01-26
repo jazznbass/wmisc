@@ -9,23 +9,27 @@
 #'
 #' @aliases nice_table nice_table.default
 #' @param x The data frame to be formatted into a table.
-#' @param title Title string.
-#' @param footnote Add footnotes to the table.
+#' @param title Title string. If provided, it will be displayed at the top of the table.
+#' @param footnote Add footnotes to the table. Can be a character vector. Each
+#'   element will be a separate footnote. If multiple footnotes are provided,
+#'   they will be concatenated.
 #' @param file Character string with filename. If set, an additional file is
 #'   exported (html or docx format is possible). If set `TRUE`, a filename is
-#'   automatically created based on the title.
+#'   automatically created based on the title. If `NULL` (default), no file is
+#'   exported.
 #' @param use_col_labels Logical. If TRUE, variable labels are used for column
-#'   names.
+#'   names. If FALSE, column names are used.
 #' @param cols_label List with renaming information for columns (old_name =
 #'   new_name). E.g., `cols_label = list(old_name1 = "New Name 1",
-#'   old_name2 = "New Name 2")`.
+#'   old_name2 = "New Name 2")`. 
 #' @param cols_align List with align align information. 
-#'   E.g., `list(left = c(2,3), right = 1)`.
+#'   E.g., `list(left = c(2,3), right = 1)`. 
 #' @param spanner List with information on grouping columns. E.g. `spanner =
-#'   list("M" = 2:3, "SD" = 4:6)`.
+#'   list("M" = 2:3, "SD" = 4:6)`. 
 #' @param row_group List with information on grouping rows `row_group =
-#'   list("Start" = 1:2, "That is the second" = 3:5)`.
-#' @param row_group_order List with information on grouping order. 
+#'   list("Start" = 1:2, "That is the second" = 3:5)`. 
+#' @param row_group_order List with information on grouping order. E.g.
+#'  `row_group_order = c("That is the second", "Start")`. 
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
 #' @param rownames Logical or `NULL`. If TRUE, rownames are shown. If `NULL`,

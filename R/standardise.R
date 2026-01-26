@@ -1,4 +1,23 @@
 #' Standardise values
+#' 
+#' This function standardises a vector \code{x} to have a specified mean
+#' \code{m} and standard deviation \code{sd}. It can also perform grouped
+#' standardisation based on a grouping variable. Additionally, it allows for
+#' setting minimal valid values or maximal allowed NAs for the calculation.
+#' If the conditions are not met, NA values are returned.
+#' 
+#' @details
+#' If both \code{min_valid} and \code{max_na} are provided, 
+#' both conditions have to be met for the calculation to proceed.
+#' If \code{grouping} is provided, the standardisation is done
+#' within the groups defined by \code{grouping}.
+#' Missing values (NAs) are ignored in the calculation of means and standard
+#' deviations.
+#' If the conditions for \code{min_valid} or \code{max_na}
+#' are not met, NA values are returned for all elements of \code{x}.
+#' 
+#' @author Juergen Wilbert
+#' @return A vector with standardised values
 #'
 #' @aliases standardise standardize
 #' @param x A vector
