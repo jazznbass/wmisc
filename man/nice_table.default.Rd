@@ -30,15 +30,18 @@
 \arguments{
 \item{x}{The data frame to be formatted into a table.}
 
-\item{title}{Title string.}
+\item{title}{Title string. If provided, it will be displayed at the top of the table.}
 
-\item{footnote}{Add footnotes to the table.}
+\item{footnote}{Add footnotes to the table. Can be a character vector. Each
+element will be a separate footnote. If multiple footnotes are provided,
+they will be concatenated.}
 
 \item{spanner}{List with information on grouping columns. E.g. \code{spanner = list("M" = 2:3, "SD" = 4:6)}.}
 
 \item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}.}
 
-\item{row_group_order}{List with information on grouping order.}
+\item{row_group_order}{List with information on grouping order. E.g.
+\code{row_group_order = c("That is the second", "Start")}.}
 
 \item{rownames}{Logical or \code{NULL}. If TRUE, rownames are shown. If \code{NULL},
 rownames are shown when they are not identical to
@@ -46,10 +49,11 @@ rownames are shown when they are not identical to
 
 \item{file}{Character string with filename. If set, an additional file is
 exported (html or docx format is possible). If set \code{TRUE}, a filename is
-automatically created based on the title.}
+automatically created based on the title. If \code{NULL} (default), no file is
+exported.}
 
 \item{use_col_labels}{Logical. If TRUE, variable labels are used for column
-names.}
+names. If FALSE, column names are used.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
 new_name). E.g., \code{cols_label = list(old_name1 = "New Name 1", old_name2 = "New Name 2")}.}

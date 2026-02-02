@@ -24,6 +24,13 @@ A percentage
 Returns percentage of the occurance of TRUE values in a vector of logical
 values.
 }
+\details{
+If \code{min_valid} is provided, the function will only calculate the percentage
+if the number of valid (non-NA) values is at least \code{min_valid}.
+If \code{max_na} is provided, the function will only calculate the
+percentage if the number of NAs is at most \code{max_na}. If the conditions
+are not met, NA is returned.
+}
 \examples{
 percent(runif(10000) > 0.50)
 }
