@@ -18,7 +18,7 @@ table using the gt packages."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
       </span>
     </div>
 
@@ -78,15 +78,18 @@ table using the <code>gt</code> packages.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>The data frame to be formatted into a table</p></dd>
+<dd><p>The data frame to be formatted into a table or a character string
+representing a table in row-wise format (see example).</p></dd>
 
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
-<dd><p>Title string.</p></dd>
+<dd><p>Title string. If provided, it will be displayed at the top of the table.</p></dd>
 
 
 <dt id="arg-footnote">footnote<a class="anchor" aria-label="anchor" href="#arg-footnote"></a></dt>
-<dd><p>Add footnote</p></dd>
+<dd><p>Add footnotes to the table. Can be a character vector. Each
+element will be a separate footnote. If multiple footnotes are provided,
+they will be concatenated.</p></dd>
 
 
 <dt id="arg-spanner">spanner<a class="anchor" aria-label="anchor" href="#arg-spanner"></a></dt>
@@ -94,11 +97,12 @@ table using the <code>gt</code> packages.</p>
 
 
 <dt id="arg-row-group">row_group<a class="anchor" aria-label="anchor" href="#arg-row-group"></a></dt>
-<dd><p>List with information on grouping rows <code>row_group = list("Start" = 1:2, "That is the second" = 3:5)</code></p></dd>
+<dd><p>List with information on grouping rows <code>row_group = list("Start" = 1:2, "That is the second" = 3:5)</code>.</p></dd>
 
 
 <dt id="arg-row-group-order">row_group_order<a class="anchor" aria-label="anchor" href="#arg-row-group-order"></a></dt>
-<dd><p>List with information on grouping order.</p></dd>
+<dd><p>List with information on grouping order. E.g.
+<code>row_group_order = c("That is the second", "Start")</code>.</p></dd>
 
 
 <dt id="arg-rownames">rownames<a class="anchor" aria-label="anchor" href="#arg-rownames"></a></dt>
@@ -110,21 +114,23 @@ rownames are shown when they are not identical to
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
 <dd><p>Character string with filename. If set, an additional file is
 exported (html or docx format is possible). If set <code>TRUE</code>, a filename is
-automatically created based on the title.</p></dd>
+automatically created based on the title. If <code>NULL</code> (default), no file is
+exported.</p></dd>
 
 
 <dt id="arg-use-col-labels">use_col_labels<a class="anchor" aria-label="anchor" href="#arg-use-col-labels"></a></dt>
 <dd><p>Logical. If TRUE, variable labels are used for column
-names.</p></dd>
+names. If FALSE, column names are used.</p></dd>
 
 
 <dt id="arg-cols-label">cols_label<a class="anchor" aria-label="anchor" href="#arg-cols-label"></a></dt>
 <dd><p>List with renaming information for columns (old_name =
-new_name).</p></dd>
+new_name). E.g., <code>cols_label = list(old_name1 = "New Name 1", old_name2 = "New Name 2")</code>.</p></dd>
 
 
 <dt id="arg-cols-align">cols_align<a class="anchor" aria-label="anchor" href="#arg-cols-align"></a></dt>
-<dd><p>List with align align information. E.g., <code>list(left = c(2,3), right = 1)</code>.</p></dd>
+<dd><p>List with align align information.
+E.g., <code>list(left = c(2,3), right = 1)</code>.</p></dd>
 
 
 <dt id="arg-decimals">decimals<a class="anchor" aria-label="anchor" href="#arg-decimals"></a></dt>
@@ -163,6 +169,16 @@ should be sorted.</p></dd>
     <div id="value">
     <h2>Value</h2>
     <p>A gt table object.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The function allows for various customizations such as adding titles,
+footnotes, grouping columns and rows, aligning columns, rounding numeric
+values, and more. It also supports exporting the table to HTML or DOCX files.</p>
+    </div>
+    <div id="author">
+    <h2>Author</h2>
+    <p>Juergen Wilbert</p>
     </div>
 
     <div id="ref-examples">
@@ -212,6 +228,24 @@ should be sorted.</p></dd>
 <td headers="That is the second  c" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">a</td>
 <td headers="That is the second  d" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">b</td></tr></tbody><tfoot style="border-style: none;"><tr class="gt_footnotes" style="border-style: none; color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3;" bgcolor="#FFFFFF"><td class="gt_footnote" colspan="4" style="border-style: none; margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px;"> <span class="gt_from_md"><em style="margin-top: 0; margin-bottom: 0;">Note.</em> Footnote 1. Footnote 2.</span></td>
     </tr></tfoot></table></div></div><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Rowwise table creation</span></span></span>
+<span class="r-in"><span><span class="st">"</span></span></span>
+<span class="r-in"><span><span class="st">id | name  | age</span></span></span>
+<span class="r-in"><span><span class="st">1  | Alice | 30</span></span></span>
+<span class="r-in"><span><span class="st">1  | John  | 40</span></span></span>
+<span class="r-in"><span><span class="st">"</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu">nice_table</span><span class="op">(</span><span class="op">)</span></span></span>
+<div class="gt-table"><div id="jicxgyvrgn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+
+  <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: times, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #FFFFFF; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF"><thead style="border-style: none;"><tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 3px; border-top-color: #000000; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #000000; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;"><th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="id" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="name" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="age" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">age</th>
+    </tr></thead><tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 3px; border-top-color: #000000; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #000000;"><tr style="border-style: none;"><td headers="id" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">1</td>
+<td headers="name" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">Alice</td>
+<td headers="age" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">30</td></tr><tr style="border-style: none;"><td headers="id" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">1</td>
+<td headers="name" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">John</td>
+<td headers="age" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 0px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">40</td></tr></tbody></table></div></div><span class="r-in"><span> </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

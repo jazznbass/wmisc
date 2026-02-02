@@ -11,6 +11,16 @@ row_df(x, sep = "|")
 
 \item{sep}{The separator used in the data string. Default is "|"}
 }
-\description{
-Read a single row of data into a data frame
+\value{
+A data frame with one row
 }
+\description{
+This function takes a character string representing a single row of data,
+with columns separated by a specified separator, and converts it into a data
+frame.
+}
+\examples{
+row_df("id|name|age\n1|Alice|30")
+row_df("id,name,age\n3,Charlie,35", sep = ",")
+}
+\keyword{internal}

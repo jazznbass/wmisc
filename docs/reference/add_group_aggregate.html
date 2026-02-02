@@ -19,7 +19,7 @@ sex) and merges the aggregated values back into the original data."><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
       </span>
     </div>
 
@@ -87,19 +87,40 @@ removed.</p></dd>
     <h2>Value</h2>
     <p>A data.frame with the same observations as <code>dat</code>, plus additional
 columns containing subgroup-level aggregated values for each variable in
-<code>vars</code>.</p>
+<code>vars</code>. The new columns are named using the pattern
+<code>&lt;var&gt;_&lt;func_name&gt;</code>, where <code>&lt;var&gt;</code> is the original variable name and
+<code>&lt;func_name&gt;</code> is the name of the aggregation function.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Aggregation is performed using <code><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">stats::aggregate()</a></code> with <code>by = dat[, grouping]</code>, so each unique combination of the <code>grouping</code> variables defines a
-subgroup. Results are joined back to <code>dat</code> using <code><a href="https://rdrr.io/r/base/merge.html" class="external-link">base::merge()</a></code> by all
-<code>grouping</code> columns. If multiple functions are provided in <code>func</code>, the
+    <p>This implementation avoids repeated <code><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge()</a></code> calls (which can lead to
+duplicated columns and ordering issues) by computing a stable subgroup key and
+indexing results back to the original rows.</p>
+<p>If all grouping variables are <code>NA</code> for a given row, the resulting aggregated
+columns for that row will also be <code>NA</code>.
+Missing values in the variables to be aggregated are handled by the
+functions provided in <code>func</code> (e.g., using <code>na.rm = TRUE</code> within those
+functions).</p>
+<p>If multiple functions are provided in <code>func</code>, the
 resulting columns are suffixed with the names of the functions in <code>func</code>. If
 <code>func</code> is an unnamed list, suffixes "stat1", "stat2", etc. are used.</p>
+    </div>
+    <div id="warning">
+    <h2>Warning</h2>
+
+
+<p>If the grouping variables contain special characters (e.g., line breaks,
+carriage returns, tabs), the function may not work as intended, since it
+uses <code><a href="https://rdrr.io/r/base/interaction.html" class="external-link">interaction()</a></code> with a separator to create subgroup keys. Ensure that
+grouping variable values do not contain such characters.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">stats::aggregate()</a></code>, <code><a href="https://rdrr.io/r/base/merge.html" class="external-link">base::merge()</a></code></p></div>
+    </div>
+    <div id="author">
+    <h2>Author</h2>
+    <p>Juergen Wilbert</p>
     </div>
 
     <div id="ref-examples">
@@ -130,12 +151,12 @@ resulting columns are suffixed with the names of the functions in <code>func</co
 <span class="r-in"><span>    median <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>   <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sex age score other score_max other_max score_median other_median</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   f  10     1     1         1         2            1          1.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   f  10    NA     2         1         2            1          1.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m  10     3     3         3         3            3          3.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   m  12     5     4         7         5            6          4.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   m  12     7     5         7         5            6          4.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sex age score other score_max score_median other_max other_median</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   f  10     1     1         1            1         2          1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   f  10    NA     2         1            1         2          1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   m  10     3     3         3            3         3          3.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   m  12     5     4         7            6         5          4.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   m  12     7     5         7            6         5          4.5</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -8,7 +8,8 @@
 #' values, and more. It also supports exporting the table to HTML or DOCX files.
 #'
 #' @aliases nice_table nice_table.default
-#' @param x The data frame to be formatted into a table.
+#' @param x The data frame to be formatted into a table or a character string
+#'  representing a table in row-wise format (see example).
 #' @param title Title string. If provided, it will be displayed at the top of the table.
 #' @param footnote Add footnotes to the table. Can be a character vector. Each
 #'   element will be a separate footnote. If multiple footnotes are provided,
@@ -58,6 +59,15 @@
 #'   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
 #'   decimals = 1
 #' )
+#'
+#' ## Rowwise table creation
+#' "
+#' id | name  | age
+#' 1  | Alice | 30
+#' 1  | John  | 40
+#' " |> 
+#'   nice_table()
+#'  
 #'
 #' @export
 nice_table.default <- function(x, 

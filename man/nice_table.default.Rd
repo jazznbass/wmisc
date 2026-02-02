@@ -28,7 +28,8 @@
 )
 }
 \arguments{
-\item{x}{The data frame to be formatted into a table.}
+\item{x}{The data frame to be formatted into a table or a character string
+representing a table in row-wise format (see example).}
 
 \item{title}{Title string. If provided, it will be displayed at the top of the table.}
 
@@ -104,6 +105,15 @@ nice_table(
   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
   decimals = 1
 )
+
+## Rowwise table creation
+"
+id | name  | age
+1  | Alice | 30
+1  | John  | 40
+" |> 
+  nice_table()
+ 
 
 }
 \author{
