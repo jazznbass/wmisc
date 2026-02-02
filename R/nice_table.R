@@ -82,6 +82,10 @@ nice_table.default <- function(x,
   
   init_messages(); on.exit(print_messages())
   
+  if (inherits(x, "character") && length(x) == 1) {
+   x <- row_df(x) 
+  }
+  
   if (!inherits(x, "data.frame")) {
     add_message("Object is no data.frame")
     return(FALSE)
