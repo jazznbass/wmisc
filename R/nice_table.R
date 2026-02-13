@@ -36,7 +36,7 @@
 #' @param rownames Logical or `NULL`. If TRUE, rownames are shown. If `NULL`,
 #'   rownames are shown when they are not identical to
 #'   `as.character(1:nrow(x))`.
-#' @param label_na = Label for replacing missing values.
+#' @param label_na Label for replacing missing values.
 #' @param markdown If TRUE, interprets cell content as markdown.
 #' @param gt Additional arguments passed to `gt::gt()`.
 #' @param sort Character vector with column names according to which the table
