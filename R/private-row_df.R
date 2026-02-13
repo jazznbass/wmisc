@@ -4,13 +4,19 @@
 #' with columns separated by a specified separator, and converts it into a data
 #' frame.
 #' 
+#' @param x A character string representing a row of data.
+#' @param sep The separator used in the data string. Default is "|". 
+#' @return A data frame with one row.
 #' @keywords internal
-#' @param x A character string representing a row of data
-#' @param sep The separator used in the data string. Default is "|" 
-#' @return A data frame with one row
 #' @examples
-#' row_df("id|name|age\n1|Alice|30")
-#' row_df("id,name,age\n3,Charlie,35", sep = ",")
+#' row_df("
+#' id|name|age
+#' 1|Alice|30
+#' ")
+#' row_df("
+#' id,name,age
+#' 3,Charlie,35
+#' ", sep = ",")
 row_df <- function(x, sep = "|") {
   x <- trimws(x)
   read.table(
