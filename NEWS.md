@@ -9,7 +9,6 @@
 
 ### New functions
 
-* Added `batch_create_data_description()`. Creates automatic data description in README files.
 * Added `add_aggregate()` to compute subgroup-level summary statistics for one or more grouping variables (e.g., `sex` × `age`) and merge the aggregated values back into the original data.
 
 ### New arguents
