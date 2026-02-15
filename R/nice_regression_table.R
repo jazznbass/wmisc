@@ -70,12 +70,11 @@ nice_regression_table <- function(
 ) {
   
   models <- list(...)
-  models_params <- lapply(models, \(x) extract_model_param(x, or = or))
-  
+  models_params <- lapply(models, function(x) extract_model_param(x, or = or))
+ 
   n_models <- length(models)
   
   out <- lapply(models_params, \(x) x$estimates$fixed)
-
   
   if (nice_p) {
     p_label <- models_params[[1]]$estimates$p_label
@@ -97,11 +96,11 @@ nice_regression_table <- function(
   }
   
   n_param <- ncol(out[[1]])
-  
+ 
   # join tables -----
   
   if (length(out) > 1) out <- do.call(combine_cols, out) else out <- out[[1]]
-  
+ 
   # auto rename cols ----
   
   labels <- list(
@@ -131,7 +130,7 @@ nice_regression_table <- function(
   names(out) <- make.unique(names(out))
   
   # 
-  
+ 
   cols_label <- as.list(rep(names(out)[1:n_param], length(models)))
   names(cols_label) <- names(out)
   out <- cbind(var = rownames(out), out)
@@ -140,7 +139,7 @@ nice_regression_table <- function(
   n_predic <- nrow(out)
 
   # add model parameters from extract -----
-  
+ 
   add_param <- function(param, label) {
     out[nrow(out) + 1, 1] <- label
     out[nrow(out), 2 + (0:(n_models - 1)) * n_param] <- param
@@ -160,7 +159,7 @@ nice_regression_table <- function(
       new_params[[names_params[j]]][i] <- all_params[[i]][[names_params[j]]]
     }
   }
-  
+
   ## sort output params
   names_params <- names(new_params)
   names_params[startsWith(names_params, "n ")]
@@ -310,9 +309,8 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   tmp <- c(...)
   model_summary <- summary(model)
   out <- list()
-
   out$auto_labels <- get_labels(model@frame)
-  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$labels_models <- names(model@frame)[1]#model@call$formula[[2]] |> as.character() 
   out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- 
     names(out$estimates$fixed)[ncol(out$estimates$fixed)]
@@ -365,7 +363,7 @@ extract_model_param.glmerMod <- function(model, or = FALSE, ...) {
   out <- list()
   
   out$auto_labels <- get_labels(model@frame)
-  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$labels_models <- names(model@frame)[1]#model@call$formula[[2]] |> as.character() 
   out$estimates$fixed <- as.data.frame(coef(model_summary))
  
   if (or) {
