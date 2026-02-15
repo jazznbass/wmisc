@@ -7,12 +7,12 @@
 row_df(x, sep = "|")
 }
 \arguments{
-\item{x}{A character string representing a row of data}
+\item{x}{A character string representing a row of data.}
 
-\item{sep}{The separator used in the data string. Default is "|"}
+\item{sep}{The separator used in the data string. Default is "|".}
 }
 \value{
-A data frame with one row
+A data frame with one row.
 }
 \description{
 This function takes a character string representing a single row of data,

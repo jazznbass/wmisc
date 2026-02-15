@@ -66,7 +66,7 @@ E.g., \code{list(left = c(2,3), right = 1)}.}
 
 \item{round}{Number of digits to which numbers should be rounded.}
 
-\item{label_na}{= Label for replacing missing values.}
+\item{label_na}{Label for replacing missing values.}
 
 \item{markdown}{If TRUE, interprets cell content as markdown.}
 
