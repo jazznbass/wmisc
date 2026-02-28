@@ -11,10 +11,13 @@ nice_frequencies(
   label_grouping = NULL,
   show_missing = TRUE,
   show_percent = TRUE,
+  percent_base = "column",
+  add_total = TRUE,
   auto_labels = TRUE,
   title = NULL,
   footnote = NULL,
   file = NULL,
+  round = 1,
   ...
 )
 }
@@ -30,6 +33,11 @@ nice_frequencies(
 \item{show_missing}{If TRUE, adds a row for the number of missing values.}
 
 \item{show_percent}{If TRUE, adds a column for percentages.}
+
+\item{percent_base}{If show_percent is TRUE, this argument specifies the base for percentage calculations.
+Options are "column" (percentages calculated within each column), "row"
+(percentages calculated within each row), or "total" (percentages calculated based on the total count).
+Default is "column".}
 
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 

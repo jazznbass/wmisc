@@ -1,9 +1,10 @@
-## wmisc 0.4.1
+## wmisc 0.4.3
 
 ### Changes
 
 - `split_at_percentile()`: frac arguments now accepts a character with predefined splits like "median", "tertiles", "quartiles", "quintiles", "deciles".
-
+- `nice_item_analysis()`: Now shows a footnote and a column for Delta Alpha.
+- Added percent_base to `nice_frequencies()` to allow showing percentages based.
 
 ## wmisc 0.4.0
 

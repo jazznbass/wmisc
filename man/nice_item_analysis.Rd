@@ -18,6 +18,8 @@ nice_item_analysis(
   difficulty = FALSE,
   values = NULL,
   fa = TRUE,
+  alpha_dropped = TRUE,
+  use_col_labels = FALSE,
   ...
 )
 }
@@ -51,6 +53,9 @@ item difficulty.}
 
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
+
+\item{use_col_labels}{If TRUE, variable names are taken from a label
+attribute.}
 
 \item{...}{Further arguments passed to the \code{nice_table()} function.}
 }

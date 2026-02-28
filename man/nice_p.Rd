@@ -2,24 +2,41 @@
 % Please edit documentation in R/nice_p.R
 \name{nice_p}
 \alias{nice_p}
-\title{Format p values}
+\title{Format p values nicely for presentation}
 \usage{
 nice_p(p, equal_sign = FALSE, digits = 3, stars = FALSE)
 }
 \arguments{
-\item{p}{Vector of p values.}
+\item{p}{Vector of p values. NA values are allowed and will be returned as NA.}
 
-\item{equal_sign}{If TRUE an equal sign is set before p values.}
+\item{equal_sign}{If TRUE an equal sign is set before p values.
+Default is FALSE.}
 
-\item{digits}{Number of digits to show for p values >= 0.05.}
+\item{digits}{Number of digits to show for p values >= 0.05. Default is 3.}
 
-\item{stars}{If TRUE, significance stars are added for p values < 0.05.}
+\item{stars}{If TRUE, significance stars are added for p values < 0.05.
+Default is FALSE.}
 }
 \value{
-A character vector with nicely formatted p values
+A character vector with nicely formatted p values suitable for presentation.
 }
 \description{
-Format p values
+This function formats p values for presentation. P values >= 0.05 are rounded
+to a specified number of digits, while p values < 0.05 are displayed as
+"<.05", "<.01", or "<.001".
+}
+\details{
+If \code{stars} is TRUE, significance stars are added for p values < 0.05.
+The function also allows to set an equal sign before p values
+if \code{equal_sign} is TRUE.
+
+P values are formatted as follows:
+\itemize{
+\item p >= 0.05: Rounded to the specified number of digits (e.g., 0.123)
+\item 0.01 <= p < 0.05: Displayed as "<.05" (or with stars if \code{stars} is TRUE)
+\item 0.001 <= p < 0.01: Displayed as "<.01" (or with stars if \code{stars} is TRUE)
+\item p < 0.001: Displayed as "<.001" (or with stars if \code{stars} is TRUE)
+}
 }
 \examples{
 p <- c(0.04, 0.9, 0.10, 0.001, 1, NA)
@@ -30,4 +47,7 @@ paste0("p", nice_p(p, equal_sign = TRUE, stars = TRUE))
 nice_p(c(0.0004, 0.005, 0.03, 0.2), stars = TRUE)
 paste0("p", nice_p(c(0.0004, 0.005, 0.03, 0.2), equal_sign = TRUE, stars = TRUE))
 
+}
+\author{
+Juergen Wilbert
 }
