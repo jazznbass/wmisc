@@ -6,6 +6,10 @@
 #' @param label_grouping Set label for the grouping variable name.
 #' @param show_missing If TRUE, adds a row for the number of missing values.
 #' @param show_percent If TRUE, adds a column for percentages.
+#' @param percent_base If show_percent is TRUE, this argument specifies the base for percentage calculations.
+#'  Options are "column" (percentages calculated within each column), "row"
+#'  (percentages calculated within each row), or "total" (percentages calculated based on the total count).
+#'  Default is "column".
 #' @param auto_labels If TRUE, variable names are taken from a label attribute.
 #' @param title Table title.
 #' @param footnote Table footnote.
@@ -38,13 +42,23 @@ nice_frequencies <- function(data,
                              label_grouping = NULL,
                              show_missing = TRUE,
                              show_percent = TRUE,
+                             percent_base = "column",
+                             add_total = TRUE, 
                              auto_labels = TRUE,
                              title = NULL,
                              footnote = NULL,
                              file = NULL,
+                             round = 1,
                              ...) {
   
   init_messages(); on.exit(print_messages())
+  
+  if (show_percent && !percent_base %in% c("column", "row", "total", "cell")) {
+    add_message(
+      "Invalid value for 'percent_base'. Defaulting to 'column'."
+    )
+    percent_base <- "column"
+  }
   
   useNA <- if (show_missing) "always" else "no"
   
@@ -75,6 +89,14 @@ nice_frequencies <- function(data,
     if (show_percent) {
       out$Percent = round(out[[1]]/sum(out[[1]], na.rm = TRUE)*100)
     }
+    if (add_total) {
+      .total <- sum(out[[1]], na.rm = TRUE)
+      if (show_percent) {
+        .total[2] <- sum(out$Percent, na.rm = TRUE)
+      }
+      out <- rbind(out, Total = .total)
+    }
+    
     spanner <- NULL
     rn <- rownames(out)
   } else {
@@ -86,13 +108,38 @@ nice_frequencies <- function(data,
     group_levels <- ncol(out)
   
     if (show_percent) {
-      perc <- lapply(out, \(.) round(./sum(., na.rm = TRUE)*100))
-      perc <- as.data.frame(perc)
+      if (percent_base == "column") {
+        perc <- proportions(as.matrix(out) , margin = 2)
+      } 
+      if (percent_base == "row") {
+        perc <- proportions(as.matrix(out) , margin = 1)        
+      } 
+      if (percent_base %in% c("total", "cell")) {
+        perc <- proportions(as.matrix(out))
+      } 
+      perc <- as.data.frame(perc * 100)
       names(perc) <- paste0(" ", names(out), " ")
+      if (add_total) {
+        .total <- colSums(out, na.rm = TRUE)
+        out <- rbind(out, Total = .total)
+        if (percent_base == "column") {
+          .total <- colSums(perc, na.rm = TRUE)
+        } else {
+          .total <- rep(NA, ncol(perc))
+        } 
+        perc <- rbind(perc, Total = .total)
+        rn <- c(rn, "Total")
+      }
       
       out <- cbind(out, perc)
-      
     }
+    
+    if (!show_percent && add_total) {
+      .total <- colSums(out, na.rm = TRUE)
+      out <- rbind(out, Total = .total)
+      rn <- c(rn, "Total")
+    }
+    
     spanner <- list(Frequency = 2:(group_levels + 1))
     names(spanner)[1] <- paste0(label_grouping, " (n)")
     if (show_percent) {
@@ -104,16 +151,25 @@ nice_frequencies <- function(data,
   if (length(which(is.na(rn))) > 0) rn[which(is.na(rn))] <- "Missing"
   if (length(which(rn == "NA.")) > 0) rn[which(rn == "NA.")] <- "Missing"
 
-  
   rownames(out) <- NULL
   out <- cbind(Value = rn, out)
   names(out)[1] <- label
+  
+  if (show_percent && is.null(footnote) && !is.null(grouping)) {
+    footnote <- paste0(
+      "Percentages are calculated within ", 
+      switch(percent_base, "column" = "columns", "row" = "rows", 
+        "total" = "cells", "cell" = "cells")
+    )
+  } 
   
   out <- set_wmisc_attributes(out, 
     title = title,
     footnote = footnote,
     file = file,
-    spanner = spanner
+    round = round,
+    spanner = spanner,
+    label_na = "-"
   )
   
   nice_table(out, ...)
