@@ -66,8 +66,7 @@ nice_regression_table <- function(
     or = FALSE,
     nice_p = TRUE,
     title = "Regression model",
-    footnote = NULL
-) {
+    footnote = NULL) {
   
   models <- list(...)
   models_params <- lapply(models, function(x) extract_model_param(x, or = or))
