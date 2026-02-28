@@ -25,6 +25,8 @@
 #'   item difficulty.
 #' @param fa If TRUE, a one factor exploratory factor analyses is calculated and
 #'   loadings are reported.
+#' @param use_col_labels If TRUE, variable names are taken from a label 
+#'  attribute.
 #' @param ... Further arguments passed to the `nice_table()` function.
 #'   
 #' @return A data frame with concise scale indices.
@@ -50,6 +52,8 @@ nice_item_analysis <- function(data,
                        difficulty = FALSE,
                        values = NULL,
                        fa = TRUE,
+                       alpha_dropped = TRUE,
+                       use_col_labels = FALSE,
                        ...) {
   init_messages(); on.exit(print_messages())
   args <- as.list(environment())
@@ -86,6 +90,7 @@ nice_item_analysis <- function(data,
   header <- lapply(out, function(x) get_wmisc_attributes(x)$header) |> unlist()
   names(out) <- paste0("**", names(out), "**  \n*", header, "*")
   out <- combine_tables(out, rownames_to_column = FALSE)
+  
   nice_table(out, ...)
 }
 
@@ -101,15 +106,22 @@ nice_item_analysis <- function(data,
                         RMSEA = FALSE,
                         difficulty = FALSE,
                         values = NULL,
-                        fa = TRUE) {
+                        fa = TRUE,
+                        alpha_dropped = TRUE,
+                        use_col_labels = FALSE) {
   
   data_scale <- data[, scale]
+  
+  if (use_col_labels) data_scale <- rename_from_labels(data_scale) 
+  
   header <- c()
-    
+  frame <- "nice_item_analysis"
+  
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
     add_message(
-      "Removed ", length(.id), " rows because all items were missing."
+      "Removed ", length(.id), " rows because all items were missing.",
+      frame = frame
     )
     data_scale <- data_scale[-.id, ]
   }
@@ -120,7 +132,8 @@ nice_item_analysis <- function(data,
     filter_names <- names(data_scale)[which(.var == 0)]
     add_message(
       "Variable with no variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", ")
+      paste0(filter_names, collapse = ", "),
+      frame = frame
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -131,7 +144,8 @@ nice_item_analysis <- function(data,
     filter_names <- names(data_scale)[which(is.na(.var))]
     add_message(
       "Variable with NA variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", ")
+      paste0(filter_names, collapse = ", "),
+      frame = frame
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -139,6 +153,7 @@ nice_item_analysis <- function(data,
   }
   
   if (keys_from_weights) {
+    
     if (requireNamespace("scaledic", quietly = TRUE)) {
       keys <- lapply(
         data_scale, 
@@ -147,14 +162,16 @@ nice_item_analysis <- function(data,
         unlist() |> 
         sign()
       if (identical(length(keys), 0L)) {
-        add_message("Weights from scaledic attributes are missing.")
+        add_message("Weights from scaledic attributes are missing.",
+                    frame = frame)
         keys_from_weights <- FALSE
       }
     } else {
       keys <- NULL
-      add_message("Scaledic is not installed, keys can not be extracted automatically.")
+      add_message("Scaledic is not installed, keys can not be extracted automatically.",
+                  frame = frame)
     }
-
+    
   }
 
   a <- invisible(suppressWarnings(
@@ -173,8 +190,8 @@ nice_item_analysis <- function(data,
   df$loadings <- as.numeric(loadings(f))
 
   alpha <- a$total$raw_alpha
- 
- 
+  df$alpha_dropped <- a$alpha.drop$raw_alpha - alpha
+  
   if (!ci) alpha <- nice_statnum(alpha, 2)
   
   if (ci) {
@@ -219,7 +236,7 @@ nice_item_analysis <- function(data,
   
   rownames(df) <- NULL
   
-  ord <- c("Labels", "mean", "sd", "r.drop")
+  ord <- c("Labels", "mean", "sd", "r.drop", "alpha_dropped")
   
   df <- df[, c(ord, names(df)[!names(df) %in% ord])]
   
@@ -228,17 +245,32 @@ nice_item_analysis <- function(data,
     "mean" = gt::md("*M*"),
     "sd" = gt::md("*SD*"),
     r.drop = gt::html("<i>r<sub>it</sub></i>"),
-    "loadings" = "Loadings"
+    "loadings" = "Loadings",
+    "alpha_dropped" = gt::html("<i>&Delta;Alpha</i>")
   )
   
   header <- paste0(header, collapse = "; ")
+  
+  note <- c(
+    gt::html("<i>r</i><sub>it</sub> is the item-total correlation"),
+     "Homogeneity is the average inter-item correlation",
+     "Difficulty is mean rescaled to [0,1]" 
+  )
+  if (alpha_dropped) note <- c(note,
+    gt::html("&Delta;Alpha is the change in raw alpha when the item is dropped")
+  )
+  if (fa) note <- c(note,
+    "Loadings are based on a one factor exploratory factor analysis"
+  )
+  
   
   df <- set_wmisc_attributes(df, 
                              note = c(),
                              title = "Item analysis",
                              cols_label = cols_label,
                              round = round,
-                             header = header
+                             header = header,
+                             footnote = note
   )
   
   df
