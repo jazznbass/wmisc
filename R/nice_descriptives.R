@@ -1,7 +1,8 @@
 #' Table with descriptive statistics
 #'
 #' @param data A data frame
-#' @param auto_labels If TRUE, variable names are taken from a label attribute.
+#' @param use_col_labels If TRUE, variable names are taken from a label 
+#'  attribute.
 #' @param title Title for the table.
 #' @param footnote Footnote for the table.
 #' @param file If a file name is provided, the table is saved to this file.
@@ -13,7 +14,7 @@
 #' nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
 #' @export
 nice_descriptives <- function(data, 
-                              auto_labels = FALSE,
+                              use_col_labels = TRUE,
                               title = "Descriptive statistics",
                               footnote = NULL,
                               file = NULL,
@@ -37,6 +38,23 @@ nice_descriptives <- function(data,
     )
   }
   
+  .factor <- sapply(data, is.factor)
+  if (any(.factor)) {
+    for (i in seq_along(data)) {
+      if (.factor[i] && nlevels(data[[i]]) == 2) {
+        add_message(
+          "Variable '", names(data)[i] ,"' converted from factor to numeric (0/1)"
+        )
+        names(data)[i] <- paste0(names(data)[i], " (", levels(data[[i]])[2],")")
+        .label <- attr(data[[i]], "label") 
+        if (!is.null(.label))          
+          attr(data[[i]], "label") <- paste0(.label, " (", levels(data[[i]])[2],")") 
+        data[[i]] <- as.numeric(data[[i]]) - 1
+        
+      }
+    }
+  }
+  
   .filter <- sapply(data, is.numeric)
   if (any(!.filter)) {
     add_message(
@@ -47,7 +65,7 @@ nice_descriptives <- function(data,
   
   data <- data[, .filter]
   
-  if (auto_labels) data <- rename_from_labels(data)
+  if (use_col_labels) data <- rename_from_labels(data)
   
   out <- apply(data, 2, function(x)
     c(
@@ -63,7 +81,6 @@ nice_descriptives <- function(data,
     ))
   
   out <- t(out)
-  #if (!is.null(round)) out <- round_numeric(out, round)
   out <- data.frame(out)
   out <- cbind(Variable = rownames(out), out)
   rownames(out) <- NULL
