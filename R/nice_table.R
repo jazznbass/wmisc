@@ -91,14 +91,19 @@ nice_table.default <- function(x,
                                ...) {
   
   init_messages(); on.exit(print_messages())
-  
+ 
   if (inherits(x, "character") && length(x) == 1) {
    x <- row_df(x) 
   }
   
   if (!inherits(x, "data.frame")) {
-    add_message("Object is no data.frame")
-    return(FALSE)
+    try({
+      x <- as.data.frame(x)
+    }, silent = TRUE)
+    if (!inherits(x, "data.frame")) {    
+      add_message("Object cannot be coerced to a data.frame")
+      return(FALSE)
+    }
   }
 
   if (is.null(rownames)) {
@@ -157,14 +162,14 @@ nice_table.default <- function(x,
   if (!is.null(footnote)) {
     footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
   }
-  
-  x <- round_numeric(x, round)
-  
+ 
   if (!use_col_labels) {
     for (i in seq_along(x)) {
       attr(x[[i]], "label") <- NULL
     }
   }
+  
+  x <- round_numeric(x, round)
   
   if (FALSE) {
     new_cols_label <- lapply(x, \(x) get_label(x)) 
