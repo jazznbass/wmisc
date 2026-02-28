@@ -13,7 +13,8 @@
     wmisc.nice.table.engine = "gt",
     wmisc.dic.labels = TRUE,
     wmisc.print.messages = TRUE,
-    wmisc.print.concise.messages = TRUE
+    wmisc.print.concise.messages = TRUE,
+    wmisc.print.max.messages = 10
   )
 }
 
