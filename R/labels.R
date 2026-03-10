@@ -8,14 +8,14 @@
 #'   attribute(s).
 add_label <- function(x, value) {
   
-  on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   if (!inherits(value, "list") && length(value) > 1) value <- as.list(value)
   
   if (inherits(value, "list")) {
     for(i in seq_along(value)) {
       variable <- names(value)[i]
       if (is.null(x[[names(value)[i]]])) {
-        add_message("'", variable, "' does not exist.")
+        notify("'", variable, "' does not exist.")
         next
       }
       
@@ -67,7 +67,7 @@ rename_from_labels <- function(data,
 #' @return For `get_labels`: A names character vector with labels (and columnnames
 #'   as names).
 #' @examples
-#' wmisc:::mtcars_labeled |> get_labels()
+#' mtcars_labeled |> get_labels()
 get_labels <- function(data,
                        keep = FALSE,
                        pattern = "{name}: {label}",

@@ -19,9 +19,9 @@
 conf_int <- function(x, ci = 0.95, r = NA, s = NA, se = NA, n = NA) {
 
   if (is.na(se)) {
-    if (is.na(s)) stop("Need s to calculate standard error")
+    if (is.na(s)) abort("Need s to calculate standard error")
     if (is.na(r) && is.na(n)) 
-      stop("Either need n or r to calculate standard error")
+      abort("Either need n or r to calculate standard error")
     if (!is.na(r)) se <-  s * sqrt(1 - r)
     if (!is.na(n)) se <-  s / sqrt(n)
   }

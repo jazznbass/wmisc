@@ -18,7 +18,7 @@ new_blog_entry <- function(title = "New Blog Entry",
                        subdir = "posts",
                        ...) {
   
-  if (!any(endsWith(dir(), ".Rproj"))) stop("No project directory found!")
+  if (!any(endsWith(dir(), ".Rproj"))) abort("No project directory found!")
   out <- c(as.list(environment()), list(...))
   filename <- file.path(subdir, paste0(out$date, ".Rmd", collapse = ""))
   i <- 1

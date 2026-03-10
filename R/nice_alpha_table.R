@@ -25,8 +25,8 @@
 #' @return A data frame with concise scale indices.
 #' @examples
 #' nice_alpha_table(
-#'   wmisc:::data_emo,
-#'   wmisc:::data_emo_scales,
+#'   data_emo,
+#'   data_emo_scales,
 #'   check_key = TRUE,
 #'   difficulty = TRUE,
 #'   value = list(c(0,4))
@@ -34,8 +34,8 @@
 #' 
 #' ## Example needs packages scaledic installed and active
 #' nice_alpha_table(
-#'   data = wmisc:::ex_itrf,
-#'   scales = wmisc:::ex_itrf_scales,
+#'   data = ex_itrf,
+#'   scales = ex_itrf_scales,
 #'   labels = c("Internalizing", "Externalizing"),
 #'   keys_from_weights = TRUE,
 #'   difficulty = TRUE,
@@ -79,13 +79,13 @@ alpha_table <- function(data,
                         fa = TRUE) {
   
   
-  on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   
   if (!inherits(data, "data.frame")) 
-    add_message("Provided data must be of class data.frame")
+    notify("Provided data must be of class data.frame")
   
   if (!inherits(scales, "list")) 
-    add_message("Scales must be provided in a list")
+    notify("Scales must be provided in a list")
   
   if (!is.null(keys)) {
     check_key <- FALSE
@@ -93,7 +93,7 @@ alpha_table <- function(data,
   }
   
   if (difficulty && is.null(values)) {
-    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
+    notify("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
     difficulty <- FALSE
   }
   
@@ -107,7 +107,7 @@ alpha_table <- function(data,
     data_scale <- data[, scales[[i]]]
     .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
     if (length(.id) > 0) {
-      add_message(
+      notify(
         "Removed ", length(.id), " rows because all items were missing."
       )
       data_scale <- data_scale[-.id, ]
@@ -117,7 +117,7 @@ alpha_table <- function(data,
     
     if (any(.var == 0, na.rm = TRUE)) {
       filter_names <- names(data_scale)[which(.var == 0)]
-      add_message(
+      notify(
         "Variable with no variance dropped from analyses: ",
         paste0(filter_names, collapse = ", ")
       )
@@ -128,7 +128,7 @@ alpha_table <- function(data,
     
     if (any(is.na(.var), na.rm = TRUE)) {
       filter_names <- names(data_scale)[which(is.na(.var))]
-      add_message(
+      notify(
         "Variable with NA variance dropped from analyses: ",
         paste0(filter_names, collapse = ", ")
       )
@@ -146,13 +146,13 @@ alpha_table <- function(data,
           unlist() |> 
           sign()
         if (identical(length(keys), 0L)) {
-          add_message("Weights from scaledic attributes are missing.")
+          notify("Weights from scaledic attributes are missing.")
           keys_from_weights <- FALSE
           keys <- NULL
         }
       } else {
         keys <- NULL
-        add_message("Scaledic is not installed, keys can not be extracted automatically.")
+        notify("Scaledic is not installed, keys can not be extracted automatically.")
       }
   
     }

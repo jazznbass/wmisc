@@ -3,6 +3,9 @@
 #' This function calculates the autocorrelation for a given time series data. It
 #' estimates the autocorrelation coefficients, standard errors, test statistics,
 #' and p-values for each lag up to a specified maximum lag.
+#' 
+#' The function also computes overall standard errors and performs the
+#' Ljung-Box test for overall autocorrelation.
 #'
 #' @param x A numeric vector representing the time series data.
 #' @param lag The maximum lag for which autocorrelation is to be calculated.

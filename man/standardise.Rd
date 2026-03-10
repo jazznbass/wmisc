@@ -25,10 +25,30 @@ percent NAs are allowed).}
 
 \item{sd}{Mean after standardisation (default = 1)}
 }
+\value{
+A vector with standardised values
+}
 \description{
-Standardise values
+This function standardises a vector \code{x} to have a specified mean
+\code{m} and standard deviation \code{sd}. It can also perform grouped
+standardisation based on a grouping variable. Additionally, it allows for
+setting minimal valid values or maximal allowed NAs for the calculation.
+If the conditions are not met, NA values are returned.
+}
+\details{
+If both \code{min_valid} and \code{max_na} are provided,
+both conditions have to be met for the calculation to proceed.
+If \code{grouping} is provided, the standardisation is done
+within the groups defined by \code{grouping}.
+Missing values (NAs) are ignored in the calculation of means and standard
+deviations.
+If the conditions for \code{min_valid} or \code{max_na}
+are not met, NA values are returned for all elements of \code{x}.
 }
 \examples{
 standardise( c(1:9, NA, NA, NA, NA, NA), m = 100, sd = 15)
 standardise( c(1:95, NA, NA, NA, NA, NA), min_valid = 0.96)
+}
+\author{
+Juergen Wilbert
 }

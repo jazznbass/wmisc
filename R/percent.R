@@ -2,9 +2,14 @@
 #'
 #' Returns percentage of the occurance of TRUE values in a vector of logical
 #' values.
+#' 
+#' If `min_valid` is provided, the function will only calculate the percentage
+#' if the number of valid (non-NA) values is at least `min_valid`. 
+#' If `max_na` is provided, the function will only calculate the
+#' percentage if the number of NAs is at most `max_na`. If the conditions
+#' are not met, NA is returned.
 #'
 #' @param x A vector
-#' @param round Demical positions (default = 2).
 #' @param min_valid Minimal number of valid values that is required for
 #'   calculation. A value between 0 and 1 indicates a proportion of values
 #'   (e.g., 0.5 = 50 percent of values have to be valid).
@@ -15,22 +20,14 @@
 #' @export
 #' @examples
 #' percent(runif(10000) > 0.50)
-percent <- function(x, round = 2, min_valid, max_na) {
-  if (!missing(min_valid)) {
-    if (min_valid < 1 && min_valid > 0) min_valid <- trunc(min_valid * length(x))
-    if(sum(!is.na(x)) < min_valid) {
-      return(NA)
-    }
+percent <- function(x, min_valid, max_na) {
+  if (!is.logical(x)) {
+    abort("x has to be a logical vector")
   }
-  
-  if (!missing(max_na)) {
-    if (max_na < 1 && max_na > 0) max_na <- trunc(max_na * length(x))
-    if(sum(is.na(x)) > max_na) {
-      return(NA)
-    }
-  }
-  
-  out <- mean(x, na.rm = TRUE) * 100
-  out <- round(out, digits = round)
-  out
+  average(
+    x, 
+    min_valid = min_valid,
+    max_na = max_na,
+    func = function(x) mean(x) * 100
+  )
 }

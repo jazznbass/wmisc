@@ -2,37 +2,48 @@
 #'
 #' This function takes a data frame and formats it into a nicely formatted HTML
 #' table using the `gt` packages.
+#' 
+#' The function allows for various customizations such as adding titles,
+#' footnotes, grouping columns and rows, aligning columns, rounding numeric
+#' values, and more. It also supports exporting the table to HTML or DOCX files.
 #'
 #' @aliases nice_table nice_table.default
-#' @param x The data frame to be formatted into a table
-#' @param title Title string.
-#' @param footnote Add footnote
+#' @param x The data frame to be formatted into a table or a character string
+#'  representing a table in row-wise format (see example).
+#' @param title Title string. If provided, it will be displayed at the top of the table.
+#' @param footnote Add footnotes to the table. Can be a character vector. Each
+#'   element will be a separate footnote. If multiple footnotes are provided,
+#'   they will be concatenated.
 #' @param file Character string with filename. If set, an additional file is
 #'   exported (html or docx format is possible). If set `TRUE`, a filename is
-#'   automatically created based on the title.
+#'   automatically created based on the title. If `NULL` (default), no file is
+#'   exported.
 #' @param use_col_labels Logical. If TRUE, variable labels are used for column
-#'   names.
+#'   names. If FALSE, column names are used.
 #' @param cols_label List with renaming information for columns (old_name =
-#'   new_name).
-#' @param cols_align List with align align information. E.g., `list(left = c(2,3), right = 1)`.
+#'   new_name). E.g., `cols_label = list(old_name1 = "New Name 1",
+#'   old_name2 = "New Name 2")`. 
+#' @param cols_align List with align align information. 
+#'   E.g., `list(left = c(2,3), right = 1)`. 
 #' @param spanner List with information on grouping columns. E.g. `spanner =
-#'   list("M" = 2:3, "SD" = 4:6)`.
+#'   list("M" = 2:3, "SD" = 4:6)`. 
 #' @param row_group List with information on grouping rows `row_group =
-#'   list("Start" = 1:2, "That is the second" = 3:5)`
-#' @param row_group_order List with information on grouping order.
+#'   list("Start" = 1:2, "That is the second" = 3:5)`. 
+#' @param row_group_order List with information on grouping order. E.g.
+#'  `row_group_order = c("That is the second", "Start")`. 
 #' @param decimals Number of decimals that will be printed.
 #' @param round Number of digits to which numbers should be rounded.
 #' @param rownames Logical or `NULL`. If TRUE, rownames are shown. If `NULL`,
 #'   rownames are shown when they are not identical to
 #'   `as.character(1:nrow(x))`.
-#' @param label_na = Label for replacing missing values.
+#' @param label_na Label for replacing missing values.
 #' @param markdown If TRUE, interprets cell content as markdown.
 #' @param gt Additional arguments passed to `gt::gt()`.
 #' @param sort Character vector with column names according to which the table
 #'   should be sorted.
 #' @param sort_decreasing Logical. If TRUE, sorting is done in decreasing order.
-#' 
 #' @param ... Various arguments for backward compatibility.
+#' @author Juergen Wilbert
 #' @return A gt table object.
 #' @examples
 #' df <- data.frame(
@@ -48,6 +59,15 @@
 #'   cols_label = list(x = "First", y = "Second", c = "Third", d = "Fourth"),
 #'   decimals = 1
 #' )
+#'
+#' ## Rowwise table creation
+#' "
+#' id | name  | age
+#' 1  | Alice | 30
+#' 1  | John  | 40
+#' " |> 
+#'   nice_table()
+#'  
 #'
 #' @export
 nice_table.default <- function(x, 
@@ -70,11 +90,20 @@ nice_table.default <- function(x,
                                sort_decreasing = FALSE,
                                ...) {
   
-  on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
+ 
+  if (inherits(x, "character") && length(x) == 1) {
+   x <- row_df(x) 
+  }
   
   if (!inherits(x, "data.frame")) {
-    add_message("Object is no data.frame")
-    return(FALSE)
+    try({
+      x <- as.data.frame(x)
+    }, silent = TRUE)
+    if (!inherits(x, "data.frame")) {    
+      notify("Object cannot be coerced to a data.frame")
+      return(FALSE)
+    }
   }
 
   if (is.null(rownames)) {
@@ -133,14 +162,14 @@ nice_table.default <- function(x,
   if (!is.null(footnote)) {
     footnote <- paste0("*Note.* ", paste0(footnote, collapse = ". "), ".")
   }
-  
-  x <- round_numeric(x, round)
-  
+ 
   if (!use_col_labels) {
     for (i in seq_along(x)) {
       attr(x[[i]], "label") <- NULL
     }
   }
+  
+  x <- round_numeric(x, round)
   
   if (FALSE) {
     new_cols_label <- lapply(x, \(x) get_label(x)) 

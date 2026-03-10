@@ -24,7 +24,7 @@ alpha_table_old <- function(data, scales, labels = NULL, round = 2, CI = TRUE,
                         values = NULL) {
   
   if (difficulty && is.null(values)) {
-    stop("Can not calculate item difficulty without min and max scale values.")
+    abort("Can not calculate item difficulty without min and max scale values.")
   }
   if (is.null(labels)) labels <- labels(scales)
   df <- data.frame(Scale = labels)

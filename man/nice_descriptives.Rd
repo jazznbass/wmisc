@@ -6,7 +6,7 @@
 \usage{
 nice_descriptives(
   data,
-  auto_labels = FALSE,
+  use_col_labels = TRUE,
   title = "Descriptive statistics",
   footnote = NULL,
   file = NULL,
@@ -16,7 +16,8 @@ nice_descriptives(
 \arguments{
 \item{data}{A data frame}
 
-\item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
+\item{use_col_labels}{If TRUE, variable names are taken from a label
+attribute.}
 
 \item{title}{Title for the table.}
 
@@ -35,5 +36,5 @@ Table with descriptive statistics
 \examples{
 nice_descriptives(mtcars)
 
-nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
+nice_descriptives(mtcars_labeled, auto_labels = TRUE, round = 2)
 }

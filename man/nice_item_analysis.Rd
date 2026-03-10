@@ -18,11 +18,13 @@ nice_item_analysis(
   difficulty = FALSE,
   values = NULL,
   fa = TRUE,
+  alpha_dropped = TRUE,
+  use_col_labels = FALSE,
   ...
 )
 }
 \arguments{
-\item{data}{A data Frame}
+\item{data}{A data Frame.}
 
 \item{scales}{A list with vectors with variable names that define each scale.}
 
@@ -52,6 +54,9 @@ item difficulty.}
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
 
+\item{use_col_labels}{If TRUE, variable names are taken from a label
+attribute.}
+
 \item{...}{Further arguments passed to the \code{nice_table()} function.}
 }
 \value{
@@ -60,11 +65,21 @@ A data frame with concise scale indices.
 \description{
 Returns a data.frame with detailed item analyses for the provided scale.
 }
+\details{
+This function is a wrapper around the \code{psych::alpha()} function from the
+psych package. It computes item-total correlations, scale mean and standard
+deviation, Cronbach's alpha (with optional confidence intervals), standardized
+alpha, item difficulty, and factor loadings from a one-factor exploratory
+factor analysis.
+}
 \examples{
 nice_item_analysis(
-  wmisc:::data_emo, 
-  scale = wmisc:::data_emo_scales, 
+  data_emo, 
+  scale = data_emo_scales, 
   difficulty = TRUE, 
   values = c(1,5)
 )
+}
+\author{
+Juergen Wilbert
 }

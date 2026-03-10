@@ -3,7 +3,7 @@
 #' lm(mpg ~ am + disp + hp, data = mtcars) |> 
 #'   nice_regression_table()
 #' nice_regression_table(
-#'   wmisc:::model1, wmisc:::model2, 
+#'   model1, model2, 
 #'   rename_labels = list(
 #'     "EffectTrend" = "Trend", "EffectSlope" = "Slope"), 
 #'   rename_cols = list("Estimate" = "b", "SE" = "se")

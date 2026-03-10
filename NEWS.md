@@ -1,8 +1,15 @@
+## wmisc 0.4.3
+
+### Changes
+
+- `split_at_percentile()`: frac arguments now accepts a character with predefined splits like "median", "tertiles", "quartiles", "quintiles", "deciles".
+- `nice_item_analysis()`: Now shows a footnote and a column for Delta Alpha.
+- Added percent_base to `nice_frequencies()` to allow showing percentages based.
+
 ## wmisc 0.4.0
 
 ### New functions
 
-* Added `batch_create_data_description()`. Creates automatic data description in README files.
 * Added `add_aggregate()` to compute subgroup-level summary statistics for one or more grouping variables (e.g., `sex` × `age`) and merge the aggregated values back into the original data.
 
 ### New arguents

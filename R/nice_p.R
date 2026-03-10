@@ -1,11 +1,27 @@
-#' Format p values
+#' Format p values nicely for presentation
+#' 
+#' This function formats p values for presentation. P values >= 0.05 are rounded 
+#' to a specified number of digits, while p values < 0.05 are displayed as 
+#' "<.05", "<.01", or "<.001". 
+#' 
+#' If `stars` is TRUE, significance stars are added for p values < 0.05. 
+#' The function also allows to set an equal sign before p values 
+#' if `equal_sign` is TRUE. 
 #'
-#' @param p Vector of p values.
-#' @param equal_sign If TRUE an equal sign is set before p values.
-#' @param digits Number of digits to show for p values >= 0.05.
-#' @param stars If TRUE, significance stars are added for p values < 0.05.
-#'
-#' @return A character vector with nicely formatted p values
+#' @param p Vector of p values. NA values are allowed and will be returned as NA.
+#' @param equal_sign If TRUE an equal sign is set before p values. 
+#'  Default is FALSE.
+#' @param digits Number of digits to show for p values >= 0.05. Default is 3.
+#' @param stars If TRUE, significance stars are added for p values < 0.05. 
+#'  Default is FALSE.
+#' @details
+#' P values are formatted as follows:
+#' - p >= 0.05: Rounded to the specified number of digits (e.g., 0.123)
+#' - 0.01 <= p < 0.05: Displayed as "<.05" (or with stars if `stars` is TRUE)
+#' - 0.001 <= p < 0.01: Displayed as "<.01" (or with stars if `stars` is TRUE)
+#' - p < 0.001: Displayed as "<.001" (or with stars if `stars` is TRUE)
+#' @return A character vector with nicely formatted p values suitable for presentation.
+#' @author Juergen Wilbert
 #' @export
 #' @examples 
 #' p <- c(0.04, 0.9, 0.10, 0.001, 1, NA)

@@ -24,6 +24,10 @@ This function calculates the autocorrelation for a given time series data. It
 estimates the autocorrelation coefficients, standard errors, test statistics,
 and p-values for each lag up to a specified maximum lag.
 }
+\details{
+The function also computes overall standard errors and performs the
+Ljung-Box test for overall autocorrelation.
+}
 \examples{
 data <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 auto_corr(data, lag = 3)

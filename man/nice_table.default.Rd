@@ -28,17 +28,21 @@
 )
 }
 \arguments{
-\item{x}{The data frame to be formatted into a table}
+\item{x}{The data frame to be formatted into a table or a character string
+representing a table in row-wise format (see example).}
 
-\item{title}{Title string.}
+\item{title}{Title string. If provided, it will be displayed at the top of the table.}
 
-\item{footnote}{Add footnote}
+\item{footnote}{Add footnotes to the table. Can be a character vector. Each
+element will be a separate footnote. If multiple footnotes are provided,
+they will be concatenated.}
 
 \item{spanner}{List with information on grouping columns. E.g. \code{spanner = list("M" = 2:3, "SD" = 4:6)}.}
 
-\item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}}
+\item{row_group}{List with information on grouping rows \code{row_group = list("Start" = 1:2, "That is the second" = 3:5)}.}
 
-\item{row_group_order}{List with information on grouping order.}
+\item{row_group_order}{List with information on grouping order. E.g.
+\code{row_group_order = c("That is the second", "Start")}.}
 
 \item{rownames}{Logical or \code{NULL}. If TRUE, rownames are shown. If \code{NULL},
 rownames are shown when they are not identical to
@@ -46,21 +50,23 @@ rownames are shown when they are not identical to
 
 \item{file}{Character string with filename. If set, an additional file is
 exported (html or docx format is possible). If set \code{TRUE}, a filename is
-automatically created based on the title.}
+automatically created based on the title. If \code{NULL} (default), no file is
+exported.}
 
 \item{use_col_labels}{Logical. If TRUE, variable labels are used for column
-names.}
+names. If FALSE, column names are used.}
 
 \item{cols_label}{List with renaming information for columns (old_name =
-new_name).}
+new_name). E.g., \code{cols_label = list(old_name1 = "New Name 1", old_name2 = "New Name 2")}.}
 
-\item{cols_align}{List with align align information. E.g., \code{list(left = c(2,3), right = 1)}.}
+\item{cols_align}{List with align align information.
+E.g., \code{list(left = c(2,3), right = 1)}.}
 
 \item{decimals}{Number of decimals that will be printed.}
 
 \item{round}{Number of digits to which numbers should be rounded.}
 
-\item{label_na}{= Label for replacing missing values.}
+\item{label_na}{Label for replacing missing values.}
 
 \item{markdown}{If TRUE, interprets cell content as markdown.}
 
@@ -80,6 +86,11 @@ A gt table object.
 This function takes a data frame and formats it into a nicely formatted HTML
 table using the \code{gt} packages.
 }
+\details{
+The function allows for various customizations such as adding titles,
+footnotes, grouping columns and rows, aligning columns, rounding numeric
+values, and more. It also supports exporting the table to HTML or DOCX files.
+}
 \examples{
 df <- data.frame(
   x = 1:5, y = rnorm(5, mean = 10, sd = 12),
@@ -95,4 +106,16 @@ nice_table(
   decimals = 1
 )
 
+## Rowwise table creation
+"
+id | name  | age
+1  | Alice | 30
+1  | John  | 40
+" |> 
+  nice_table()
+ 
+
+}
+\author{
+Juergen Wilbert
 }

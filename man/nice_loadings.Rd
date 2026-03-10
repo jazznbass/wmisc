@@ -67,13 +67,13 @@ This function wraps \code{nice_loadings()} and adds additional formatting
 for exploratory factor analyses, such as row groups and spanners.
 }
 \examples{
-wmisc:::mtcars_labeled |> 
+mtcars_labeled |> 
   rename_from_labels() |>
   psych::fa(nfactors = 2) |> 
   nice_efa()
 
 nice_efa(
-  wmisc:::data_emo_fa,
+  data_emo_fa,
   factor_names = c(
     "Emotionserkennung", "Resilienz", 
     "Aufmerksamkeit", "Erklärung für Emotionen"

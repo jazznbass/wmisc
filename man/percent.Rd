@@ -4,12 +4,10 @@
 \alias{percent}
 \title{Percent of TRUE values}
 \usage{
-percent(x, round = 2, min_valid, max_na)
+percent(x, min_valid, max_na)
 }
 \arguments{
 \item{x}{A vector}
-
-\item{round}{Demical positions (default = 2).}
 
 \item{min_valid}{Minimal number of valid values that is required for
 calculation. A value between 0 and 1 indicates a proportion of values
@@ -25,6 +23,13 @@ A percentage
 \description{
 Returns percentage of the occurance of TRUE values in a vector of logical
 values.
+}
+\details{
+If \code{min_valid} is provided, the function will only calculate the percentage
+if the number of valid (non-NA) values is at least \code{min_valid}.
+If \code{max_na} is provided, the function will only calculate the
+percentage if the number of NAs is at most \code{max_na}. If the conditions
+are not met, NA is returned.
 }
 \examples{
 percent(runif(10000) > 0.50)

@@ -49,5 +49,5 @@ introduced by other packages (e.g. \code{haven}) and is implemented into the
 R-Studiio environment.
 }
 \examples{
-wmisc:::mtcars_labeled |> get_labels()
+mtcars_labeled |> get_labels()
 }

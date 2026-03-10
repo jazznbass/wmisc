@@ -1,8 +1,14 @@
 #' Table with detailed item statistics for one scale
 #'
 #' Returns a data.frame with detailed item analyses for the provided scale.
+#' 
+#' This function is a wrapper around the `psych::alpha()` function from the
+#' psych package. It computes item-total correlations, scale mean and standard
+#' deviation, Cronbach's alpha (with optional confidence intervals), standardized
+#' alpha, item difficulty, and factor loadings from a one-factor exploratory
+#' factor analysis.
 #'
-#' @param data A data Frame
+#' @param data A data Frame.
 #' @param scales A list with vectors with variable names that define each scale.
 #' @param labels Optional labels for the items in the scale.
 #' @param round Rounds values to given decimal position.
@@ -19,13 +25,16 @@
 #'   item difficulty.
 #' @param fa If TRUE, a one factor exploratory factor analyses is calculated and
 #'   loadings are reported.
+#' @param use_col_labels If TRUE, variable names are taken from a label 
+#'  attribute.
 #' @param ... Further arguments passed to the `nice_table()` function.
 #'   
 #' @return A data frame with concise scale indices.
+#' @author Juergen Wilbert 
 #' @examples
 #' nice_item_analysis(
-#'   wmisc:::data_emo, 
-#'   scale = wmisc:::data_emo_scales, 
+#'   data_emo, 
+#'   scale = data_emo_scales, 
 #'   difficulty = TRUE, 
 #'   values = c(1,5)
 #' )
@@ -43,17 +52,19 @@ nice_item_analysis <- function(data,
                        difficulty = FALSE,
                        values = NULL,
                        fa = TRUE,
+                       alpha_dropped = TRUE,
+                       use_col_labels = FALSE,
                        ...) {
-  on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   args <- as.list(environment())
   
   
   if (!inherits(data, "data.frame")) 
-    add_message("Provided data must be of class data.frame")
+    notify("Provided data must be of class data.frame")
   
   if (!inherits(scales, "list")) {
     scales <- list(scale = scales) 
-    add_message("Scales must be provided in a list. Turned values into list.")
+    notify("Scales must be provided in a list. Turned values into list.")
   } 
     
   if (!is.null(keys)) {
@@ -62,7 +73,7 @@ nice_item_analysis <- function(data,
   }
   
   if (difficulty && is.null(values)) {
-    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
+    notify("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
     difficulty <- FALSE
   }
   
@@ -73,16 +84,17 @@ nice_item_analysis <- function(data,
     new_args <- args
     new_args$scale <- x
     new_args$scales <- NULL
-    do.call(item_analysis, new_args)
+    do.call(.item_analysis, new_args)
   })
 
   header <- lapply(out, function(x) get_wmisc_attributes(x)$header) |> unlist()
   names(out) <- paste0("**", names(out), "**  \n*", header, "*")
   out <- combine_tables(out, rownames_to_column = FALSE)
+  
   nice_table(out, ...)
 }
 
-item_analysis <- function(data,
+.item_analysis <- function(data,
                         scale,
                         labels,
                         round = 2,
@@ -94,15 +106,22 @@ item_analysis <- function(data,
                         RMSEA = FALSE,
                         difficulty = FALSE,
                         values = NULL,
-                        fa = TRUE) {
+                        fa = TRUE,
+                        alpha_dropped = TRUE,
+                        use_col_labels = FALSE) {
   
   data_scale <- data[, scale]
+  
+  if (use_col_labels) data_scale <- rename_from_labels(data_scale) 
+  
   header <- c()
-    
+  frame <- "nice_item_analysis"
+  
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
-    add_message(
-      "Removed ", length(.id), " rows because all items were missing."
+    notify(
+      "Removed ", length(.id), " rows because all items were missing.",
+      frame = frame
     )
     data_scale <- data_scale[-.id, ]
   }
@@ -111,9 +130,10 @@ item_analysis <- function(data,
   
   if (any(.var == 0, na.rm = TRUE)) {
     filter_names <- names(data_scale)[which(.var == 0)]
-    add_message(
+    notify(
       "Variable with no variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", ")
+      paste0(filter_names, collapse = ", "),
+      frame = frame
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -122,9 +142,10 @@ item_analysis <- function(data,
   
   if (any(is.na(.var), na.rm = TRUE)) {
     filter_names <- names(data_scale)[which(is.na(.var))]
-    add_message(
+    notify(
       "Variable with NA variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", ")
+      paste0(filter_names, collapse = ", "),
+      frame = frame
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -132,6 +153,7 @@ item_analysis <- function(data,
   }
   
   if (keys_from_weights) {
+    
     if (requireNamespace("scaledic", quietly = TRUE)) {
       keys <- lapply(
         data_scale, 
@@ -140,14 +162,16 @@ item_analysis <- function(data,
         unlist() |> 
         sign()
       if (identical(length(keys), 0L)) {
-        add_message("Weights from scaledic attributes are missing.")
+        notify("Weights from scaledic attributes are missing.",
+                    frame = frame)
         keys_from_weights <- FALSE
       }
     } else {
       keys <- NULL
-      add_message("Scaledic is not installed, keys can not be extracted automatically.")
+      notify("Scaledic is not installed, keys can not be extracted automatically.",
+                  frame = frame)
     }
-
+    
   }
 
   a <- invisible(suppressWarnings(
@@ -166,8 +190,8 @@ item_analysis <- function(data,
   df$loadings <- as.numeric(loadings(f))
 
   alpha <- a$total$raw_alpha
- 
- 
+  df$alpha_dropped <- a$alpha.drop$raw_alpha - alpha
+  
   if (!ci) alpha <- nice_statnum(alpha, 2)
   
   if (ci) {
@@ -212,7 +236,7 @@ item_analysis <- function(data,
   
   rownames(df) <- NULL
   
-  ord <- c("Labels", "mean", "sd", "r.drop")
+  ord <- c("Labels", "mean", "sd", "r.drop", "alpha_dropped")
   
   df <- df[, c(ord, names(df)[!names(df) %in% ord])]
   
@@ -221,17 +245,32 @@ item_analysis <- function(data,
     "mean" = gt::md("*M*"),
     "sd" = gt::md("*SD*"),
     r.drop = gt::html("<i>r<sub>it</sub></i>"),
-    "loadings" = "Loadings"
+    "loadings" = "Loadings",
+    "alpha_dropped" = gt::html("<i>&Delta;Alpha</i>")
   )
   
   header <- paste0(header, collapse = "; ")
+  
+  note <- c(
+    gt::html("<i>r</i><sub>it</sub> is the item-total correlation"),
+     "Homogeneity is the average inter-item correlation",
+     "Difficulty is mean rescaled to [0,1]" 
+  )
+  if (alpha_dropped) note <- c(note,
+    gt::html("&Delta;Alpha is the change in raw alpha when the item is dropped")
+  )
+  if (fa) note <- c(note,
+    "Loadings are based on a one factor exploratory factor analysis"
+  )
+  
   
   df <- set_wmisc_attributes(df, 
                              note = c(),
                              title = "Item analysis",
                              cols_label = cols_label,
                              round = round,
-                             header = header
+                             header = header,
+                             footnote = note
   )
   
   df

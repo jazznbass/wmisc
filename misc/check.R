@@ -41,7 +41,7 @@ check_within <- function(x, arg, lower, upper) {
 #' @export
 end_check <- function(x) {
   if (length(x) > 0) {
-    stop("\n", x, call. = FALSE)
+    abort("\n", x, call. = FALSE)
   }
 }
 

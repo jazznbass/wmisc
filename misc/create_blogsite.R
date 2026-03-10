@@ -31,7 +31,7 @@ create_blogsite <- function(source_dir = "posts",
   
   args <-  as.list(environment()) # c(as.list(environment()), list(...))
   
-  if (!any(endsWith(dir(), ".Rproj"))) stop("No project directory found!")
+  if (!any(endsWith(dir(), ".Rproj"))) abort("No project directory found!")
   if (!file.exists(("_site.yml"))){ 
     warnings("_site.yml not found!")
   } else {

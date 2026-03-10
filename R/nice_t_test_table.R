@@ -1,5 +1,11 @@
 #' Creates a t-test table for multiple dependent variables
-#'
+#' 
+#' The function performs independent samples t-tests for each dependent
+#' variable comparing two conditions of an independent variable. It calculates
+#' means, standard deviations, t-values, degrees of freedom, p-values, and
+#' effect sizes (Cohen's d, Glass' delta, or Hedges' g). 
+#' The results are presented in a nicely formatted table.
+#' 
 #' @param dv A data frame with the dependent variables or a character vector
 #'   with variable names when data is defined.
 #' @param iv A data frame or vector with the independent variable or a character
@@ -26,7 +32,8 @@
 #'   exported (html format is possible). If set `TRUE`, a filename is
 #'   automatically created based on the title.
 #' @param ... Additional arguments passed to `nice_table()`.
-#' @return A data.frame or an html table
+#' @return A data.frame or an html table.
+#' @author Juergen Wilbert
 #' @export
 #'
 #' @examples
@@ -67,11 +74,11 @@ nice_t_test_table <- function(dv,
                               file = NULL,
                               ...) {
 
-  on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   
   if (!missing(data)) {
     if (!is.character(iv)) {
-      add_message("iv should be a character string when data are provided")
+      notify("iv should be a character string when data are provided")
     }
     dv <- data[, dv, drop = FALSE]
     iv <- data[[iv]]

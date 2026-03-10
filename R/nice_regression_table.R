@@ -1,9 +1,25 @@
 #' Create a nice table from one or more regression models
+#' 
+#' This function creates a nicely formatted table comparing the results
+#' from one or more regression models (e.g., linear models, generalized linear
+#' models, mixed-effects models). It extracts key statistics such as estimates,
+#' standard errors, t-values, and p-values, and organizes them into a clear
+#' tabular format. Additional model parameters (e.g., R-squared, ICC)
+#' can also be included at the bottom of the table for easy comparison.
+#' 
+#' @details The function supports various model types, including `lm`, `glm`,
+#' `lme` (from the `nlme` package), and `lmerModLmerTest` (from the `lmerTest`
+#' package). It automatically extracts relevant statistics and formats them
+#' for presentation. Users can customize the output by renaming predictor labels
+#' and column names, removing specific columns, and adding titles and footnotes.
+#' The resulting table can be exported to a file (e.g., Excel) for reporting
+#' purposes.
 #'
-#' @param remove_cols Either column number or column names to be removed
+#' @param remove_cols Either column number or column names to be removed from the
+#'  output table.
 #' @param or If TRUE, the estimators are assumed to be logits and are
-#'   exponentiated to yield odds ratios
-#' @param nice_p If TRUE, p values are formatted nicely
+#'   exponentiated to yield odds ratios.
+#' @param nice_p If TRUE, p values are formatted nicely with significance stars.
 #' @param ... One or more model objects (e.g., objects of class `lm`, `glm`,
 #'   `lme`, `lmerModLmerTest`, `glmerMod`).
 #' @param round Number of decimal places to round numeric values.
@@ -17,7 +33,8 @@
 #'   file (e.g., an Excel file).
 #' @param title Title of the table.
 #' @param footnote Footnote of the table.
-#'
+#' @author Juergen Wilbert
+#' @return A data frame with the regression results formatted as a nice table.
 #' @examples
 #' lm(mpg ~ am + disp + hp, data = mtcars) |>
 #'   nice_regression_table()
@@ -28,7 +45,7 @@
 #' )
 #'
 #' nice_regression_table(
-#'   wmisc:::model_lmer_1, wmisc:::model_lmer_2,
+#'   model_lmer_1, model_lmer_2,
 #'   rename_labels = list(
 #'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post",
 #'     "ConditionTraining" = "Training", "id_subject" = "Subject"),
@@ -49,16 +66,14 @@ nice_regression_table <- function(
     or = FALSE,
     nice_p = TRUE,
     title = "Regression model",
-    footnote = NULL
-) {
+    footnote = NULL) {
   
   models <- list(...)
-  models_params <- lapply(models, \(x) extract_model_param(x, or = or))
-  
+  models_params <- lapply(models, function(x) extract_model_param(x, or = or))
+ 
   n_models <- length(models)
   
   out <- lapply(models_params, \(x) x$estimates$fixed)
-
   
   if (nice_p) {
     p_label <- models_params[[1]]$estimates$p_label
@@ -80,11 +95,11 @@ nice_regression_table <- function(
   }
   
   n_param <- ncol(out[[1]])
-  
+ 
   # join tables -----
   
   if (length(out) > 1) out <- do.call(combine_cols, out) else out <- out[[1]]
-  
+ 
   # auto rename cols ----
   
   labels <- list(
@@ -114,7 +129,7 @@ nice_regression_table <- function(
   names(out) <- make.unique(names(out))
   
   # 
-  
+ 
   cols_label <- as.list(rep(names(out)[1:n_param], length(models)))
   names(cols_label) <- names(out)
   out <- cbind(var = rownames(out), out)
@@ -123,7 +138,7 @@ nice_regression_table <- function(
   n_predic <- nrow(out)
 
   # add model parameters from extract -----
-  
+ 
   add_param <- function(param, label) {
     out[nrow(out) + 1, 1] <- label
     out[nrow(out), 2 + (0:(n_models - 1)) * n_param] <- param
@@ -143,7 +158,7 @@ nice_regression_table <- function(
       new_params[[names_params[j]]][i] <- all_params[[i]][[names_params[j]]]
     }
   }
-  
+
   ## sort output params
   names_params <- names(new_params)
   names_params[startsWith(names_params, "n ")]
@@ -293,9 +308,8 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   tmp <- c(...)
   model_summary <- summary(model)
   out <- list()
-
   out$auto_labels <- get_labels(model@frame)
-  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$labels_models <- names(model@frame)[1]#model@call$formula[[2]] |> as.character() 
   out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- 
     names(out$estimates$fixed)[ncol(out$estimates$fixed)]
@@ -348,7 +362,7 @@ extract_model_param.glmerMod <- function(model, or = FALSE, ...) {
   out <- list()
   
   out$auto_labels <- get_labels(model@frame)
-  out$labels_models <- model@call$formula[[2]] |> as.character() 
+  out$labels_models <- names(model@frame)[1]#model@call$formula[[2]] |> as.character() 
   out$estimates$fixed <- as.data.frame(coef(model_summary))
  
   if (or) {
