@@ -45,7 +45,7 @@
 #' )
 #'
 #' nice_regression_table(
-#'   wmisc:::model_lmer_1, wmisc:::model_lmer_2,
+#'   model_lmer_1, model_lmer_2,
 #'   rename_labels = list(
 #'     "EffectTrend" = "Trend", "EffectSlope" = "Slope", "TimePost" = "Post",
 #'     "ConditionTraining" = "Training", "id_subject" = "Subject"),

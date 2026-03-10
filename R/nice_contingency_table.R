@@ -71,10 +71,10 @@
 #' By default, the function also sorts the levels of the row and column variables.
 #' @return An html table.
 #' @examples
-#' nice_contingency_table(wmisc:::mtcars_labeled[, c("cyl", "carb", "mpg")])
+#' nice_contingency_table(mtcars_labeled[, c("cyl", "carb", "mpg")])
 #' 
 #' nice_contingency_table(
-#'   wmisc:::mtcars_labeled[, c("cyl", "am", "mpg")],
+#'   mtcars_labeled[, c("cyl", "am", "mpg")],
 #'   fn = list(Median = median, "mean average deviation" = mad),
 #'   label_na = "-",
 #' )
@@ -85,7 +85,7 @@ nice_contingency_table <- function(rows,
                                    var, 
                                    fn = list(
                                      Mean = mean, 
-                                     n = \(.) length(.)
+                                     n = \(x) length(x)
                                    ),
                                    auto_labels = TRUE,
                                    var_label = NULL,
