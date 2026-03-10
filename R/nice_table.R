@@ -90,7 +90,7 @@ nice_table.default <- function(x,
                                sort_decreasing = FALSE,
                                ...) {
   
-  init_messages(); on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
  
   if (inherits(x, "character") && length(x) == 1) {
    x <- row_df(x) 
@@ -101,7 +101,7 @@ nice_table.default <- function(x,
       x <- as.data.frame(x)
     }, silent = TRUE)
     if (!inherits(x, "data.frame")) {    
-      add_message("Object cannot be coerced to a data.frame")
+      notify("Object cannot be coerced to a data.frame")
       return(FALSE)
     }
   }

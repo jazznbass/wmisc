@@ -22,7 +22,7 @@
 #' percent(runif(10000) > 0.50)
 percent <- function(x, min_valid, max_na) {
   if (!is.logical(x)) {
-    stop("x has to be a logical vector")
+    abort("x has to be a logical vector")
   }
   average(
     x, 

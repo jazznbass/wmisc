@@ -33,8 +33,8 @@
 #' @author Juergen Wilbert 
 #' @examples
 #' nice_item_analysis(
-#'   wmisc:::data_emo, 
-#'   scale = wmisc:::data_emo_scales, 
+#'   data_emo, 
+#'   scale = data_emo_scales, 
 #'   difficulty = TRUE, 
 #'   values = c(1,5)
 #' )
@@ -55,16 +55,16 @@ nice_item_analysis <- function(data,
                        alpha_dropped = TRUE,
                        use_col_labels = FALSE,
                        ...) {
-  init_messages(); on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   args <- as.list(environment())
   
   
   if (!inherits(data, "data.frame")) 
-    add_message("Provided data must be of class data.frame")
+    notify("Provided data must be of class data.frame")
   
   if (!inherits(scales, "list")) {
     scales <- list(scale = scales) 
-    add_message("Scales must be provided in a list. Turned values into list.")
+    notify("Scales must be provided in a list. Turned values into list.")
   } 
     
   if (!is.null(keys)) {
@@ -73,7 +73,7 @@ nice_item_analysis <- function(data,
   }
   
   if (difficulty && is.null(values)) {
-    add_message("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
+    notify("Can not calculate item difficulty without min and max scale values: values = list(c(min, max))")
     difficulty <- FALSE
   }
   
@@ -119,7 +119,7 @@ nice_item_analysis <- function(data,
   
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
-    add_message(
+    notify(
       "Removed ", length(.id), " rows because all items were missing.",
       frame = frame
     )
@@ -130,7 +130,7 @@ nice_item_analysis <- function(data,
   
   if (any(.var == 0, na.rm = TRUE)) {
     filter_names <- names(data_scale)[which(.var == 0)]
-    add_message(
+    notify(
       "Variable with no variance dropped from analyses: ",
       paste0(filter_names, collapse = ", "),
       frame = frame
@@ -142,7 +142,7 @@ nice_item_analysis <- function(data,
   
   if (any(is.na(.var), na.rm = TRUE)) {
     filter_names <- names(data_scale)[which(is.na(.var))]
-    add_message(
+    notify(
       "Variable with NA variance dropped from analyses: ",
       paste0(filter_names, collapse = ", "),
       frame = frame
@@ -162,13 +162,13 @@ nice_item_analysis <- function(data,
         unlist() |> 
         sign()
       if (identical(length(keys), 0L)) {
-        add_message("Weights from scaledic attributes are missing.",
+        notify("Weights from scaledic attributes are missing.",
                     frame = frame)
         keys_from_weights <- FALSE
       }
     } else {
       keys <- NULL
-      add_message("Scaledic is not installed, keys can not be extracted automatically.",
+      notify("Scaledic is not installed, keys can not be extracted automatically.",
                   frame = frame)
     }
     

@@ -76,7 +76,7 @@ nice_chi_test_table  <- function(dv,
       labels[i] <- label
     l <- ref_levels[i]
     if (is.numeric(l)) l <- levels(dv[[i]])[l]
-    if (!l %in% levels(dv[[i]])) stop("Wrong levels.")
+    if (!l %in% levels(dv[[i]])) abort("Wrong levels.")
     dv[[i]] <- relevel(dv[[i]], l)
     res <- chisq.test(dv[[i]], iv)
     out[i, "Level"] <- l

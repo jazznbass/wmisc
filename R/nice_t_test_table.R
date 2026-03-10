@@ -74,11 +74,11 @@ nice_t_test_table <- function(dv,
                               file = NULL,
                               ...) {
 
-  init_messages(); on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   
   if (!missing(data)) {
     if (!is.character(iv)) {
-      add_message("iv should be a character string when data are provided")
+      notify("iv should be a character string when data are provided")
     }
     dv <- data[, dv, drop = FALSE]
     iv <- data[[iv]]

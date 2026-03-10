@@ -77,7 +77,7 @@ rename_by_list <- function(data,
   rn <- rn[rn %in% names(data)]
   rn <- rn[!is.na(names(rn))]
 
-  if (length(rn) == 0) stop("No variables renamed")
+  if (length(rn) == 0) abort("No variables renamed")
 
   out <- rename(data, !!rn)
 

@@ -64,7 +64,7 @@ split_at_percentile <- function(x,
                                 type = "higher", 
                                 explicit_na = NA) {
   if (!type %in% c("higher", "lower")) {
-    stop("Wrong type. Must be 'higher' or 'lower'")
+    abort("Wrong type. Must be 'higher' or 'lower'")
   }
   
   if (is.character(frac)) {
@@ -81,7 +81,7 @@ split_at_percentile <- function(x,
            "quartile" = c(0.25, 0.5, 0.75),
            "quintile" = c(0.2, 0.4, 0.6, 0.8),
            "decile" = seq(0.1, 0.9, by = 0.1),
-           stop("Unknown character for 'frac'. Use 'median', 'tertile', 'quartile', 'quintile', or 'decile'.")
+           abort("Unknown character for 'frac'. Use 'median', 'tertile', 'quartile', 'quintile', or 'decile'.")
     )
   }
   

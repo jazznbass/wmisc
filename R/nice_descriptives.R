@@ -11,7 +11,7 @@
 #' @examples
 #' nice_descriptives(mtcars)
 #' 
-#' nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
+#' nice_descriptives(mtcars_labeled, auto_labels = TRUE, round = 2)
 #' @export
 nice_descriptives <- function(data, 
                               use_col_labels = TRUE,
@@ -20,7 +20,7 @@ nice_descriptives <- function(data,
                               file = NULL,
                               ...) {
   
-  init_messages(); on.exit(print_messages())
+  ## init_messages(); on.exit(print_messages())
   
   if (is.null(footnote)) 
     footnote <- paste0("MAD is the median average deviation with a ",
@@ -32,7 +32,7 @@ nice_descriptives <- function(data,
     for (i in seq_along(data)) {
       if (.logical[i]) data[[i]] <- as.numeric(data[[i]])
     }
-    add_message(
+    notify(
       "Some variables were converted from logical to numeric: ",
       paste0(names(data)[.logical], collapse = ", ")
     )
@@ -42,7 +42,7 @@ nice_descriptives <- function(data,
   if (any(.factor)) {
     for (i in seq_along(data)) {
       if (.factor[i] && nlevels(data[[i]]) == 2) {
-        add_message(
+        notify(
           "Variable '", names(data)[i] ,"' converted from factor to numeric (0/1)"
         )
         names(data)[i] <- paste0(names(data)[i], " (", levels(data[[i]])[2],")")
@@ -57,7 +57,7 @@ nice_descriptives <- function(data,
   
   .filter <- sapply(data, is.numeric)
   if (any(!.filter)) {
-    add_message(
+    notify(
       "Some variables are not numeric and dropped from the analysis: ",
       paste0(names(.filter)[!.filter], collapse = ", ")
     )
