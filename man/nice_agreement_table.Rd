@@ -69,7 +69,7 @@ vars <- c("Norm_Pop_academic", "Norm_Pop_conform", "Norm_Pop_sporty",
   "Norm_LL_language")
 
 nice_agreement_table(
-    data = wmisc:::ex_agreement,
+    data = ex_agreement,
     vars = vars,
     grouping = "id_class_teacher",
     rv = 4,

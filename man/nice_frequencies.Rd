@@ -12,7 +12,8 @@ nice_frequencies(
   show_missing = TRUE,
   show_percent = TRUE,
   percent_base = "column",
-  add_total = TRUE,
+  show_total_col = TRUE,
+  show_total_row = TRUE,
   auto_labels = TRUE,
   title = NULL,
   footnote = NULL,
@@ -34,10 +35,17 @@ nice_frequencies(
 
 \item{show_percent}{If TRUE, adds a column for percentages.}
 
-\item{percent_base}{If show_percent is TRUE, this argument specifies the base for percentage calculations.
-Options are "column" (percentages calculated within each column), "row"
-(percentages calculated within each row), or "total" (percentages calculated based on the total count).
-Default is "column".}
+\item{percent_base}{If show_percent is TRUE, this argument specifies the base
+for percentage calculations. Options are "column" (percentages calculated
+within each column), "row" (percentages calculated within each row), or
+"total" (percentages calculated based on the total count). Default is
+"column".}
+
+\item{show_total_col}{If TRUE, adds a column with the total counts and
+percentages (if show_percent is TRUE).}
+
+\item{show_total_row}{If TRUE, adds a row with the total counts and
+percentages (if show_percent is TRUE).}
 
 \item{auto_labels}{If TRUE, variable names are taken from a label attribute.}
 
@@ -53,23 +61,39 @@ Default is "column".}
 An html table with frequencies
 }
 \description{
-Table with frequency statistics
+This function creates a frequency table for a given variable, optionally
+grouped by another variable. It can include counts, percentages, and totals,
+with customizable labels and formatting options.
+}
+\details{
+The resulting data frame contains the frequency counts and, if specified, the
+percentages for each level of the variable and grouping variable. The table can
+also include totals for rows and columns, and a row for missing values if desired.
+The resulting data frame is decorated with attributes for use with the
+\code{wmisc::nice_table()} function, which is called internally to create the final
+output.
 }
 \examples{
-nice_frequencies(wmisc:::mtcars_labeled[[11]])
+nice_frequencies(mtcars_labeled[[11]])
+
+## cross table
 nice_frequencies(
-  wmisc:::mtcars_labeled$cyl, 
-  wmisc:::mtcars_labeled$am
+  mtcars_labeled$cyl,
+  mtcars_labeled$am
 )
+
+## barebone table
 nice_frequencies(
- wmisc:::mtcars_labeled$cyl,
- wmisc:::mtcars_labeled$am,
+ mtcars_labeled$cyl,
+ mtcars_labeled$am,
  show_missing = FALSE,
- show_percent = FALSE
+ show_percent = FALSE,
+ show_total_col = FALSE,
+ show_total_row = FALSE
 )
 nice_frequencies(
-  wmisc:::mtcars_labeled$cyl,
-  wmisc:::mtcars_labeled$am,
+  mtcars_labeled$cyl,
+  mtcars_labeled$am,
   label = "Cylinders",
   label_grouping = "Transmission",
   title = "Cylinders by Transmission Type"

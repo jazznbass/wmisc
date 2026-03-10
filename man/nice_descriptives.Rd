@@ -36,5 +36,5 @@ Table with descriptive statistics
 \examples{
 nice_descriptives(mtcars)
 
-nice_descriptives(wmisc:::mtcars_labeled, auto_labels = TRUE, round = 2)
+nice_descriptives(mtcars_labeled, auto_labels = TRUE, round = 2)
 }

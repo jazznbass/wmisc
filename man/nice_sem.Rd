@@ -45,10 +45,10 @@ It leverages the \code{nice_table()} function for final formatting, allowing fur
 The resulting table includes a title and footnote that provide context about the estimation method, optimization algorithm, handling of missing data, and citation information for the \code{lavaan} package.
 }
 \examples{
-nice_sem(wmisc:::lavaan_fit)
-nice_sem(wmisc:::lavaan_fit, standardized = FALSE, show_ci = FALSE)
+nice_sem(lavaan_fit)
+nice_sem(lavaan_fit, standardized = FALSE, show_ci = FALSE)
 nice_sem(
- wmisc:::lavaan_fit,
+ lavaan_fit,
  show_fitmeasures = c(
   FI = "cfi", TLI = "tli", RMSEA = "rmsea",
   "SRMR" = "srmr"

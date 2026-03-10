@@ -74,8 +74,8 @@ factor analysis.
 }
 \examples{
 nice_item_analysis(
-  wmisc:::data_emo, 
-  scale = wmisc:::data_emo_scales, 
+  data_emo, 
+  scale = data_emo_scales, 
   difficulty = TRUE, 
   values = c(1,5)
 )

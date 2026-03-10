@@ -81,8 +81,8 @@ Returns a data.frame with item analyses for the provided scales.
 }
 \examples{
 nice_alpha_table(
-  wmisc:::data_emo,
-  wmisc:::data_emo_scales,
+  data_emo,
+  data_emo_scales,
   check_key = TRUE,
   difficulty = TRUE,
   value = list(c(0,4))
@@ -90,8 +90,8 @@ nice_alpha_table(
 
 ## Example needs packages scaledic installed and active
 nice_alpha_table(
-  data = wmisc:::ex_itrf,
-  scales = wmisc:::ex_itrf_scales,
+  data = ex_itrf,
+  scales = ex_itrf_scales,
   labels = c("Internalizing", "Externalizing"),
   keys_from_weights = TRUE,
   difficulty = TRUE,

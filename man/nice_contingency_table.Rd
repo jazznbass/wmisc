@@ -8,7 +8,7 @@ nice_contingency_table(
   rows,
   columns,
   var,
-  fn = list(Mean = mean, n = function(.) length(.)),
+  fn = list(Mean = mean, n = function(x) length(x)),
   auto_labels = TRUE,
   var_label = NULL,
   rows_label = NULL,
@@ -112,10 +112,10 @@ if \code{remove_missing = TRUE}.
 By default, the function also sorts the levels of the row and column variables.
 }
 \examples{
-nice_contingency_table(wmisc:::mtcars_labeled[, c("cyl", "carb", "mpg")])
+nice_contingency_table(mtcars_labeled[, c("cyl", "carb", "mpg")])
 
 nice_contingency_table(
-  wmisc:::mtcars_labeled[, c("cyl", "am", "mpg")],
+  mtcars_labeled[, c("cyl", "am", "mpg")],
   fn = list(Median = median, "mean average deviation" = mad),
   label_na = "-",
 )

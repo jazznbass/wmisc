@@ -3,7 +3,7 @@ Description: Wilbert's Miscellaneous Functions.
 Type: Package
 Title: Wilbert miscellaneous functions
 Version: 0.4.3
-Date: 2026-02-21
+Date: 2026-03-10
 Author: Jürgen Wilbert
 Maintainer: Juergen Wilbert <juergen.wilbert@uni-muenster.de>
 Depends: 
@@ -26,7 +26,8 @@ Imports:
   lmerTest,
   ggplot2,
   performance,
-  insight
+  insight,
+  rlang
 License: GPL (>= 3)
 LazyData: true
 Encoding: UTF-8

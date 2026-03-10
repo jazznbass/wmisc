@@ -34,5 +34,5 @@ change_values(c(NA, 1, NA, 2), NA ~ "This is a missing value")
 
 }
 \seealso{
-\code{\link[dplyr:recode]{dplyr::recode()}}, \code{\link[=ifelse]{ifelse()}}, \code{\link[dplyr:case_when]{dplyr::case_when()}}
+\code{\link[dplyr:recode]{dplyr::recode()}}, \code{\link[=ifelse]{ifelse()}}, \code{\link[dplyr:case-and-replace-when]{dplyr::case_when()}}
 }

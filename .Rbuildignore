@@ -4,3 +4,4 @@
 _config.yml
 docs
 misc
+^data-raw$
