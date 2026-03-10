@@ -49,7 +49,7 @@ check_args <- function(...) {
   env$by_call <- function(arg, fn) {
     args <- formals(fn)
     id <- which(names(args) == as.character(match.call()[2]))
-    if (length(id) == 0) stop("by_call has no matching arg.")
+    if (length(id) == 0) abort("by_call has no matching arg.")
     match <- eval(args[[id]])
     msg <- paste0("'", match, "'")
     if (length(match) == 2) msg <- paste0(msg, collapse = " or ")
@@ -109,7 +109,7 @@ check_args <- function(...) {
   
   if (length(out) > 0) {
     out <- paste0(1:length(out), ": ", unlist(out), "\n")
-    stop("\n", out, call. = FALSE)
+    abort("\n", out, call. = FALSE)
   }
 }
 

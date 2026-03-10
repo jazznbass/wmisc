@@ -9,11 +9,11 @@ ex_itrf_scales <- scaledic::get_scales(
 )
 
 
-model_lmer_1 <- wmisc:::model_lmer_1
-model_lmer_2 <- wmisc:::model_lmer_2
+model_lmer_1 <- model_lmer_1
+model_lmer_2 <- model_lmer_2
 
-model_glmer_1 <- wmisc:::model_glmer_1
-model_glmer_2 <- wmisc:::model_glmer_2
+model_glmer_1 <- model_glmer_1
+model_glmer_2 <- model_glmer_2
 
 
 mtcars_labeled <- add_label(mtcars, list(
