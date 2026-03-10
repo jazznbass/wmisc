@@ -20,10 +20,10 @@
 #' @param round Number of digits to round numeric values.
 #' @param ... Further arguments passed to the `nice_table()` function.
 #' @examples
-#' nice_sem(wmisc:::lavaan_fit)
-#' nice_sem(wmisc:::lavaan_fit, standardized = FALSE, show_ci = FALSE)
+#' nice_sem(lavaan_fit)
+#' nice_sem(lavaan_fit, standardized = FALSE, show_ci = FALSE)
 #' nice_sem(
-#'  wmisc:::lavaan_fit,
+#'  lavaan_fit,
 #'  show_fitmeasures = c(
 #'   FI = "cfi", TLI = "tli", RMSEA = "rmsea",
 #'   "SRMR" = "srmr"
@@ -58,10 +58,18 @@ nice_sem <- function(x,
   rows_variances <- which(out$op == "~~" & out$lhs == out$rhs)
   rows_covariances <- which(out$op == "~~" & out$lhs != out$rhs)
   rows_interecepts <-  which(out$op == "~1")
+  rows_defined <- which(out$op == ":=")
   
-  out[rows_latents, 1] <- paste0(out[rows_latents, 1], " \u2192 ", out[rows_latents, 3] )
-  out[rows_regressions, 1] <- paste0(out[rows_regressions, 1], " \u2190 ", out[rows_regressions, 3] )
-  out[rows_covariances, 1] <- paste0(out[rows_covariances, 1], " \u2194 ", out[rows_covariances, 3] )
+  out[rows_latents, 1] <- paste0(out[["lhs"]][rows_latents], " \u2192 ", out[["rhs"]][rows_latents])
+  out[rows_regressions, 1] <- paste0(out[["lhs"]][rows_regressions], " \u2190 ", out[["rhs"]][rows_regressions])
+  out[rows_covariances, 1] <- paste0(out[["lhs"]][rows_covariances], " \u2194 ", out[["rhs"]][rows_covariances])
+  out[rows_defined, 1] <- paste0(out[["rhs"]][rows_defined])
+  
+  if ("label" %in% names(out)) {
+    id <- which(out[["label"]] != "")
+    out[[1]][id] <- paste0(out[[1]][id], " (", out[["label"]][id], ")")
+    out <- out[, setdiff(names(out), "label")]
+  }
   
   
   row_group <- list(
@@ -69,18 +77,26 @@ nice_sem <- function(x,
     "Regressions" = rows_regressions,
     "Covariances" = rows_covariances,
     "Variances" = rows_variances,
-    "Intercepts" = rows_interecepts
+    "Intercepts" = rows_interecepts,
+    "Defined" = rows_defined
   )
   row_group <- row_group[sapply(row_group, \(.) length(.) > 0)]
   
-  out <- out[, -c(2:3)]
-  names(out) <- c("parameter", char_estimate, "se", "z", "p", "lower", "upper")
-  out$p <- nice_p(out$p)
-  out <- out[,c("parameter", char_estimate, "lower", "upper", "se", "z", "p")]
+  nm <- names(out)
+  names(out)[which(nm == "lhs")] <- "parameter"
+  names(out)[which(nm == "est.std")] <- char_estimate
+  names(out)[which(nm == "pvalue")] <- "p"
+  names(out)[which(nm == "ci.lower")] <- "lower"
+  names(out)[which(nm == "ci.upper")] <- "upper"
   
+  out <- out[, setdiff(names(out), c("op", "rhs"))]
+  out$p <- nice_p(out$p)
+
   # remove cols ----
   
-  if (!show_ci) out <- out[,-(3:4)]
+  if (!show_ci) {
+    out <- out[, setdiff(names(out), c("lower", "upper"))]
+  }
   if (!is.null(remove_cols)) {
     if (is.character(remove_cols)) {
       remove_cols <- which(names(out) %in% remove_cols)
@@ -92,13 +108,13 @@ nice_sem <- function(x,
   
   fit_first <- lavaan::fitmeasures(x)
   
-  out[nrow(out)+1, 1] <- "N parameters"
+  out[nrow(out) + 1, 1] <- "N parameters"
   out[nrow(out), 2] <- fit_first["npar"]
-  out[nrow(out)+1, 1] <- "Observations"
+  out[nrow(out) + 1, 1] <- "Observations"
   out[nrow(out), 2] <- fit_first["ntotal"]
   
   
-  out[nrow(out)+1, 1] <- paste0("\u03a7\u00b2(", fit_first["df"], ") / p-value")
+  out[nrow(out) + 1, 1] <- paste0("\u03a7\u00b2(", fit_first["df"], ") / p-value")
   out[nrow(out), 2] <- fit_first["chisq"]
   #out[nrow(out)+1, 1] <- "p"
   out[nrow(out), 3] <- fit_first["pvalue"]
@@ -145,8 +161,11 @@ nice_sem <- function(x,
     label_na = ""
   )
   
-  if (show_ci) out <- set_wmisc_attributes(
-    out, spanner = list("95% CI" = 3:4))
+  if (show_ci) {
+    cols <- which(names(out) %in% c("lower", "upper"))
+    out <- set_wmisc_attributes(out, 
+      spanner = list("95% CI" = cols[1]:cols[2]))
+  }
   
   args_nice_table$x <- out
 
