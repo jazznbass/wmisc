@@ -189,20 +189,24 @@ nice_table.default <- function(x,
   if (rownames && !is.null(rownames(x))) x <- cbind(" " = rownames(x), x)
   
   args <- c(list(data = x), gt)
-  
   out <- do.call(gt::gt, args)|> gt_apa_style()
   
+  ## Align columns ----
   if (!is.null(cols_align)) {
     for(i_align in seq_along(cols_align)) {
       cols <- cols_align[[i_align]]
       if (identical(cols, "all")) cols <- 1:ncol(x)
       if (is.character(cols)) 
         cols <- which(names(x) %in% cols)
-      out <- gt::cols_align(out, align = names(cols_align)[i_align], columns = cols)
+      out <- gt::cols_align(out, 
+                            align = names(cols_align)[i_align], columns = cols)
     }
   }
 
+  ## Add title ----
   if (!is.null(title)) out <- gt::tab_header(out, title = gt::md(title))
+  
+  ## Add row groups ----
   if (!is.null(row_group)) {
     for(i in length(row_group):1)
       out <- gt::tab_row_group(
@@ -214,30 +218,47 @@ nice_table.default <- function(x,
       locations = gt::cells_row_groups()
     )
   }
-  
   if (!is.null(row_group_order)) {
     out <- gt::row_group_order(out, groups = row_group_order)
   }
   
+  ## Add spanner ----
   if (!is.null(spanner)) {
     for(i in seq_along(spanner)) {
+      if (markdown) label <- gt::md(names(spanner)[i]) else label <- names(spanner)[i]
       out <- gt::tab_spanner(
         out, 
-        label = names(spanner)[i], 
+        label = label, 
         columns = spanner[[i]]
       )  
     }
   }
   
+  ## Add column labels ----
+  if (markdown) {
+    md_colnames <- setNames(names(x), names(x)) |> as.list()
+    cols_label <- c(cols_label, md_colnames)
+    cols_label <- cols_label[!duplicated(names(cols_label))]
+    cols_label <- lapply(cols_label, \(x) {
+      if (!is.null(x)) {
+        x <- gt::md(x)
+      }
+      x
+    })
+  }
   if (!is.null(cols_label)) out <- gt::cols_label(out, .list = cols_label)
+  
+  ## Add footnote ----
   if (!is.null(footnote)) {
     out <- gt::tab_footnote(out, gt::md(footnote), placement = "left")
   }
   if (!is.null(decimals)) out <- gt::fmt_number(out, decimals = decimals)
   if (!is.null(label_na)) out <- gt::sub_missing(out, missing_text = label_na)
   
+  ## Add markdown formatting ----
   if (markdown) out <- gt::fmt_markdown(out)
   
+  ## Save file ----
   if (!is.null(file)) gt::gtsave(out, file)
     
   out
