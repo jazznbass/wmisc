@@ -1,4 +1,4 @@
-## version 0.1.0
+## version 0.1.0-2
 
 #' Throws a message
 #'
@@ -41,6 +41,8 @@ notify <- function(... , type = "!", detail = 1, warning = FALSE) {
   invisible(NULL)
 }
 
+#' Throws a warning
+#' This is a convenience wrapper for internal use.
 warn <- function(...) {
   notify(..., warning = TRUE)
 }

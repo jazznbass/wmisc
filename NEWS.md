@@ -1,3 +1,7 @@
+## wmisc 0.4.4
+
+- `nice_table()`: Now applies mardown to columnames and spanners as well if `markdown = TRUE` is specified.
+
 ## wmisc 0.4.3
 
 ### Changes
