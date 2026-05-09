@@ -24,6 +24,7 @@ nice_corrmatrix(
   string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
   string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
   caption = NULL,
+  title = caption,
   drop_zero = TRUE,
   type = "html",
   file = NULL,
@@ -69,8 +70,6 @@ significant.}
 
 \item{string_p}{Character string in glue format for p-values.}
 
-\item{caption}{Caption for an html table.}
-
 \item{drop_zero}{If TRUE, leadning zeros are dropped.}
 
 \item{type}{Character string. "df" for data-frame. "html" for html table.}
@@ -79,6 +78,8 @@ significant.}
 defined by file ending eith html or docx).}
 
 \item{...}{Further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
+
+\item{caption/title}{Title for an html table.}
 }
 \value{
 A data-frame or a html table object

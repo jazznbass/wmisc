@@ -6,7 +6,7 @@
 \usage{
 nice_item_analysis(
   data,
-  scales,
+  scales = NULL,
   labels = NULL,
   round = 2,
   ci = FALSE,
@@ -28,7 +28,7 @@ nice_item_analysis(
 
 \item{scales}{A list with vectors with variable names that define each scale.}
 
-\item{labels}{Optional labels for the items in the scale.}
+\item{labels}{Optional labels for the items in the scale. If NULL, variable names are used.}
 
 \item{round}{Rounds values to given decimal position.}
 

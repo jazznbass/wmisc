@@ -63,8 +63,8 @@ dic <- data.frame(old = c("A", "B"), new = c("albert", "bea"))
 rename_by_list(dat, dic, to_from = c("new" = "old"))
 rename_by_list(dat, dic, to = "new", from = "old")
 \dontrun{
-rename_by_list(dat, "rename_list,xlsx", to_from = c("new" = "old"))
-rename_by_list(dat, "rename_list,xlsx", to = "new", from = "old")
+rename_by_list(dat, "rename_list.xlsx", to_from = c("new" = "old"))
+rename_by_list(dat, "rename_list.xlsx", to = "new", from = "old")
 }
 }
 \author{
