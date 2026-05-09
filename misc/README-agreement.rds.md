@@ -1,40 +1,58 @@
 # Discription of datafile `agreement.rds`
 
-- README file from: 2026-01-13 16:48:21   
-- Datafile from: 2025-01-19 07:57:00   
+- README file from: 2026-03-21 15:10:38  
+- Datafile from: 2025-01-19 07:57:00  
+- File format: `rds`  
+- File size: 54.25 KB  
+- Object size: 993.16 KB  
 - This data is a tibble with 29 columns and 3626 rows.  
 - This data has dictionary information from the scaledic package.  
 
+## Overview
+
+- Rows: 3626
+- Columns: 29
+- Complete rows: 794 (21.9%)
+- Rows with missing values: 2832 (78.1%)
+- Missing values total: 54761 (52.08%)
+- Duplicated rows: 505
+
+## Variable types
+
+- dic: 29
+
 ## Columns 
 
-|Variable                |Class                  |Values                               |Label                 | 
-|:-----------------------|:----------------------|:------------------------------------|:---------------------| 
-|Norm_Pop_academic       |(dic/numeric, 1924 NA) |1 to 4                               |Academic +            | 
-|Norm_Pop_conform        |(dic/numeric, 1931 NA) |1 to 4                               |Conform               | 
-|Norm_Pop_sporty         |(dic/numeric, 1932 NA) |1 to 4                               |Sporty +              | 
-|Norm_Pop_cool_clothes   |(dic/numeric, 1935 NA) |1 to 4                               |Clothes +             | 
-|Norm_Pop_helpful        |(dic/numeric, 1934 NA) |1 to 4                               |Helpful               | 
-|Norm_Unpop_academic     |(dic/numeric, 2480 NA) |1 to 4                               |Academic -            | 
-|Norm_Unpop_nonconform   |(dic/numeric, 2481 NA) |1 to 4                               |Non-conform           | 
-|Norm_Unpop_sporty       |(dic/numeric, 2483 NA) |1 to 4                               |Sporty -              | 
-|Norm_Unpop_cool_clothes |(dic/numeric, 2482 NA) |1 to 4                               |Clothes -             | 
-|Norm_Unpop_language     |(dic/numeric, 2483 NA) |1 to 4                               |Language skills       | 
-|Norm_LM_academic        |(dic/numeric, 1866 NA) |1 to 4                               |Academic +            | 
-|Norm_LM_conform         |(dic/numeric, 1861 NA) |1 to 4                               |Conform               | 
-|Norm_LM_sporty          |(dic/numeric, 1859 NA) |1 to 4                               |Sporty +              | 
-|Norm_LM_cool_clothes    |(dic/numeric, 1865 NA) |1 to 4                               |Clothes +             | 
-|Norm_LM_helpful         |(dic/numeric, 1865 NA) |1 to 4                               |Helpful               | 
-|Norm_LL_academic        |(dic/numeric, 2484 NA) |1 to 4                               |Academic -            | 
-|Norm_LL_nonconform      |(dic/numeric, 2481 NA) |1 to 4                               |Non-conform           | 
-|Norm_LL_sporty          |(dic/numeric, 2484 NA) |1 to 4                               |Sporty -              | 
-|Norm_LL_cool_clothes    |(dic/numeric, 2483 NA) |1 to 4                               |Clothes -             | 
-|Norm_LL_language        |(dic/numeric, 2486 NA) |1 to 4                               |Language skills       | 
-|Unpop_in                |(dic/numeric, 1220 NA) |0 to 22                              |Unpopular indegrees   | 
-|Pop_in                  |(dic/numeric, 1220 NA) |0 to 26                              |Popular indegrees     | 
-|LL_in                   |(dic/numeric, 935 NA)  |0 to 25                              |Like least indegrees  | 
-|LM_in                   |(dic/numeric, 935 NA)  |0 to 23                              |Like most indegrees   | 
-|Unpop_out               |(dic/numeric, 1816 NA) |0 to 25                              |Unpopular outdegrees  | 
-|Pop_out                 |(dic/numeric, 1815 NA) |0 to 25                              |Popular outdegrees    | 
-|LL_out                  |(dic/numeric, 1512 NA) |0 to 23                              |Like least outdegrees | 
-|LM_out                  |(dic/numeric, 1509 NA) |0 to 24                              |Like most outdegrees  | 
-|id_class_teacher        |(dic/character, 0 NA)  |1111, 20174b, 2017M4b, 2222, 3 [...] |id class              |
+|Variable                |Class         |NA         |Values                                         |Label                 |
+|:-----------------------|:-------------|:----------|:----------------------------------------------|:---------------------|
+|Norm_Pop_academic       |dic/numeric   |1924 (53%) |1 to 4                                         |Academic +            |
+|Norm_Pop_conform        |dic/numeric   |1931 (53%) |1 to 4                                         |Conform               |
+|Norm_Pop_sporty         |dic/numeric   |1932 (53%) |1 to 4                                         |Sporty +              |
+|Norm_Pop_cool_clothes   |dic/numeric   |1935 (53%) |1 to 4                                         |Clothes +             |
+|Norm_Pop_helpful        |dic/numeric   |1934 (53%) |1 to 4                                         |Helpful               |
+|Norm_Unpop_academic     |dic/numeric   |2480 (68%) |1 to 4                                         |Academic -            |
+|Norm_Unpop_nonconform   |dic/numeric   |2481 (68%) |1 to 4                                         |Non-conform           |
+|Norm_Unpop_sporty       |dic/numeric   |2483 (68%) |1 to 4                                         |Sporty -              |
+|Norm_Unpop_cool_clothes |dic/numeric   |2482 (68%) |1 to 4                                         |Clothes -             |
+|Norm_Unpop_language     |dic/numeric   |2483 (68%) |1 to 4                                         |Language skills       |
+|Norm_LM_academic        |dic/numeric   |1866 (51%) |1 to 4                                         |Academic +            |
+|Norm_LM_conform         |dic/numeric   |1861 (51%) |1 to 4                                         |Conform               |
+|Norm_LM_sporty          |dic/numeric   |1859 (51%) |1 to 4                                         |Sporty +              |
+|Norm_LM_cool_clothes    |dic/numeric   |1865 (51%) |1 to 4                                         |Clothes +             |
+|Norm_LM_helpful         |dic/numeric   |1865 (51%) |1 to 4                                         |Helpful               |
+|Norm_LL_academic        |dic/numeric   |2484 (69%) |1 to 4                                         |Academic -            |
+|Norm_LL_nonconform      |dic/numeric   |2481 (68%) |1 to 4                                         |Non-conform           |
+|Norm_LL_sporty          |dic/numeric   |2484 (69%) |1 to 4                                         |Sporty -              |
+|Norm_LL_cool_clothes    |dic/numeric   |2483 (68%) |1 to 4                                         |Clothes -             |
+|Norm_LL_language        |dic/numeric   |2486 (69%) |1 to 4                                         |Language skills       |
+|Unpop_in                |dic/numeric   |1220 (34%) |0 to 22                                        |Unpopular indegrees   |
+|Pop_in                  |dic/numeric   |1220 (34%) |0 to 26                                        |Popular indegrees     |
+|LL_in                   |dic/numeric   |935 (26%)  |0 to 25                                        |Like least indegrees  |
+|LM_in                   |dic/numeric   |935 (26%)  |0 to 23                                        |Like most indegrees   |
+|Unpop_out               |dic/numeric   |1816 (50%) |0 to 25                                        |Unpopular outdegrees  |
+|Pop_out                 |dic/numeric   |1815 (50%) |0 to 25                                        |Popular outdegrees    |
+|LL_out                  |dic/numeric   |1512 (42%) |0 to 23                                        |Like least outdegrees |
+|LM_out                  |dic/numeric   |1509 (42%) |0 to 24                                        |Like most outdegrees  |
+|id_class_teacher        |dic/character |0 (0%)     |1111, 20174b, 2017M4b, 2222, 3333, AALI1 [...] |id class              |
+
+<!-- Automatically generated by the `thisandthat` package (Wilbert, 2026) -->

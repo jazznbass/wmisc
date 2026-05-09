@@ -20,13 +20,13 @@ with columns separated by a specified separator, and converts it into a data
 frame.
 }
 \examples{
-row_df("
-id|name|age
-1|Alice|30
-")
-row_df("
-id,name,age
-3,Charlie,35
-", sep = ",")
+#row_df("
+#id|name|age
+#1|Alice|30
+#")
+#row_df("
+#id,name,age
+#3,Charlie,35
+#", sep = ",")
 }
 \keyword{internal}

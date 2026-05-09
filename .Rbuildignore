@@ -5,3 +5,5 @@ _config.yml
 docs
 misc
 ^data-raw$
+^\.positai$
+^\.claude$

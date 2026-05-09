@@ -1,45 +1,63 @@
 # Discription of datafile `emotional_style.rds`
 
-- README file from: 2026-01-13 16:48:21   
-- Datafile from: 2025-01-19 07:46:23   
+- README file from: 2026-03-21 15:10:38  
+- Datafile from: 2025-01-19 07:46:23  
+- File format: `rds`  
+- File size: 5.27 KB  
+- Object size: 55.16 KB  
 - This data is a `data.frame` with 35 columns and 146 rows.  
+
+## Overview
+
+- Rows: 146
+- Columns: 35
+- Complete rows: 142 (97.26%)
+- Rows with missing values: 4 (2.74%)
+- Missing values total: 6 (0.12%)
+- Duplicated rows: 0
+
+## Variable types
+
+- numeric: 35
 
 ## Columns 
 
-|Variable   |Class           |Values   |Label                                | 
-|:----------|:---------------|:--------|:------------------------------------| 
-|ID         |(numeric, 0 NA) |1 to 30  |NA                                   | 
-|F1         |(numeric, 1 NA) |0 to 4   |Ich bemerke leicht subtile Ver [...] | 
-|F2         |(numeric, 0 NA) |0 to 4   |Ich beschreibe mich als optimi [...] | 
-|F3         |(numeric, 0 NA) |0 to 4   |Ich bin immer gut gelaunt, auc [...] | 
-|F4         |(numeric, 1 NA) |0 to 4   |Ich erkenne meinem Gegenüber s [...] | 
-|F5         |(numeric, 0 NA) |0 to 4   |Ich erkenne sofort, wenn jeman [...] | 
-|F6         |(numeric, 0 NA) |0 to 4   |Ich fühle mich in der Lage, mi [...] | 
-|F7         |(numeric, 0 NA) |0 to 4   |Ich fühle mich oft überwältigt [...] | 
-|F8         |(numeric, 0 NA) |0 to 4   |Ich kann mich gut an neue Gege [...] | 
-|F9         |(numeric, 0 NA) |0 to 4   |Ich kann mich gut auf eine Auf [...] | 
-|F10        |(numeric, 0 NA) |0 to 4   |Ich kann mich von Situationen  [...] | 
-|F11        |(numeric, 0 NA) |0 to 4   |Ich kann oft klar benennen, wa [...] | 
-|F12        |(numeric, 0 NA) |0 to 4   |Ich kann Situationen gut einsc [...] | 
-|F13        |(numeric, 0 NA) |0 to 4   |Ich lasse mich bei Aufgaben of [...] | 
-|F14        |(numeric, 0 NA) |0 to 4   |Ich lasse mich von kleinen All [...] | 
-|F15        |(numeric, 0 NA) |0 to 4   |Ich schweife oft mit meinen Ge [...] | 
-|F16        |(numeric, 0 NA) |0 to 4   |Ich spüre schnell, wenn die At [...] | 
-|F17        |(numeric, 0 NA) |0 to 4   |Ich verstehe schnell den Grund [...] | 
-|F18        |(numeric, 1 NA) |0 to 4   |Ich weiß oft im Voraus, welche [...] | 
-|F19        |(numeric, 0 NA) |0 to 4   |In Gesprächen mit anderen schw [...] | 
-|F20        |(numeric, 0 NA) |0 to 4   |In meinen zwischenmenschlichen [...] | 
-|F21        |(numeric, 0 NA) |0 to 4   |In sozialen Kontexten erkenne  [...] | 
-|F22        |(numeric, 0 NA) |0 to 4   |Meine Freunde beschreiben mich [...] | 
-|F23        |(numeric, 1 NA) |0 to 4   |Mir fällt es leicht, Emotionen [...] | 
-|F24        |(numeric, 0 NA) |0 to 4   |Mir fällt es schwer, mich auf  [...] | 
-|F25        |(numeric, 0 NA) |0 to 4   |Nach einem Streit brauche ich  [...] | 
-|F26        |(numeric, 1 NA) |0 to 4   |Nach schönen Momenten fühle ic [...] | 
-|F27        |(numeric, 0 NA) |0 to 4   |Selbst wenn ich kurzfristige R [...] | 
-|F28        |(numeric, 0 NA) |0 to 4   |Über ein positives Erlebnis fr [...] | 
-|F29        |(numeric, 1 NA) |0 to 4   |Wenn ich ein Geschenk erhalte, [...] | 
-|F30        |(numeric, 0 NA) |0 to 4   |Wenn ich glücklich bin und auf [...] | 
-|F31        |(numeric, 0 NA) |0 to 4   |Wenn ich starke Emotionen spür [...] | 
-|F32        |(numeric, 0 NA) |0 to 4   |Wenn mein Morgen stressig war, [...] | 
-|Alter      |(numeric, 0 NA) |16 to 80 |Alter                                | 
-|Geschlecht |(numeric, 0 NA) |1 to 3   |Geschlecht                           |
+|Variable   |Class   |NA     |Values   |Label                                          |
+|:----------|:-------|:------|:--------|:----------------------------------------------|
+|ID         |numeric |0 (0%) |1 to 30  |NA                                             |
+|F1         |numeric |1 (1%) |0 to 4   |Ich bemerke leicht subtile Veränderungen [...] |
+|F2         |numeric |0 (0%) |0 to 4   |Ich beschreibe mich als optimistischen M [...] |
+|F3         |numeric |0 (0%) |0 to 4   |Ich bin immer gut gelaunt, auch nach str [...] |
+|F4         |numeric |1 (1%) |0 to 4   |Ich erkenne meinem Gegenüber schnell an, [...] |
+|F5         |numeric |0 (0%) |0 to 4   |Ich erkenne sofort, wenn jemand in meine [...] |
+|F6         |numeric |0 (0%) |0 to 4   |Ich fühle mich in der Lage, mit Stresssi [...] |
+|F7         |numeric |0 (0%) |0 to 4   |Ich fühle mich oft überwältigt, weil es  [...] |
+|F8         |numeric |0 (0%) |0 to 4   |Ich kann mich gut an neue Gegebenheiten  [...] |
+|F9         |numeric |0 (0%) |0 to 4   |Ich kann mich gut auf eine Aufgabe fokus [...] |
+|F10        |numeric |0 (0%) |0 to 4   |Ich kann mich von Situationen distanzier [...] |
+|F11        |numeric |0 (0%) |0 to 4   |Ich kann oft klar benennen, was ich in e [...] |
+|F12        |numeric |0 (0%) |0 to 4   |Ich kann Situationen gut einschätzen und [...] |
+|F13        |numeric |0 (0%) |0 to 4   |Ich lasse mich bei Aufgaben oft von mein [...] |
+|F14        |numeric |0 (0%) |0 to 4   |Ich lasse mich von kleinen Alltagssituat [...] |
+|F15        |numeric |0 (0%) |0 to 4   |Ich schweife oft mit meinen Gedanken ab, [...] |
+|F16        |numeric |0 (0%) |0 to 4   |Ich spüre schnell, wenn die Atmosphäre i [...] |
+|F17        |numeric |0 (0%) |0 to 4   |Ich verstehe schnell den Grund meiner Em [...] |
+|F18        |numeric |1 (1%) |0 to 4   |Ich weiß oft im Voraus, welche Situation [...] |
+|F19        |numeric |0 (0%) |0 to 4   |In Gesprächen mit anderen schweifen mein [...] |
+|F20        |numeric |0 (0%) |0 to 4   |In meinen zwischenmenschlichen Beziehung [...] |
+|F21        |numeric |0 (0%) |0 to 4   |In sozialen Kontexten erkenne ich auch u [...] |
+|F22        |numeric |0 (0%) |0 to 4   |Meine Freunde beschreiben mich als unsen [...] |
+|F23        |numeric |1 (1%) |0 to 4   |Mir fällt es leicht, Emotionen und Gedan [...] |
+|F24        |numeric |0 (0%) |0 to 4   |Mir fällt es schwer, mich auf ein Gesprä [...] |
+|F25        |numeric |0 (0%) |0 to 4   |Nach einem Streit brauche ich erstmal vi [...] |
+|F26        |numeric |1 (1%) |0 to 4   |Nach schönen Momenten fühle ich mich sch [...] |
+|F27        |numeric |0 (0%) |0 to 4   |Selbst wenn ich kurzfristige Rückschläge [...] |
+|F28        |numeric |0 (0%) |0 to 4   |Über ein positives Erlebnis freue ich mi [...] |
+|F29        |numeric |1 (1%) |0 to 4   |Wenn ich ein Geschenk erhalte, kann ich  [...] |
+|F30        |numeric |0 (0%) |0 to 4   |Wenn ich glücklich bin und auf eine Pers [...] |
+|F31        |numeric |0 (0%) |0 to 4   |Wenn ich starke Emotionen spüre, kann ic [...] |
+|F32        |numeric |0 (0%) |0 to 4   |Wenn mein Morgen stressig war, bin ich d [...] |
+|Alter      |numeric |0 (0%) |16 to 80 |Alter                                          |
+|Geschlecht |numeric |0 (0%) |1 to 3   |Geschlecht                                     |
+
+<!-- Automatically generated by the `thisandthat` package (Wilbert, 2026) -->

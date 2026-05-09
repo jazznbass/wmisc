@@ -59,14 +59,16 @@ nice_loadings <- function(x,
   
   complexity <- x$complexity
   communalities <- 1 - x$uniquenesses
+  
+  object <- round(as.data.frame(object), round)
+  object[abs(object) < cut] <- ""
+  
   object <- cbind(
     object, 
-    Communalities = communalities, 
-    Complexity = complexity
+    Communalities = round(communalities, round), 
+    Complexity = round(complexity, round)
   )
   
-  object <- round(object, round)
-  object[abs(object) < cut] <- ""
   object <- as.data.frame(object)
   
   var_exp <- round(var_exp, round)

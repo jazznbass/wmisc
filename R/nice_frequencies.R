@@ -18,6 +18,8 @@
 #' @param label_grouping Set label for the grouping variable name.
 #' @param show_missing If TRUE, adds a row for the number of missing values.
 #' @param show_percent If TRUE, adds a column for percentages.
+#' @param show_percent_cumulative If TRUE, adds a column for cumulative 
+#'    percentages (only if no grouping variable is provided).
 #' @param percent_base If show_percent is TRUE, this argument specifies the base
 #'   for percentage calculations. Options are "column" (percentages calculated
 #'   within each column), "row" (percentages calculated within each row), or
@@ -65,6 +67,7 @@ nice_frequencies <- function(data,
                              label_grouping = NULL,
                              show_missing = TRUE,
                              show_percent = TRUE,
+                             show_percent_cumulative = FALSE,
                              percent_base = "column",
                              show_total_col = TRUE, 
                              show_total_row = TRUE,
@@ -111,14 +114,20 @@ nice_frequencies <- function(data,
     out <- as.data.frame(tab)
     names(out)[1] <- "Frequency"
     if (show_percent) {
-      out$Percent = out[[1]] / sum(out[[1]], na.rm = TRUE) * 100
+      out$Percent <- out[[1]] / sum(out[[1]], na.rm = TRUE) * 100
+      if(show_percent_cumulative) {
+        out$`Percent cumulative` <- cumsum(out$Percent)
+      }
     }
-    if (show_total_col) {
+    if (show_total_row) {
       .total <- sum(out[[1]], na.rm = TRUE)
       if (show_percent) {
         .total[2] <- sum(out$Percent, na.rm = TRUE)
       }
-      out <- rbind(out, Total = .total)
+      
+      if(show_percent_cumulative) .total[3] <- NA
+      
+      out <- rbind(out, Total = .total) 
     }
     
     spanner <- NULL

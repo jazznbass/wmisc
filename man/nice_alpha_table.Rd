@@ -7,7 +7,7 @@
 \usage{
 nice_alpha_table(
   data,
-  scales,
+  scales = NULL,
   labels = NULL,
   round = 2,
   ci = TRUE,
@@ -42,7 +42,9 @@ alpha_table(
 \item{data}{A data Frame}
 
 \item{scales}{A list containing vectors with variable names. Each list
-element defines one scale. Named list elements are used as labels.}
+element defines one scale. Named list elements are used as labels.
+If no scales are provided, all variables in the data frame are treated as
+one scale.}
 
 \item{labels}{Label names for scales (defaults to named list elements in
 'scales').}

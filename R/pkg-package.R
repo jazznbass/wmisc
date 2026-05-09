@@ -6,10 +6,8 @@
 #' @aliases wmisc-package wmisc
 #' @author Jürgen Wilbert \[aut, cre\]
 #' @keywords package
-#' @import graphics
+#' @import graphics ggplot2
 #' @importFrom utils read.csv citation packageVersion
-#' @importFrom ggplot2 ggplot geom_col geom_text aes scale_fill_brewer position_stack unit
-#'   theme_minimal ylab xlab theme element_blank coord_flip element_rect annotate 
 #' @importFrom gt gt html opt_table_lines tab_options opt_table_font
 #' @importFrom openxlsx write.xlsx
 #' @importFrom forcats fct_explicit_na

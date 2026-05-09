@@ -10,6 +10,7 @@ nice_descriptives(
   title = "Descriptive statistics",
   footnote = NULL,
   file = NULL,
+  show_scale = TRUE,
   ...
 )
 }
@@ -24,6 +25,9 @@ attribute.}
 \item{footnote}{Footnote for the table.}
 
 \item{file}{If a file name is provided, the table is saved to this file.}
+
+\item{show_scale}{If TRUE, a column with the scale range is added if the
+variable has value labels (either from haven or scaledic attributes).}
 
 \item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}.}
 }

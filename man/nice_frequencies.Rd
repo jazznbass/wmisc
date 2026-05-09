@@ -11,6 +11,7 @@ nice_frequencies(
   label_grouping = NULL,
   show_missing = TRUE,
   show_percent = TRUE,
+  show_percent_cumulative = FALSE,
   percent_base = "column",
   show_total_col = TRUE,
   show_total_row = TRUE,
@@ -34,6 +35,9 @@ nice_frequencies(
 \item{show_missing}{If TRUE, adds a row for the number of missing values.}
 
 \item{show_percent}{If TRUE, adds a column for percentages.}
+
+\item{show_percent_cumulative}{If TRUE, adds a column for cumulative
+percentages (only if no grouping variable is provided).}
 
 \item{percent_base}{If show_percent is TRUE, this argument specifies the base
 for percentage calculations. Options are "column" (percentages calculated

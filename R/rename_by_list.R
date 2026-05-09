@@ -48,8 +48,8 @@
 #' rename_by_list(dat, dic, to_from = c("new" = "old"))
 #' rename_by_list(dat, dic, to = "new", from = "old")
 #' \dontrun{
-#' rename_by_list(dat, "rename_list,xlsx", to_from = c("new" = "old"))
-#' rename_by_list(dat, "rename_list,xlsx", to = "new", from = "old")
+#' rename_by_list(dat, "rename_list.xlsx", to_from = c("new" = "old"))
+#' rename_by_list(dat, "rename_list.xlsx", to = "new", from = "old")
 #' }
 rename_by_list <- function(data,
                            file = NULL,
@@ -69,6 +69,7 @@ rename_by_list <- function(data,
   }
 
   if (is.null(file) && !is.null(to_from)) {
+    if (is.list(to_from)) to_from <- unlist(to_from)
     from <- to_from
     to <- names(to_from)
   }
@@ -78,10 +79,10 @@ rename_by_list <- function(data,
   rn <- rn[!is.na(names(rn))]
 
   if (length(rn) == 0) abort("No variables renamed")
+  
+  names(data)[match(rn, names(data))] <- names(rn)
+  
+  notify(paste0(length(rn), " variables renamed\n"))
 
-  out <- rename(data, !!rn)
-
-  cat(paste0(length(rn), " variables renamed\n"))
-
-  out
+  data
 }

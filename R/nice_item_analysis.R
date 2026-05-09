@@ -10,7 +10,7 @@
 #'
 #' @param data A data Frame.
 #' @param scales A list with vectors with variable names that define each scale.
-#' @param labels Optional labels for the items in the scale.
+#' @param labels Optional labels for the items in the scale. If NULL, variable names are used.
 #' @param round Rounds values to given decimal position.
 #' @param ci If TRUE confidence intervals are calculated.
 #' @param conf_level Confidence level (e.g. 0.95 for 95 percent).
@@ -40,7 +40,7 @@
 #' )
 #' @export
 nice_item_analysis <- function(data,
-                       scales,
+                       scales = NULL,
                        labels = NULL,
                        round = 2,
                        ci = FALSE,
@@ -58,9 +58,10 @@ nice_item_analysis <- function(data,
   ## init_messages(); on.exit(print_messages())
   args <- as.list(environment())
   
-  
   if (!inherits(data, "data.frame")) 
     notify("Provided data must be of class data.frame")
+  
+  if (is.null(scales)) scales <- list(scale = names(data))
   
   if (!inherits(scales, "list")) {
     scales <- list(scale = scales) 
@@ -115,13 +116,11 @@ nice_item_analysis <- function(data,
   if (use_col_labels) data_scale <- rename_from_labels(data_scale) 
   
   header <- c()
-  frame <- "nice_item_analysis"
-  
+
   .id <- apply(data_scale, 1, function(x) all(is.na(x))) |> which()
   if (length(.id) > 0) {
     notify(
-      "Removed ", length(.id), " rows because all items were missing.",
-      frame = frame
+      "Removed ", length(.id), " rows because all items were missing."
     )
     data_scale <- data_scale[-.id, ]
   }
@@ -132,8 +131,7 @@ nice_item_analysis <- function(data,
     filter_names <- names(data_scale)[which(.var == 0)]
     notify(
       "Variable with no variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", "),
-      frame = frame
+      paste0(filter_names, collapse = ", ")
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -144,8 +142,7 @@ nice_item_analysis <- function(data,
     filter_names <- names(data_scale)[which(is.na(.var))]
     notify(
       "Variable with NA variance dropped from analyses: ",
-      paste0(filter_names, collapse = ", "),
-      frame = frame
+      paste0(filter_names, collapse = ", ")
     )
     .id <- which(!scale %in% filter_names)
     scale <- scale[.id]
@@ -162,14 +159,12 @@ nice_item_analysis <- function(data,
         unlist() |> 
         sign()
       if (identical(length(keys), 0L)) {
-        notify("Weights from scaledic attributes are missing.",
-                    frame = frame)
+        notify("Weights from scaledic attributes are missing.")
         keys_from_weights <- FALSE
       }
     } else {
       keys <- NULL
-      notify("Scaledic is not installed, keys can not be extracted automatically.",
-                  frame = frame)
+      notify("Scaledic is not installed, keys can not be extracted automatically.")
     }
     
   }

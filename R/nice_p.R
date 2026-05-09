@@ -33,9 +33,11 @@
 #' paste0("p", nice_p(c(0.0004, 0.005, 0.03, 0.2), equal_sign = TRUE, stars = TRUE))
 #' 
 nice_p <- function(p, equal_sign = FALSE, digits = 3, stars = FALSE) {
-  unlist(
-    lapply(p, .nice_p, equal_sign = equal_sign, digits = digits, stars = stars)
-  )
+    out <- lapply(p, function(x) 
+      .nice_p(x, equal_sign = equal_sign, digits = digits, stars = stars)
+    )
+    out <- unlist(out)
+    out
 }
 
 .nice_p <- function(p, equal_sign, digits, stars) {
