@@ -1,6 +1,14 @@
+## wmisc 0.4.7
+
+### New functions
+
+- `values_to_colors_continuous()`: Returns a vector of colors based on a continuous variable.
+- `values_to_colors_discrete()`: Returns a vector of colors based on a discrete variable.
+- `nice_table()`: now returns data.frame as attributes "df"
+
 ## wmisc 0.4.4
 
-- `nice_table()`: Now applies mardown to columnames and spanners as well if `markdown = TRUE` is specified.
+- `nice_table()`: Now applies markdown to column-names and spanners as well if `markdown = TRUE` is specified.
 
 ## wmisc 0.4.3
 
