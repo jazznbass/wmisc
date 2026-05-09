@@ -23,7 +23,7 @@
 #' @param show_stars TRUE if stars should be included.
 #' @param show_descriptives If TRUE, mean and sd columns are added.
 #' @param drop_zero If TRUE, leadning zeros are dropped.
-#' @param caption Caption for an html table.
+#' @param caption/title Title for an html table.
 #' @param file If TRUE or a filename is provided, a file is exportet (format is
 #'   defined by file ending eith html or docx).
 #' @param type Character string. "df" for data-frame. "html" for html table.
@@ -61,6 +61,7 @@ nice_corrmatrix <- function(cr,
                             string_ci = "{break_sign}[{ci_lower},{ci_upper}]",
                             string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
                             caption = NULL,
+                            title = caption,
                             drop_zero = TRUE,
                             type = "html", 
                             file = NULL,
@@ -73,11 +74,11 @@ nice_corrmatrix <- function(cr,
       .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
       .n <- apply(cr, 2, function(x) sum(!is.na(x)))
       cr <- corrmatrix(cr, ...)
-      if (is.null(caption)) caption <- "Correlation matrix"
+      if (is.null(title)) title <- "Correlation matrix"
       footnote <- NULL
     } else {
-      if (is.null(caption)) {
-        caption <- paste0(
+      if (is.null(title)) {
+        title <- paste0(
           "Multilevel correlation matrix with ", 
           deparse(substitute(group)), " as the grouping variable"
         )
@@ -111,6 +112,7 @@ nice_corrmatrix <- function(cr,
   diag(p) <- 1
   if (show_stars) {
     copy_r <- r
+
     r[which(p <= .10)] <- paste0(copy_r[which(p <= .10)], char_p10)
     r[which(p <= .05)] <- paste0(copy_r[which(p <= .05)], "*  ")
     r[which(p <= .01)] <- paste0(copy_r[which(p <= .01)], "** ")
@@ -167,7 +169,7 @@ nice_corrmatrix <- function(cr,
   
   r <- set_wmisc_attributes(
     r, 
-    title = caption, 
+    title = title, 
     note = if (show_stars) {paste0(
       char_p10, 
       "*p* < .10; \\**p* < .05; \\*\\**p* < .01; \\*\\*\\**p* < .001",
