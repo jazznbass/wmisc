@@ -6,6 +6,8 @@
 #' @param title Title for the table.
 #' @param footnote Footnote for the table.
 #' @param file If a file name is provided, the table is saved to this file.
+#' @param show_scale If TRUE, a column with the scale range is added if the
+#'  variable has value labels (either from haven or scaledic attributes).
 #' @param ... Further arguments passed to [nice_table()].
 #' @return A data frame with descriptive statistics
 #' @examples
@@ -18,6 +20,7 @@ nice_descriptives <- function(data,
                               title = "Descriptive statistics",
                               footnote = NULL,
                               file = NULL,
+                              show_scale = TRUE,
                               ...) {
   
   ## init_messages(); on.exit(print_messages())
@@ -65,24 +68,59 @@ nice_descriptives <- function(data,
   
   data <- data[, .filter]
   
+  data <- scaledic_to_haven(data)
   if (use_col_labels) data <- rename_from_labels(data)
   
-  out <- apply(data, 2, function(x)
-    c(
-      Valid = sum(!is.na(x)),
-      Missing  = sum(is.na(x)),
-      Mean = mean(x, na.rm = TRUE),
-      SD = sd(x, na.rm = TRUE),
-      Min = min(x, na.rm = TRUE),
-      Max = max(x, na.rm = TRUE),
-      Range = max(x, na.rm = TRUE) - min(x, na.rm = TRUE),
-      Median = median(x, na.rm = TRUE),
-      MAD = mad(x, na.rm = TRUE)
-    ))
   
-  out <- t(out)
+  
+  
+  cols <- c("Variable", "Valid", "Missing", "Mean", "SD", "Min", "Max", "Range", "Median", "MAD")
+  
+  if (show_scale) {
+    has_labels <- any(lapply(data, function(x) length(attr(x, "labels") > 2)) |> unlist())
+    if (has_labels) cols <- c(cols, "Scale")
+  }
+    
+  out <- matrix(NA, nrow = ncol(data), ncol = length(cols))
+  colnames(out) <- cols
+  out <- as.data.frame(out)
+  for (col in seq_along(data)) {
+    out[col, "Variable"] <- names(data)[col]
+    out[col, "Valid"] <- sum(!is.na(data[[col]]))
+    out[col, "Missing"] <- sum(is.na(data[[col]]))
+    out[col, "Mean"] <- mean(data[[col]], na.rm = TRUE)
+    out[col, "SD"] <- sd(data[[col]], na.rm = TRUE)
+    out[col, "Min"] <- min(data[[col]], na.rm = TRUE)
+    out[col, "Max"] <- max(data[[col]], na.rm = TRUE)
+    out[col, "Range"] <- max(data[[col]], na.rm = TRUE) -
+      min(data[[col]], na.rm = TRUE)
+    out[col, "Median"] <- median(data[[col]], na.rm = TRUE)
+    out[col, "MAD"] <- mad(data[[col]], na.rm = TRUE)
+  
+    if (show_scale && has_labels) {
+      lab <- attr(data[[col]], "labels")
+      if (length(lab) > 1) {
+        sep <- if (length(lab) == 2) "and" else "to" 
+        if (!is.null(names(lab))) {
+          lab <- paste0(
+            lab[1], " (", names(lab)[1] ,") ", sep, " ", 
+            lab[length(lab)], " (", 
+            names(lab)[length(lab)], ")", collapse = " "
+          )  
+        } else {
+          lab <- paste0(
+            lab[1], " to ", 
+            lab[length(lab)]
+          )  
+        }
+        out[col, "Scale"] <- lab
+      } else {
+        out[col, "Scale"] <- ""
+      }
+    }
+  }
+  
   out <- data.frame(out)
-  out <- cbind(Variable = rownames(out), out)
   rownames(out) <- NULL
  
   out <- set_wmisc_attributes(out, 
