@@ -5,6 +5,8 @@
 #' @param data A data Frame
 #' @param scales A list containing vectors with variable names. Each list
 #'   element defines one scale. Named list elements are used as labels.
+#'   If no scales are provided, all variables in the data frame are treated as 
+#'   one scale.
 #' @param labels Label names for scales (defaults to named list elements in
 #'   'scales').
 #' @param round Rounds values to given decimal position.
@@ -45,7 +47,7 @@
 #'
 #' @export
 nice_alpha_table <- function(data,
-                             scales,
+                             scales = NULL,
                              labels = NULL,
                              round = 2,
                              ci = TRUE,
@@ -58,6 +60,8 @@ nice_alpha_table <- function(data,
                              values = NULL,
                              fa = TRUE,
                              ...) {
+  
+  if (is.null(scales)) scales <- list(scale = names(data))
   out <- do.call(alpha_table, as.list(environment()))
   nice_table(out, ...)
 }
