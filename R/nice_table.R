@@ -258,9 +258,13 @@ nice_table.default <- function(x,
   ## Add markdown formatting ----
   if (markdown) out <- gt::fmt_markdown(out)
   
+  # out ------
+  
   ## Save file ----
   if (!is.null(file)) gt::gtsave(out, file)
     
+  attr(out, "df") <- x
+  
   out
 }
 
