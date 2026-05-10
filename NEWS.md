@@ -1,7 +1,8 @@
-## wmisc 0.4.7
+## wmisc 0.4.8
 
 ### New functions
 
+- `has_attributes()`: Checks if an object has specified attributes.
 - `values_to_colors_continuous()`: Returns a vector of colors based on a continuous variable.
 - `values_to_colors_discrete()`: Returns a vector of colors based on a discrete variable.
 - `nice_table()`: now returns data.frame as attributes "df"
