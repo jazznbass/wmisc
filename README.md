@@ -5,9 +5,7 @@ It is here to be accessible by people who work with my code.
 
 ## Installation
 
-You can install the released version of wmisc from github with:
-
-Update with: `remotes::install_github("jazznbass/wmisc")`
+`pak::pak("jazznbass/wmisc")`
 
 ## Documentation
 

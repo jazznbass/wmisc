@@ -16,6 +16,7 @@
 #' @importFrom remotes package_deps install_github
 #' @importFrom psych scoreFast alpha describe fa fa.sort
 #' @importFrom nlme lme VarCorr gls
-#' @importFrom stats aggregate anova aov dnorm lm manova median pchisq qf pnorm
-#'   qnorm pt qt sd t.test var mad cor.test cor setNames coef residuals relevel chisq.test loadings quantile
+#' @importFrom stats aggregate anova aov dnorm lm manova median pchisq qf pnorm 
+#' @importFrom stats qnorm pt qt sd t.test var mad cor.test cor setNames coef 
+#' @importFrom stats residuals relevel chisq.test loadings quantile
 "_PACKAGE"

@@ -23,11 +23,13 @@
 #' @param show_stars TRUE if stars should be included.
 #' @param show_descriptives If TRUE, mean and sd columns are added.
 #' @param drop_zero If TRUE, leadning zeros are dropped.
-#' @param caption/title Title for an html table.
+#' @param caption Title for an html table.
+#' @param title Title for an html table.
 #' @param file If TRUE or a filename is provided, a file is exportet (format is
 #'   defined by file ending eith html or docx).
 #' @param type Character string. "df" for data-frame. "html" for html table.
-#' @param ... Further arguments passed to the [cor.test()] function.
+#' @param arguments_cor_test A list with further arguments passed to the [cor.test()] function.
+#' @param add_columns A data frame with additional columns to be added to the correlation matrix.
 #'
 #' @return A data-frame or a html table object
 #' @examples
@@ -36,8 +38,7 @@
 #'   show_p = TRUE,
 #'   show_ci = TRUE,
 #'   show_stars = FALSE,
-#'   show_descriptives = FALSE,
-#'   conf.level = 0.99
+#'   show_descriptives = FALSE
 #' )
 #' nice_corrmatrix(mtcars, group = "cyl")
 #' @export
@@ -65,7 +66,8 @@ nice_corrmatrix <- function(cr,
                             drop_zero = TRUE,
                             type = "html", 
                             file = NULL,
-                            ...) {
+                            arguments_cor_test = NULL,
+                            add_columns = NULL) {
   
   if (inherits(cr, "data.frame")) {
     if (is.numeric(group)) group <- names(cr)[group]
@@ -73,7 +75,8 @@ nice_corrmatrix <- function(cr,
       .means <- apply(cr, 2, function(x) mean(x, na.rm = TRUE))
       .sds <- apply(cr, 2, function(x) sd(x, na.rm = TRUE))
       .n <- apply(cr, 2, function(x) sum(!is.na(x)))
-      cr <- corrmatrix(cr, ...)
+      args <- c(list(x = cr), arguments_cor_test)
+      cr <- do.call(corrmatrix, args)
       if (is.null(title)) title <- "Correlation matrix"
       footnote <- NULL
     } else {
@@ -178,6 +181,10 @@ nice_corrmatrix <- function(cr,
     )} else footnote
   )
   
+  if (!is.null(add_columns)) {
+    r <- cbind(r, add_columns)
+  }
+  
   if (type == "df") {
     cat("Correlation matrix.\n", sep = "")
     cat("\n")
@@ -189,10 +196,7 @@ nice_corrmatrix <- function(cr,
   }
 
   if (type == "html") {
-    out <- nice_table(
-      r,
-      file = file
-    ) #|> gt::fmt_markdown(columns = 5:ncol(r))
+    out <- nice_table(r, file = file)
     return(out)
     
   }
@@ -214,11 +218,11 @@ corrmatrix <- function(x, digits = 2, p = TRUE, ci = FALSE, ...) {
         next
       }  
       if (p) {
-        res <- cor.test(x[[i]], x[[j]])#, ...)  
+        res <- cor.test(x[[i]], x[[j]], ...)  
         out_r[i, j] <- res$estimate
         out_p[i, j] <- res$p.value
         out_t[i, j] <- res$statistic
-        out_df[i, j] <- res$parameter
+        out_df[i, j] <- if (!is.null(res$parameter)) res$parameter else NA
         conf_int <- res$conf.int
         if (!is.null(conf_int)) {
           out_lower[i, j] <- conf_int[1]

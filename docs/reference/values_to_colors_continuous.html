@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.9</span>
       </span>
     </div>
 
@@ -84,6 +84,16 @@ clipped).</p></dd>
 clipped).</p></dd>
 
 
+<dt id="arg-neutral-min">neutral_min<a class="anchor" aria-label="anchor" href="#arg-neutral-min"></a></dt>
+<dd><p>Minimum value of the white "dead zone" (values above are
+colored white).</p></dd>
+
+
+<dt id="arg-neutral-max">neutral_max<a class="anchor" aria-label="anchor" href="#arg-neutral-max"></a></dt>
+<dd><p>Maximum value of the white "dead zone" (values below are
+colored white).</p></dd>
+
+
 <dt id="arg-low">low<a class="anchor" aria-label="anchor" href="#arg-low"></a></dt>
 <dd><p>Color for low end (default dark red).</p></dd>
 
@@ -115,7 +125,8 @@ clipped).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#983232" "#E4CACA" "#ffffff" "#CADFCA" "#328232" </span>
 <span class="r-in"><span><span class="va">t_values</span> <span class="op">&lt;-</span> <span class="va">z_values</span> <span class="op">*</span> <span class="fl">10</span> <span class="op">+</span> <span class="fl">50</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">t_values</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Node"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">values_to_colors_continuous</span><span class="op">(</span><span class="va">t_values</span>, min <span class="op">=</span> <span class="fl">20</span>, max <span class="op">=</span> <span class="fl">80</span>, neutral_min <span class="op">=</span> <span class="fl">45</span>, neutral_max <span class="op">=</span> <span class="fl">55</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">values_to_colors_continuous</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">t_values</span>, min <span class="op">=</span> <span class="fl">20</span>, max <span class="op">=</span> <span class="fl">80</span>, neutral_min <span class="op">=</span> <span class="fl">45</span>, neutral_max <span class="op">=</span> <span class="fl">55</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Node1     Node2     Node3     Node4     Node5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#983232" "#E4CACA" "#ffffff" "#CADFCA" "#328232" </span>
@@ -133,7 +144,7 @@ clipped).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

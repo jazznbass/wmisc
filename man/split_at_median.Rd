@@ -33,8 +33,7 @@ values can be assigned to a separate factor level.
 }
 \details{
 This function is a wrapper around \code{split_at_percentile()} with the
-percentile fixed at 0.5 (the median). See
-\code{\link{split_at_percentile()}} for more details.
+percentile fixed at 0.5 (the median).
 }
 \examples{
 x <- sample(c(1:10, NA), 100, replace = TRUE)

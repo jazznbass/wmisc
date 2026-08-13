@@ -38,6 +38,8 @@ colored white).}
 
 \item{n}{Number of discrete colors used internally for the gradient.}
 
+\item{unit}{Interval for x-axis ticks.}
+
 \item{title}{Title for the legend.}
 }
 \value{

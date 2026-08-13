@@ -59,6 +59,8 @@ percentages (if show_percent is TRUE).}
 
 \item{file}{Filename.}
 
+\item{round}{Number of decimal places for percentages.}
+
 \item{...}{Further arguments passed to \code{\link[=nice_table]{nice_table()}}.}
 }
 \value{
