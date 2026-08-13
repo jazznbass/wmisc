@@ -7,8 +7,7 @@
 #' 
 #' @details
 #'   This function is a wrapper around \code{split_at_percentile()} with the
-#'   percentile fixed at 0.5 (the median). See
-#'   \code{\link{split_at_percentile()}} for more details.
+#'   percentile fixed at 0.5 (the median).
 #'
 #' @param x A vector
 #' @param labels Vector with two factor labels.

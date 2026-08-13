@@ -28,7 +28,8 @@ nice_corrmatrix(
   drop_zero = TRUE,
   type = "html",
   file = NULL,
-  ...
+  arguments_cor_test = NULL,
+  add_columns = NULL
 )
 }
 \arguments{
@@ -70,6 +71,10 @@ significant.}
 
 \item{string_p}{Character string in glue format for p-values.}
 
+\item{caption}{Title for an html table.}
+
+\item{title}{Title for an html table.}
+
 \item{drop_zero}{If TRUE, leadning zeros are dropped.}
 
 \item{type}{Character string. "df" for data-frame. "html" for html table.}
@@ -77,9 +82,9 @@ significant.}
 \item{file}{If TRUE or a filename is provided, a file is exportet (format is
 defined by file ending eith html or docx).}
 
-\item{...}{Further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
+\item{arguments_cor_test}{A list with further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
 
-\item{caption/title}{Title for an html table.}
+\item{add_columns}{A data frame with additional columns to be added to the correlation matrix.}
 }
 \value{
 A data-frame or a html table object
@@ -93,8 +98,7 @@ nice_corrmatrix(mtcars,
   show_p = TRUE,
   show_ci = TRUE,
   show_stars = FALSE,
-  show_descriptives = FALSE,
-  conf.level = 0.99
+  show_descriptives = FALSE
 )
 nice_corrmatrix(mtcars, group = "cyl")
 }

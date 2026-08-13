@@ -7,6 +7,10 @@
 #'  clipped).
 #' @param max Maximum value that maps to the darkest green (values above are 
 #'  clipped).
+#' @param neutral_min Minimum value of the white "dead zone" (values above are
+#' colored white).
+#' @param neutral_max Maximum value of the white "dead zone" (values below are
+#' colored white).
 #' @param low Color for low end (default dark red).
 #' @param mid Color for midpoint (default white).
 #' @param high Color for high end (default dark green).
@@ -21,7 +25,8 @@
 #' print(colors)
 #' t_values <- z_values * 10 + 50
 #' names(t_values) <- paste0("Node", 1:5)
-#' colors <- values_to_colors_continuous(t_values, min = 20, max = 80, neutral_min = 45, neutral_max = 55)
+#' colors <- values_to_colors_continuous(
+#'   t_values, min = 20, max = 80, neutral_min = 45, neutral_max = 55)
 #' print(colors)
 values_to_colors_continuous <- function(x,
                        labels = NULL,
@@ -117,6 +122,7 @@ values_to_colors_discrete <- function(x,
 #' @param high Color for high end (default dark green).
 #' @param n Number of discrete colors used internally for the gradient.
 #' @param title Title for the legend.
+#' @param unit Interval for x-axis ticks.
 #' @return A plot of the color legend.
 #' @export
 plot_continuous_legend <- function(min = -3,

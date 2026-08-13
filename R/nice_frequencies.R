@@ -33,6 +33,7 @@
 #' @param title Table title.
 #' @param footnote Table footnote.
 #' @param file Filename.
+#' @param round Number of decimal places for percentages.
 #' @param ... Further arguments passed to [nice_table()].
 #' @return An html table with frequencies
 #' @examples
@@ -89,24 +90,28 @@ nice_frequencies <- function(data,
   
   useNA <- if (show_missing) "always" else "no"
   
-  if (auto_labels && is.null(label)) 
+  if (auto_labels && is.null(label)) {
     label <- get_label(data)
-  if (auto_labels && is.null(label_grouping)) 
+  }
+  if (auto_labels && is.null(label_grouping)) {
     label_grouping <- get_label(grouping)
-  if (is.null(label)) 
+  }
+  if (is.null(label)) {
     label <- deparse(substitute(data))
-  if (is.null(label_grouping)) 
+  }
+  if (is.null(label_grouping)) {
     label_grouping <- deparse(substitute(grouping))
+  }
   if (is.null(title) && is.null(grouping)) {
     title <- paste0("Frequency statistics of '", label, "'")
   }
-  
   if (is.null(title) && !is.null(grouping)) {
     title <- paste0(
       "Frequency statistics of '", label, "' by '", label_grouping, "'"
     )
   }
-  
+
+  if (is.factor(data)) data <- as.character(data)
   
   if (is.null(grouping)) {
     tab <- table(data, useNA = useNA)

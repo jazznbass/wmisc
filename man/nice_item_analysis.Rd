@@ -54,6 +54,9 @@ item difficulty.}
 \item{fa}{If TRUE, a one factor exploratory factor analyses is calculated and
 loadings are reported.}
 
+\item{alpha_dropped}{If TRUE, the change in Cronbach's alpha when dropping each
+item is reported.}
+
 \item{use_col_labels}{If TRUE, variable names are taken from a label
 attribute.}
 

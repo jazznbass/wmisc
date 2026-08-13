@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.9</span>
       </span>
     </div>
 
@@ -71,7 +71,8 @@
 <span>  drop_zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"html"</span>,</span>
 <span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  arguments_cor_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_columns <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -153,6 +154,14 @@ significant.</p></dd>
 <dd><p>Character string in glue format for p-values.</p></dd>
 
 
+<dt id="arg-caption">caption<a class="anchor" aria-label="anchor" href="#arg-caption"></a></dt>
+<dd><p>Title for an html table.</p></dd>
+
+
+<dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
+<dd><p>Title for an html table.</p></dd>
+
+
 <dt id="arg-drop-zero">drop_zero<a class="anchor" aria-label="anchor" href="#arg-drop-zero"></a></dt>
 <dd><p>If TRUE, leadning zeros are dropped.</p></dd>
 
@@ -166,12 +175,12 @@ significant.</p></dd>
 defined by file ending eith html or docx).</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further arguments passed to the <code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code> function.</p></dd>
+<dt id="arg-arguments-cor-test">arguments_cor_test<a class="anchor" aria-label="anchor" href="#arg-arguments-cor-test"></a></dt>
+<dd><p>A list with further arguments passed to the <code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code> function.</p></dd>
 
 
-<dt id="arg-caption-title">caption/title<a class="anchor" aria-label="anchor" href="#arg-caption-title"></a></dt>
-<dd><p>Title for an html table.</p></dd>
+<dt id="arg-add-columns">add_columns<a class="anchor" aria-label="anchor" href="#arg-add-columns"></a></dt>
+<dd><p>A data frame with additional columns to be added to the correlation matrix.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -359,8 +368,7 @@ defined by file ending eith html or docx).</p></dd>
 <span class="r-in"><span>  show_p <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  show_ci <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  show_stars <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>  show_descriptives <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>  conf.level <span class="op">=</span> <span class="fl">0.99</span></span></span>
+<span class="r-in"><span>  show_descriptives <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <div class="gt-table"><div id="igidbvzlik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
@@ -661,7 +669,7 @@ defined by file ending eith html or docx).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

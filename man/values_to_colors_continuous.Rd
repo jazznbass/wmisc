@@ -29,6 +29,12 @@ clipped).}
 \item{max}{Maximum value that maps to the darkest green (values above are
 clipped).}
 
+\item{neutral_min}{Minimum value of the white "dead zone" (values above are
+colored white).}
+
+\item{neutral_max}{Maximum value of the white "dead zone" (values below are
+colored white).}
+
 \item{low}{Color for low end (default dark red).}
 
 \item{mid}{Color for midpoint (default white).}
@@ -50,6 +56,7 @@ colors <- values_to_colors_continuous(z_values)
 print(colors)
 t_values <- z_values * 10 + 50
 names(t_values) <- paste0("Node", 1:5)
-colors <- values_to_colors_continuous(t_values, min = 20, max = 80, neutral_min = 45, neutral_max = 55)
+colors <- values_to_colors_continuous(
+  t_values, min = 20, max = 80, neutral_min = 45, neutral_max = 55)
 print(colors)
 }

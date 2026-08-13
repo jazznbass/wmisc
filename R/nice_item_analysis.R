@@ -27,8 +27,9 @@
 #'   loadings are reported.
 #' @param use_col_labels If TRUE, variable names are taken from a label 
 #'  attribute.
+#' @param alpha_dropped If TRUE, the change in Cronbach's alpha when dropping each
+#'  item is reported.
 #' @param ... Further arguments passed to the `nice_table()` function.
-#'   
 #' @return A data frame with concise scale indices.
 #' @author Juergen Wilbert 
 #' @examples
