@@ -25,11 +25,13 @@ nice_corrmatrix(
   string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
   caption = NULL,
   title = caption,
+  footnote = NULL,
   drop_zero = TRUE,
   type = "html",
   file = NULL,
   arguments_cor_test = NULL,
-  add_columns = NULL
+  add_columns = NULL,
+  ...
 )
 }
 \arguments{
@@ -75,6 +77,8 @@ significant.}
 
 \item{title}{Title for an html table.}
 
+\item{footnote}{Footnote of the table.}
+
 \item{drop_zero}{If TRUE, leadning zeros are dropped.}
 
 \item{type}{Character string. "df" for data-frame. "html" for html table.}
@@ -84,7 +88,10 @@ defined by file ending eith html or docx).}
 
 \item{arguments_cor_test}{A list with further arguments passed to the \code{\link[=cor.test]{cor.test()}} function.}
 
-\item{add_columns}{A data frame with additional columns to be added to the correlation matrix.}
+\item{add_columns}{A data frame with additional columns to be added to the
+correlation matrix.}
+
+\item{...}{Further arguments passed to nice_table().}
 }
 \value{
 A data-frame or a html table object

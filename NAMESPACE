@@ -70,49 +70,61 @@ import(ggplot2)
 import(graphics)
 importFrom(forcats,fct_explicit_na)
 importFrom(glue,glue)
-importFrom(gt,gt)
-importFrom(gt,html)
-importFrom(gt,opt_table_font)
-importFrom(gt,opt_table_lines)
-importFrom(gt,tab_options)
+importFrom(gt,
+  gt,
+  html,
+  opt_table_font,
+  opt_table_lines,
+  tab_options
+)
 importFrom(lavaan,fitMeasures)
-importFrom(nlme,VarCorr)
-importFrom(nlme,gls)
-importFrom(nlme,lme)
+importFrom(nlme,
+  VarCorr,
+  gls,
+  lme
+)
 importFrom(openxlsx,write.xlsx)
-importFrom(psych,alpha)
-importFrom(psych,describe)
-importFrom(psych,fa)
-importFrom(psych,fa.sort)
-importFrom(psych,scoreFast)
-importFrom(remotes,install_github)
-importFrom(remotes,package_deps)
-importFrom(stats,aggregate)
-importFrom(stats,anova)
-importFrom(stats,aov)
-importFrom(stats,chisq.test)
-importFrom(stats,coef)
-importFrom(stats,cor)
-importFrom(stats,cor.test)
-importFrom(stats,dnorm)
-importFrom(stats,lm)
-importFrom(stats,loadings)
-importFrom(stats,mad)
-importFrom(stats,manova)
-importFrom(stats,median)
-importFrom(stats,pchisq)
-importFrom(stats,pnorm)
-importFrom(stats,pt)
-importFrom(stats,qf)
-importFrom(stats,qnorm)
-importFrom(stats,qt)
-importFrom(stats,quantile)
-importFrom(stats,relevel)
-importFrom(stats,residuals)
-importFrom(stats,sd)
-importFrom(stats,setNames)
-importFrom(stats,t.test)
-importFrom(stats,var)
-importFrom(utils,citation)
-importFrom(utils,packageVersion)
-importFrom(utils,read.csv)
+importFrom(psych,
+  alpha,
+  describe,
+  fa,
+  fa.sort,
+  scoreFast
+)
+importFrom(remotes,
+  install_github,
+  package_deps
+)
+importFrom(stats,
+  aggregate,
+  anova,
+  aov,
+  chisq.test,
+  coef,
+  cor,
+  cor.test,
+  dnorm,
+  lm,
+  loadings,
+  mad,
+  manova,
+  median,
+  pchisq,
+  pnorm,
+  pt,
+  qf,
+  qnorm,
+  qt,
+  quantile,
+  relevel,
+  residuals,
+  sd,
+  setNames,
+  t.test,
+  var
+)
+importFrom(utils,
+  citation,
+  packageVersion,
+  read.csv
+)

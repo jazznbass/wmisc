@@ -59,6 +59,7 @@ nice_p <- function(p, equal_sign = FALSE, digits = 3, stars = FALSE) {
     if (!stars) {
       return("<.01") 
     } else {
+      #return("<.01**") 
       return(paste0(equal_sign, nice_statnum(p, digits = digits), "**"))
     }
   }
@@ -71,4 +72,16 @@ nice_p <- function(p, equal_sign = FALSE, digits = 3, stars = FALSE) {
   }
 }
 
-
+new_nice_p <- function(p, digits = 2, equal_sign = FALSE, stars = FALSE, space = TRUE) {
+  sp  <- if (space) " " else ""
+  thr <- 10^-digits
+  num <- sub("^0\\.", ".", formatC(p, format = "f", digits = digits))
+  out <- ifelse(
+    p < thr,
+    paste0("<", sp, sub("^0", "", formatC(thr, format = "f", digits = digits))),
+    paste0(if (equal_sign) paste0("=", sp) else "", num)
+  )
+  if (stars) out <- paste0(out, ifelse(p < .001, "***", ifelse(p < .01, "**", ifelse(p < .05, "*", ""))))
+  out[is.na(p)] <- NA
+  out
+}

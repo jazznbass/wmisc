@@ -15,3 +15,4 @@ combination of character strings and variables.}
 Throws a warning
 This is a convenience wrapper for internal use.
 }
+\keyword{internal}

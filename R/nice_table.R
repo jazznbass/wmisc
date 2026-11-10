@@ -214,7 +214,6 @@ nice_table.default <- function(x,
       )
     out <- gt::tab_style(
       out, style = gt::cell_text(align = "center"),
-      #locations = gt::cells_row_groups(groups = names(row_group)[i])
       locations = gt::cells_row_groups()
     )
   }
@@ -258,6 +257,8 @@ nice_table.default <- function(x,
   ## Add markdown formatting ----
   if (markdown) out <- gt::fmt_markdown(out)
   
+  
+  
   # out ------
   
   ## Save file ----
@@ -268,9 +269,10 @@ nice_table.default <- function(x,
   out
 }
 
-gt_apa_style <- function(gt_tbl) {
+gt_apa_style_old <- function(gt_tbl) {
   gt_tbl  |> 
-    tab_options(
+    gt::tab_options(
+      quarto.disable_processing = TRUE,
       table.border.bottom.color = "white",
       #table.border.bottom.width = 3,
       
@@ -302,4 +304,71 @@ gt_apa_style <- function(gt_tbl) {
     opt_table_font(font = "times") |> 
     gt::cols_align(align = "center") |> 
     gt::cols_align(align = "left", columns = 1)
+}
+
+gt_apa_style <- function(gt_tbl, line_outer = 2, line_inner = 1) {
+  out <- gt_tbl |>
+    gt::tab_options(
+      quarto.disable_processing = TRUE,
+      table.font.names = c("Times New Roman", "Times", "serif"),
+      table.font.size = "100%",
+      table.border.top.style = "none",
+      table.border.bottom.style = "none",
+      
+      heading.align = "left",
+      heading.title.font.size = "100%",
+      heading.title.font.weight = "bold",
+      heading.subtitle.font.size = "100%",
+      heading.border.bottom.style = "solid",
+      heading.border.bottom.width = gt::px(line_outer),
+      heading.border.bottom.color = "black",
+      
+      column_labels.font.weight = "normal",
+      column_labels.border.top.style = "solid",
+      column_labels.border.top.width = gt::px(line_outer),
+      column_labels.border.top.color = "black",
+      column_labels.border.bottom.style = "solid",
+      column_labels.border.bottom.width = gt::px(line_inner),
+      column_labels.border.bottom.color = "black",
+      column_labels.border.lr.style = "none",
+      
+      table_body.border.top.style = "none",
+      table_body.border.bottom.style = "solid",
+      table_body.border.bottom.width = gt::px(line_outer),
+      table_body.border.bottom.color = "black",
+      table_body.hlines.style = "none",
+      table_body.vlines.style = "none",
+      
+      stub.border.style = "none",
+      row_group.border.top.style = "solid",
+      row_group.border.top.width = gt::px(line_inner),
+      row_group.border.top.color = "black",
+      row_group.border.bottom.style = "none",
+      row.striping.include_table_body = FALSE,
+      
+      footnotes.border.bottom.style = "none",
+      source_notes.border.bottom.style = "none",
+      footnotes.font.size = "90%",
+      source_notes.font.size = "90%",
+      
+      data_row.padding = gt::px(4)
+    ) |>
+    gt::cols_align(align = "center") |>
+    gt::cols_align(align = "left", columns = 1)
+  
+  if (!is.null(gt_tbl[["_heading"]]$subtitle)) {
+    out <- gt::tab_style(out, gt::cell_text(style = "italic"), gt::cells_title("subtitle"))
+  }
+  if (nrow(gt_tbl[["_spanners"]]) > 0) {
+    out <- gt::tab_style(
+      out,
+      gt::cell_borders(sides = "bottom", color = "black", weight = gt::px(line_inner)),
+      gt::cells_column_spanners()
+    )
+  }
+  out <- gt::tab_style(
+    out, style = gt::cell_text(align = "center"),
+    locations = gt::cells_row_groups()
+  )
+  out
 }

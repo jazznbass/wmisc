@@ -1,3 +1,9 @@
+## wmisc 0.4.10
+
+- removed quarto procession for nice_tables so that the APA style is preserved in quarto documents.
+- refined the APA Style in `nice_table()`
+- in nice_regression_table(): or = true now adds an OR column instead of replacing the Estimate column.
+
 ## wmisc 0.4.9
 
 ### New functions

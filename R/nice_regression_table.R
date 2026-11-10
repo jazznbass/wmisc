@@ -70,7 +70,7 @@ nice_regression_table <- function(
   
   models <- list(...)
   models_params <- lapply(models, function(x) extract_model_param(x, or = or))
- 
+  
   n_models <- length(models)
   
   out <- lapply(models_params, \(x) x$estimates$fixed)
@@ -105,7 +105,7 @@ nice_regression_table <- function(
   labels <- list(
     predictor = "Predictor",
     estimate = "Estimate",
-    se = "SE",
+    se = "se",
     statistic = "t",
     p = "p"
   )
@@ -117,10 +117,14 @@ nice_regression_table <- function(
       "t value" = "t",
       "Std.Error" = labels$se,
       "Std. Error" = labels$se,
+      "SE" = labels$se,
       "Pr(>|t|)" = labels$p,
       "Pr(>|z|)" = labels$p,
       "z-value" = "z",
-      "z value" = "z"
+      "z value" = "z",
+      "p-value" = labels$p,
+      "p value" = labels$p,
+      "DF" = "df"
     )
     names(out) <- change_by_list(names(out), rn)
   }
@@ -206,7 +210,6 @@ nice_regression_table <- function(
   names(spanner) <- labels_models
   
   row_group <- list(
-    #Coefficients = 1:(n_predic),
     Model = (n_predic + 1):nrow(out)
   )
   
@@ -254,7 +257,9 @@ extract_model_param.lm <- function(model, or = FALSE, ...) {
   out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
   
   if (or) {
-    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
+    out$estimates$fixed[["OR"]] <- exp(out$estimates$fixed[["Estimate"]])
+    new_order <- c(ncol(out$estimates$fixed), 1:(ncol(out$estimates$fixed) - 1))
+    out$estimates$fixed <- out$estimates$fixed[, new_order]
   }  
   
   out
@@ -264,7 +269,7 @@ extract_model_param.lm <- function(model, or = FALSE, ...) {
 extract_model_param.lme <- function(model, ...) {
   
   model_summary <- summary(model)
-  
+ 
   out <- list()
 
   out$auto_labels <- get_labels(model$model)
@@ -278,16 +283,19 @@ extract_model_param.lme <- function(model, ...) {
     paste0(names(varcov |> diag()), " ",  attr(varcov, "group.levels")) |> as.data.frame(), 
     varcov |> diag() 
   )
-  
+
   
   for(j in 1:nrow(random)) {
     out$add_param[[random[j ,1]]] <- random[j ,2]
   }
   
   out$add_param$Residual <- model$sigma^2
-  out$add_param$ICC <- sum(random[[2]]) / (sum(random[[2]]) + model$sigma^2)
+  
+  names(out$add_param) <- paste0("\u03C3\u00B2 ", names(out$add_param))
+  names(out$add_param) <- gsub("(Intercept)", "", names(out$add_param), fixed = TRUE)
   
   performance <- performance::model_performance(model)
+  
   out$add_param$ICC <- performance$ICC
   out$add_param$"R\u00b2 Conditional" <-  performance$"R2_conditional"
   out$add_param$"R\u00b2 Marginal" <-  performance$"R2_marginal"
@@ -297,7 +305,7 @@ extract_model_param.lme <- function(model, ...) {
   for(i in seq_along(n_random)) {
     out$add_param[[paste0("N ", random_vars[i])]] <- n_random[i]
   }
-  #out$add_param$N <- model$dims$ngrps[1:model$dims$Q]
+  
   out$add_param$Observations <- model$dims$N
   
   out
@@ -313,7 +321,7 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
   out$estimates$fixed <- as.data.frame(coef(model_summary))
   out$estimates$p_label <- 
     names(out$estimates$fixed)[ncol(out$estimates$fixed)]
-  
+
   # random effect
   random <- model_summary$varcor |> as.data.frame()
   names(random)[1] <- "Effect"
@@ -331,12 +339,12 @@ extract_model_param.lmerModLmerTest <- function(model, ...) {
     paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
   random <- random[nrow(random):1, c(1,4)]
   
-  #random[nrow(random) + 1, "Effect"] <- "ICC"
-  #random[nrow(random), 2] <- var_intercept_effects / var_total
-
   for(j in 1:nrow(random)) {
     out$add_param[[random[j ,1]]] <- random[j ,2]
   }
+  
+  names(out$add_param) <- paste0("\u03C3\u00B2 ", names(out$add_param))
+  names(out$add_param) <- gsub("(Intercept)", "", names(out$add_param), fixed = TRUE)
   
   performance <- performance::model_performance(model)
   
@@ -366,8 +374,10 @@ extract_model_param.glmerMod <- function(model, or = FALSE, ...) {
   out$estimates$fixed <- as.data.frame(coef(model_summary))
  
   if (or) {
-    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
-    #out$estimates$fixed[[2]] <- exp(out$estimates$fixed[[2]])
+    out$estimates$fixed[["OR"]] <- exp(out$estimates$fixed[["Estimate"]])
+    new_order <- c(ncol(out$estimates$fixed), 1:(ncol(out$estimates$fixed) - 1))
+    out$estimates$fixed <- out$estimates$fixed[, new_order]
+    #out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
   }  
   
   out$estimates$p_label <- 
@@ -380,26 +390,20 @@ extract_model_param.glmerMod <- function(model, or = FALSE, ...) {
   var_effects <- sum(random$vcov[1:n_effects])
   var_intercept_effects <- 
     sum(random$vcov[which(random$var1 == "(Intercept)")])
-  #var_total <- sum(random$vcov)
-  #random$Partial_explained <- NA
-  #random$Partial_explained[1:n_effects] <- 
-  #  random$vcov[1:n_effects] /  var_effects
-  #random$Total_explained <- NA
-  #random$Total_explained <- random$vcov /  var_total
+
   random$Effect[1:n_effects] <- 
     paste0(random[[2]][1:n_effects], " ", random[[1]][1:n_effects])
   random <- random[nrow(random):1, c(1,4)]
-  
-  #random[nrow(random) + 1, "Effect"] <- "ICC"
-  #random[nrow(random), 2] <- var_intercept_effects / var_total
   
   for(j in 1:nrow(random)) {
     out$add_param[[random[j ,1]]] <- random[j ,2]
   }
   
-  #out$add_param$ICC <- var_effects / (var_effects + pi*pi/3)
+  out$add_param$`Residual (fixed)` <- pi*pi/3
   
-  out$add_param$Residual <- pi*pi/3
+  names(out$add_param) <- paste0("\u03C3\u00B2 ", names(out$add_param))
+  names(out$add_param) <- gsub("(Intercept)", "", names(out$add_param), fixed = TRUE)
+  
   out$add_param$Observations <- length(model@resp$y)
   
   performance <- performance::model_performance(model)
@@ -440,7 +444,7 @@ extract_model_param.gls <- function(model, or = FALSE, ...) {
   out$add_param$Observations <- model$dims$N
   out$add_param[["R\u00b2"]] <- performance::r2(model)$R2
   #out$add_param[["R\u00b2 adjusted"]] <- model_summary$adj.r.squared
-  out$add_param[["Residual"]] <- model_summary$sigma^2
+  out$add_param[["\u03C3\u00B2 Residual"]] <- model_summary$sigma^2
   out$add_param[["AIC"]] <- model_summary$AIC
   out$add_param[["BIC"]] <- model_summary$BIC
   #if (inherits(model, "glm")) out$add_param$"R\u00b2 Tjur" <-  performance::r2_tjur(model)
@@ -449,7 +453,9 @@ extract_model_param.gls <- function(model, or = FALSE, ...) {
   out$estimates$p_label <- names(out$estimates$fixed)[ncol(out$estimates$fixed)]
   
   if (or) {
-    out$estimates$fixed[[1]] <- exp(out$estimates$fixed[[1]])
+    out$estimates$fixed[["OR"]] <- exp(out$estimates$fixed[["Estimate"]])
+    new_order <- c(ncol(out$estimates$fixed), 1:(ncol(out$estimates$fixed) - 1))
+    out$estimates$fixed <- out$estimates$fixed[, new_order]
   }  
   
   out

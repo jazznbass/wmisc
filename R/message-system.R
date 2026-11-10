@@ -1,4 +1,4 @@
-## version 0.1.0-2
+## version 0.1.0-3
 
 #' Throws a message
 #'
@@ -28,10 +28,14 @@ notify <- function(... , type = "!", detail = 1, warning = FALSE) {
     type <- ""
   }
   
-  max_char <- getOption("wmisc.msg.max", default = 100)
+  max_char <- getOption("wmisc.msg.max", default = 150)
   if (nchar(msg) > max_char) {
-    msg <- paste0(substring(msg, 1, max_char), "... [truncated]")
+    cut <- substring(msg, 1, max_char)
+    last_space <- regexpr("[[:space:]][^[:space:]]*$", cut)
+    if (last_space > 0) cut <- substring(cut, 1, last_space - 1)
+    msg <- paste0(cut, " [...]")
   }
+
   msg <- setNames(msg, type)
   if (!warning) {
     rlang::inform(msg)
@@ -43,8 +47,9 @@ notify <- function(... , type = "!", detail = 1, warning = FALSE) {
 
 #' Throws a warning
 #' This is a convenience wrapper for internal use.
-#' @param ... The message. This can be a character string or a
+#' @param ... The message. This can be a character string or a 
 #'  combination of character strings and variables.
+#' @keywords internal
 warn <- function(...) {
   notify(..., warning = TRUE)
 }

@@ -29,8 +29,10 @@
 #'   defined by file ending eith html or docx).
 #' @param type Character string. "df" for data-frame. "html" for html table.
 #' @param arguments_cor_test A list with further arguments passed to the [cor.test()] function.
-#' @param add_columns A data frame with additional columns to be added to the correlation matrix.
-#'
+#' @param add_columns A data frame with additional columns to be added to the 
+#'  correlation matrix.
+#' @param footnote Footnote of the table.
+#' @param ... Further arguments passed to nice_table().
 #' @return A data-frame or a html table object
 #' @examples
 #' nice_corrmatrix(mtcars)
@@ -63,11 +65,13 @@ nice_corrmatrix <- function(cr,
                             string_p = "{break_sign}(p {nice_p(p, equal_sign = TRUE)})",
                             caption = NULL,
                             title = caption,
+                            footnote = NULL,
                             drop_zero = TRUE,
                             type = "html", 
                             file = NULL,
                             arguments_cor_test = NULL,
-                            add_columns = NULL) {
+                            add_columns = NULL,
+                            ...) {
   
   if (inherits(cr, "data.frame")) {
     if (is.numeric(group)) group <- names(cr)[group]
@@ -78,7 +82,6 @@ nice_corrmatrix <- function(cr,
       args <- c(list(x = cr), arguments_cor_test)
       cr <- do.call(corrmatrix, args)
       if (is.null(title)) title <- "Correlation matrix"
-      footnote <- NULL
     } else {
       if (is.null(title)) {
         title <- paste0(
@@ -97,7 +100,9 @@ nice_corrmatrix <- function(cr,
       .sds <- sapply(cr, \(x) tapply(x, group, \(x) mean(x, na.rm = TRUE)) |> sd(na.rm = TRUE))
       .n <- sapply(cr, \(x) unique(group[which(!is.na(x))]) |> length())
       cr <- multilevel_corrmatrix(cr, group = group)
-      footnote <- "n is the number of groups, M is the mean of the means of each group, SD is the between group standard deviation"
+      if (!is.null(footnote)) {
+        footnote <- "n is the number of groups, M is the mean of the means of each group, SD is the between group standard deviation"
+      } 
     }
   }
   
@@ -196,7 +201,7 @@ nice_corrmatrix <- function(cr,
   }
 
   if (type == "html") {
-    out <- nice_table(r, file = file)
+    out <- nice_table(r, file = file, ...)
     return(out)
     
   }
