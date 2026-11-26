@@ -14,6 +14,8 @@
 #' @param low Color for low end (default dark red).
 #' @param mid Color for midpoint (default white).
 #' @param high Color for high end (default dark green).
+#' @param na Color for NA values (default gray).
+#' @param include_na If TRUE, NA values in `x` are replaced with `na` color.
 #' @param n Number of discrete colors used internally for the gradient.
 #'
 #' @return Named character vector of hex colors with names equal to `labels`.
@@ -37,6 +39,8 @@ values_to_colors_continuous <- function(x,
                        low = "#7f0000",
                        mid = "#ffffff",
                        high = "#006400",
+                       na = "#808080",
+                       include_na = TRUE,
                        n = 201) {
 
   if (is.null(labels)) labels <- names(x)
@@ -70,7 +74,13 @@ values_to_colors_continuous <- function(x,
     out[pos] <- white_to_green[idx]
   }
   
-  #####
+  ## replace NA
+  
+  if (include_na) {
+    out[is.na(x)] <- na
+  }
+  
+  
   
   names(out) <- labels
   out
@@ -84,6 +94,8 @@ values_to_colors_continuous <- function(x,
 #' @param values Numeric or factor vector of values to map (same type as `x`).
 #' @param colors Character vector of hex color codes (same length as `values`
 #'  and in the same order).
+#' @param na Color for NA values (default gray).
+#' @param include_na If TRUE, NA values in `x` are replaced with `na` color.
 #' @return Named character vector of hex colors with names equal to `x`.
 #' @export
 #' @examples
@@ -94,13 +106,21 @@ values_to_colors_continuous <- function(x,
 #'  print(result)
 values_to_colors_discrete <- function(x,
                              values,
-                             colors) {
+                             colors,
+                             na = "#808080",
+                             include_na = TRUE) {
   
   out <- x
   
   for(i in seq_along(values)) {
     id <- which(x == values[i])
     if (length(id) > 0) out[id] <- colors[i] 
+  }
+  
+  ## replace NA
+  
+  if (include_na) {
+    out[is.na(x)] <- na
   }
   
   out

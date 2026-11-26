@@ -14,6 +14,8 @@ values_to_colors_continuous(
   low = "#7f0000",
   mid = "#ffffff",
   high = "#006400",
+  na = "#808080",
+  include_na = TRUE,
   n = 201
 )
 }
@@ -40,6 +42,10 @@ colored white).}
 \item{mid}{Color for midpoint (default white).}
 
 \item{high}{Color for high end (default dark green).}
+
+\item{na}{Color for NA values (default gray).}
+
+\item{include_na}{If TRUE, NA values in \code{x} are replaced with \code{na} color.}
 
 \item{n}{Number of discrete colors used internally for the gradient.}
 }

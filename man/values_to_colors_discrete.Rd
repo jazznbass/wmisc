@@ -4,7 +4,7 @@
 \alias{values_to_colors_discrete}
 \title{Map discrete values to colors.}
 \usage{
-values_to_colors_discrete(x, values, colors)
+values_to_colors_discrete(x, values, colors, na = "#808080", include_na = TRUE)
 }
 \arguments{
 \item{x}{Numeric or factor vector. Can be named or unnamed, but must align
@@ -14,6 +14,10 @@ with \code{values} by name (preferred) or by position (same length).}
 
 \item{colors}{Character vector of hex color codes (same length as \code{values}
 and in the same order).}
+
+\item{na}{Color for NA values (default gray).}
+
+\item{include_na}{If TRUE, NA values in \code{x} are replaced with \code{na} color.}
 }
 \value{
 Named character vector of hex colors with names equal to \code{x}.
