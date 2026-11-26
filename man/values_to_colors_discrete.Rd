@@ -4,7 +4,13 @@
 \alias{values_to_colors_discrete}
 \title{Map discrete values to colors.}
 \usage{
-values_to_colors_discrete(x, values, colors, na = "#808080", include_na = TRUE)
+values_to_colors_discrete(
+  x,
+  values,
+  colors,
+  na = "lightgray",
+  include_na = TRUE
+)
 }
 \arguments{
 \item{x}{Numeric or factor vector. Can be named or unnamed, but must align

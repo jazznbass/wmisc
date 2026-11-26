@@ -39,7 +39,7 @@ values_to_colors_continuous <- function(x,
                        low = "#7f0000",
                        mid = "#ffffff",
                        high = "#006400",
-                       na = "#808080",
+                       na = "lightgray",
                        include_na = TRUE,
                        n = 201) {
 
@@ -83,7 +83,7 @@ values_to_colors_continuous <- function(x,
   
   
   names(out) <- labels
-  out
+  unlist(out)
 }
 
 
@@ -107,7 +107,7 @@ values_to_colors_continuous <- function(x,
 values_to_colors_discrete <- function(x,
                              values,
                              colors,
-                             na = "#808080",
+                             na = "lightgray",
                              include_na = TRUE) {
   
   out <- x
@@ -123,7 +123,7 @@ values_to_colors_discrete <- function(x,
     out[is.na(x)] <- na
   }
   
-  out
+  unlist(out)
 }
 
 

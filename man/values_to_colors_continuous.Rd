@@ -14,7 +14,7 @@ values_to_colors_continuous(
   low = "#7f0000",
   mid = "#ffffff",
   high = "#006400",
-  na = "#808080",
+  na = "lightgray",
   include_na = TRUE,
   n = 201
 )
